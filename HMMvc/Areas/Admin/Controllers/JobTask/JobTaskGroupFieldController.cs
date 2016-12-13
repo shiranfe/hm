@@ -57,7 +57,7 @@ namespace MVC.Areas.Admin.Controllers
             try
             {
                 _entityBL.Update(model);
-                return Json(new { JobTaskGroupFieldID = model.TaskFieldID});
+                return Json(new { JobTaskGroupFieldID = model.Id});
             }
             catch (Exception e)
             {

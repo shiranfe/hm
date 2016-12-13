@@ -40,7 +40,7 @@ namespace MVC.Areas.Admin.Controllers
             {
                 var path = GetFolder();
                     var upld = new UploadFileHelper();
-                upld.UploadFile(path, Request);
+                UploadFileHelper.UploadFile(path, Request);
 
 
                 return Json(new { success = true });

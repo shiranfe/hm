@@ -82,7 +82,7 @@ namespace BL
             {
                
                 FieldValue = x.FieldValue,
-                TaskFieldID = x.JobTaskGroupFieldID,
+                Id = x.JobTaskGroupFieldID,
                 OrderVal = x.OrderVal,
                 JobRefubrishStepGroupID = flds.DynamicGroup.DynamicGroupID,
                 //SubGroupID = not availble becuase fields attaced only to parent group anyway

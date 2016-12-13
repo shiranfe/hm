@@ -36,6 +36,11 @@ namespace BL
             return _entityDal.SingleOrDefault(x => x.BankTask_FieldID == id);
         }
 
+        private List<BankTask_Field> GetMulty(int[] ids)
+        {
+            return _entityDal.ToList(x => ids.Contains(x.BankTask_FieldID));
+        }
+
 
         internal BankTask_FieldDM GetSingleDM(int id)
         {
@@ -46,6 +51,17 @@ namespace BL
 
             return model;
 
+        }
+
+        internal void Sort(int[] ids)
+        {
+            var entites = GetMulty(ids);
+         
+            foreach (var field in entites)
+            {
+                field.OrderVal = Array.IndexOf(ids, field.BankTask_FieldID) + 1;
+                _entityDal.Update(field);
+            }
         }
 
         internal IQueryable<BankTask_Field> GetQuer()
@@ -64,6 +80,8 @@ namespace BL
 
         }
 
+     
+
         private List<BankTask_FieldDM> CreateList(List<BankTask_Field> list)
         {
             return (from x in list
@@ -71,7 +89,8 @@ namespace BL
                     {
                         BankTask_FieldID = x.BankTask_FieldID,
                     })
-                    .OrderByDescending(x => x.BankTask_FieldID)
+                    .OrderBy(x => x.OrderVal)
+                    .ThenByDescending(x => x.BankTask_FieldID)
                     .ToList();
         }
 
@@ -109,11 +128,12 @@ namespace BL
 
         public List<JobTaskGroupFieldDM> GetTaskFields(ICollection<BankTask_Field> list)
         {
-            var res = list.Select(y => TaskFieldToDm(y)).ToList();
+            var res = list.Select(y => TaskFieldToDm(y))
+                .OrderBy(x=> x.OrderVal).ToList();
 
             _fieldPoolModule.SetFieldsPickList(res.Select(x => (StepGroupFieldDM)x).ToList());
 
-            return res;
+            return res; 
         }
 
         private static JobTaskGroupFieldDM TaskFieldToDm(BankTask_Field x)
@@ -127,7 +147,7 @@ namespace BL
             {
 
                 //FieldValue = x.FieldValue,
-                TaskFieldID = x.BankTask_FieldID,
+                Id = x.BankTask_FieldID,
                 OrderVal = x.OrderVal,
                 IsRequired = x.IsRequired,
 
@@ -194,6 +214,9 @@ namespace BL
         {         
            Mapper.DynamicMap(entity, model);
         }
+
+
+
 
 
         internal void Delete(int id)

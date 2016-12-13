@@ -26,7 +26,7 @@ namespace MVC.Models
             // avat.ImgFolder = HttpContext.Server.MapPath(".").Replace("\\Pic", "") + _foldpath;
 
             var upld = new UploadFileHelper();
-            upld.UploadFile(avat.Temppath, request);
+            UploadFileHelper.UploadFile(avat.Temppath, request);
 
             // IsMinResolution(avat.Temppath);
 
@@ -97,10 +97,10 @@ namespace MVC.Models
             var propW = w / sourceImage.Width;
             var propH = h / sourceImage.Height;
             var total = Math.Max(propH, propW);
-            int width = Convert.ToInt32(sourceImage.Width * total);
-            int height = Convert.ToInt32(sourceImage.Height * total);
+            var width = Convert.ToInt32(sourceImage.Width * total);
+            var height = Convert.ToInt32(sourceImage.Height * total);
 
-            Image destImage = ResizeImage(height, width, sourceImage);
+            var destImage = ResizeImage(height, width, sourceImage);
 
             var type = sourceImage.RawFormat;
             sourceImage.Dispose();
@@ -126,13 +126,27 @@ namespace MVC.Models
         {
 
 
-            long rate = _picCompressionRate;
+            var rate = _picCompressionRate;
 
             //if (ImageFormat.Jpeg.Equals(type))
             //{
-            SetCompresionValues(rate);
-            destImage.Save(imgUrl, _jpgEncoder, _myEncoderParameters);
-            destImage.Dispose();
+            // Create an Encoder object based on the GUID
+            // for the Quality parameter category.
+            _jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+            var myEncoder = Encoder.Quality;
+
+            // Create an EncoderParameters object.
+            // An EncoderParameters object has an array of EncoderParameter
+            // objects. In this case, there is only one
+            // EncoderParameter object in the array.
+            _myEncoderParameters = new EncoderParameters(1);
+            using (var myEncoderParameter = new EncoderParameter(myEncoder, rate))
+            {
+                _myEncoderParameters.Param[0] = myEncoderParameter;
+
+                destImage.Save(imgUrl, _jpgEncoder, _myEncoderParameters);
+                destImage.Dispose();
+            }
             //}
             //else if (ImageFormat.Png.Equals(type))
             //{
@@ -162,26 +176,11 @@ namespace MVC.Models
 
         }
 
-        private static void SetCompresionValues(long rate)
-        {
-            // Create an Encoder object based on the GUID
-            // for the Quality parameter category.
-            _jpgEncoder = GetEncoder(ImageFormat.Jpeg);
-            Encoder myEncoder = Encoder.Quality;
-
-            // Create an EncoderParameters object.
-            // An EncoderParameters object has an array of EncoderParameter
-            // objects. In this case, there is only one
-            // EncoderParameter object in the array.
-            _myEncoderParameters = new EncoderParameters(1);
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, rate);
-            _myEncoderParameters.Param[0] = myEncoderParameter;
-        }
 
         private static ImageCodecInfo GetEncoder(ImageFormat format)
         {
 
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            var codecs = ImageCodecInfo.GetImageDecoders();
 
             foreach (ImageCodecInfo codec in codecs)
             {
@@ -195,7 +194,7 @@ namespace MVC.Models
 
 
 
-        internal void ChangeTempPic(Avatar avat)
+        internal static void ChangeTempPic(Avatar avat)
         {
 
 
@@ -233,7 +232,7 @@ namespace MVC.Models
 
         }
 
-        private void CropPic(Avatar avat)
+        private static void CropPic(Avatar avat)
         {
             if (avat.W == 0)
                 return;
@@ -323,7 +322,7 @@ namespace MVC.Models
 
         }
 
-        public void Rotate(Avatar avat, bool isCounter)
+        public static void Rotate(Avatar avat, bool isCounter)
         {
 
 
@@ -352,7 +351,7 @@ namespace MVC.Models
 
         }
 
-        public void CreatePicSizes(Avatar avat, int[] sizes, bool? byWidth)
+        public static void CreatePicSizes(Avatar avat, int[] sizes, bool? byWidth)
         {
             int height, width;
 
@@ -389,7 +388,7 @@ namespace MVC.Models
                     width = sourceImage.Width * height / sourceImage.Height;
                 }
 
-                Image destImage = ResizeImage(height, width, sourceImage);
+                var destImage = ResizeImage(height, width, sourceImage);
 
                 var type = sourceImage.RawFormat;
                 sourceImage.Dispose();
@@ -402,7 +401,7 @@ namespace MVC.Models
 
 
 
-        internal void ChangeFolder(string oldFolder, string newFolder)
+        internal static void ChangeFolder(string oldFolder, string newFolder)
         {
             FolderManager.Move(oldFolder, newFolder);
         }

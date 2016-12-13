@@ -67,9 +67,9 @@ namespace BL
             return (from x in GetQuer()
                     select new JobTaskGroupFieldDM
                     {
-                        TaskFieldID = x.JobTaskGroupFieldID,
+                        Id = x.JobTaskGroupFieldID,
                     })
-                    .OrderByDescending(x => x.TaskFieldID)
+                    .OrderByDescending(x => x.Id)
                     .ToList();
         }
 
@@ -103,7 +103,7 @@ namespace BL
         public void Update(JobTaskGroupFieldDM model)
         {
            
-            if (model.TaskFieldID > 0)
+            if (model.Id > 0)
                 Edit(model);
             else
                 Add(model);
@@ -121,7 +121,7 @@ namespace BL
 
         private void Edit(JobTaskGroupFieldDM model)
         {
-            JobTaskGroupField entity = GetSingle(model.TaskFieldID);
+            JobTaskGroupField entity = GetSingle(model.Id);
             
             ModelToEntity(model, entity);
         }

@@ -102,28 +102,32 @@ namespace BL
 
         public void Update(_TemplateDM model)
         {
-           
-            if (model._TemplateID > 0)
-                Edit(model);
-            else
-                Add(model);
 
+            var entity = (model._TemplateID > 0) ? Edit(model) : Add(model);
+
+            _uow.SaveChanges();
+
+            model._TemplateID = entity._TemplateID;
         }
 
-        private void Add(_TemplateDM model)
+        private _Template Add(_TemplateDM model)
         {
             _Template entity = new _Template();
             
             ModelToEntity(model, entity);
 
-            _entityDal.Add(entity);    
+            _entityDal.Add(entity);
+
+            return entity;
         }
 
-        private void Edit(_TemplateDM model)
+        private _Template Edit(_TemplateDM model)
         {
             _Template entity = GetSingle(model._TemplateID);
             
             ModelToEntity(model, entity);
+
+            return entity;
         }
 
 

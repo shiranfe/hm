@@ -66,7 +66,7 @@ namespace MVC.Areas.Admin.Controllers
             {
                 _supplierBL.Update(model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
             {        

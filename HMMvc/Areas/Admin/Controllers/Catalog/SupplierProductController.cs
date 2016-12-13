@@ -74,7 +74,7 @@ namespace MVC.Areas.Admin.Controllers
             {
                 _supplierBL.UpdateSupplierProduct(model);
   
-                 return RedirectToAction("Index");
+                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
             {

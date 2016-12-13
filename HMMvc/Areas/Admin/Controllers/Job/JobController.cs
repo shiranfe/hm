@@ -317,7 +317,7 @@ namespace MVC.Areas.Admin.Controllers
                 return;
 
             if (model.TempId > 0)
-                _picManger.ChangeFolder(path + model.TempId, path + model.JobID);
+                PicManager.ChangeFolder(path + model.TempId, path + model.JobID);
 
             var macId = model.RefubrishDetailsDM.MachineID;
 

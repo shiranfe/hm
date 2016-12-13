@@ -3967,15 +3967,32 @@ p {
 }
 
 /*#fieldList .datarow { background-color: #b0dbee; }*/
-#fieldList .datarow:not(.selected):hover, #fieldList .BlockHeaderTitle:hover, #fieldList .sub-group-title:hover {
+#fieldList .datarow:not(.selected):hover, 
+#fieldList .BlockHeaderTitle:hover, 
+#fieldList .sub-group-title:hover {
     background-color: #e0eff6;
     cursor: pointer;
 }
 /*.BlockHeaderTitle{width:50%}*/
-.datarow.selected, .VbTabBlock.selected, .sub-group.selected, .sub-group.selected .sub-group-title, .VbTabBlock.selected .sub-group-title {
+.datarow.selected, 
+.VbTabBlock.selected, 
+.sub-group.selected, 
+.sub-group.selected .sub-group-title, 
+.VbTabBlock.selected .sub-group-title 
+{
     background-color: #b0dbee;
 }
 /*.sitesubcontent input[type="button"]{min-width:initial; margin-left:5px;}*/
+
+.addFieldDiv {
+    border-top: 1px solid #fff;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+    .addFieldDiv .autocomplete {
+        width:300px;
+    }
 
 .BlockHeaderIcon {
     height: 30px;

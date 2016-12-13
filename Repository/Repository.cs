@@ -13,7 +13,7 @@ namespace Repository
     {
         internal IDbContext Context;
         internal IDbSet<TEntity> DbSet;
-
+         
         public Repository(IDbContext context)
         {
             Context = context;

@@ -83,7 +83,7 @@ namespace MVC.Areas.Admin.Controllers
 
             Session["EmpID"] = null;
 
-            return RedirectToAction("Login");
+            return RedirectToAction(nameof(Login));
         }
 
     }

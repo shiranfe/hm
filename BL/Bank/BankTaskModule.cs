@@ -115,28 +115,31 @@ namespace BL
 
         public void Update(BankTaskDM model)
         {
-           
-            if (model.BankTaskID > 0)
-                Edit(model);
-            else
-                Add(model);
+            var entity = (model.BankTaskID > 0) ? Edit(model) : Add(model);
+   
+            _uow.SaveChanges();
 
+            model.BankTaskID = entity.BankTaskID;
         }
 
-        private void Add(BankTaskDM model)
+        private BankTask Add(BankTaskDM model)
         {
             BankTask entity = new BankTask();
             
             ModelToEntity(model, entity);
 
-            _entityDal.Add(entity);    
+            _entityDal.Add(entity);
+
+            return entity;
         }
 
-        private void Edit(BankTaskDM model)
+        private BankTask Edit(BankTaskDM model)
         {
             BankTask entity = GetSingle(model.BankTaskID);
             
             ModelToEntity(model, entity);
+
+            return entity;
         }
 
 

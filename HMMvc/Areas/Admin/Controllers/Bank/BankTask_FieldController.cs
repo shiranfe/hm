@@ -40,7 +40,7 @@ namespace MVC.Areas.Admin.Controllers
             }
             else
             {
-                model = new BankTask_FieldDM {  };
+                model = new BankTask_FieldDM();
                 ViewBag.PopTitle = "חדשה";
             }
 
@@ -72,16 +72,38 @@ namespace MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Sort(int[] ids)
         {
             try
             {
-                _entityBL.Delete(id);
-                return Json(new { msg = "Success" });
+                _entityBL.Sort(ids);
+
+                //return RedirectToAction("DynamicFields");
+                return Json(new { sts = "Success", });
             }
             catch (Exception e)
             {
                 return ExceptionObj(e);
+
+            }
+
+        }
+
+        /*************      DELETE        ***********/
+
+        [HttpPost]
+        public ActionResult Delete(int[] ids)
+        {
+            try
+            {
+                _entityBL.Delete(ids);
+
+                return Json(new { sts = "Success" });
+            }
+            catch (Exception e)
+            {
+                return ExceptionObj(e);
+
             }
         }
 

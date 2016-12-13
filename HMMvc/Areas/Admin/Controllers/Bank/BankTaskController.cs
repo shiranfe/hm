@@ -42,7 +42,7 @@ namespace MVC.Areas.Admin.Controllers
             }
             else
             {
-                model = new BankTaskDM {  };
+                model = new BankTaskDM();
                 ViewBag.PopTitle = "חדשה";
             }
 

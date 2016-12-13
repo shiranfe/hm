@@ -311,6 +311,7 @@ $.crud = function (options) {
 
     /** unbind all "live"  */
     function unbindAll() {
+
         for (var i = 0; i < bindings.length; i++) {
             bindings[i].die();
         }

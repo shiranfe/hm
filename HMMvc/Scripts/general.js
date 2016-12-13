@@ -287,11 +287,15 @@ function scrollToError() {
 }
 
 function scrollTo(elem) {
-
-    $('html, body').animate({
-        scrollTop: $(elem).offset().top - 20
-    }, 500);
+    try {
+        $('html, body').animate({
+            scrollTop: $(elem).offset().top - 20
+        }, 500);
     //  $('body').scrollTo($(elem).offset().top - 20);
+    } catch (e) {
+
+    }
+  
 }
 
 function scrollToTop() {

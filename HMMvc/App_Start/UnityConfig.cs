@@ -41,12 +41,29 @@ namespace MvcBlox.App_Start
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.AddNewExtension<ServicesUnityExtension>();
-            container.RegisterType<LangBL, LangBL>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ClientBL, ClientBL>(new ContainerControlledLifetimeManager());
-            container.RegisterType<UserBL, UserBL>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IGlobalManager, GlobalManager>(new ContainerControlledLifetimeManager());
-            container.RegisterType<PicManager, PicManager>(new ContainerControlledLifetimeManager());
+
+            using (var containerControlledLifetimeManager = new ContainerControlledLifetimeManager())
+            {
+                container.RegisterType<LangBL, LangBL>(containerControlledLifetimeManager);
+            }
+            using (var containerControlledLifetimeManager = new ContainerControlledLifetimeManager())
+            {
+                container.RegisterType<ClientBL, ClientBL>(containerControlledLifetimeManager);
+            }
+            using (var containerControlledLifetimeManager = new ContainerControlledLifetimeManager())
+            {
+                container.RegisterType<UserBL, UserBL>(containerControlledLifetimeManager);
+            }
+            using (var containerControlledLifetimeManager = new ContainerControlledLifetimeManager())
+            {
+                container.RegisterType<IGlobalManager, GlobalManager>(containerControlledLifetimeManager);
+            }
+            using (var containerControlledLifetimeManager = new ContainerControlledLifetimeManager())
+            {
+                container.RegisterType<PicManager, PicManager>(containerControlledLifetimeManager);
+            }
 
         }
+
     }
 }

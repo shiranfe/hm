@@ -2,17 +2,17 @@
 @using Common
 
 <script src="~/Areas/Admin/Scripts/BankTask_Field/index.js"></script>
-<div id="taskFieldsList">
+<div id="fieldList">
     @foreach (var field in Model)
     {
         @Html.Partial("FieldTmpl", field)
     }
-    <div class="clear"></div>
+   
 
 
 </div>
-
-<div class="datarow formRow">
+<div class="clear"></div>
+<div class="addFieldDiv">
     @{
         ViewBag.Required = false;
     }

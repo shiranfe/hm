@@ -88,7 +88,7 @@ namespace MVC.Controllers
         {
             try
             {
-                _picManger.ChangeTempPic(avat);
+                PicManager.ChangeTempPic(avat);
                 // avat.ImgFolder = HttpContext.Server.MapPath(".").Replace("\\Pic", "") + _foldpath;
 
 
@@ -109,7 +109,7 @@ namespace MVC.Controllers
         {
             try
             {
-                _picManger.Rotate(avat, isCounter);
+                PicManager.Rotate(avat, isCounter);
                 return Json(new { success = true, path = PicHelper.PhysicalToUrl(avat.path) + "?" + DateTime.Now.Ticks });
 
             }

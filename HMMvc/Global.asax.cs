@@ -86,15 +86,9 @@ namespace MVC
             {
                 var id = Convert.ToInt32(cok);
                 Session["UserID"] = id;
-
-                try
                 {
                     Session["RootClientID"] = Session["ClientID"] = _userBL.GetClientID(id);
                     Session["EmpID"] = null;
-                }
-                catch (Exception)
-                {
-                    // ignored
                 }
             }
 

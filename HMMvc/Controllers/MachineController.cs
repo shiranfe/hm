@@ -99,18 +99,12 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Update(MachineEditDM machine)
         {
-            try
-            {
+         
                 _machineBL.Update(machine);
                 // PopulateClientDrop();
 
                 return Json(new { sts = "Success", MachineID = machine.MachineID });
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
+           
 
         }
 

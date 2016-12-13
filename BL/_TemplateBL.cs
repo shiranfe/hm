@@ -39,7 +39,6 @@ namespace BL
         {
             _module.Update(model);
 
-            _uow.SaveChanges();
         }
 
         public void Delete(int id)

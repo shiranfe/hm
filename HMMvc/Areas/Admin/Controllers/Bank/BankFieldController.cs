@@ -41,7 +41,7 @@ namespace MVC.Areas.Admin.Controllers
             }
             else
             {
-                model = new BankFieldDM { };
+                model = new BankFieldDM();
                 ViewBag.PopTitle = "חדשה";
             }
 

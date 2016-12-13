@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Microsoft.Practices.Unity;
 using Repository;
 
@@ -52,8 +53,21 @@ namespace BL
             _uow.SaveChanges();
         }
 
+        public void Sort(int[] ids)
+        {
+            _module.Sort(ids);
+            _uow.SaveChanges();
+        }
 
+        public void Delete(int[] ids)
+        {
+            foreach (var id in ids)
+            {
+                _module.Delete(id);
+            }
 
-     
+            _uow.SaveChanges();
+
+        }
     }
 }

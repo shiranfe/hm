@@ -2,7 +2,7 @@
 @{
 
     var field = Model;
-    field.HtmlID = field.DynamicGroupFieldID + "";
+    field.HtmlID = field.Id.ToString();
     field.HtmlValue = field.FieldValue;
 
     var fieldType = field.FieldTypeID.ToString();
@@ -11,5 +11,3 @@
 }
 
 @Html.EditorFor(model => field, fieldType)
-
-

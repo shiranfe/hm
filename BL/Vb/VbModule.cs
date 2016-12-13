@@ -39,7 +39,7 @@ namespace BL.Moduls
         public VbReportDM GetVbReport(int jobID,bool isEnglish)
         {
            
-            string undefined = "Undefined";//GlobalDM.GetTransStr("Undefined");
+       
             return (from v in _vwJobVibration.GetQueryable()
                     where v.JobID == jobID
                     select new VbReportDM

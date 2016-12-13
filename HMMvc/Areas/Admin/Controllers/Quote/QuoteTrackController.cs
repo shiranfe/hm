@@ -146,7 +146,7 @@ namespace MVC.Areas.Admin.Controllers
 
 
                 var upld = new UploadFileHelper();
-                upld.UploadFile(fullPath, Request);
+                UploadFileHelper.UploadFile(fullPath, Request);
 
                 _entityBL.UpdateOrderAttchment(id, fileName);
 

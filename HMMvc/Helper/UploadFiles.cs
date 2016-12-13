@@ -6,7 +6,7 @@ namespace MVC.Helper
 {
     public class UploadFileHelper
     {
-        internal void UploadFile(string newFilename, HttpRequestBase request)
+        internal static void UploadFile(string newFilename, HttpRequestBase request)
         {
             using (var strm = request.InputStream)
             {
@@ -40,13 +40,18 @@ namespace MVC.Helper
 
 
                 var writeStream = new FileStream(newFilename, FileMode.Create);
-                var bw = new BinaryWriter(writeStream);
-                bw.Write(fileContents);
-                bw.Close();
+                using (var bw = new BinaryWriter(writeStream))
+                {
+                    bw.Write(fileContents);
+                    bw.Close();
 
-                strm.Flush();
-                strm.Dispose();
+                    strm.Flush();
+                    strm.Dispose();
+                }
+
+                br.Dispose();
             }
+           
         }
 
        
