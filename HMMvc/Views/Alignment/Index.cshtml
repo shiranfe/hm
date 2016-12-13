@@ -1,0 +1,84 @@
+﻿@model List<JobAlignmentDM>
+@using Common
+
+
+<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuMachine", "Menu");}
+</div>
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>@GlobalDM.GetTransStr("JobType_Shivur")</h1>
+
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div>
+
+        <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("JobHistory")</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div style="padding:15px;">
+                @if (Model.Any())
+                {
+                    <table id="VbHistoryTable" class="tablesorter">
+                        <thead>
+                            <tr>
+                                <th style="width: 90px;">
+                                    תאריך בדיקה
+
+                                </th>
+                                <th>
+                                    עבודה
+                                </th>
+                                <th>
+                                    מפעל
+                                </th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{var i = 1;}
+                            @foreach (var item in Model)
+                            {
+                                var odd = i % 2 == 0 ? "odd" : "even";
+                                i++;
+                                // var posted = (item.JobDM.IsPosted) ? "posted" : "";
+
+                                <tr class="@odd">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.JobDM.StartDate)
+
+                                        @*<div class="VbhisSts @posted"></div>*@
+                                    </td>
+                                    <td>
+                                        <a class="linktext" target="_blank" href="/Export/AlignmentExport?id=@item.JobID">@Html.DisplayFor(modelItem => item.JobDM.JobName)</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.JobDM.ClientName)
+                                    </td>
+                                   
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div>לא נמצאו בדיקות במערכת</div>
+                }
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+

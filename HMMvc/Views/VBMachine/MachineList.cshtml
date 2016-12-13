@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Machine Details List";
+}
+
+@using Common
+
+@model IEnumerable<MachineDetailsDM>
+
+
+
+    <h1>@GlobalDM.GetTransStr("Machine_Machines")</h1>
+<div id="pageContent">
+    <table>
+        <tr>
+            <th style="width: 200px">
+                @GlobalDM.GetTransStr("Machine_MachineName")
+        </th>
+        <th style="width: 200px">
+            @GlobalDM.GetTransStr("User_Client")
+    </th>
+    <th style="width: 100px">
+        @GlobalDM.GetTransStr("Machine_Status")
+</th>
+</tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="MacName">
+            @Html.DisplayFor(modelItem => item.MachineName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientName)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Status)*@
+        </td>
+
+    </tr>
+}
+
+</table>
+
+</div>
+    

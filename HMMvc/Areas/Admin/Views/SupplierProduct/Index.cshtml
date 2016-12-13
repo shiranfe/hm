@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "SupplierPriceList";
+}
+<script src="~/Scripts/UI/jquery.tablesorter.js"></script>
+<script src="~/Areas/Admin/Scripts/Catalog/SupllierProduct.js"></script>
+<style>
+    .ui-tabs .ui-tabs-panel { width: auto; }
+    .ui-tabs .ui-tabs-nav li { background-color: transparent; box-shadow: none; border: 1px solid #e8e8e8; }
+    .ui-tabs li.ui-tabs-active, .ui-tabs .ui-tabs-panel { background-color: #e8e8e8; }
+</style>
+@*<div class="SiteSideMenu corn_3 shadow">
+
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>מחירון ספקים</h1>
+        </div>
+        <div class="HeaderActions">
+            <input id="AddItemBtn" type="button" class="buttondefault" value="מוצר חדש" />
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">חיפוש</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo searchFields">
+            <div class="formRow">
+                <div class="datarow  single">
+                    <div class="fieldlabel">
+                        חיפוש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input type="text" id="srch" placeholder="חפש" autofocus/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formRow ">
+                <div class="datarow single clearfix">
+                    <div class="fr">
+                        <input id="showMaterial" type="checkbox" checked="checked"><span>הצג חומרים</span>
+                    </div>
+                    <div class="fr" style="margin:0 10px;">
+                        <input id="showService" type="checkbox" checked="checked"><span>הצג שירותי חוץ</span></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+  
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">מוצרים</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div id="pageContent" class="VbTabBlockInfo">
+            @{Html.RenderAction("PriceListProducts", "SupplierProduct");}
+        </div>
+
+    </div>
+    @*<div id="tabs" style="margin: 25px 0 10px" class="">
+            <ul>
+                <li class="corn_top shadow"><a href="~/Admin/Catalog/PriceListProducts">מוצרים</a></li>
+                <li class="corn_top shadow"><a href="~/Admin/Catalog/PriceListOutsource">מוצרי חוץ</a></li>
+
+            </ul>
+
+        </div>*@
+
+
+
+</div>

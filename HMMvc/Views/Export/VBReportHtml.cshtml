@@ -1,0 +1,118 @@
+﻿@model Common.VbReportDM
+@using Common;
+@{
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+<style>
+    .td1 { width: 250px; }
+    /*.td2 { width: 100px; }*/
+    .td3 { width: 200px; }
+    .td4 { width: 70px; }
+    .td5 { width: 150px; }
+</style>
+
+
+
+@Html.Partial("Vb/JobInfo", Model)
+
+<div class="PageContInner">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("TestResult")</div>
+    </div>
+
+    <div id="VbHtmInfo" style="margin: 25px 0;">
+
+        <div class="VBHtmMikraZone">
+            <div class="VBReportMikraTitle">@GlobalDM.GetTransStr("Global_Legend"):</div>
+            <div style="padding: 5px 20px;">
+                <div class="VBReportMikraStsDiv">
+                    <div class="VBReportMikraIcon IconBig-4"></div>
+                    <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_Normal")</div>
+                </div>
+                <div class="VBReportMikraStsDiv">
+                    <div class="VBReportMikraIcon IconBig-3"></div>
+                    <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_FollowUp")</div>
+                </div>
+                <div class="VBReportMikraStsDiv">
+                    <div class="VBReportMikraIcon IconBig-2"></div>
+                    <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_Repair")</div>
+                </div>
+                <div class="VBReportMikraStsDiv">
+                    <div class="VBReportMikraIcon IconBig-1"></div>
+                    <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_ArgentRepair")</div>
+                </div>
+                <div class="VBReportMikraStsDiv">
+                    <div class="VBReportMikraIcon IconBig-5"></div>
+                    <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_NotTested")</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="TableZone">
+        <table  dir="@ViewBag.dir">
+            <tr class="mainRow">
+                <th class="FirstTd td1">
+                    @GlobalDM.GetTransStr("Machine_MachineName")
+                </th>
+                <th class="td2">
+                    @GlobalDM.GetTransStr("Description")
+                </th>
+                <th class="td3">
+                    @GlobalDM.GetTransStr("User_Location")
+                </th>
+                <th class="td4">
+                    @GlobalDM.GetTransStr("JobVibration_MaxValue")
+                </th>
+                <th class="LastTd td5">
+                    @GlobalDM.GetTransStr("Machine_Status")
+                </th>
+            </tr>
+            @*<tr class="spacer">
+                    <td colspan="5"></td>
+                </tr>*@
+            @foreach (var item in Model.VbReportMachineDMs)
+                {
+
+                    <tr style="margin-top:4px;">
+                        <td class="td1">
+                            <b class="MacName">@Html.DisplayFor(modelItem => item.MachineName)</b>
+                        </td>
+                        <td class="td2">
+                            @Html.DisplayFor(modelItem => item.Details)
+                        </td>
+                        <td class="td3">
+                            @Html.DisplayFor(modelItem => item.Areas)
+                        </td>
+                        <td dir="ltr" class="td4">
+                            @if (item.MaxValue.HasValue)
+                            {
+                            @Html.DisplayFor(modelItem => item.MaxValue)
+                            <span class="fnt_s"> (mm/s) </span>
+                            }
+                        </td>
+                        <td class="TdIcon td5">
+                            @item.Status
+                            <div class="VBReportStsIcon IconBig-@item.StatusID"></div>
+                        </td>
+                    </tr>
+                    if (item.Notes == null)
+                    {
+                        continue;
+                    }
+                    <tr>
+                        <td colspan="5" class="NotesTD">@item.Notes</td>
+                    </tr>
+                     @*<tr class="spacer">
+                            <td colspan="4"></td>
+                        </tr>*@
+                }
+
+        </table>
+    </div>
+
+</div>
+
+@*@Html.Partial("ExportSignuture", @Model.JobDM.CreatorName)*@

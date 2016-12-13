@@ -1,0 +1,21 @@
+﻿@model Common.AdminPointResualtDM
+
+@{
+    Layout = "";
+    ViewBag.HasPic = !Model.SpectrumPic.Contains("MacType_");
+}
+
+@if (Model.PointResualtID != 0)
+{
+    <h3>נקודה @Model.PointName , @Model.ValueName </h3>
+
+    <div class="fr">
+        <div class="MachineImg s1 Schema uplodable pic-container" style="position: relative;">
+            <img alt="" src="@Url.Content(Model.SpectrumPic)" />
+             @Html.Partial("UploadPic", new MVC.Models.Avatar { ObjID = Model.PointResualtID, ObjType = "PointResualt" })
+
+        </div>
+        <div class="clear"></div>
+       
+    </div>
+}

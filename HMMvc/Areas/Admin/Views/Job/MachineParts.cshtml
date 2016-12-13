@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Common.MachinePartDM>
+
+
+<div class="linktext EditMachineBtn" data-id="@ViewBag.MachineID">להוספה לחץ כאן</div>
+
+
+<div class="inner">
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var part in Model)
+        {
+            var sel = part.Selected ? "checked='checked'" : "";
+            <li><input type="checkbox" @sel name="@ViewBag.MachinePartID" value="@part.MachinePartID" /><span>@part.MachineTypeLangStr</span></li>
+        }
+    </ul>
+}
+else
+{
+    <span>לא הוגדרו חלקים למכונה.</span>
+}
+</div>
+
+
+
+<div id="partsValidation" class="field-validation-error dn">
+    <span>יש לבחור חלק אחד לפחות</span>
+</div>

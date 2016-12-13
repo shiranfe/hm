@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Report</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <link href="@Url.Content( "~/Content/Site_" +  ViewBag.dir + ".css")" rel="stylesheet" type="text/css" />
+    @*@Html.Partial("ChangeLang")*@
+    <link href="~/Content/HtmlExport.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="SiteWidth">
+        @if (!ViewBag.disableHF)
+        {
+            //Html.RenderAction("Header", "User", new { ClientID = ViewBag.ClientID, area = "" });
+            @Html.Partial("HeaderPdf")
+        }
+        <div id="SiteBody" class="clearfix">
+
+            @RenderBody()
+        </div>
+        @if (!ViewBag.disableHF)
+        {
+            @Html.Partial("FooterPdf")
+
+
+        }
+
+
+</div>
+      
+
+</body>
+</html>

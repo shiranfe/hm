@@ -1,0 +1,34 @@
+﻿@model List<JobTaskGroupDM>
+@using Common
+<script src="~/Areas/Admin/Scripts/Job/JobFields.js"></script>
+    @if (Model.Any())
+    {
+        foreach (var sub in Model)
+        {
+            ViewBag.RootGroup = sub;
+            ViewBag.allGroups = Model;
+         
+           
+            <div class="sub-group" data-id="@sub.JobTaskGroupID">
+                @if (!sub.IsGeneral)
+                {
+                    <div class="sub-group-title corn_3">@sub.GroupNameStr</div>
+                }
+                
+               @* @Html.Partial("~/Areas/Admin/Views/Shared/StepGroupFields.cshtml", (StepGroupDM)sub)*@
+
+                <div class="clearfix">
+         @Html.Partial("TaskFields", sub.JobTaskGroupFieldDMs)
+
+                  
+                </div>
+
+            </div>
+
+   
+        }
+    }
+    else
+    {
+        <div>טרם התווספו שדות</div>
+    }

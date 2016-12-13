@@ -1,0 +1,26 @@
+/* @license
+ * MyFonts Webfont Build ID 2509828, 2013-03-20T11:07:31-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Magistral Light by ParaType
+ * URL: http://www.myfonts.com/fonts/paratype/magistral/pt-magistral/
+ * Copyright: Copyright &#x00A9; 1997 ParaType Inc., ParaType Ltd. All rights reserved.
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2509828
+ * 
+ * © 2013 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/264c04");
+
+  
+@font-face {font-family: 'Magistral-Light';src: url('webfonts/264C04_0_0.eot');src: url('webfonts/264C04_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/264C04_0_0.woff') format('woff'),url('webfonts/264C04_0_0.ttf') format('truetype');}
+ 

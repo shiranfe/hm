@@ -1,0 +1,52 @@
+﻿@model List<Common.RefubrishStepDM>
+
+@{
+    ViewBag.Title = "RefubrishStep";
+}
+<div id="pageContent" class="VbTabBlockInfo">
+    <table>
+        <tr>
+
+            <th>
+                שלב
+            </th>
+         
+            <th>
+               תאריך ביצוע
+            </th>
+            <th>
+                יוצר
+            </th>
+           
+            <th>
+                הערות
+            </th>
+            
+        </tr>
+        @{var i = 1;}
+        @foreach (var item in Model)
+        {
+            var odd = i % 2 == 0 ? "odd" : "even";
+            i++;
+
+            <tr class="@odd">
+                <td>                 
+                    <span class="linktext" data-id="@item.FormName" >@item.StepName</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoneDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatorName)
+                </td>              
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+               
+               
+               
+            </tr>
+        }
+
+    </table>
+</div>

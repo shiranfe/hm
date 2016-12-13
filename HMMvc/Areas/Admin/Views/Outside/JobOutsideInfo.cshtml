@@ -1,0 +1,27 @@
+﻿@model JobDM
+@using Common
+
+<div class="SiteSideMenu menuInfoDiv corn_3 shadow clearfix">
+  
+
+    <div class="SideHeaderInfos">
+        <div class="SideHeaderInfoLabel">שם העבודה: <a class="SideHeaderInfoValue linktext" href="/Admin/#/Job/Details?&JobID=@Model.JobID">@Model.JobName</a></div>
+        <div class="SideHeaderInfoLabel">מספר עבודה: <span class="SideHeaderInfoValue">05/</span><span class="SideHeaderInfoValue" id="JobID">@Model.JobID</span></div>
+        <div class="SideHeaderInfoLabel">לקוח: <span class="SideHeaderInfoValue">@Model.ClientName</span></div>
+        <div class="SideHeaderInfoLabel">מזמין: <span class="SideHeaderInfoValue">@Model.ContactName</span></div>
+
+        @if (Model.IsOutside)
+        {
+            <div class="SideHeaderInfoLabel">כתובת: <span class="SideHeaderInfoValue">@Model.JobOutsideDM.Address</span></div>
+            <div class="SideHeaderInfoLabel">אזור: <span class="SideHeaderInfoValue">@Model.JobOutsideDM.Zone</span></div>
+        }
+        @*<div class="SideHeaderInfoLabel">מכונה: <span class="SideHeaderInfoValue"><a class="linktext " href="/Admin/#/Machine/@Model.MachineID /alignment">@Model.MachineName</a></span></div>*@
+        @*   <div class="SideHeaderInfoLabel"> @Html.DropDownList("Parts")</div>*@
+    </div>
+    <div class="SideHeaderBack">
+        <span class="linktext">
+            <a href="javascript:history.back()">חזרה </a>
+        </span>
+    </div>
+
+</div>

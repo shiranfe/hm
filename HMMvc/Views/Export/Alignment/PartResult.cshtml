@@ -1,0 +1,56 @@
+﻿@model JobAlignmentPartDM
+@using Common
+<style>
+    .value{direction:ltr;}
+</style>
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">תוצאות </div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo clearfix">
+
+
+        <div class="alignment-resualt ">
+
+            <div class="h">
+                <h3 >@GlobalDM.GetTransStr("Vertical")</h3>
+                <div class="resualt">
+                    <div class="type">Offset</div>
+                    <img src="~/images/ver-off.png" />
+                  
+                    <div class="value ">@Html.DisplayFor(model => model.V_Offset)</div>
+                    <div class="unit">mm</div>
+                </div>
+                <div class="resualt">
+                    <div class="type">Angle</div>
+                    <img src="~/images/Ver-rotate.png" />
+                   
+                    <div class="value ">@Html.DisplayFor(model => model.V_Angle) </div>
+                    <div class="unit">mm/175mm</div>
+                </div>
+            </div>
+            <div class="h">
+                <h3 >@GlobalDM.GetTransStr("Horizontal")</h3>
+                <div class="resualt">
+                    <div class="type">Offset</div>
+                    <img src="~/images/hor-off.png" />
+                    <div class="value">@Html.DisplayFor(model => model.H_Offset)</div>
+                    <div class="unit">mm</div>
+                </div>
+                <div class="resualt">
+                    <div class="type">Angle</div>
+                    <img src="~/images/hor-rotate.png" />
+                    
+                    <div class="value">@Html.DisplayFor(model => model.H_Angle)</div>
+                    <div class="unit">mm/175mm</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

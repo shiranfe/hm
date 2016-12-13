@@ -1,0 +1,203 @@
+﻿@model QuoteVersionDM
+@using Common
+
+@{
+    ViewBag.VersionDate = ((DateTime)Model.VersionDate).ToShortDateString();
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+
+    var SumAfterDiscount = Math.Round(Model.TotalSum > 0 ? Model.TotalSum * (1 - Model.Disscount) : 0);
+    var VatMoney = Model.Vat * SumAfterDiscount;
+
+    var SumAfterVat = Math.Round(SumAfterDiscount+ VatMoney);
+}
+
+<style>
+    /*th.td1 { width: 500px; }*/
+    .td2 {
+        width: 50px;
+       
+    }
+
+    td.td2{
+         height:42px;
+    }
+    .td3 {
+        width: 100px;
+    }
+
+    .td4 {
+        width: 135px;
+    }
+
+    .odd {
+        margin-bottom: -1px;
+    }
+
+    
+</style>
+
+@Html.Partial("Quote/JobInfo", Model.QuoteDM)
+
+<div class="VbTabBlock corn_3 itemsTable">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("QuoteDetails")</div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        <p>@GlobalDM.GetTransStr("QuoteDetails_Text"):</p>
+        <table dir="@ViewBag.dir">
+            <tr>
+
+                <th class="td1">
+                    @GlobalDM.GetTransStr("A_Item")
+                </th>
+                <th class="td2">
+                    @GlobalDM.GetTransStr("A_Quanitity")
+                </th>
+                <th class="td3">
+                    @GlobalDM.GetTransStr("A_PricePerUnit")
+                </th>
+                <th class="td4">
+                    @GlobalDM.GetTransStr("A_TotalPrice")
+                </th>
+
+            </tr>
+
+
+            @foreach (var item in Model.Items)
+            {
+                var isChild = item.ItemParentID.HasValue ? "child" : "even";
+                var hideZero = !item.ItemParentID.HasValue && item.ItemTotalPrice == 0 ? "hideZero" : "";
+                <tr class="mainRow @isChild @hideZero">
+
+                    <td class="td1">
+                        <div class="indent"></div>
+                        <div>
+                            <span class="b">@Html.DisplayFor(modelItem => item.ItemTitle)</span>
+                            <span class="keep-eng" label="FieldValue">@Html.DisplayFor(modelItem => item.FieldValue)</span>
+                            <pre >@Html.DisplayFor(modelItem => item.ItemNotes)</pre>
+                        </div>
+
+                    </td>
+                    <td class="td2">
+                        @if (item.ItemQuntity > 0)
+                        {
+                            <span class="output">@Html.DisplayFor(modelItem => item.ItemQuntity)</span>
+
+                        }
+                     
+                    </td>
+                    <td class="money td3">
+                        <span class="output">@Html.DisplayFor(modelItem => item.ItemPricePerUnit)</span>
+
+                    </td>
+                    <td class="money td4">
+                        <span class="itemTotalPrice">@Html.DisplayFor(modelItem => item.ItemTotalPrice)</span>
+                    </td>
+                </tr>
+                @*if (item.ItemNotes != null)
+                    {
+                        <tr >
+                            <td colspan="4" class="NotesTD">@item.ItemNotes</td>
+                        </tr>
+                    }*@
+
+            }
+
+
+        </table>
+    </div>
+</div>
+
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("QuoteSummary")</div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        @*<p class="b">
+                @GlobalDM.GetTransStr("QuoteSummary_Info"):
+            </p>*@
+        <table style="font-size:1.1em"  dir="@ViewBag.dir"zui>
+            @if (Model.Disscount > 0)
+            {
+                <tr class="even b">
+                    <td>@GlobalDM.GetTransStr("SubTotal")</td>
+                    <td class="money td4">
+                        <span id="VersionSum">@Model.TotalSum.ToString("c0")</span>
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td>@GlobalDM.GetTransStr("Discount")</td>
+                    <td class="td4">
+                        @Model.Disscount.ToString("p0")
+                    </td>
+
+                </tr>
+            }
+         
+            <tr class="even b">
+                <td>@GlobalDM.GetTransStr("SubTotalAfterDics")</td>
+                <td class=" money td4">
+                    @*<span>@String.Format("{0:c}", SumAfterDiscount)</span>*@
+                    <span>@SumAfterDiscount.ToString("c0")</span>
+                </td>
+            </tr>
+            <tr class="odd">
+                @{var vat = Model.Vat * 100;}
+                <td>@GlobalDM.GetTransStr("Vat") (<span id="Vat">@vat.ToString("#")</span>%)</td>
+                <td class="money td4">
+                    <span>@VatMoney.ToString("c0")</span>
+                </td>
+            </tr>
+            <tr style="font-size:larger">
+                <th>@GlobalDM.GetTransStr("Total")</th>
+                <th class="money td4">
+                    @*<span>@String.Format("{0:c}", SumAfterVat)</span>*@
+                    <span>@SumAfterVat.ToString("c0")</span>
+                </th>
+            </tr>
+        </table>
+        @if (!string.IsNullOrEmpty(Model.Appendices))
+        {
+            <div style="margin-top:20px;">
+                <p class="b">@GlobalDM.GetTransStr("Comments"):</p>
+                <pre class="black cke_editable">@Html.Raw(Model.Appendices)</pre>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Terms))
+{
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("GeneralTerms")</div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="black cke_editable">
+                @Html.Raw(Model.Terms)
+            </div>
+
+
+        </div>
+    </div>
+}
+
+
+    @Html.Partial("ExportSignuture")
+    @*<div class="signuture">
+        <div class="inner">
+            <div style="text-align: center;">@GlobalDM.GetTransStr("Sincerely"), </div>
+            <div style="text-align: center;">@Model.QuoteDM.Creator</div>
+            @if (Model.QuoteDM.EmpSignture != string.Empty)
+            {
+                <img src="@Model.QuoteDM.EmpSignture" />
+            }
+
+        </div>
+
+    </div>*@

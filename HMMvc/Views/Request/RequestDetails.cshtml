@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Request Details";
+}
+@using Common
+@using Common
+
+@model RequestDM
+
+
+
+<div class="sitesubcontent">
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+       
+        <div class="dataform floatfirst">
+            <div class="datarow">
+                <h2>@GlobalDM.GetTransStr("Request_Request")</h2>
+            </div>
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("JobType")
+                </div>
+                <div class="fieldvalue">
+                    @if (Model.Locked)
+                    {
+                        @Model.JobType
+                    }
+                    else
+                    {
+                        @Html.DropDownList("JobType", (SelectList)ViewBag.JobType)    
+                    }
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("Request_Date")
+                </div>
+                <div class="fieldvalue">
+                    @if (Model.Locked)
+                    {
+                        @Model.Date
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Date)
+                        @Html.ValidationMessageFor(model => model.Date) 
+                    }
+
+                </div>
+            </div>
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Client")
+                </div>
+                <div class="fieldvalue">
+                    @if (Model.Locked)
+                    {
+                        @Model.ClientName
+                    }
+                    else
+                    {
+                        @Html.DropDownList("Client", (SelectList)ViewBag.Client)
+                        @Html.ValidationMessageFor(model => model.ClientID)
+                    }
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("Request_Creator")
+                </div>
+                <div class="fieldlabel">
+                    @Model.CreatedUserFullName
+
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("Job_Priority")
+                </div>
+                <div class="fieldvalue">
+                    @if (Model.Locked)
+                    {
+                        @Model.Priority
+                    }
+                    else
+                    {
+                        @Html.DropDownList("Priority", (SelectList)ViewBag.Priority)
+                        @Html.ValidationMessageFor(model => model.PriorityPL)
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="floatfirst">
+            @if (Model.Locked)
+            {
+               
+            }
+        </div>
+        <div class="dataform">
+
+            <input type="submit" value="@GlobalDM.GetTransStr("A_Save")" class="buttondefault floatlast">
+        </div>
+
+    }
+</div>
+<div class="clear"></div>

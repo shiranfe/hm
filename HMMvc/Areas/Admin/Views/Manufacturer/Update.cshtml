@@ -1,0 +1,58 @@
+﻿@model Common.ClientDM
+@using Common
+@{
+    ViewBag.Title = "עדכון יצרן";
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    setPopTitle('Manufacturer', '@ViewBag.PopTitle');
+</script>
+
+<form id="UpdateManufacturerForm" method="post" data-ajax="true">
+
+    @Html.HiddenFor(x => x.IsClient)
+    @Html.HiddenFor(x => x.IsSupplier)
+    @Html.HiddenFor(x => x.IsManufacture)
+    @Html.HiddenFor(x => x.HasVbService)
+    @Html.HiddenFor(x => x.ClientID)
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv">
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            שם היצרן:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.ClientName)
+                            @Html.ValidationMessageFor(model => model.ClientName)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("User_CommunicationDetails")</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            @{ ViewBag.ShowPersonal = false;}
+            @Html.Partial("ConactInfoDetails", Model)
+        </div>
+
+    </div>
+    <div class="ForBtnDiv">
+        <input type="button" value="שמור" class="buttondefault floatlast">
+        @Html.ValidationSummary(true)
+    </div>
+</form>

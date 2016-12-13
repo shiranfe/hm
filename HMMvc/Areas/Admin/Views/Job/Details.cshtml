@@ -1,0 +1,221 @@
+﻿@model JobDM
+@using Common
+
+@{
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "פרטי עבודה";
+    string StartDate = ((DateTime)Model.StartDate).ToShortDateString();
+    string EndDate = Model.EndDate != null ?
+        ((DateTime)Model.EndDate).ToShortDateString() :
+        string.Empty;
+    string DueDate = Model.DueDate != null ?
+        ((DateTime)Model.DueDate).ToShortDateString() :
+        string.Empty;
+
+
+    //var clientID = Model.ClientID == 0 ? string.Empty : Model.ClientID.ToString();
+
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script>
+        tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Services/clientUserService.js")');
+        tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Services/clientMachineService.js")');
+
+</script>
+
+
+<div class="sitesubcontent corn_3 shadow">
+    <h2>פרטי הזמנה</h2>
+
+    <form id="UpdateJobForm" method="post" data-ajax="true">
+
+
+        @*@Html.HiddenFor(model => Model.JobID)*@
+        <input class="input-validation-error" data-val="true" data-val-number="The field JobID must be a number." data-val-required="The JobID field is required." id="JobID" name="JobID" type="hidden" value="@Model.JobID">
+        @Html.HiddenFor(model => Model.IsVB)
+        @Html.HiddenFor(model => Model.IsRefubrish)
+        @Html.HiddenFor(model => Model.TempId)
+        @Html.HiddenFor(model => Model.ReturningJobParentID)
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">פרטי עבודה כלליים </div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            שם העבודה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.JobName)
+                            @Html.ValidationMessageFor(model => Model.JobName)
+
+                        </div>
+
+                    </div>
+
+                </div>
+               @if (Model.ReturningJobParentID.HasValue)
+                {
+                    <div class="formRow">
+                        <div class="datarow single">
+                            <div class="fieldlabel">
+                               @GlobalDM.GetTransStr("ReturningJob"):
+                            </div>
+                            <div class="fieldvalue">
+                                <a class="red" href="/Admin/#/Refubrish/0?JobID=@Model.ReturningJobParentID">05/@Model.ReturningJobParentID</a>
+                            </div>
+                        </div>
+                    </div>          
+                }
+                <div class="formRow">
+                    <div class="datarow single">
+                        @{ ViewBag.Container = "#UpdateJobForm"; }
+                        @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml", Model)
+
+                    </div>
+
+                    <div class="formRow">
+                        <div class="datarow floatfirst">
+                            <div class="fieldlabel">
+                                איש קשר:
+                            </div>
+                            <div class="fieldvalue">
+                                @*@Html.DropDownList("ContactID", (SelectList)ViewBag.Contacts)*@
+                                @Html.EditorFor(model => Model.ContactID, new { options = ViewBag.Contacts, AddBtnClass="addContact" })
+
+
+                            </div>
+                            <div class="tcTopMin">
+                                <div class="plusBtn EditClientBtn" data-id="@Model.ClientID"></div>
+                            </div>
+                        </div>
+                        <div class="datarow floatlast">
+                            <div class="fieldlabel">
+                                יוצר:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.EditorFor(model => Model.CreatorID, new { options = ViewBag.Creator, disabled = true })
+
+                                @*@Html.DropDownList("CreatorID", (SelectList)ViewBag.Creator)*@
+                                @* ,new {  } *@
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            תאריך התחלה:
+                        </div>
+                        <div class="fieldvalue">
+                            <div class="OuterSelect PointValDatesRow">
+                                <input id="StartDate" class="DatePicker" name="StartDate" value="@StartDate" />
+                            </div>
+                            @Html.ValidationMessageFor(model => Model.StartDate)
+                        </div>
+
+                    </div>
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            תאריך יעד:
+                        </div>
+                        <div class="fieldvalue">
+                            <div class="OuterSelect PointValDatesRow">
+                                <input id="DueDate" class="DatePicker" name="DueDate" value="@DueDate" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            תאריך סיום בפועל:
+                        </div>
+                        <div class="fieldvalue">
+                            <div class="OuterSelect PointValDatesRow">
+                                <input id="EndDate" class="DatePicker" name="EndDate" value="@EndDate" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            מספר עבודה:
+                        </div>
+                        <div class="fieldvalue">
+                            05/@Html.DisplayFor(model => model.JobID)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            הערות כלליות:
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                            <textarea id="Comments" class="TextBox" name="Comments" rows="2">@Model.Comments</textarea>
+                        </div>
+                    </div>
+                </div>
+               
+
+
+                <div class="clear"></div>
+            </div>
+
+        </div>
+
+
+        @if (Model.IsOutside)
+        {
+            @Html.Partial("JobOutsideDetails", Model)
+        }
+
+        @if (Model.IsRefubrish)
+        {
+            //Html.RenderAction("Index", "JobEquipment", Model);
+            @Html.Partial("JobRefubrushDetails", Model)
+            @Html.Partial("~/Areas/Admin/Views/Job/JobPics.cshtml", Model)
+        }
+        else if (Model.IsAlignment)
+        {
+            @Html.Partial("JobAlignmentDetails", Model)
+        }
+
+
+      
+
+
+        <div class="ForBtnDiv clearfix">
+            <input id="UpdateJobBtn" type="button" value="שמור" class="buttondefault floatlast">
+        </div>
+
+    </form>
+
+</div>
+<div class="clear"></div>
+
+<script>
+    try {
+        setPopTitle('Job', '@ViewBag.PopTitle',true);
+    } catch (e) {
+        CreateDropDown();
+    }
+
+
+
+</script>
+
+<script src="~/Areas/Admin/Scripts/Job/UpdateJob.js"></script>

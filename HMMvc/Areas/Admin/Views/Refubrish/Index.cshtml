@@ -1,0 +1,91 @@
+﻿@model RefubrishFilterDm
+@using Common
+
+<script src="~/Areas/Admin/Scripts/Refubrish/index.js"></script>
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "Refubrish", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>תיקונים</h1>
+
+        </div>
+        <div class="HeaderActions">
+
+            <input id="AddItemBtn" type="button" class="buttondefault newRefubrishBtn" value="עבודה חדשה" />
+            <input id="AddJobRequestBtn" type="button" class="buttondefault" value="קליטה מהירה" />
+            <input id="openReturningJobBtn" type="button" class="buttondefault red" value="עבודה חוזרת" />
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div>
+
+        <div class="VbTabBlock corn_3 searchFields">
+
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">חיפוש</div>
+                <div class="HeaderActions">
+                    <a class="linktext clear">נקה שדות</a>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            חיפוש:
+                        </div>
+                        <div class="fieldvalue">
+                            <input type="text" id="srch" placeholder="חפש" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formRow ">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            סטטוס:
+                        </div>
+                        <div class="">
+                            @Html.Editor("RefubrishStatusID", "AutoComplete", new { options = ViewBag.RefubrishStatusID })
+                        </div>
+                    </div>
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            יוצר:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.Editor("CreatorID", "AutoComplete", new { options = ViewBag.Creator })
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+        </div>
+
+
+        <div id="innerContent" class="VbTabBlock corn_3">
+            @Html.Partial("~/Areas/Admin/Views/Refubrish/Filterd.cshtml",Model)
+            
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+
+<style>
+    td {
+        line-height: 1.7;
+    }
+</style>

@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html class="trans">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VBReportHtml</title>
+    @Html.Partial("ChangeLang")
+    <link href="~/Content/HtmlExport.css" rel="stylesheet" />
+    <script>
+        function setPage() { var a = {}, b = document.location.search.substring(1).split("&"); for (var c in b) { var d = b[c].split("=", 2); a[d[0]] = unescape(d[1]) } b = "page"; for (var e = document.getElementsByClassName(b), f = 0; f < e.length; ++f) e[f].setAttribute("data-page", a[b]) }
+    </script>
+    <style>
+        #SiteHeader { margin-bottom: 0px; }
+    </style>
+    
+</head>
+<body onload="setPage()">
+
+    <div class="SiteWidth section">
+        @Html.Partial("HeaderPdf")
+
+
+        <div class="report-header-inner page" data-page="1">
+
+            <label>@ViewBag.ReportTitle</label>
+            <div>@ViewBag.StartDate</div>
+        </div>
+    </div>
+
+
+</body>
+</html>

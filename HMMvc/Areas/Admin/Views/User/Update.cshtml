@@ -1,0 +1,84 @@
+﻿@model UserDetailsDM
+@using Common
+
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script>
+
+    setPopTitle('User', '@ViewBag.PopTitle');
+</script>
+
+<form id="UpdateUserForm" method="post" data-ajax="true" autocomplete="off">
+
+    @Html.HiddenFor(model => model.UserID)
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">פרטי כניסה</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_FirstName"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.FirstName)
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_LastName"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        שם משתמש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input class="TextBox valid" id="Username" name="Username" type="text" value="@Model.Username" autocomplete="off" required/>
+                        @Html.ValidationMessageFor(model => model.Username)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        סיסמא:
+                    </div>
+                    <div class="fieldvalue">
+                        <input class="TextBox valid" id="Password" name="Password" type="password" value="@Model.Password" autocomplete="off" required/>
+                     
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="datarow floatfirst single">
+                    @{ ViewBag.Container = "#popUpdateUser"; ViewBag.HideAdd = true;}
+                    @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml", new JobDM { ClientID = Model.ClientID, Clients = Model.Clients })
+
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+
+    <div class="ForBtnDiv">
+        @Html.ValidationSummary(true)
+
+        <input type="button" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+    </div>
+
+</form>
+

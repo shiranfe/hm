@@ -1,0 +1,55 @@
+﻿@model Common.PointPositionDM
+
+@{
+    ViewBag.Title = "PointPosition";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/Admin/PointPosition.js"></script>
+<script>
+    var FilePre = 'MacType_';
+</script>
+<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Admin");}
+    <script>$('.ClientTreeDiv').hide();</script>
+</div>
+<div class="sitesubcontent corn_3 shadow">
+     <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>הגדרת נקודות למכונה</h1>
+
+        </div>
+        <div class="PageContHeaderActions">
+        
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div>
+        
+<div id="VbTabMacDetails" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderIcon MacPoints"></div>
+        <div class="BlockHeaderTitle">נקודות לפי סוג מכונה</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockCont">
+        <div class="DefMacZone fr" style="width:220px;">
+           @foreach (var x in Model.DefualtMachines)
+           {
+               <div class="DefMacDiv linktext MacName"  data-id="@x.MachineID">@x.MachineName</div>
+           }
+           
+        </div>
+        <div id="DefSelMac" class="fr">
+            @Html.Partial("PointPositionSelected", new ViewDataDictionary(Model.SelectedMachine))
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+    </div>
+</div>
+<div class="clear"></div>

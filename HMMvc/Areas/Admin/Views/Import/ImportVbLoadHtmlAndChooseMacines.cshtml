@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Common.MachineBasicDM>
+
+<h2>שלב 2 - בחירת מכונות לטעינה</h2>
+<p>
+    בחר את המכונות שיכללו בייבוא. מכונות לא קיימות יווצרו באופן אוטומטי
+</p>
+<div class="ImportBtnRow">
+    <p>
+        בחר מכונות שיכללו בייבוא. ברירת מחדל - הכל כלול.
+    </p>
+    @foreach (var item in Model)
+    {
+        <div class="ImportItemDiv in macs" data-id="@item.MachineID">
+            @Html.DisplayFor(modelItem => item.MachineName)
+        </div>
+       
+    }
+    <div class="clear"></div>
+</div>
+
+
+<div class="ImportBtnRow">
+
+    <p>
+        בחר את הלקוח אליו יש לשייך את המכונות
+    </p>
+    @*@Html.DropDownList("ClientID", (SelectList)ViewBag.Clients)*@
+    @Html.Editor("ClientID", "AutoComplete", new { options = ViewBag.Clients })
+
+
+    <input type="button" id="ToStep3Btn" value="המשך" class="fr" />
+
+    <div class="clear"></div>
+</div>
+
+

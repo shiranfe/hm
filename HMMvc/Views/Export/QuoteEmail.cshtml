@@ -1,0 +1,113 @@
+﻿@model Common.EmailDm
+@{
+    ViewBag.Title = "QuoteEmail";
+}
+
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+<form id="UpdateQuoteEmailForm" method="post" data-ajax="true">
+   @Html.HiddenFor(x=>x.Id)
+  
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">פרטי דוא"ל</div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo clearfix">
+            <div class="formRow">
+                <div class="datarow single">
+                    <div class="fieldlabel">
+                        אל:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => Model.To)
+                        @Html.ValidationMessageFor(model => Model.To)
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="formRow">
+                <div class="datarow single">
+                    <div class="fieldlabel">
+                        מאת:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => Model.From)
+                        @Html.ValidationMessageFor(model => Model.From)
+                    </div>
+
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="datarow single">
+                    <div class="fieldlabel">
+                        נושא:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => Model.Subject)
+                        @Html.ValidationMessageFor(model => Model.Subject)
+                    </div>
+
+                </div>
+            </div>
+            <div class="formRow">
+                 * הצעת מחיר תצורף למייל ב PDF
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">תוכן</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo body">
+          
+            @Html.TextAreaFor(model => Model.EmailBody)
+        </div>
+    </div>
+
+
+    <div class="ForBtnDiv clearfix">
+        <input type="button" value="שמור" class="buttondefault floatlast">
+    </div>
+
+</form>
+
+
+<script>
+    try {
+        setPopTitle('QuoteEmail', '@ViewBag.PopTitle',true);
+    } catch (e) {
+
+    }
+
+    
+    CKEDITOR.inline("EmailBody");
+    CKEDITOR.instances.EmailBody.on('blur', function () {
+        $("#EmailBody").val(CKEDITOR.instances.EmailBody.getData());
+    });
+
+    var ops = {
+        entity: "QuoteEmail",
+        cntrl: "/Export/QuoteEmail",
+        container: "#popQuoteEmail",
+        onlyUpdate: true,
+        success: function () {
+            $.SuccessAlert('הדוא"ל נשלח בהצלחה');
+            closePopup("popQuoteEmail");
+        }
+    }
+
+    crud(ops);
+
+</script>
+

@@ -1,0 +1,152 @@
+﻿@model List<VbReportDM>
+@using Common
+@{
+    ViewBag.Title = GlobalDM.GetTransStr("JobVB_HistoryIndex_Title");
+    var PageCount = 1;
+    var PageNum = 1;
+}
+
+<script src="~/Scripts/UI/jquery.tablesorter.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#VbHistoryTable").tablesorter();
+
+    });
+</script>
+<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuMachine", "Menu");}
+</div>
+
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>@GlobalDM.GetTransStr("JobType_Vibration") - @GlobalDM.GetTransStr("JobVB_HistoryIndex_Title")</h1>
+
+        </div>
+       @* <div class="HeaderActions">
+            <input type="button" class="buttondefault" value="@GlobalDM.GetTransStr("CallRequestIndex_RequestTest")"/>
+        </div>*@
+        <div class="clear"></div>
+    </div>
+   @* <div class="PageContSrchZone corn_3 shadow">
+        <div class="SrchDiv">
+            <input id="SrchBox" class="TextBox" type="text" value="" placeholder="@GlobalDM.GetTransStr(".A_Search")" name="SrchBox"  data-val="true">
+                <input type="submit" id="SrchBtn" class="buttondefault" value="@GlobalDM.GetTransStr("A_Search")"  />
+        </div>
+    </div>*@
+    <div class="PageContInner">
+        @if (Model.Any())
+        {
+            <div class="TableHeaderZone">
+                <div class="TableHeaderZoneTitle">@GlobalDM.GetTransStr("Job_AllTests")</div>
+                <div class="TableHeaderActions">
+                    @*<span class="TableHeaderActionsText">@GlobalDM.GetTransStr(".A_Page")</span>
+                    <input id="PageNum" class="TextBox PageNum " type="text" value="@PageNum"  name="PageNum" >
+                    <span class="TableHeaderActionsText">@GlobalDM.GetTransStr("A_Of")  @PageCount</span>
+
+                    <a class="NavigationBtn PrevBtn"></a>
+                    <a class="NavigationBtn NextBtn"></a>*@
+
+                   @* <div class="OuterSelect SortBy">
+                        <span class="SortByLabel">@GlobalDM.GetTransStr("Global_SortBy"): </span>
+                        <span class="SelectVal">@GlobalDM.GetTransStr("Job_TestDate")</span>
+                        <span class="SelectBtn"></span>
+                        <select id="SortByCombo" class="selectbox SortByTop">
+                            <option value="Job_TestDate">@GlobalDM.GetTransStr("Job_TestDate")</option>
+                            <option value="User_Locations">@GlobalDM.GetTransStr("User_Locations")</option>
+                            
+                        </select>
+                    </div>*@
+
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+            <div class="SliceLine"></div>
+            <div class="TableZone">
+                <table id="VbHistoryTable" class="tablesorter">
+                    <thead>
+                        <tr>
+                            <th>@GlobalDM.GetTransStr("Job_TestDate")
+                            </th>
+                            <th>@GlobalDM.GetTransStr("User_Locations")
+                            </th>
+                            <th>@GlobalDM.GetTransStr("Global_ReportStatus")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{var i = 1;}
+                        @foreach (var item in Model)
+                        {
+                            var odd = i % 2 == 0 ? "odd" : "even";
+                            i++;
+                            var RowDis = "";
+                            var sts = "אובחן";
+                            if (!item.JobDM.IsPosted)
+                            {
+                                RowDis = "RowDis";
+                                sts = "טרם אובחן";
+                            }
+                       
+                            <tr class="@odd @RowDis">
+                                <td>
+                                    @if (item.JobDM.IsPosted)
+                                    {
+                                        <a class="linktext" href="/#/VB/VBReport?JobID=@item.JobDM.JobID">@Html.DisplayFor(modelItem => item.JobDM.StartDate)</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.JobDM.StartDate)
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Areas)
+                                </td>
+                                <td>
+                                    @sts
+                                </td>
+
+                            </tr>
+                       
+                    }
+                    </tbody>
+                </table>
+            </div>
+@*<div class="TableFooterZone">
+                <div class="TableHeaderActions"></div>
+                <div class="TableHeaderActions">
+                    <span class="TableHeaderActionsText">@GlobalDM.GetTransStr("A_Page")</span>
+                    <input id="PageNum" class="TextBox PageNum " type="text" value="@PageNum"  name="PageNum" >
+                    <span class="TableHeaderActionsText">@GlobalDM.GetTransStr("A_Of")  @PageCount</span>
+
+                    <a class="NavigationBtn PrevBtn"></a>
+                    <a class="NavigationBtn NextBtn"></a>
+
+                    <div class="OuterSelect SortBy">
+                        <span class="SortByLabel">מיין לפי: </span><span class="SelectVal SortByTop">תאריך בדיקה</span><span class="SelectBtn"></span>
+                        <select id="b" class="selectbox SortByTop">
+                            <option value="תאריך בדיקה" selected="selected">תאריך בדיקה</option>
+                            <option value="אזורים">אזורים</option>
+                            <option value="סטטוס דוח">סטטוס דוח</option>
+                        </select>
+
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+            <div class="SliceLine"></div>*@
+        }  
+        else
+        {
+            <div style="padding:10px;">לא נמצאו בדיקות במערכת</div>
+        }
+    </div>
+</div>
+<div class="clear"></div>
+
+

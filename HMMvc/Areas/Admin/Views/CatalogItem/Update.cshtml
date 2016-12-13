@@ -1,0 +1,120 @@
+﻿@model CatalogItemDM
+@using Common
+@{
+    ViewBag.Title = "Update";
+  
+}
+
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script>
+    setPopTitle('CatalogItem', '@ViewBag.PopTitle');
+    
+    catalogItemID =  @Model.CatalogItemID;//itemID.val();
+</script>
+
+
+
+<form id="UpdateCatalogItemForm" method="post" data-ajax="true">
+
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+        @Html.HiddenFor(x => x.CatalogItemID)
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv clearfix">
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            שם פריט:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.ItemName)
+                            @Html.ValidationMessageFor(model => model.ItemName)
+                        </div>
+                    </div>
+                    <div class="datarow floatlast ">
+                        <div class="fieldlabel">
+                            מזהה:
+                        </div>
+
+                        <div class="fieldvalue">
+                            <b id="CatalogItemIDLabel">@Model.CatalogItemID</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            סוג שדה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.DropDownList("FieldPoolID", (SelectList)ViewBag.poolFields, string.Empty)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            @GlobalDM.GetTransStr("Description"):
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextAreaFor(model => model.ItemNotes)
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+@if(!Model.IsGroup){ 
+    <div class="VbTabBlock corn_3" >
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">מרכיבי עלות</div>
+            <div class="HeaderActions">
+                <input id="AddComponentBtn" type="button" class=" buttondefault Black" value="הוסף מרכיב">
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo" id="componentsDiv">
+            @if (Model.CatalogItemID > 0)
+            {
+                Html.RenderAction("ItemComponents", "CatalogItemComponent", new { CatalogItemID = Model.CatalogItemID });  
+            }
+           
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">פריטים בקבוצה</div>
+            <div class="HeaderActions">
+                <input id="AddChildBtn" type="button" class=" buttondefault Black" value="הוסף פריט">
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo" id="childsDiv">
+          
+        </div>
+
+    </div>
+}
+    <div class="">
+        <input id="UpdateCatatlogItem" type="button" value="שמור" class="buttondefault floatlast">
+        @Html.ValidationSummary(true)
+        <div id="noCompError"  class="field-validation-error dn">יש להוסיף רכיבים לפריט</div>
+    </div>
+</form>

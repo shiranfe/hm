@@ -1,0 +1,19 @@
+﻿@model Common.ClientDM
+
+@{
+    Layout = "";
+    ViewBag.HasPic = !Model.ClientLogo.Contains("DefLogo");
+}
+
+ 
+<div>
+    <div class="SiteHeaderClientLogo pic-container uplodable corn_3 shadow">
+        <img  alt="" src="@Model.ClientLogo" data-def="/Pics/ClientLogos/DefLogo.jpg"/>
+       
+            @Html.Partial("UploadPic", new MVC.Models.Avatar { ObjID = Model.ClientID, ObjType = "ClientLogos", FilePre = "Logo_"})
+
+       
+    </div>
+    <div class="clear"></div>
+     
+</div>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9003f6f811e41108c1d980826d2e3d2" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="HMErpModel.C_JobVibrationHtml" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.C_JobVibrationNewJob" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.C_JobVibrationNewMachine" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.Client" Width="1.5" PointX="5.25" PointY="40" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.Employee" Width="1.5" PointX="9.75" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.Job" Width="1.5" PointX="9.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.JobVibration" Width="1.5" PointX="12" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.JobVibrationMachine" Width="1.5" PointX="8.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.JobVibrationMachinePointResult" Width="1.5" PointX="9" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.LangString" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.LastUpdate" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.Machine" Width="1.5" PointX="3" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.MachinePoint" Width="1.5" PointX="5.25" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.Request" Width="1.5" PointX="6" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.User" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwClientTree" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwClientMachineCountHtmlImport" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwCureentVbSts" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwCureentVbSts_a" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwCureentVbSts_b" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJob" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJobVibration" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJobVibrationGetPointAndStatus" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJobVibrationIndex" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJobVibrationMachine" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJobVibrationMachineLastStatus" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJobVibrationMachinePointLastStatus" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwJobVibrationReport" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.vwVelDemod" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="HMErpModel.FK_Job_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_Machine_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_User_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibration_Employee2" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibration_Employee3" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibration_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibrationMachine_JobVibration" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibrationMachinePointResult_JobVibration" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibrationMachine_Machine" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibrationMachinePointResult_MachinePoint" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_MachinePoint_Machine" ManuallyRouted="false" />
+        <AssociationConnector Association="HMErpModel.FK_Request_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HMErpModel.PickList" Width="1.5" PointX="0.75" PointY="22.875" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibrationMachinePointResult_PickList" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibrationMachinePointResult_PickList1" />
+        <AssociationConnector Association="HMErpModel.FK_JobVibrationMachinePointResult_PickList2" />
+        <AssociationConnector Association="HMErpModel.FK_Machine_PickList" />
+        <AssociationConnector Association="HMErpModel.FK_Machine_PickList1" />
+        <AssociationConnector Association="HMErpModel.FK_Request_PickList" />
+        <AssociationConnector Association="HMErpModel.FK_Request_PickList1" />
+        <AssociationConnector Association="HMErpModel.FK_Request_PickList2" />
+        <AssociationConnector Association="HMErpModel.FK_User_PickList" />
+        <EntityTypeShape EntityType="HMErpModel.EmployeeRole" Width="1.5" PointX="6" PointY="24.375" />
+        <AssociationConnector Association="HMErpModel.FK_EmployeeRole_Employee" />
+        <AssociationConnector Association="HMErpModel.FK_EmployeeRole_PickList" />
+        <EntityTypeShape EntityType="HMErpModel.Branch" Width="1.5" PointX="7.5" PointY="40.25" />
+        <AssociationConnector Association="HMErpModel.FK_Employee_Branch" />
+        <EntityTypeShape EntityType="HMErpModel.JobRefubrishStep" Width="1.75" PointX="3.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMErpModel.ContactInfo" Width="1.5" PointX="13.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HMErpModel.JobRefubrish_Part" Width="1.5" PointX="14.25" PointY="27.75" />
+        <EntityTypeShape EntityType="HMErpModel.JobRefubrish_Step" Width="2.125" PointX="16.5" PointY="27.125" />
+        <EntityTypeShape EntityType="HMErpModel.MachinePart" Width="1.5" PointX="11.25" PointY="24.125" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Step_Employee" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Part_MachinePart" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Step_JobRefubrish_Part" />
+        <AssociationConnector Association="HMErpModel.FK_MachinePart_Machine" />
+        <AssociationConnector Association="HMErpModel.FK_MachinePart_PickList" />
+        <EntityTypeShape EntityType="HMErpModel.DynamicGroup" PointX="9" PointY="14.875" Width="1.5" />
+        <EntityTypeShape EntityType="HMErpModel.FieldPool" Width="1.5" PointX="9" PointY="11.5" />
+        <EntityTypeShape EntityType="HMErpModel.JobRefubrish_StepField" Width="1.5" PointX="19.375" PointY="27.5" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_StepField_JobRefubrish_Step" />
+        <EntityTypeShape EntityType="HMErpModel.MachineTypeStep" Width="1.5" PointX="6" PointY="27.25" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Step_MachineTypeStep" />
+        <AssociationConnector Association="HMErpModel.FK_MachineTypeStep_JobRefubrishStep" />
+        <AssociationConnector Association="HMErpModel.FK_MachineTypeStep_PickList" />
+        <EntityTypeShape EntityType="HMErpModel.MachinePart_TechField" Width="1.5" PointX="13.5" PointY="24.25" />
+        <AssociationConnector Association="HMErpModel.FK_MachinePart_TechField_MachinePart" />
+        <EntityTypeShape EntityType="HMErpModel.DynamicGroupField" PointX="11.25" PointY="12.875" Width="1.5" />
+        <AssociationConnector Association="HMErpModel.FK_DynamicGroupField_DynamicGroup" />
+        <AssociationConnector Association="HMErpModel.FK_DynamicGroupField_FieldPool" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_StepField_DynamicGroupField" />
+        <AssociationConnector Association="HMErpModel.FK_MachinePart_TechField_DynamicGroupField" />
+        <EntityTypeShape EntityType="HMErpModel.SupplierProduct" Width="1.5" PointX="3" PointY="29.5" />
+        <AssociationConnector Association="HMErpModel.FK_SupplierProduct_Client" />
+        <AssociationConnector Association="HMErpModel.FK_ServiceMaterial_PickList" />
+        <AssociationConnector Association="HMErpModel.SupplierProductClient" />
+        <EntityTypeShape EntityType="HMErpModel.CatalogItem" Width="1.5" PointX="9.5" PointY="45.125" />
+        <EntityTypeShape EntityType="HMErpModel.CatalogItemComponent" Width="1.5" PointX="12" PointY="45.75" />
+        <EntityTypeShape EntityType="HMErpModel.Role" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="HMErpModel.FK_CatalogItemComponent_CatalogItem" />
+        <EntityTypeShape EntityType="HMErpModel.vwCatalogItemComponent" Width="1.5" PointX="12" PointY="42.25" />
+        <AssociationConnector Association="HMErpModel.CatalogItemvwCatalogItemComponent" />
+        <EntityTypeShape EntityType="HMErpModel.JobTemplateNotes" Width="1.5" PointX="13.75" PointY="13.75" />
+        <EntityTypeShape EntityType="HMErpModel.Quote" Width="1.5" PointX="7.5" PointY="30.25" />
+        <AssociationConnector Association="HMErpModel.FK_Job_Quote" />
+        <AssociationConnector Association="HMErpModel.FK_Quote_PickList" />
+        <AssociationConnector Association="HMErpModel.FK_Quote_Client" />
+        <EntityTypeShape EntityType="HMErpModel.QuoteVersion" Width="1.5" PointX="9.75" PointY="34.625" />
+        <AssociationConnector Association="HMErpModel.FK_QuoteVersion_Quote" />
+        <AssociationConnector Association="HMErpModel.LangStringRole" />
+        <AssociationConnector Association="HMErpModel.FK_Quote_User" />
+        <EntityTypeShape EntityType="HMErpModel.JobAlignmentPart" Width="1.5" PointX="16.5" PointY="21.25" />
+        <AssociationConnector Association="HMErpModel.FK_JobAlignmentPart_MachinePart" />
+        <EntityTypeShape EntityType="HMErpModel.JobAlignment" Width="1.5" PointX="15" PointY="31.75" />
+        <AssociationConnector Association="HMErpModel.FK_JobAlignment_Employee" />
+        <AssociationConnector Association="HMErpModel.FK_JobAlignment_Job" />
+        <AssociationConnector Association="HMErpModel.FK_JobAlignment_Machine" />
+        <AssociationConnector Association="HMErpModel.FK_JobAlignmentPart_JobAlignment" />
+        <AssociationConnector Association="HMErpModel.FK_Job_User1" />
+        <AssociationConnector Association="HMErpModel.FK_Job_Employee" />
+        <EntityTypeShape EntityType="HMErpModel.QuoteTalk" Width="1.5" PointX="15" PointY="36.25" />
+        <AssociationConnector Association="HMErpModel.FK_QuoteTalk_Employee" />
+        <AssociationConnector Association="HMErpModel.FK_QuoteTalk_Quote" />
+        <AssociationConnector Association="HMErpModel.FK_Quote_Employee" />
+        <AssociationConnector Association="HMErpModel.FK_LinkedId_CatalogItem" />
+        <AssociationConnector Association="HMErpModel.FK_Pid_CatalogItem" />
+        <AssociationConnector Association="HMErpModel.FK_CatalogItem_FieldPool" />
+        <EntityTypeShape EntityType="HMErpModel.QuoteVersionItem" Width="1.5" PointX="12.75" PointY="36.625" />
+        <AssociationConnector Association="HMErpModel.FK_QuoteVersionItem_CatalogItem" />
+        <AssociationConnector Association="HMErpModel.FK_QuoteVersionItem_FieldPool" />
+        <AssociationConnector Association="HMErpModel.FK_QuoteVersionItem_QuoteVersion" />
+        <AssociationConnector Association="HMErpModel.FK_DynamicGroup_DynamicGroup" />
+        <EntityTypeShape EntityType="HMErpModel.BugLog" Width="1.5" PointX="15.375" PointY="0.75" />
+        <AssociationConnector Association="HMErpModel.FK_DynamicGroupField_CatalogItem" />
+        <EntityTypeShape EntityType="HMErpModel.vwQuoteReport" Width="1.5" PointX="15.375" PointY="4.75" />
+        <EntityTypeShape EntityType="HMErpModel.vwRefubrishReport" Width="1.5" PointX="16.375" PointY="8.75" />
+        <EntityTypeShape EntityType="HMErpModel.EmployeeLog" Width="1.5" PointX="12" PointY="49" />
+        <AssociationConnector Association="HMErpModel.FK_EmployeeLog_Employee" />
+        <EntityTypeShape EntityType="HMErpModel.JobOutside" Width="1.5" PointX="12" PointY="20.625" />
+        <AssociationConnector Association="HMErpModel.FK_JobOutside_Job" />
+        <AssociationConnector Association="HMErpModel.FK_JobOutside_Machine" />
+        <EntityTypeShape EntityType="HMErpModel.JobTask" Width="1.5" PointX="12" PointY="52.5" />
+        <EntityTypeShape EntityType="HMErpModel.JobTaskEmployee" Width="1.5" PointX="14.25" PointY="45.875" />
+        <AssociationConnector Association="HMErpModel.FK_JobOutsideEmployee_Employee1" />
+        <AssociationConnector Association="HMErpModel.FK_JobTask_Job" />
+        <AssociationConnector Association="HMErpModel.FK_JobTaskEmployee_JobTask" />
+        <EntityTypeShape EntityType="HMErpModel.Equipment" Width="1.5" PointX="15.5" PointY="39.75" />
+        <EntityTypeShape EntityType="HMErpModel.JobEquipment" Width="1.5" PointX="18" PointY="30.875" />
+        <AssociationConnector Association="HMErpModel.FK_Equipment_Client" />
+        <AssociationConnector Association="HMErpModel.FK_Equipment_PickList" />
+        <AssociationConnector Association="HMErpModel.FK_JobEquipment_Equipment" />
+        <AssociationConnector Association="HMErpModel.FK_JobEquipment_Job" />
+        <EntityTypeShape EntityType="HMErpModel.Equipment_TechField" Width="1.5" PointX="18.75" PointY="23.875" />
+        <AssociationConnector Association="HMErpModel.FK_Equipment_TechField_DynamicGroupField" />
+        <AssociationConnector Association="HMErpModel.FK_Equipment_TechField_Equipment" />
+        <EntityTypeShape EntityType="HMErpModel.JobRefubrish" Width="1.5" PointX="12" PointY="28.375" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Branch" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Job" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Job1" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Machine" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Part_JobRefubrish" />
+        <AssociationConnector Association="HMErpModel.FK_JobRefubrish_PickList" />
+        <EntityTypeShape EntityType="HMErpModel.JobTaskGroup" Width="1.5" PointX="14.25" PointY="52.75" />
+        <EntityTypeShape EntityType="HMErpModel.JobTaskGroupField" Width="1.5" PointX="16.5" PointY="52.75" />
+        <AssociationConnector Association="HMErpModel.FK_JobTaskGroup_JobTask" />
+        <AssociationConnector Association="HMErpModel.FK_JobTaskGroupField_JobTaskGroup" />
+        <AssociationConnector Association="HMErpModel.FK_JobTaskGroup_DynamicGroup" />
+        <AssociationConnector Association="HMErpModel.FK_JobTaskGroupField_DynamicGroupField" />
+        <EntityTypeShape EntityType="HMErpModel.BankField" Width="1.5" PointX="11.25" PointY="57" />
+        <AssociationConnector Association="HMErpModel.FK_BankField_FieldPool" />
+        <EntityTypeShape EntityType="HMErpModel.BankTask" Width="1.5" PointX="11.25" PointY="60.25" />
+        <EntityTypeShape EntityType="HMErpModel.BankTask_Field" Width="1.5" PointX="13.5" PointY="56.875" />
+        <AssociationConnector Association="HMErpModel.FK_BankTask_Field_BankField" />
+        <AssociationConnector Association="HMErpModel.FK_BankTask_Field_BankTask" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

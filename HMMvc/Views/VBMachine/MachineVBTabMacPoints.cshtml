@@ -1,0 +1,96 @@
+﻿@model Common.MachineVBDM
+@using Common;
+@{
+    Layout = "";
+    var PointSelected = Model.PointSelected;
+    var PointStr = GlobalDM.GetTransStr("Point");
+}
+
+<h1>@PointStr @PointSelected.PointNumber</h1>
+<div id="VbTabMacPoints" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderIcon MacPoints"></div>
+        <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("Machine_PointsInMachine")</div>
+        <div class="clear"></div>
+    </div>
+    @*<div class="WhiteSep"></div>*@
+    <div class="VbTabBlockCont">
+      
+        <div id="PointSelectedDiv" class="">
+            @*  
+                @Html.Partial("PointDetails",new ViewDataDictionary(PointSelected))*@
+            @{
+
+
+                var pointNotSel = true;
+            }
+
+
+            
+            <div class="PointValues">
+                <div class="PointValuesScroll1">
+                    <div class="PointValSep"></div>
+                    @{pointNotSel = true;}
+                    @foreach (var PointVal in PointSelected.PointResultDMs)
+                    {
+                        var vsel = pointNotSel ? "Selected" : ""; pointNotSel = false;
+
+                        <div class="PointValueRow @vsel corn_3 " data-id="@PointVal.JobVibrationMachinePointResultID">
+                            <div class="PointValuesArrow @PointVal.DirectionStr"></div>
+                            <div class="PointValuesInfo">
+                                <div class="PointValuesName">@PointVal.ValueName</div>
+                                <div class="">
+                                    @GlobalDM.GetTransStr("Value"):<span class="b" style="font-size: 0.8em">@Html.DisplayFor(modelItem => PointVal.Value)</span><span class="b" style="font-size: 0.8em; margin:0 2px;">@PointVal.ValueUnit</span>
+                                </div>
+                            </div>
+
+                            <div class="MacStsIcon StsIconSmall Sts-@PointVal.StatusID" data-txt="@PointVal.Status"></div>
+                            <div class="PointValuesGraph "></div>
+                            <div class="clear"></div>
+                        </div>
+                        @*<div class="PointValSep"></div>*@
+                    }
+
+                    <script>
+                        if ('@(Request.HttpMethod == "POST")' == 'True') {
+                            var PointResultID = '@PointSelected.PointResultDMs.First().JobVibrationMachinePointResultID';
+                            $.LoadPointValue(PointResultID);
+                        }
+                    </script>
+                    <div class="WhiteSep"></div>
+                </div>
+
+            </div>
+
+            @*<div class="p_10">
+              
+                <div class="PointInfo">
+                    @if (PointSelected.Bearing != null)
+                    {<div class="PointInfoRow">@GlobalDM.GetTransStr("PointInfo_Bearing"): <b>@PointSelected.Bearing</b></div>}
+                    @if (PointSelected.Grease != null)
+                    {   <div class="PointInfoRow">@GlobalDM.GetTransStr("PointInfo_Grease"): <b>@PointSelected.Grease</b></div>}
+                    @if (PointSelected.TrackWheels != null)
+                    {   <div class="PointInfoRow">@GlobalDM.GetTransStr("PointInfo_TrackWheels"): <b>@PointSelected.TrackWheels</b></div>}
+                    @if (PointSelected.Track != null)
+                    {  <div class="PointInfoRow">@GlobalDM.GetTransStr("PointInfo_Track"): <b>@PointSelected.Track</b></div>}
+
+                </div>
+                <div class="PointInfo">
+                    @if (PointSelected.Tfrlok != null)
+                    {  <div class="PointInfoRow">@GlobalDM.GetTransStr("PointInfo_Teperlok"): <b>@PointSelected.Tfrlok</b></div>}
+                    @if (PointSelected.Connector != null)
+                    {  <div class="PointInfoRow">@GlobalDM.GetTransStr("PointInfo_Connector"): <b>@PointSelected.Connector</b></div>}
+                    @if (PointSelected.GreaseAmount != null)
+                    {  <div class="PointInfoRow">@GlobalDM.GetTransStr("PointInfo_GreadeAmount"): <b>@PointSelected.GreaseAmount  ml</b></div>}
+                </div>
+                <div class="clear"></div>
+            </div>*@
+        </div>
+
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/qtipSts.js"></script>

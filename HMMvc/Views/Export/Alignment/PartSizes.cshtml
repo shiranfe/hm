@@ -1,0 +1,37 @@
+﻿@model JobAlignmentPartDM
+@using Common
+
+
+
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">מידות (mm) </div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo  clearfix">
+        <div class="alignment-size">
+            <img class="motor" src="~/Pics/MachinePicture/Motor.png" />
+            <img src="@Model.PartPic" />
+            <div class="size-arrows">
+                <img src="~/Pics/MachinePicture/size-arrow.png" />
+                <div class="size CouplingDiameter">@Html.DisplayFor(model => model.CouplingDiameter)</div>
+                <div class="size SC">@Html.DisplayFor(model => model.SC)</div>
+                <div class="size MMF1">@Html.DisplayFor(model => model.MMF1)</div>
+                <div class="size SM">@Html.DisplayFor(model => model.SM)</div>
+                <div class="size MF1MF2">@Html.DisplayFor(model => model.MF1MF2)</div>
+            </div>
+           
+        </div>
+
+        @*<div class="help-line clearfix">
+                <div class="arrow last"></div>
+                <div class="line"></div>
+                <div class="arrow first"></div>
+            </div>*@
+
+       
+
+
+    </div>
+</div>
+

@@ -1,0 +1,35 @@
+﻿@model List<Common.StepGroupDM>
+
+@if (Model != null)
+{
+    if (Model.Any())
+    {
+        foreach (var group in Model.Where(x=> !x.Pid.HasValue))
+        {
+             ViewBag.addLineDivider = false;
+            <div class="VbTabBlock corn_3 clearfix" data-id="@group.DynamicGroupID">
+                <div class="VbTabBlockHeader clearfix">
+                    <div class="BlockHeaderTitle">@group.GroupNameStr </div>
+                    <div class="HeaderActions"></div>
+                </div>
+                <div class="WhiteSep"></div>
+                <div class="VbTabBlockInfo ">
+                    @{  ViewBag.RootGroup = group;
+                        ViewBag.allGroups = Model; }
+                    @Html.Partial("~/Areas/Admin/Views/Shared/StepSubGroups.cshtml", group)
+                    
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div>טרם נוצרו קבוצות</div>
+    }
+}
+else
+{
+    <div>
+        <input type="button" class="buttondefault " value="הפוך לפעיל" id="AddPhaseBtn">
+    </div>
+}

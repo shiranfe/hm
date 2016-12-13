@@ -1,0 +1,33 @@
+﻿@model Common.MachinePicChangeDM
+
+<script src="~/Areas/Admin/Scripts/Machine/MergeMachines.js"></script>
+<script>
+    setPopTitle('MergeMachines', '@ViewBag.PopTitle',true);
+</script>
+<div class="ui-dialog-inner-content">
+    <div class="MergeMacCol" id="OldMacs">        
+        <div>@Html.DropDownList("OldClientID", (SelectList)ViewBag.ClientID)</div>        
+        <div class="MacList">
+            @Html.Partial("MergeMachinesClientSelected", new ViewDataDictionary(Model.SelectedClient))
+        </div>
+               
+    </div>
+    <div style="margin:20px;float:right"> </div>
+    <div class="MergeMacCol" id="NewMacs">
+        <div>@Html.DropDownList("NewClientID", (SelectList)ViewBag.ClientID)</div>
+        <div class="MacList">
+            @Html.Partial("MergeMachinesClientSelected", new ViewDataDictionary(Model.SelectedClient))
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="MergeSum">
+        <span>מחק את</span>
+        <span id="OldMacText" class="b">בחר מכונה</span>
+        <span>-------> </span>
+        <span>השאר את</span>
+        <span id="NewMacText" class="b">בחר מכונה</span>
+    </div>
+</div>
+<div class="ui-dialog-inner-content-btns">
+    <input id="MergeMachinesBtnConfirm" type="button" class="buttondefault" value="אחד מכונות" />
+</div>

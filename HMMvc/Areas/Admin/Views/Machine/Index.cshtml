@@ -1,0 +1,80 @@
+﻿@model MachineFilterDm
+@using Common
+@{
+//Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+//var IntialMacID = '@ViewBag.MachineID';
+//if (IntialMacID != null) {
+//    // $.LoadDefMachine(IntialMacID);
+//}
+
+}
+
+
+@*<script src="~/Areas/Admin/Scripts/Machine/PointPosition.js"></script>*@
+<script src="~/Areas/Admin/Scripts/Machine/Machine.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+</div>*@
+
+
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader clearfix">
+
+        <div class="PageContHeaderTitle">
+            <h1>מכונות</h1>
+        </div>
+        @if (Model.ClientID > 0)
+        {
+            <div class="HeaderActions">
+                <input id="MergeMachinesBtn" type="button" class="buttondefault" value="איחוד מכונות" />
+                <input id="AddItemBtn" type="button" class="buttondefault AddMachineBtn" value="מכונה חדשה" />
+            </div>
+        }
+
+
+    </div>
+
+    <div class="VbTabBlock corn_3 searchFields">
+
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">חיפוש מכונות</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow  single">
+                    <div class="fieldlabel">
+                        חיפוש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input type="text" id="srch" placeholder="חפש" />
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="datarow single machineIndexDiv">
+
+                    @{ViewBag.Container = ".machineIndexDiv"; ViewBag.HideAdd = true;}
+                    @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml", new JobDM { ClientID = Model.ClientID, Clients = ViewBag.Clients })
+
+
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+    <div id="innerContent" class="machine-index VbTabBlock corn_3">
+        
+        @Html.Partial("Filterd", Model)
+    </div>
+
+
+
+</div>
+
+

@@ -1,0 +1,42 @@
+﻿@{
+    var dir = "rtl";
+    //var lang = "isr";
+    if (Request.Cookies["dir"].Value == "False")
+    {
+        dir = "ltr";
+       // lang = "eng";
+
+    }
+    var cs = "~/Content/Site_" + dir + ".css";
+}
+<script>
+    var DirFirst = 'right';
+    var DirLast = 'left';
+    if ('@dir' == 'ltr') {
+        DirFirst = 'left';
+        DirLast = 'right';
+    }
+
+    $(document).ready(function () {
+        $('#ChangeLangBtn').on('click', function () {
+            $.post("/User/ChangeLang", {
+                //lng: "en-US"
+
+            }, function (data) {
+                location.reload();
+            });
+
+        });
+    });
+</script>
+<link href="@Url.Content(cs)" rel="stylesheet" type="text/css" />
+@*@using (Html.BeginForm())
+    {
+        <div style="text-align: center; padding-top: 50px;">
+
+            <input type="submit" class="header-icon flag @lang" style="background-image:url('../Content/images/englandFlag.png')"/>
+        </div>
+    }*@
+
+
+

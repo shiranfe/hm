@@ -1,0 +1,88 @@
+﻿@model Common.DynamicGroupDM
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+<form id="ChangeGroupForm" method="post" data-ajax="true">
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3 clearfix">
+        @Html.HiddenFor(model => model.DynamicGroupID)
+        @Html.HiddenFor(model => model.ForeignID)
+        @Html.HiddenFor(model => model.ForeignType)
+        @Html.HiddenFor(model => model.Pid)
+
+        <div class="VbTabBlockCont">
+            <div class=" VbTabBlockInfo clearfix">
+
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            שם שדה בעברית:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.GroupNameStr)
+                            <span data-valmsg-replace="true" data-valmsg-for="GroupNameStr" class="field-validation-valid"></span>
+                          
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            מיון:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.OrderVal)
+                        </div>
+                    </div>
+                    <div class="datarow  floatlast">
+                        <div class="fieldlabel">
+                            שדה חובה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.IsRequired)
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            מזהה קבוצה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Model.DynamicGroupID
+                        </div>
+                    </div>
+                    <div class="datarow  floatlast">
+                        <div class="fieldlabel">
+                            שייך לקבוצה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Model.Pid
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ForBtnDiv">
+        <input id="ChangeGroupBtn" type="button" value="שמור" class="buttondefault floatlast">
+       
+    </div>
+
+</form>
+
+
+
+
+<script>
+    
+    try {
+        setPopTitle('DynamicGroups', 'עדכון קבוצה');
+    } catch (e) {
+
+    }
+
+</script>

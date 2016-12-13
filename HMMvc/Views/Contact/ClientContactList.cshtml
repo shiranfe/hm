@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Common.ClientContactDM>
+@using Common
+
+@{
+    ViewBag.Title = "ClientContactList";
+}
+
+
+
+<div class="SiteSideMenu">
+    @{Html.RenderAction("MenuUser", "Menu");}
+
+</div>
+<div class="sitesubcontent">
+    <div class="floatfirst">
+        <h1>@GlobalDM.GetTransStr("User_Users")</h1>
+    </div>
+    <div class="floatlast">
+        <input type="button" value="@GlobalDM.GetTransStr("User_NewUser")" onClick="location.href = '../Contact/ClientContactAdd'" class="buttondefault floatlast">
+    </div>
+
+    <table>
+        <tr>
+            <th style="width: 200px">@GlobalDM.GetTransStr("User_Name")
+            </th>
+            <th style="width: 200px">@GlobalDM.GetTransStr("User_Role")
+            </th>
+            <th style="width: 200px">@GlobalDM.GetTransStr("User_Client")
+            </th>
+            <th style="width: 100px">@GlobalDM.GetTransStr("User_Permission")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermissionNameLang)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="clear"></div>

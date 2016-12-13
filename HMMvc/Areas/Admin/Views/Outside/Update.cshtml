@@ -1,0 +1,71 @@
+﻿@model JobDM
+@using Common
+
+
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script>
+
+    tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Services/clientMachineService.js")');
+
+</script>
+
+@Html.Partial("~/Areas/Admin/Views/Outside/JobOutsideInfo.cshtml", Model)
+
+<div class="sitesubcontent corn_3 shadow">
+    <h2>פרטי מכונה לעבודת חוץ</h2>
+
+    <p>
+        אנא הזן את פרטי הציוד בכדי לפתוח כרטיס עבודה
+    </p>
+  
+    @{Html.RenderAction("Index", "JobEquipment", Model);}
+
+
+
+    <form id="UpdateJobForm" method="post" data-ajax="true">
+
+        @Html.Partial("~/Areas/Admin/Views/Job/JobRefubrushDetails.cshtml", Model)
+        @Html.Partial("~/Areas/Admin/Views/Job/JobPics.cshtml", Model)
+
+
+        @*@Html.HiddenFor(model => Model.JobID)*@
+        <input class="input-validation-error" data-val="true" data-val-number="The field JobID must be a number." data-val-required="The JobID field is required." id="JobID" name="JobID" type="hidden" value="@Model.JobID">
+
+      @*  @Html.HiddenFor(model => Model.ReturningJobParentID)*@
+       @* @Html.HiddenFor(model => Model.JobID)*@
+        @Html.HiddenFor(model => Model.JobName)
+        @Html.HiddenFor(model => Model.ClientID)
+        @Html.HiddenFor(model => Model.ContactID)
+        @Html.HiddenFor(model => Model.CreatorID)
+        @Html.HiddenFor(model => Model.StartDate)
+        @Html.HiddenFor(model => Model.EndDate)
+        @Html.HiddenFor(model => Model.DueDate)
+        @Html.HiddenFor(model => Model.Comments)
+
+        @Html.HiddenFor(model => Model.JobOutsideDM.Address)
+        @Html.HiddenFor(model => Model.JobOutsideDM.Zone)
+
+        <input type="hidden" name="RefubrishDetailsDM.BranchID"  value="3">
+    
+           @*@Html.Partial("~/Areas/Admin/Views/Job/JobOutsideDetails.cshtml", Model)*@
+     
+
+
+        <div class="ForBtnDiv clearfix">
+            <input id="UpdateJobBtn" type="button" value="שמור" class="buttondefault floatlast">
+        </div>
+
+    </form>
+
+</div>
+<div class="clear"></div>
+
+
+<script>
+    var equipMode = true;
+</script>
+<script src="~/Areas/Admin/Scripts/Job/UpdateJob.js"></script>

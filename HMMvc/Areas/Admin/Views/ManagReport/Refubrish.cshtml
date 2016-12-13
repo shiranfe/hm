@@ -1,0 +1,80 @@
+﻿@model object
+
+
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "Refubrish", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>דו"ח עבודות</h1>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="VbTabBlock corn_3 ">
+
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">מסננים</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow radio-horizontal" id="radioFilters"></div>
+        </div>
+    </div>
+
+    <div class="VbTabBlock corn_3 ">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle" id="pivotTitle">כמות עבודות בחודש</div>
+        </div>
+        <div id="output"></div>
+    </div>
+</div>
+<div class="clear"></div>
+
+
+<script>
+
+    var pivotData = [["לקוח", "עובד", "ת.התחלה", "סטטוס", "עבודה חוזרת"]];
+    $(@Html.Raw(Json.Encode(Model))).each(function (index,item) {
+        pivotData.push([
+            item["ClientName"],
+            item["EmpName"],
+           encodedToTime(item["StartDate"]),
+            item["IL"],
+            item["IsRetunring"]
+        ]);
+    });
+
+  
+
+    var configs = {
+        monthJobByStatus: {
+            text: "כמות עבודות בחודש",
+            derived: {
+                month: "ת.התחלה",
+                year: "ת.התחלה",
+                week: "ת.התחלה"
+            },
+            rows: ["שנה", "חודש"],
+            cols: ["סטטוס"],
+            vals: ["לקוח"],
+        }, monthJobByClient: {
+            text: "כמות עבודות ללקוח בחודש",
+            derived: {
+                month: "ת.התחלה",
+                year: "ת.התחלה"
+            },
+            rows: ["שנה", "חודש", "לקוח"],
+           // cols: ["סטטוס"],
+            vals: ["לקוח"],
+        }
+    }
+
+    initPivot(pivotData, configs.monthJobByStatus);
+
+</script>

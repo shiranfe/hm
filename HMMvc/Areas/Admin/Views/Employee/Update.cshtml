@@ -1,0 +1,105 @@
+﻿@model EmployeeDM
+@using Common
+
+
+<script>
+    setPopTitle('Employee', '@ViewBag.PopTitle');
+</script>
+
+<form id="UpdateEmployeeForm" method="post" data-ajax="true" >
+
+    @Html.HiddenFor(model => model.EmployeeID)
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("User_PersonalDetails")</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_FirstName"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.FirstName)
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_LastName"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        שם משתמש:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Username)
+                        @Html.ValidationMessageFor(model => model.Username)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        סיסמא:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Password)
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="datarow floatfirst ">
+                    <div class="fieldlabel">
+                        מפעל:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0px">
+                        @Html.DropDownList("BranchID", (SelectList)ViewBag.Branch)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        עובד פעיל:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Active)
+                        @Html.ValidationMessageFor(model => model.Active)
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("User_CommunicationDetails")</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            @{ ViewBag.ShowPersonal = true;}
+            @Html.Partial("ConactInfoDetails", Model.ContactInfoDM)
+        </div>
+
+    </div>
+
+    <div class="ForBtnDiv">
+        @Html.ValidationSummary(true)
+
+        <input type="button" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+    </div>
+
+</form>
+

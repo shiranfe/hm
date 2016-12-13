@@ -1,0 +1,81 @@
+﻿@model ContactInfoDM
+@using Common
+
+
+
+<div>
+    @Html.HiddenFor(model => model.ObjID)
+    @Html.HiddenFor(model => model.ObjType)
+    @if (ViewBag.ShowPersonal)
+    {
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Email"):
+                </div>
+                <div class="fieldvalue">
+                    @Html.TextBoxFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Mobile"):
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.Mobile)
+                    @Html.ValidationMessageFor(model => model.Mobile)
+                </div>
+            </div>
+        </div>
+    }
+    @if (ViewBag.ShowEmailPassword==true)
+    {
+        var placehlder = string.IsNullOrEmpty(Model.EmailPassword) ? "" : "*******";
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                   סיסמת דוא"ל:
+                </div>
+                <div class="fieldvalue">
+                    @Html.PasswordFor(model => model.EmailPassword, new { placeholder = placehlder, autocomplete = "new-password" })
+                </div>
+            </div>
+           
+        </div>
+    }
+
+    <div class="formRow">
+        <div class="datarow floatfirst">
+            <div class="fieldlabel">
+                @GlobalDM.GetTransStr("User_OfficePhone"):
+            </div>
+            <div class="fieldvalue">
+                @Html.EditorFor(model => model.Phone)
+                @Html.ValidationMessageFor(model => model.Phone)
+            </div>
+        </div>
+        <div class="datarow floatlast">
+            <div class="fieldlabel">
+                @GlobalDM.GetTransStr("User_Fax"):
+            </div>
+            <div class="fieldvalue">
+                @Html.EditorFor(model => model.Fax)
+                @Html.ValidationMessageFor(model => model.Fax)
+            </div>
+        </div>
+    </div>
+
+    <div class="formRow">
+        <div class="datarow floatfirst single">
+            <div class="fieldlabel">
+                @GlobalDM.GetTransStr("User_Address"):
+            </div>
+            <div class="fieldvalue">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

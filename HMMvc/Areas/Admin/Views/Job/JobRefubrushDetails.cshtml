@@ -1,0 +1,106 @@
+﻿@model Common.JobDM
+<script>
+    jobType = "@Common.JobType.Refubrish";
+    idName = "#RefubrishDetailsDM_MachineID";
+
+</script>
+
+
+
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">פרטי עבודת שיפוץ </div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo clearfix">
+        @if (!Model.IsOutside)
+        {
+            <div class="formRow">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        סניף:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DropDownList("RefubrishDetailsDM.BranchID", (SelectList)ViewBag.Branch)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        מיקום בו מטופל:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => Model.RefubrishDetailsDM.Loaction)
+                        @Html.ValidationMessageFor(model => Model.RefubrishDetailsDM.Loaction)
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="formRow">
+
+            <div class="datarow single">
+                <div class="fieldlabel">
+                    תיאור תקלה עפ"י לקוח:
+                </div>
+                <div class="fieldvalue" style="padding-left:0px">
+                    <textarea id="ClinetNotes" class="TextBox" name="RefubrishDetailsDM.ClinetNotes" rows="2">@Model.RefubrishDetailsDM.ClinetNotes</textarea>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="formRow">
+            <div class="datarow single">
+                    <div class="fieldlabel">
+                        מכונה:
+                    </div>
+                    <div class="fieldvalue machineSelect">
+                        @Html.EditorFor(model => Model.RefubrishDetailsDM.MachineID, new { options = ViewBag.Machine, Required =true, requiredText = "יש לבחור מכונה",AddBtnClass = "AddMachineBtn" })
+
+                        @Html.ValidationMessageFor(model => Model.RefubrishDetailsDM.MachineID)
+                    </div>
+                    <div class="tcTopMin">
+                        <div class="editBtn editMachineJob"></div>
+                    </div>
+
+
+                </div>
+            @Html.HiddenFor(model => Model.RefubrishDetailsDM.RefubrishStatusID)
+            @*<div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        סטטוס:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DropDownList("RefubrishDetailsDM.RefubrishStatusID", (SelectList)ViewBag.Status)
+                    </div>
+                </div>*@
+        </div>
+
+        <div class="formRow">
+                <div class="datarow single">
+                    <div class="fieldlabel">
+                        חלקים בעבודה:
+                    </div>
+
+                    <div id="PartsDIv" class="fieldvalue">
+
+                       @if (Model.RefubrishDetailsDM.MachineID == 0)
+                        {
+                            <span>נא לבחור מכונה</span>
+                       }
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        @Html.ValidationMessageFor(model => Model.RefubrishDetailsDM.MachineID)
+    </div>
+
+</div>
+
+

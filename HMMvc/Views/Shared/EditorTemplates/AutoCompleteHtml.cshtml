@@ -1,0 +1,59 @@
+﻿@model  MVC.Models.SelectDm
+@{
+
+    SelectList list = Model.Options;
+     
+    var selectedItem = list.FirstOrDefault(x => x.Value == Model.Value || x.Selected)  ;
+
+    string value = selectedItem!=null ? selectedItem.Value : "";
+
+    var placeholder = selectedItem!=null ? selectedItem.Text : Model.PlaceHolder;
+
+    var dis =Model.Disabled ? "disabled = \"disabled\"" : "";
+    string name = Model.Name;
+    var id = Model.Id ?? name.Replace(".", "_");
+    string requiredText = Model.RequiredText ==null  ?  "(*)" : Model.RequiredText.Replace(" ", "&#32;");
+    var required = Model.Required ? " data-val-required="+ requiredText + " data-val=true required" : "";
+    string allowNotInList = Model.AllowNotInList ? "data-allowAdd=true" : "";
+    //var extraField = Model.ExtraId!=null ? "data-extra=\"{0}\"" : "";
+
+    bool showAdd = Model.AddBtnClass != null;
+}
+
+
+<div class="filterBox autocomplete" data-temp-id="@value" data-temp-text="@placeholder" data-placeholder="@placeholder" @allowNotInList>
+
+    <div class="">
+        <input type="hidden" name="@name" id="@id"  value="@value" @required />
+        <input class="text TextBox placeholderColor" placeholder="@placeholder" @dis type="text" >
+@*@Html.TextBox("", "", new { placeholder = placeholder, @class = "text TextBox placeholderColor" })*@
+
+        @*<input type="text" class="placeholderColor" />*@
+        @*<span class="SelectBtn"></span>*@
+       @if (dis == "")
+       {
+        <span class="SelectBtn"></span>
+       }
+        
+    </div>
+    <div class="list ">
+        <ul>
+            @foreach (var item in list)
+            {
+
+                var extra = item.Group != null ? "data-extra=" +item.Group.Name : "";
+                var show= item.Group != null && item.Group.Name!=Model.CurrentGroup ? "style=display:none" : "";
+                <li data-id="@item.Value" selected="@item.Selected" @extra @show>@item.Text</li>
+            }
+            @if (showAdd)
+            {
+                <li class="empty add @Model.AddBtnClass">+ הוסף כחדש</li>
+            }
+            else
+            {
+                <li class="empty none">אין תוצאות</li>
+            }
+          
+        </ul>
+    </div>
+</div>

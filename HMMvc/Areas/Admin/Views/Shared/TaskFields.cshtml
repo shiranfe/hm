@@ -1,0 +1,21 @@
+﻿@model List<JobTaskGroupFieldDM>
+@using Common
+
+<script src="~/Areas/Admin/Scripts/BankTask_Field/index.js"></script>
+<div id="taskFieldsList">
+    @foreach (var field in Model)
+    {
+        @Html.Partial("FieldTmpl", field)
+    }
+    <div class="clear"></div>
+
+
+</div>
+
+<div class="datarow formRow">
+    @{
+        ViewBag.Required = false;
+    }
+    @Html.Editor("AddFieldDrop", "AutoComplete", new { options = ViewBag.BankFields, placeholder = "הוסף שדה" })
+
+</div>

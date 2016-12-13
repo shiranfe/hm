@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Common.QuoteDM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Areas/Admin/Scripts/Quote/CommonQuote.js"></script>
+<script src="~/Areas/Admin/Scripts/Quote/QuoteTrack.js"></script>
+<script src="~/Scripts/UI/jquery.datetimepicker.full.min.js"></script>
+
+
+@*<div class="SiteSideMenu corn_3 shadow">
+
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow searchFields">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>מעקב הצעות</h1>
+        </div>
+        @*<div class="HeaderActions">
+            <input id="AddItemBtn" type="button" class="buttondefault" value="הצעה חדשה" />
+        </div>*@
+        <div class="clear"></div>
+
+    </div>
+   
+    @Html.Partial("~/Areas/Admin/Views/Quote/QuoteSearch.cshtml")
+ 
+       <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">פריטים</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div id="pageContent" class="VbTabBlockInfo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            נושא
+                        </th>
+                        <th>
+                            לקוח
+                        </th>
+
+                        <th>
+                            יוצר
+                        </th>
+                        <th>
+                            תאריך למעקב
+                            סטטוס
+                        </th>
+                        <th>
+                            מספר הצעה
+                        </th>
+                        
+     
+                    </tr>
+                </thead>
+
+
+                @foreach (var group in Model.GroupBy(x => x.CurrentVersionDate.Date))
+                {
+                    <tbody>
+                        <tr class="odd group">
+                            <td colspan="6">
+                                @{var date = group.Key.ToString("dd/MM/yyyy dddd");}
+                                <b>@date</b>
+                            </td>
+                        </tr>
+                        @foreach (var item in Model.Where(x => x.CurrentVersionDate.Date == group.Key))
+                        {
+
+                            var duePassed = item.FollowDate < DateTime.Now ? "duePassed" : "";
+
+                            <tr class="even" data-id="@item.QuoteID" data-iscover="@item.IsCover" data-emp="@item.CreatorID" data-status="@item.QuoteStatusID">
+                                <td>
+                                    <span class="linktext openItem">@Html.DisplayFor(modelItem => item.QuoteTitle)</span>
+                                    @if (item.IsCover)
+                                    {
+                                        <i>(הצעת כיסוי)</i>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClientName)
+                                </td>
+
+                                <td nowrap >
+                                    @Html.DisplayFor(modelItem => item.Creator)
+                                </td>
+                                <td nowrap>
+                                    <div class="@duePassed">@Html.DisplayFor(modelItem => item.FollowDate)</div>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    <a class="linktext openQuote" href="/Admin/#/QuoteVersion/Update?id=@item.CurrentVersionID">06/@item.QuoteID</a>
+                                </td>
+                              
+                           
+                            </tr>
+                        }
+                    </tbody>
+                }
+
+
+
+            </table>
+        </div>
+
+    </div>
+
+
+</div>
+

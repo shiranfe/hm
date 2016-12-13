@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Common.RoleDM>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Areas/Admin/Scripts/Employee/Role.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>מחירון שעת עבודה</h1>
+        </div>
+        <div class="HeaderActions">
+            <input id="AddItemBtn" type="button" class="buttondefault" value="תפקיד חדש" />
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">תפקידים</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div id="pageContent" class="VbTabBlockInfo">
+
+            <table>
+                <tr>
+                    
+                    <th>
+                       תפקיד
+                    </th>
+                   
+                    <th>
+                        עלות לשעה
+                    </th>
+                    <th>
+                       מחיר לשעה
+                    </th>
+                    <th></th>
+                </tr>
+                @{var i = 1;
+                var odd = "";}
+                @foreach (var item in Model)
+                {
+                    odd = i % 2 == 0 ? "odd" : "even";
+                    i++;
+                    <tr class="@odd" data-id="@item.RoleID">
+                        <td>
+                            <span class="linktext openItem">@item.RoleHebrew</span>
+
+                        </td>
+                       
+                        <td nowrap class="money">
+                            @Html.DisplayFor(modelItem => item.RoleCost)
+                        </td>
+                        <td nowrap class="money">
+                            @Html.DisplayFor(modelItem => item.RolePrice)
+                        </td>
+                        <td>
+                            <span class="linktext deleteItem">X</span>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+</div>

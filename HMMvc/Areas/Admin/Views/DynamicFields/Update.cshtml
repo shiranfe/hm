@@ -1,0 +1,110 @@
+﻿@model DynamicGroupFieldDM
+@using Common
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+<form id="AddFieldForm" method="post" data-ajax="true">
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3 clearfix">
+        @Html.HiddenFor(model => model.DynamicGroupFieldID)
+        @Html.HiddenFor(model => model.DynamicGroupID)
+        <div class="VbTabBlockCont">
+            <div class=" VbTabBlockInfo clearfix">
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            סוג שדה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.DropDownList("FieldPoolID", (SelectList)ViewBag.poolFields)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            שם שדה בעברית:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.FieldNameHeb)
+                            @*@Html.EditorFor(x=>x.HebStrings, "AutoComplete")*@
+                            @Html.ValidationMessageFor(model => model.FieldNameHeb)
+                        </div>
+                    </div>
+                    <div class="datarow  floatlast">
+                        <div class="fieldlabel">
+                            שם שדה באנגלית:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.FieldNameEng)
+                            @Html.ValidationMessageFor(model => model.FieldNameEng)
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            פריט מקושר בקטלוג:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.Editor("CatalogItemID", "AutoComplete", new { options = ViewBag.catatlogItems })
+
+
+                        </div>
+                    </div>
+                    <div class="datarow  floatlast ">
+                        <div class="fieldlabel">
+                            מיון:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.OrderVal)
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            הצג בהצעת מחיר:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.IsForQuote)
+                        </div>
+                    </div>
+                    <div class="datarow  floatlast">
+                        <div class="fieldlabel">
+                            שדה חובה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.IsRequired)
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ForBtnDiv">
+        @Html.ValidationSummary(true)
+        <input id="ChangeFieldBtn" type="button" value="שמור" class="buttondefault floatlast">
+       
+    </div>
+
+</form>
+
+
+
+
+<script>
+    try {
+        setPopTitle('DynamicFields', 'עדכון שדה');
+    } catch (e) {
+
+    }
+
+</script>

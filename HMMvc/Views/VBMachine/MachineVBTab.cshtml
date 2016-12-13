@@ -1,0 +1,70 @@
+﻿@model Common.MachineVBDM
+@using Common;
+@{
+    Layout = "";
+    var PointVal = "ערכים בנקודה"; 
+}
+
+
+@*<script type="text/javascript">
+        tryLoadScript('@Url.Content("~/Scripts/Machine/MachineVBTab.js")');
+    </script>*@
+
+
+<div class="PageContHeader">
+    <div class="PageContHeaderTitle">
+       @* <h3>@GlobalDM.GetTransStr("JobVibration_JobVibrationFor"): @Html.DisplayFor(model => model.MachineName)</h3>*@
+    </div>
+    <div class="HeaderActions">
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="VbTab">
+    <div class="VbTabController">
+        <div class="Tab corn_3 Selected" data-trgt="VbTabMacDetails" >
+            <a class="VbTabControllerBtn" >@GlobalDM.GetTransStr("Machine_MachineDetails")</a>
+            <div class="VbTabControllerIcon MacDetails"></div>
+        </div>
+        <div class="Tab corn_3" data-trgt="VbTabMacPoints">
+            <a class="VbTabControllerBtn" >@GlobalDM.GetTransStr("Machine_PointsInMachine")</a>
+            <div class="VbTabControllerIcon MacPoints"></div>
+        </div>
+        <div class="Tab corn_3" data-trgt="VbTabPointVal">
+            <a class="VbTabControllerBtn" >@GlobalDM.GetTransStr("Machine_ValuesInPoint")</a>
+            <div class="VbTabControllerIcon PointVal"></div>
+        </div>
+    </div>
+    
+    <div class="VbTabOutter jScrollbar">
+        <div class="VbTabInner corn_3 jScrollbar_mask">
+
+            @Html.Partial("MachineVBTabDetails", Model)
+            @Html.Partial("MachineVBTabMacPoints",Model)
+            <div id="VbTabPointVal" class="VbTabBlock corn_3">
+                <div class="VbTabBlockHeader">
+                    <div class="BlockHeaderIcon PointVal"></div>
+                    <div class="BlockHeaderTitle">@PointVal</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="WhiteSep"></div>
+                <div id="VbTabPointValCont">
+                    @Html.Partial("MachineVBTabPointVal", Model.PointSelected.PointResultDMs.First())
+                </div>
+            </div>
+        </div>
+        <!-- slider container -->
+        <div class="jScrollbar_draggable">
+            <!-- slider -->
+            <a href="#" class="draggable"></a>
+        </div>
+        <!-- don't forget to clear the floats -->
+        <div class="clear"></div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+<script>
+   
+    jqUpdateSize();
+</script>

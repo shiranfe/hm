@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "";
+    ViewBag.Title = "Lay";
+}
+
+@* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+  *@
+<link href="~/Content/Site_rtl.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/UI/bootstrap-select.js"></script>
+@*<script src="~/Scripts/UI/bootstrap.js"></script>*@
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/UI/jquery.scrollTo-min.js"></script>
+<h2>Lay</h2>
+<select class="selectpicker">
+   
+        <option value="1" selected="selected">15/07/2012</option>
+        <option value="2" selected="selected">03/04/2012</option>
+        <option value="3" selected="selected">24/12/2013</option>
+</select>
+<script>
+
+    $('.selectpicker').selectpicker({
+       
+    });
+</script>
+@*      <style>
+          div.pane {
+    clear: left;
+    height: 322px;
+    margin: 10px 0 0 10px;
+    overflow: auto;
+    position: relative;
+    width: 826px;
+}
+      </style>*@
+<div onclick="$('#aaa').scrollTo($('#VbTabPointVal'), 700);">CliCkME</div>
+<div class="pane">
+    <div  id="aaa" class="VbTabInner corn_3" style="height: 470px;margin-bottom:400px;">
+        <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+            dfg
+        </div>
+        <div id="VbTabMacPoints" class="VbTabBlock corn_3">
+            dfg
+        </div>
+
+        <div id="VbTabPointVal" class="VbTabBlock corn_3">
+            dfg
+        </div>
+    </div>
+</div>

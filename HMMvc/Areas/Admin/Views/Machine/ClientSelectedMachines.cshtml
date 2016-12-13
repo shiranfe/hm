@@ -1,0 +1,32 @@
+﻿@model Common.ClientDM
+
+@{
+    Layout = "";
+}
+
+
+@if (Model.Machines.Any())
+{
+    <div class="DefMacZone fr">
+
+        <div>
+            @foreach (var x in Model.Machines)
+            {
+                <div class="DefMacDiv linktext MacName"  data-id="@x.MachineID">@x.MachineName</div>
+        }
+        </div>
+    </div>
+    <div id="DefSelMac" class="fr">
+
+        @Html.Partial("PointPositionSelected", new ViewDataDictionary(Model.SelectedMachine))
+        
+
+    </div>
+
+    <div class="clear"></div>
+    }
+else
+{
+    <div style="padding:10px;">לא נמצאו מכונות ללקוח זה</div>
+    }
+

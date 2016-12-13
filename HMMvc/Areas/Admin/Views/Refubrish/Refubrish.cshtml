@@ -1,0 +1,84 @@
+﻿@model Common.RefubrishDM
+
+@{
+    ViewBag.Title = "Refubrish";
+     
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    //var CurForm = Model.RefubrishStepDM.Where(x => x.HasStarted).Last().FormName;
+}
+<style>
+    select.selectbox option, .OuterSelect { direction: ltr; }
+    .SelectVal{margin-right:6px;}
+</style>
+
+<script>
+    $.LoadStep = function (step,changed) {
+        
+        if (changed && location.hash.indexOf(step) > -1)
+            return refreshPage();
+
+        var JobID = $("#JobID").text();
+        location.href = "#/Refubrish/" + $("#JobRefubrishPartID").val() + "/" + step;
+        /*
+        $("#RefubrishStepDiv").html(ajax_load);
+        var pg = "/Admin/Refubrish/Step";
+
+        $.get(pg, {
+            "JobRefubrishPartID": $("#JobRefubrishPartID").val(),
+            "step": step,
+        }, function (data) {
+            $("#RefubrishStepDiv").html(data);
+
+            //  loadStepPics(JobID, step);
+        }).fail(function () { $.BugAlert(); });
+        */
+    };
+
+        tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Refubrish/Refubrish.js")');
+
+</script>
+@*<script src="~/Areas/Admin/Scripts/Refubrish/Refubrish.js"></script>*@
+<div id="StepsMenu"  >
+    @Html.Partial("RefubrishJobDetails", Model)
+
+    <div id="StepsDiv">
+        <div class="blckRectangle"></div>
+        @foreach (var step in Model.RefubrishStepDM)
+        { 
+            var selected = Model.CurrentStep == step.FormName ? "selected" : "selctee";
+            var Done = step.IsDone ? "done" : "NotDone";
+            var Started = step.HasStarted ? "started" : "nostarted";
+            <div class="SiteSideMenu corn_3 shadow Step @selected @Done @Started" data-id="@step.FormName">
+                <a href="/Admin/#/Refubrish/@Model.JobRefubrishPartID/@step.FormName">
+                    <div class="icon"></div>
+                    <div class="stepname SideHeaderInfoValue">@step.StepName</div>
+                </a>
+            </div>
+            <div class="clear"></div>
+        }
+
+    </div>
+
+
+    <div class="clear"></div>
+</div>
+
+
+<div class="sitesubcontent corn_3 shadow" id="RefubrishStepDiv">
+    @*@Html.Partial("VBMachine", Model.SelectedVbEditMachine)*@
+
+</div>
+
+<div class="clear"></div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var step = '@Model.CurrentStep';
+        //$.LoadStep(step);
+        //CreateDropDown();
+    });
+</script>
+

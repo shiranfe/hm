@@ -1,0 +1,72 @@
+﻿@*@model PagedList.IPagedList<VbCurentMachineStsDM>*@
+@using Common
+@{
+    ViewBag.Title = GlobalDM.GetTransStr("JobVB_HistoryIndex_Title");
+    var pageCount = ViewBag.PageCount;
+}
+
+<script src="~/Scripts/VB/CurrentSts.js"></script>
+
+<script>
+    var PageNumber = 1;
+   
+</script>
+
+<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuMachine", "Menu");}
+</div>
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>@GlobalDM.GetTransStr("JobType_Vibration") - @GlobalDM.GetTransStr("JobVB_CurrentSts_Title")</h1>
+        </div>
+     @*   <div class="HeaderActions">
+            <input type="button" class="buttondefault" value="@GlobalDM.GetTransStr("CallRequestIndex_RequestTest")"/>
+        </div>*@
+        <div class="clear"></div>
+    </div>
+        <div class="PageContSrchZone corn_3 shadow">
+            <div class="SrchDiv">
+                @Html.TextBox("SearchString", "", new { @class = "TextBox SearchTextbox", @id = "SrchBox" })@*, @placeholder = GlobalDM.GetTransStr("A_Search")*@
+                <input type="submit" id="SrchBtn" class="buttondefault" value="@GlobalDM.GetTransStr("A_Search")"  />
+            </div>
+        </div>
+
+    <div class="TableHeaderZone">
+                <div class="TableHeaderZoneTitle">@GlobalDM.GetTransStr("Job_AllTests")</div>
+                <div class="TableHeaderActions">
+                    <span class="TableHeaderActionsText">@GlobalDM.GetTransStr("A_Page")</span>
+                     @{ var dis = (pageCount > 1) ? "" : "disabled='disabled'"; }
+                    <input class="TextBox PageNum " type="text" value="1" name="PageNum" @dis>
+                    <span class="TableHeaderActionsText">@GlobalDM.GetTransStr("A_Of")
+                        <span id="PageCount">@pageCount</span>
+                    </span>
+                    @{ var vis = (pageCount > 1) ? "" : "dn"; }
+                    <a class="NavigationBtn PrevBtn dn"></a>
+                    <a class="NavigationBtn NextBtn @vis"></a>
+                    
+                    <div class="OuterSelect SortBy">
+                        <span class="SortByLabel">@GlobalDM.GetTransStr("Global_SortBy"): </span>
+                        <span class="SelectVal">@GlobalDM.GetTransStr("Global_ReportStatus")</span>
+                        <span class="SelectBtn"></span>
+                        <select id="SortByCombo" class="selectbox SortByTop">
+                            <option value="Global_ReportStatus">@GlobalDM.GetTransStr("Global_ReportStatus")</option>
+                            <option value="Job_TestDate">@GlobalDM.GetTransStr("Job_TestDate")</option>
+                            <option value="User_Locations">@GlobalDM.GetTransStr("User_Locations")</option>
+                            
+                        </select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+            <div class="SliceLine"></div>
+
+    <div id="CurrentStsContent">
+     
+          @*@Html.Partial("CurrentStsContent", new ViewDataDictionary(Model))*@
+    </div>
+</div>
+<div class="clear"></div>
+

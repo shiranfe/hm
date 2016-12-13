@@ -1,0 +1,125 @@
+﻿@using Common
+@model EmployeeDM
+
+@{
+    ViewBag.Title = "EmployeePermision";
+}
+<script>
+    setPopTitle('EmployeePermision', '@ViewBag.PopTitle');
+</script>
+
+<form id="UpdateEmployeePermisionForm" method="post" data-ajax="true">
+   
+    @Html.HiddenFor(model => model.EmployeeID)
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">@Html.DisplayFor(model => model.FullName)</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow floatfirst ">
+                    <div class="fieldlabel">
+                        הגדרות מערכת:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowSettings)
+                    </div>
+                </div>
+                <div class="datarow floatlast ">
+                    <div class="fieldlabel">
+                        תיקונים:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowRefubrish)
+                    </div>
+                </div>
+            </div>
+
+            <div class="formRow">
+                <div class="datarow floatfirst ">
+                    <div class="fieldlabel">
+                        הגדרות לקוח:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowClientSettings)
+                    </div>
+                </div>
+
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        בדיקת רעידות:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowVB)
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="formRow">
+                <div class="datarow floatfirst ">
+                    <div class="fieldlabel">
+                        קטלוג:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowCatalog)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        שיוור:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowAlignment)
+                    </div>
+                </div>
+            </div>
+
+            <div class="formRow">
+
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        הצעות מחיר:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowQuote)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        איזונים:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowBalancing)
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        דו"חות:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowManagReports)
+                    </div>
+                </div>
+               
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+
+    <div class="ForBtnDiv">
+        @Html.ValidationSummary(true)
+
+        <input type="button" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+    </div>
+
+</form>
+

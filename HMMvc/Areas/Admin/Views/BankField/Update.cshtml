@@ -1,0 +1,77 @@
+﻿@model BankFieldDM
+@using Common
+@{
+ 
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    setPopTitle("BankField", '@ViewBag.PopTitle');
+</script>
+
+<form id="UpdateBankFieldForm" method="post" data-ajax="true">
+
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+        @Html.HiddenFor(x => x.BankFieldID)
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv clearfix">
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            סוג שדה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.Editor("FieldPoolID", new { options = ViewBag.poolFields })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            שם שדה בעברית:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.FieldNameHeb)
+                            @*@Html.EditorFor(x=>x.HebStrings, "AutoComplete")*@
+                            @Html.ValidationMessageFor(model => model.FieldNameHeb)
+                        </div>
+                    </div>
+                    <div class="datarow  floatlast">
+                        <div class="fieldlabel">
+                            שם שדה באנגלית:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.FieldNameEng)
+                            @Html.ValidationMessageFor(model => model.FieldNameEng)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            פריט מקושר בקטלוג:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.Editor("CatalogItemID", new { options = ViewBag.catatlogItems })
+
+
+                        </div>
+                    </div>
+                   
+
+                </div>
+               
+            </div>
+        </div>
+
+    </div>
+    <div class="ForBtnDiv">
+        @Html.ValidationSummary(true)
+
+        <input type="button" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+    </div>
+</form>

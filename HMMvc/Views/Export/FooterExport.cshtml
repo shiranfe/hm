@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VBReportHtml</title>
+    @Html.Partial("ChangeLang")
+    <link href="~/Content/HtmlExport.css" rel="stylesheet" />
+    @*<link rel="stylesheet" type="text/css" href="@Url.Content("~/Views/Export/HtmlExport.css")"/>*@
+    @*<style>
+            #SiteFooter
+            {
+                margin-top: 10px;
+            }
+
+        </style>*@
+</head>
+<body>
+    <div class="SiteWidth" >
+            @Html.Partial("FooterPdf")
+
+        </div>
+
+
+</body>
+</html>

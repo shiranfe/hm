@@ -1,0 +1,98 @@
+﻿@model Common.ClientDM
+
+<script src="~/Areas/Admin/Scripts/Machine/Machine.js"></script>
+
+<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuMachine", "Menu");}
+</div>
+
+
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader clearfix">
+
+        <div class="PageContHeaderTitle">
+            <h1>@Model.ClientName - מכונות</h1>
+        </div>
+        @if (Model.ClientID > 0)
+        {
+            <div class="HeaderActions">
+                <input id="MergeMachinesBtn" type="button" class="buttondefault" value="איחוד מכונות" />
+                <input id="AddItemBtn" type="button" class="buttondefault AddMachineBtn" value="מכונה חדשה" />
+            </div>
+        }
+
+
+    </div>
+
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">חיפוש מכונות</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow  single">
+                    <div class="fieldlabel">
+                        חיפוש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input type="text" id="srch" placeholder="חפש" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div id="pageContent" class="machine-index">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+
+                    <th>
+                        מכונה
+                    </th>
+
+                    <th style="width:1px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{var i = 1;}
+                @foreach (var item in Model.Machines)
+                {
+                    var odd = i % 2 == 0 ? "odd" : "even";
+                    i++;
+                    <tr class="@odd" data-id="@item.MachineID">
+
+                        <td class="td-image" style="background-image:url('@Url.Content(item.MacPic)');"></td>
+                        <td>
+                            <a class="linktext" href="/#/Machine/@item.MachineID">@item.MachineNameFull</a>
+                            @*<span class="linktext openItem">@item.MachineName</span>*@
+                        </td>
+
+                        <td>
+                            <span class="linktext deleteItem">מחק</span>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+</div>
+
+<div class="clear"></div>

@@ -1,0 +1,41 @@
+﻿@model Common.StepGroupFieldDM
+@{
+    var field = Model;
+
+    int? val = string.IsNullOrEmpty(field.HtmlValue) ? (int?)null : Convert.ToInt32(field.HtmlValue);
+    SelectList list = new SelectList(Model.PickListItems, "PickListID", "TransStr", val);
+
+}
+
+
+<div class="datarow floatfirst field">
+    <div class="fieldlabel">
+        <span>@field.FieldLabel</span>
+        <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@field.HtmlID"></span>
+
+    </div>
+    <div class="fieldvalue ">
+
+
+@Html.Partial("~/Views/Shared/EditorTemplates/AutoCompleteHtml.cshtml", new MVC.Models.SelectDm
+{
+    Options = list,
+    Value = Model.HtmlValue,
+    Name = Model.HtmlID,
+    Id=Model.FieldNameStr,
+    Required = Model.IsRequired
+})
+
+
+        @*<select id="@field.FieldNameStr" name="@field.HtmlID" @ViewBag.Required>
+                <option value=""></option>
+
+                @foreach (var item in field.PickListItems)
+                {
+                    var sel = item.PickListID == val ? "selected=selected" : "";
+                    <option value="@item.PickListID" @sel>@item.TransStr</option>
+                }
+            </select>*@
+
+    </div>
+</div>

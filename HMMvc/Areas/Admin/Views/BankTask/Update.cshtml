@@ -1,0 +1,74 @@
+﻿@model BankTaskDM
+@using Common
+@{
+
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Scripts/BankTask/BankTask.js"></script>
+
+
+@*<script>
+    setPopTitle("BankTask", '@ViewBag.PopTitle');
+</script>*@
+<div class="sitesubcontent corn_3 shadow">
+    <h2>פרטי משימה</h2>
+    <form id="UpdateBankTaskForm" method="post" data-ajax="true">
+
+        <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+            @Html.HiddenFor(x => x.BankTaskID)
+            <div class="VbTabBlockCont">
+                <div id="ClientLogoSelectedDiv" class="AdminPicDiv clearfix">
+                    <div class="formRow">
+                        <div class="datarow  floatfirst">
+                            <div class="fieldlabel">
+                                משימה:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.EditorFor(model => model.TaskName)
+                                @Html.ValidationMessageFor(model => model.TaskName)
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="formRow">
+                        <div class="datarow single">
+                            <div class="fieldlabel">
+                                הערות מנהל:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.TextAreaFor(model => model.ManagerNotes)
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">שדות</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+
+                @Html.Partial("TaskFields", Model.TaskFields)
+
+            </div>
+
+        </div>
+
+
+        <div class="ForBtnDiv">
+            @Html.ValidationSummary(true)
+
+            <input type="button" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+        </div>
+    </form>
+</div>
+<div class="clear"></div>

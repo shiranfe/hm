@@ -1,0 +1,170 @@
+﻿@model QuoteDM
+@using Common
+
+@{
+    ViewBag.Title = "Update Quote";
+    var followDate = Model.FollowDate.ToString("yyyy/MM/dd hh:mm");
+}
+
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Scripts/Quote/Quote.js"></script>
+<script>
+        tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Services/clientUserService.js")');
+</script>
+@*<div class="sitesubcontent corn_3 shadow">
+    <h1>הצעת מחיר חדשה</h1>
+</div>*@
+    <form id="UpdateQuoteForm" method="post" data-ajax="true">
+        @Html.HiddenFor(model => model.QuoteID)
+        <input data-val="true" data-val-date="The field FollowDate must be a date." data-val-required="The FollowDate field is required."
+               id="FollowDate" name="FollowDate" type="hidden" value="@followDate">
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">לכבוד</div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo clearfix">
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            @GlobalDM.GetTransStr("Quote_Title"):
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.QuoteTitle)
+                            @Html.ValidationMessageFor(model => Model.QuoteTitle)
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        @{ ViewBag.Container = "#popUpdateQuote"; }
+                        @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml",new JobDM { ClientID=Model.ClientID, Clients=Model.Clients })
+
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            עבור:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.UserID, new { options = ViewBag.For, AddBtnClass = "addContact" })
+                            @*@Html.DropDownList("UserID", (SelectList)ViewBag.For)*@
+                        </div>
+                        <div class="tcTopMin">
+                            <div class="plusBtn EditClientBtn" data-id="@Model.ClientID"></div>
+                        </div>
+                    </div>
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            יוצר:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.CreatorID, new { options = ViewBag.Creator })
+                            @*@Html.DropDownList("CreatorID", (SelectList)ViewBag.Creator)*@
+                        </div>
+
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            סטטוס:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.QuoteStatusID, new { options = ViewBag.QuoteStatus })
+                            @*@Html.DropDownList("QuoteStatusID", (SelectList)ViewBag.QuoteStatus)*@
+                        </div>
+
+                    </div>
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            מספר עבודה:
+                        </div>
+                        <div class="fieldvalue" dir="ltr">
+                            06/@Html.DisplayFor(model => model.QuoteID)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            מספר כרטיס עבודה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.JobCardNumber)
+                        </div>
+                    </div>
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            הצעת כיסוי:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.IsCover)
+                            @*@Html.DropDownList("QuoteStatusID", (SelectList)ViewBag.QuoteStatus)*@
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="formRow">
+
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            הערות לחיפוש:
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                            <textarea id="Comments" class="TextBox" name="Comments" rows="2">@Model.Comments</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="VbTabBlock corn_3">
+
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">עבודות מקושרות</div>
+                <div class="HeaderActions">
+                    @*<input id="AddJobBtn" type="button" class=" buttondefault Black" value="צור עבודה">*@
+                    <input id="LinkJobBtn" type="button" class="buttondefault Black" value="קשר עבודה קיימת">
+
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo" id="quoteJobsDiv">
+
+                @Html.Partial("~/Areas/Admin/Views/QuoteJob/Index.cshtml", Model.Jobs)
+
+            </div>
+
+        </div>
+
+
+        <div class="ForBtnDiv clearfix">
+            <input type="button" value="שמור" class="buttondefault floatlast">
+        </div>
+
+    </form>
+
+    <script>
+        try {
+            setPopTitle('Quote', '@ViewBag.PopTitle');
+        } catch (e) {
+
+        }
+
+
+    </script>
+

@@ -1,0 +1,32 @@
+﻿
+@{
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<style>
+    input[type="submit"], input[type="button"] { padding: 5px; float: right; width: auto; min-width: 100px; }
+</style>
+@*<script src="~/Scripts/UI/jquery.scrollTo-min.js"></script>*@
+@*<script src="~/Scripts/UI/jquery.fineuploader-3.0.js"></script>*@
+<script src="~/Areas/Admin/Scripts/VB/ImportVbHtml.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "VB", ShowTree = false });}
+</div>*@
+<div class="importsubcontent">
+
+    <div id="Step1" class="ImportStep shadow">
+        <h2>שלב 1 - טעינת קובץ</h2>
+        <p>
+            לחץ להעלאת קובץ דוח רעידות בפורמט html
+        </p>
+        <div id="FileUpload1" class="linktext FileUpload"><input type="button" id="imprt" value="בחר קובץ" /></div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="LoadHtmlAndChooseMacines" class="ImportStep shadow" style="display:none;"></div>
+    <div id="ChooseJob" class="ImportStep shadow" style="display:none;"></div>
+    <div id="CommitImport" class="ImportStep shadow" style="display:none;"></div>
+
+</div>
+<div class="clear"></div>

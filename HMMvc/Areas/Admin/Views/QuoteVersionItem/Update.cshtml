@@ -1,0 +1,105 @@
+﻿@model QuoteVersionItemDM
+    @using Common
+
+    @{
+        var item = Model;
+        var odd = "even"; //i % 2 == 0 ? "odd" : "even";
+                          // i++;
+        var price = item.ItemPricePerUnit.ToString("0.00");
+        var isChild = item.ItemParentID.HasValue ? "child": "";
+        var catalog = new SelectList(ViewBag.poolFields, "FieldPoolID", "FieldLabel", item.FieldPoolID);
+        var categoryItems = new SelectList(ViewBag.categoryItems, "TransStr", "TransStr", "CategoryID", -1);
+    }
+
+    <tr class="@odd openOptions  @isChild" data-id="@item.QuoteVersionItemID">
+
+        <td  style="position:relative">
+            <div class="output" >
+               
+                <span class="b" label="ItemTitle">@Html.DisplayFor(modelItem => item.ItemTitle)</span>
+                <span class="keep-eng" label="FieldValue">@Html.DisplayFor(modelItem => item.FieldValue)</span>
+                @*<div >(@item.ItemSort) @item.QuoteVersionItemID -> @item.ItemParentID </div>*@  
+                <pre class="" label="ItemNotes">@Html.DisplayFor(modelItem => item.ItemNotes)</pre>
+            </div>
+            <div class="input">
+               <input type="text" value="@item.ItemTitle" name="ItemTitle" required placeholder="שם פריט">
+               <input type="hidden" value="@item.CatalogItemID" name="CatalogItemID">
+                <input type="hidden" value="@item.ItemSort" name="ItemSort">
+            
+            </div>
+            <div class="move-row-cont tblMin">
+                <div class="tc">
+                    <div class="move-row root">►</div>
+                </div>
+                <div class="tc">
+                    <div class="move-row up">▲</div>
+                    <div class="move-row down">▼</div>
+                </div>
+                <div class="tc">
+                    <div class="move-row child">◄</div>
+                </div>    
+            </div>
+        </td>
+        <td>
+            @*<span class="output" label="ItemSort">@Html.DisplayFor(modelItem => item.ItemSort)</span>*@
+            <span class="output" label="ItemQuntity">@Html.DisplayFor(modelItem => item.ItemQuntity)</span>
+            <span class="input">
+                <input type="text" value="@item.ItemQuntity" required name="ItemQuntity" placeholder="כמות">
+            </span>
+
+        </td>
+        <td class="money">
+            <span class="output" label="ItemPricePerUnit">@Html.DisplayFor(modelItem => item.ItemPricePerUnit)</span>
+            <span class="input"><input type="text" value="@price" required name="ItemPricePerUnit" placeholder="מחיר יחידה"></span>
+        </td>
+        <td class="money">
+            
+            <span class="itemTotalPrice">@Html.DisplayFor(modelItem => item.ItemTotalPrice)</span>
+          
+        </td>
+        <td>
+            <span class="linktext delete">X</span>
+        </td>
+    </tr>
+    <tr class="@odd options notes @isChild" data-id="@item.QuoteVersionItemID">
+        <td colspan="5">
+            <div class="formRow clearfix">
+                <div class="datarow floatfirst">
+                    @Html.Editor("FieldPoolID", "AutoComplete", new { options = catalog, placeHolder = "סוג פריט" })                 
+    @*@Html.DropDownList("FieldPoolID", catalog, "סוג פריט", new  { placeholder = "סוג פריט"})*@             
+                </div>
+                @{ var dn = item.FieldPoolID.HasValue ? "" : "style=display:none"; }
+                
+                <div class="datarow floatlast" @dn>     
+                    @Html.Editor("FieldValue", "AutoComplete", new { options = categoryItems,currentGroup = item.FieldPoolID })
+                  
+                </div>
+
+            </div>
+            <div>             
+                <textarea  id="ItemNotes" name="ItemNotes" placeholder="הערות" rows="1">@item.ItemNotes</textarea>
+            </div>
+        </td>
+    </tr>
+ <tr class="@odd options actions @isChild op_0" data-id="@item.QuoteVersionItemID">
+
+    <td colspan="5" class="clearfix">
+        @*   <span class="linktext move-row root">► סעיף ראשי</span>
+             <span class="linktext move-row child">תת סעיף ◄</span>
+             <span class="move-row"> |</span>
+             <span class="linktext">> הכנס</span> |
+             <span class="linktext delete">מחק</span>
+             <span class="linktext">הצג פרטים</span> |
+
+            <span class="linktext closeOptions fl">סגור</span>
+        *@
+
+        <input type="hidden" value="@item.ItemParentID" name="ItemParentID">
+
+
+    </td>
+
+
+</tr>
+
+

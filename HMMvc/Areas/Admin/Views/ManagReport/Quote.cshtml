@@ -1,0 +1,80 @@
+﻿@model object
+@*<script src="~/Scripts/UI/Pivot/pivot.js"></script>*@
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "Refubrish", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>דו"ח הצעות מחיר</h1>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="VbTabBlock corn_3 ">
+
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">מסננים</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow radio-horizontal" id="radioFilters"></div>
+        </div>
+    </div>
+
+    <div class="VbTabBlock corn_3 ">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle" id="pivotTitle">כמות הצעות בחודש</div>
+        </div>
+        <div id="output"></div>
+    </div>
+</div>
+<div class="clear"></div>
+
+<script>
+
+
+    var pivotData = [["לקוח", "עובד", "ת.מעקב", "סטטוס", "ת.יצירה", "סטטוס זכייה", "סכום"]];
+    $(@Html.Raw(Json.Encode(Model))).each(function (index, item) {
+        pivotData.push([
+            item["ClientName"],
+            item["EmpName"],
+            encodedToTime(item["FollowDate"]),
+            item["Status"],
+            encodedToTime(item["TimeStamp"]),
+            item["WinStatus"],
+            item["itemTotal"]
+        ]);
+    });
+
+    var configs = {
+        monthQuotes: {
+            text: "כמות הצעות בחודש",
+            derived: {
+                month: "ת.יצירה",
+                year: "ת.יצירה",
+                week: "ת.יצירה"
+            },
+            rows: ["שנה", "חודש"],
+            cols: ["סטטוס זכייה"],
+            vals: ["סכום"],
+        },
+        winLose: {
+            text: "זכייה/הפסד",
+            derived: {
+                month: "ת.יצירה",
+                year: "ת.יצירה"
+            },
+            rows: ["שנה", "חודש"],
+            cols: ["סטטוס זכייה"],
+            vals: ["סכום"],
+            aggregatorName: "סכום",
+        }
+    }
+
+    initPivot(pivotData, configs.monthQuotes);
+
+</script>

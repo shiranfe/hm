@@ -1,0 +1,168 @@
+﻿@model Common.JobRefubrishDisassembleDM
+
+<h2>פירוק מנוע</h2>
+
+<script src="~/Scripts/xtra/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset id="DisassembleForm">
+        @Html.HiddenFor(model => model.JobRefubrish_StepID)
+
+       
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.BackLid)
+            <span >מכסה כנף איוורור + כנף</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.PT100BearingsRear)
+            <span>PT100BearingsRear</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.PT100BearingsFront)
+          <span>PT100BearingsFront</span>
+        </div>
+       <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.PaddleWheel)
+            <span>PaddleWheel</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.KoflongFrontLid)
+            <span>KoflongFrontLid</span>
+        </div>
+       <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.SpringBearingPressureFront)
+            <span>SpringBearingPressureFront</span>
+        </div>
+         <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.SpringBearingBackPressure)
+            <span>SpringBearingBackPressure</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.RotorWingInternal)
+            <span>RotorWingInternal</span>
+        </div>
+       <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.RotorWingRear)
+            <span>RotorWingRear</span>
+        </div>
+         <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.RotorWingExternal)
+            <span>RotorWingExternal</span>
+        </div>
+         <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.ShegemRear)
+            <span>ShegemRear</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.ShegemFront)
+            <span>ShegemFront</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.BoxConnections)
+            <span>BoxConnections</span>
+        </div>
+         <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.BoardConnections)
+            <span>BoardConnections</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.FlexiblePorts)
+            <span>FlexiblePorts</span>
+        </div>
+         <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.RearOilSeal)
+            <span>RearOilSeal</span>
+        </div>
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.FrontOilSeal)
+            <span>FrontOilSeal</span>
+        </div>
+        @if (Model.EngtType == Common.EngtType.AC)
+        {
+            <div class="CheckZone spinner">
+                @Html.HiddenFor(model => model.AC_WingCovers)
+                <span>AC_WingCovers</span>
+            </div>
+            <div class="CheckZone spinner">
+                @Html.HiddenFor(model => model.AC_Rex)
+                <span>AC_Rex</span>
+            </div>
+            <div class="CheckZone spinner">
+                @Html.HiddenFor(model => model.AC_Heater)
+                <span>AC_Heater</span>
+            </div>
+        }
+        else
+        {
+            <div class="CheckZone spinner">
+                @Html.HiddenFor(model => model.DC_CoalDissolution)
+                <span>DC_CoalDissolution</span>
+            </div>
+             <div class="CheckZone spinner">
+                @Html.HiddenFor(model => model.DC_SpringsDissolution)
+                <span>DC_SpringsDissolution</span>
+            </div>
+        }
+        <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.Klixonim)
+            <span>Klixonim</span>
+        </div>
+        <div class="CheckZone spinner">
+         @Html.HiddenFor(model => model.Tramistorim)
+            <span>Tramistorim</span>
+        </div>
+         <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.LiftHok)
+            <span>LiftHok</span>
+        </div>
+       <div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.AirIntake)
+            <span>AirIntake</span>
+        </div>
+        @if (Model.EngtType == Common.EngtType.AC)
+        {
+            <div class="CheckZone spinner">
+                @Html.HiddenFor(model => model.AC_CapillaryClock)
+                <span>AC_CapillaryClock</span>
+            </div>
+            <div class="CheckZone spinner">
+                @Html.HiddenFor(model => model.AC_PT100Coiling)
+                <span>AC_PT100Coiling</span>
+               
+            </div>
+           
+        }
+        @*<div class="CheckZone spinner">
+            @Html.HiddenFor(model => model.AC_PT100Coiling)
+            <span>מכסה כנף איוורור + כנף</span>
+           
+        </div>*@
+        <div class="clear"></div>
+        <div class="ForBtnDiv">
+            <input type="submit" class="buttondefault floatlast" value="שמור">
+            <input type="button" value="בדיקה נכשלה" class="buttondefault red floatlast" id="DeleteClientBtn">
+        </div>
+    </fieldset>
+}
+
+<script>
+    $(".CheckZone").each(function () {
+        var spinner = ' <div class="label"></div><div class="butn plus"></div><div class="butn minus"></div>';
+        $(this).append(spinner);
+        var val = $(this).find('input').val();
+        $(this).find('.label').text(val);
+        if (val > 0)
+            $(this).addClass('selected');
+    });
+
+    $(".spinner").hover(function () {
+        $(this).find('.butn').toggle();
+       
+    });
+</script>

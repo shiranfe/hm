@@ -1,0 +1,102 @@
+﻿@model MVC.Models.LoginVM
+@using Common
+
+@{
+
+    Layout = "";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+    <script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+    <script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @*     <script src="@Url.Content("~/Scripts/xtra/jquery.validate.min.js")" ></script>
+        <script src="@Url.Content("~/Scripts/xtra/jquery.validate.unobtrusive.min.js")"></script>*@
+
+</head>
+<body>
+    @{Html.RenderAction("HeaderNotLoged", "Account");}
+
+
+    <div id="SiteBody" class="SiteWidth">
+
+        <div>
+            @*  @{Html.RenderAction("ChangeLang","User");}*@
+            @Html.Partial("ChangeLang")
+            @using (Html.BeginForm())
+            {
+
+                <div id="LoginForm">
+
+                    <div id="LoginFormHeader">
+                        <h2>@GlobalDM.GetTransStr("Login_Title")</h2>
+                    </div>
+                    <div id="LoginFormContent">
+                        <div class="fr">
+                            <img alt="" src="~/images/Wheel.png" />
+                        </div>
+                        <div class="fr" style="width: 390px;">
+                            <div class="datarow Login">
+                                <div class="fieldlabel colw">
+                                    @GlobalDM.GetTransStr("User_UserName"):
+                                </div>
+                                <div class="fieldvalue">
+                                    @Html.EditorFor(model => model.Username)
+
+                                    @* <input class="input-validation-error TextBox" data-val="true" data-val-required="יש להזין שם משתמש" id="Username" name="Username" placeholder="שם משתמש" type="text" value="">*@
+                                    @Html.ValidationMessageFor(model => model.Username)
+
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="datarow Login">
+                                <div class="fieldlabel colw">
+                                    @GlobalDM.GetTransStr("User_Password"):
+                                </div>
+                                <div class="fieldvalue">
+                                    @Html.EditorFor(model => model.Password)
+                                    @* <input class="input-validation-error TextBox" data-val="true" data-val-required="יש להזין סיסמא" id="Password" name="Password" placeholder="סיסמא" type="password" value="">*@
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="datarow Login">
+                                <div class="fieldlabel colw">
+                                </div>
+                                <div class="fieldvalue colw">
+                                    @Html.EditorFor(model => model.IsRemember)
+                                    @GlobalDM.GetTransStr("Login_RemeberMe")
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="datarow Login">
+
+                                <div class="fr colw">
+                                    @*@GlobalDM.GetTransStr("Login_ForgotPassText  style="font-size: 0.8em; width: 210px;" *@
+                                    @Html.ValidationSummary(true, "פרטי כניסה שגויים. נסה שנית.")
+                                </div>
+                                <div class="fl ">
+                                    <input type="submit" class="buttondefault" value="@GlobalDM.GetTransStr("A_Login")">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+        @Html.Partial("Footer")
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿
+@using Common
+
+@*<div class="signuture">
+    <div>בכבוד רב, </div>
+    <div>@Model</div>
+
+</div>*@
+<div class="signuture">
+    <div class="inner">
+        <div style="text-align: center;">@GlobalDM.GetTransStr("Sincerely"), </div>
+        <div style="text-align: center;">@ViewBag.Creator</div>
+        @if (ViewBag.EmpSignture != string.Empty)
+            {
+            <img src="@ViewBag.EmpSignture" />
+        }
+
+    </div>
+
+</div>

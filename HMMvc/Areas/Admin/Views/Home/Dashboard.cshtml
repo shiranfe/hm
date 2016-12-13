@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>מערכת ניהול חשמל מוטור</h1>
+        </div>
+        <div class="HeaderActions">
+
+
+            @*<input id="AddClientBtn" type="button" class="buttondefault" value="לקוח חדש" />*@
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="VbTabBlock corn_3 ">
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">המשימות שלי</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div id="ServicesDiv" class="VbTabBlockInfo PageContent home-div">
+
+          
+        </div>
+
+    </div>
+    <div class="VbTabBlock corn_3 ">
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">תפריט</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div id="SettingsDiv" class="VbTabBlockInfo PageContent home-div">
+
+           
+        </div>
+
+    </div>
+
+</div>
+<div class="clear"></div>
+<script>
+
+
+    $('.outer-nav').clone()
+        .attr('id', 'DashBoardMenu')
+        .prependTo('.sitesubcontent');
+
+    $('#DashBoardMenu h4').each(function () {
+        var $elem = $(this).next();
+        //$elem.addClass('VbTabBlock corn_3');
+        $elem.prepend($(this));
+
+        var IsSettings = $elem.find('ul').hasClass("settings-div");// 'Settings'
+        var divToMove = '#SettingsDiv';//IsSettings ? '#SettingsDiv' : '#ServicesDiv';
+        $elem.show();
+        $(divToMove).append($elem);
+    });
+
+    $('.PageContent').append(' <div class="clear"></div>');
+
+    $('#DashBoardMenu').remove();
+
+</script>

@@ -1,0 +1,121 @@
+﻿@model List<Common.JobDM>
+@{
+    var frst = Model.FirstOrDefault();
+    var clientName = (frst != null) ? frst.ClientName + " - " : string.Empty;
+
+}
+
+
+
+<div id="VbTabMacDetails" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderIcon MacPoints"></div>
+        <div class="BlockHeaderTitle">@clientName עבודות לא משוייכות</div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div id="pageContent" style="padding: 15px; overflow: auto; max-height: 225px;">
+        @if (Model.Any())
+        {
+            <table>
+                <tr>
+                    <th>
+                        מספר עבודה
+                    </th>
+                    <th>
+                        שם העבודה
+                    </th>
+                    <th>
+                        סוג
+                    </th>
+                 
+                    <th>
+                        תאריך יצירה
+                    </th>
+                    <th>
+
+                    </th>
+
+                </tr>
+
+                @{var i = 1;}
+                @foreach (var item in Model)
+                {
+                    var odd = i % 2 == 0 ? "odd" : "even";
+                    i++;
+                    var type = "";
+                    if (item.IsRefubrish)
+                    {
+                        type += "תיקונים ";
+                    }
+                    if (item.IsVB)
+                    {
+                        type += "בדיקת רעידות ";
+                    }
+                    if (item.IsAlignment)
+                    {
+                        type += "שיוור ";
+                    }
+
+
+                    <tr class="@odd">
+                        <td>
+                            05/@Html.DisplayFor(modelItem => item.JobID)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobName)
+                        </td>
+
+                        <td>
+                            @type
+                        </td>
+                      
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            <span class="linktext linkJob" data-id="@item.JobID">שייך</span>
+                        </td>
+
+                    </tr>
+
+                }
+
+            </table>
+        }
+        else
+        {
+            <div>לא נמצאו עבודות ללקוח זה</div>
+        }
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="ForBtnDiv">
+    <input type="button" value="סגור" class="buttondefault floatlast b-close">
+</div>
+
+<script>
+    try {
+        setPopTitle('JobsUnQuoted', '@ViewBag.PopTitle',true);
+    } catch (e) {
+
+    }
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

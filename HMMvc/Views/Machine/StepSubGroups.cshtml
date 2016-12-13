@@ -1,0 +1,61 @@
+﻿@model StepGroupDM
+@using Common
+@{
+    StepGroupDM rootGroup = ViewBag.RootGroup;
+    List<StepGroupDM> allGroups = ViewBag.allGroups;
+
+    var subGroups = allGroups.Where(x => x.Pid == Model.DynamicGroupID);
+}
+
+@if (subGroups.Any())
+{
+    foreach (var sub in subGroups)
+    {
+        sub.StepGroupFieldDMs = rootGroup.StepGroupFieldDMs;
+        <div class="sub-group" data-id="@sub.DynamicGroupID">
+            <div class="sub-group-title corn_3">@sub.GroupNameStr</div>
+            @*@Html.Partial("StepGroupFields", sub)*@
+            @Html.Partial("StepSubGroups", sub)
+        </div>
+    }
+}
+else
+{
+    <div class="clearfix">
+
+        @foreach (var field in Model.StepGroupFieldDMs)
+        {
+
+            var curValue = field.currenValues.SingleOrDefault(x =>
+                !Model.Pid.HasValue || x.SubGroupID == Model.DynamicGroupID);
+
+
+            field.HtmlValue = curValue != null ? curValue.FieldValue.ToString() : null;//) ? field.FieldValue : null;
+            //field.HtmlID = field.DynamicGroupFieldID +
+            //        (Model.Pid.HasValue ? "_" + Model.DynamicGroupID : "");
+
+            if(curValue!=null && field.PickListItems!=null )
+            {
+                field.HtmlValue = field.PickListItems.Single(x => x.PickListID == Convert.ToInt32(field.HtmlValue)).TransStr;
+            }
+            //var fieldType = field.FieldTypeID.ToString();
+            @*ViewBag.Required = field.IsRequired || Model.IsRequired ?
+            "data-val-required=(*) data-val=true" : "";
+            @Html.EditorFor(model => field, fieldType)
+
+            ViewBag.addLineDivider = !ViewBag.addLineDivider;*@
+
+            <div class="datarow floatfirst field">
+                <div class="fieldlabel">
+                    <span>@field.FieldLabel</span>@if (field.FieldUnit != null)
+                    {<span dir="rtl"> [@field.FieldUnit]</span>}:
+
+                </div>
+                <div class="fieldvalue">
+                    @Html.DisplayFor(model => field.HtmlValue)
+                </div>
+            </div>
+        }
+
+    </div>
+}

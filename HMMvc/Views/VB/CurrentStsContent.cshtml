@@ -1,0 +1,87 @@
+﻿@model PagedList.IPagedList<VbCurentMachineStsDM>
+@using Common
+@{
+    ViewBag.Title =  @GlobalDM.GetTransStr("JobVB_HistoryIndex_Title");
+    Layout = "";
+}
+
+<script>
+    var PageCount = '@Model.PageCount';
+    var hasNextPage = '@Model.HasNextPage';
+    var hasPrevPage = '@Model.HasPreviousPage';
+</script>
+
+    <div class="PageContInner">
+        @if (Model.Any())
+        {
+            
+            <div class="MachineStsTableZone">
+                @{var isodd = true;
+                }
+                @foreach (var item in Model)
+                {
+                    var odd = isodd ? "odd" : "";
+                    isodd = !isodd;
+                    <div class="MacCardDiv  @odd">@*shadow_L corn_5*@
+                       <div class="MacCardDivInner">
+                         <div class="MacCardHeader">
+                            <div class="MacCardTitle">
+
+                                <a class="linktext MacName" href="/#/VBMachine/@item.JobID /@item.MachineID">@Html.DisplayFor(modelItem => item.MachineName)</a>
+                            </div>
+                            @*  <div class="MacCardStsBump"></div>*@
+                            <div class="AbsStsIcon MacStsIcon StsIconBig Sts-@item.StatusID" data-txt="@item.Status"></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="MacCardContent">
+                            <div class="MacCardPic">
+                                <div class="MachineImg s1 CurSts">
+                                    <img  alt=""   src="@Url.Content(item.MacPic)" />
+                                </div>
+                            </div>
+                            <div class="MacCardInfo">
+                              
+                                <div class="MacCardInfoRow">
+                                    <span class="MacCardInfoLabel">@GlobalDM.GetTransStr("User_Location"):</span>
+                                    <span class="MacCardInfoText">@item.ClientName</span>
+                                </div>
+                                <div class="MacCardInfoRow">
+                                    <span class="MacCardInfoLabel">@GlobalDM.GetTransStr("Job_TestDateShort"):</span>
+                                    <span class="MacCardInfoText"><a class="linktext" href="/#/VB/VBReport?JobID=@item.JobID">@Html.DisplayFor(modelItem => item.LastDate)</a></span>
+                                </div>
+                                <div class="MacCardInfoRow">
+                                    <span class="MacCardInfoLabel">@GlobalDM.GetTransStr("Machine_Status"):</span>
+                                    <span class="MacCardInfoText">@item.Status</span>
+                                </div>
+                                @if (item.Notes != null)
+                                {
+                                    <div class="MacCardInfoRow">
+                                        <span class="MacCardInfoLabel">@GlobalDM.GetTransStr("Job_Recommendations"):</span>
+                                        @{ var len = 60;
+                                           var note = item.Notes.Length > len ?
+                                               item.Notes.Substring(0, len) + " <span class='linktext OpenMacVbBtn' data-id='" + item.MachineID + "'>" + GlobalDM.GetTransStr("A_More") + "</span>" 
+                                               : item.Notes;}
+                                        <p class="MacCardInfoText"  >@MvcHtmlString.Create(note)</p>
+                                       
+                                    </div> 
+                                }
+
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                           </div>
+                    </div>
+                }
+                <div class="clear"></div>
+
+            </div>
+            
+            @*<div class="SliceLine"></div>*@
+        }
+        else
+        {
+            <div style="padding: 10px;">לא נמצאו בדיקות במערכת</div>
+        }
+    </div>
+
+<script src="~/Scripts/qtipSts.js"></script>

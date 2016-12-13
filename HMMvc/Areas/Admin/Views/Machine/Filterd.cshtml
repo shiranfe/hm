@@ -1,0 +1,64 @@
+﻿@model MachineFilterDm
+@using Common
+
+<div class="VbTabBlockHeader">
+
+    <div class="BlockHeaderTitle">עבודות</div>
+    @if (Model.PageTotal > 0)
+    {
+        <div class="fl">עמוד @Model.Page מתוך @Model.PageTotal</div>
+    }
+
+    <div class="clear"></div>
+</div>
+<div class="WhiteSep"></div>
+<div id="pageContent" style="padding:15px;">
+    @if (Model.TableList.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+
+                    <th>
+                        מכונה
+                    </th>
+
+                    <th style="width:1px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{var i = 1;}
+                @foreach (var item in Model.TableList)
+                {
+                    var odd = i % 2 == 0 ? "odd" : "even";
+                    i++;
+                    <tr class="@odd" data-id="@item.MachineID">
+
+                        <td class="td-image" style="background-image:url('@Url.Content(item.MacPic)');"></td>
+                        <td>
+                            <a class="linktext" href="/Admin/#/Machine/@item.MachineID">@item.MachineNameFull</a>
+                            @*<span class="linktext openItem">@item.MachineName</span>*@
+                        </td>
+
+                        <td>
+                            <span class="linktext deleteItem">מחק</span>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+                    @Html.Partial("~/Areas/Admin/Views/Shared/Pager.cshtml", (Pager)Model)
+                                }
+                                else
+                                {
+                                    <div>לא נמצאו מכונות ללקוח זה </div>
+                                }
+
+</div>
+<div class="clear"></div>

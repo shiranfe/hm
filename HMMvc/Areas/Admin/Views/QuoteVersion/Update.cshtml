@@ -1,0 +1,193 @@
+﻿@model QuoteVersionDM
+@using Common
+
+@{
+    ViewBag.Title = "Update";
+    string VersionDate = ((DateTime)Model.VersionDate).ToShortDateString();
+
+}
+<script>
+    catalogItems = @Html.Raw(Json.Encode(Model.CatalogItems));
+
+    //tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Quote/CommonQuote.js")');
+  //  tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Quote/QuoteVersion.js")');
+
+
+</script>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script src="~/Areas/Admin/Scripts/Quote/QuoteVersion.js"></script>
+<script src="~/Areas/Admin/Scripts/Quote/CommonQuote.js"></script>
+<script src="~/Areas/Admin/Scripts/Quote/QuoteTrack.js"></script>
+<script src="~/Areas/Admin/Scripts/Quote/QuoteTalk.js"></script>
+
+<style>
+    .row { background: none repeat scroll 0 0 #05ade2; color: white; font-weight: bold; height: 45px; }
+</style>
+<div id="StepsMenu" class="clearfix">
+    @Html.Partial("SideMenu", Model.QuoteDM)
+
+
+</div>
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>@Model.VersionTitle</h1>
+
+        </div>
+        <div class="HeaderActions clearfix">
+
+            <a class="rec-icon ReportIcon PrintIcon" href="~/Export/QuoteExport?id=@Model.QuoteVersionID" title="@GlobalDM.GetTransStr("A_PrintPreview")" target="_blank"></a>
+            <a class="rec-icon ReportIcon PdfIcon" href="~/Export/QuotePdf?id=@Model.QuoteVersionID" title="@GlobalDM.GetTransStr("A_ExportToPdf") " download></a>
+            <a class="rec-icon ReportIcon EmailIcon" title="@GlobalDM.GetTransStr("A_SendEmail")"></a>
+            @*href="mailto:iudith.m@zim.co.il?subject=my report&body=see attachment&Attachment=" href="~/Export/QuoteEmail?id=@Model.QuoteVersionID*@
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+    <form id="UpdateQuoteVersionForm" method="post" data-ajax="true">
+        @Html.HiddenFor(model => model.QuoteVersionID)
+        @Html.HiddenFor(model => model.QuoteID)
+        @Html.HiddenFor(model => model.Version)
+
+        <div class="VbTabBlock corn_3 " id="">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">פרטי הצעה</div>
+                <div class="HeaderActions">
+                    @if (Model.QuoteDM.MachineDM != null)
+                    {
+                        <input id="GetJobDetailsBtn" type="button" data-id="@Model.QuoteDM.JobID" class="buttondefault " value="ייבוא מעבודה">
+                    }
+                   
+                    <input id="ImportFromQuoteBtn" type="button" data-id="@Model.QuoteID" class="buttondefault " value="ייבוא מהצעה">
+                </div>
+
+              
+
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo" id="QuoteVersionItems">
+
+                @Html.Partial("~/Areas/Admin/Views/QuoteVersionItem/Index.cshtml", Model.Items)
+
+                @*@{Html.RenderAction("Index", "QuoteVersionItem", new { QuoteVersionID = Model.QuoteVersionID });}*@
+            </div>
+        </div>
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">סיכום הצעה</div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <p>
+                    להלן סיכום מחירי הצעת המחיר:
+                </p>
+
+
+                <table style="font-size:1.1em">
+                    <tr class="odd ">
+                        <td>סה"כ</td>
+                        <td class="money">
+                            <span id="VersionSum">@Model.TotalSum.ToString("c0")</span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td>% הנחה</td>
+                        <td style="width:100px;">@Html.TextBoxFor(model => Model.Disscount)</td>
+                    </tr>
+                    <tr class="odd ">
+                        <td>סה"כ אחר הנחה</td>
+                        <td class="b keep-eng">
+                            <span id="SumAfterDiscount"></span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        @{var vat =Model.Vat * 100;}
+                        <td>מע"מ (<span id="Vat">@vat.ToString("#")</span>%)</td>
+                        <td class="keep-eng">
+                            <span id="VatMoney"></span>
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <th>סה"כ כולל מע"מ</th>
+                        <th class="keep-eng">
+                            <span id="SumAfterVat"></span>
+                        </th>
+                    </tr>
+                </table>
+                <p style="margin-top:10px;">
+                <p>הערות:</p>
+                @Html.TextAreaFor(model => Model.Appendices, new { placeholder = "הערות" })
+               
+
+            </div>
+        </div>
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">תנאים כללים</div>
+                <div class="HeaderActions">
+                    <input id="QuoteJobDetails" type="button" class="buttondefault Black" value="בחר מתבנית">
+                </div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+
+                @Html.TextAreaFor(model => Model.Terms)
+               
+            </div>
+        </div>
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">פרטי גרסא</div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo clearfix">
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            תאריך:
+                        </div>
+                        <div class="fieldvalue">
+                            <div class="OuterSelect PointValDatesRow">
+                                <input id="VersionDate" class="DatePicker" name="VersionDate" value="@VersionDate" />
+                            </div>
+                            @Html.ValidationMessageFor(model => Model.VersionDate)
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        @*<div class="VbTabBlock corn_3">
+                <div class="VbTabBlockHeader clearfix">
+                    <div class="BlockHeaderTitle">נספחים</div>
+                    <div class="HeaderActions">
+                        <input id="AddJobBtn" type="button" class=" buttondefault Black" value="בחר מתבנית">
+                    </div>
+                </div>
+                <div class="WhiteSep"></div>
+                <div class="VbTabBlockInfo">
+                    @Html.TextAreaFor(model => Model.Appendices)
+                </div>
+            </div>*@
+
+        @*<div class=" clearfix">
+            <input id="UpdateVersionBtn" type="button" value="שמור" class="buttondefault floatlast">
+        </div>*@
+
+    </form>
+
+</div>
+

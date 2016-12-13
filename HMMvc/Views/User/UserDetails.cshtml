@@ -1,0 +1,143 @@
+﻿@model MVC.Models.UserDetailsVM
+@using Common
+
+@{
+    ViewBag.Title = "User Details";
+}
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<div class="SiteSideMenu">
+    @{Html.RenderAction("MenuUser", "Menu");}
+</div>
+
+<div class="sitesubcontent">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+ 
+        @Html.HiddenFor(model => model.UserID)
+        <h1>@GlobalDM.GetTransStr("User_UserDetails")</h1>
+        
+        
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("User_PersonalDetails")</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_FirstName"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.FirstName)
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_LastName"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Role"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Role)
+                        @Html.ValidationMessageFor(model => model.Role)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Permission"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.HiddenFor(x => x.PermissionName)
+                        @Model.PermissionName
+                    </div>
+                </div>
+                <div class="datarow floatfirst single">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Customer"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.HiddenFor(x => x.ClientName)
+                        @Model.ClientName
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+           
+        </div>
+         
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("User_CommunicationDetails")</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Email"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Mobile"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Mobile)
+                        @Html.ValidationMessageFor(model => model.Mobile)
+                    </div>
+                </div>
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_OfficePhone"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.OfficePhone)
+                        @Html.ValidationMessageFor(model => model.OfficePhone)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Fax"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Fax)
+                        @Html.ValidationMessageFor(model => model.Fax)
+                    </div>
+                </div>
+                <div class="datarow floatfirst single">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Address"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.Address)
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+                 <div class="clear"></div>
+            </div>
+           
+        </div>
+        
+        <div class="ForBtnDiv">
+            <input type="submit" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+        </div>
+
+    }
+</div>
+<div class="clear"></div>

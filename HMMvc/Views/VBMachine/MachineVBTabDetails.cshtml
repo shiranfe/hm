@@ -1,0 +1,89 @@
+﻿@model Common.MachineVBDM
+@using Common
+@{
+    Layout = "";
+    var GenralNotesLabel = GlobalDM.GetTransStr("MacVBTabDetails_GeneralNotesLabel");// "ניתוח הרעידות והמלצות לטיפול:";
+    var ClientNotesLabel = GlobalDM.GetTransStr("MacVBTabDetails_ClientNotes");//"משוב לקוח";
+    var Edit = GlobalDM.GetTransStr("A_Edit");//"עריכה";
+    var Cancel = GlobalDM.GetTransStr("A_Cancel");// "ביטול";
+    var Date = GlobalDM.GetTransStr("A_Date");// "תאריך";
+    var MacDetails = GlobalDM.GetTransStr("Machine_MachineDetails");// "פרטי מכונה";
+    var Save = GlobalDM.GetTransStr("A_Save");//"שמור";
+}
+<script>
+    var JobID = '@Model.JobID';
+</script>
+
+
+<div id="VbTabMacDetails" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderIcon MacDetails"></div>
+        <div class="BlockHeaderTitle">@MacDetails</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockCont">
+        <div class="VBDetails">
+            <div class="VBDetailsDateDiv">
+                <div class="VBDetailsDateIcon"></div>
+                <div class="VBDetailsDateInput">
+                   @* <select class="selectpicker">
+                        @foreach (var dt in Model.JobDates)
+                        {
+                            <option value="@dt.JobID" selected="selected">@Html.DisplayFor(model => dt.StartDate)</option>
+                            }
+
+                    </select>*@
+                    <div class="OuterSelect DateCombo">
+                        <span class="SortByLabel">@Date: </span>
+                        <span class="SelectVal">@Html.DisplayFor(model => model.StartDate)</span>
+                        <span class="SelectBtn"></span>
+                     
+                        <select  id="DateCombo" class="selectbox DateCombo">
+                            @foreach (var dt in Model.JobDates)
+                            {
+                                var selected = (dt.IsSelected) ? "selected='selected'" : "";
+                                <option value="@dt.JobID" @selected>@Html.DisplayFor(model => dt.StartDate)</option>
+                            }
+
+                        </select>
+
+                    </div>
+                     <div class="VBDetailsShowReport"><a href="/#/VB/VBReport?JobID=@Model.JobID" class="linktext">@GlobalDM.GetTransStr("OpenReport")</a></div>
+                </div>
+               
+                <div class="clear"></div>
+            </div>
+            <div class="VBGenralNotesDiv">
+                <b>@GenralNotesLabel:</b>
+                <p>@Html.DisplayFor(model => model.Notes)</p>
+            </div>
+            <div class="VBClientNotesDiv">
+                <b>@ClientNotesLabel:</b><span id="EditClientNotesBtn" class="ToggleClientNotesBtn linktext">@Edit</span>
+                <p id="ClientNoteText">@Html.DisplayFor(model => model.ClientNotes)</p>
+                <div id="EditClientNoteDiv" class="dn">
+                    <div class="TextAreaDiv">
+                        <textarea id="ClientNoteTextBox" class="TextBox" rows="3"></textarea>
+                    </div>
+                    <div class="BtnDiv">
+                        <span id="CancelClientNotesBtn" class="ToggleClientNotesBtn linktext">@Cancel</span>
+                        <input id="SaveClientNoteBtn" class="buttondefault LitBtn" type="button" value="@Save">
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+
+        <div class="MachineImg s1 Schema">
+            <img  alt=""   src="@Url.Content(Model.MacPointPic)" />
+             @foreach (var p in Model.PointPicDMs.Where(x=>x.HtmlX!=null && x.ShowPoint))
+            {
+                var x = p.HtmlX + "px"; var y = p.HtmlY + "px";
+                <div class="marker Sts-@p.StatusID" style="left: @x ; top: @y ;" data-id="@p.MachinePointID">@p.PointNumber</div>
+            }
+        </div>
+
+
+        <div class="clear"></div>
+    </div>
+</div>

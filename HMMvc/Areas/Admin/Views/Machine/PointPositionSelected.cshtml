@@ -1,0 +1,61 @@
+﻿@model Common.SelectedMachine
+
+@{
+    Layout = "";
+}
+<script>
+    var FilePre = 'MacPic_';
+    var ObjID = '@Model.ObjID';
+    var ObjType = 'MachinePicture';
+</script>
+@*<div>
+        <h3 class="MacName">@Model.MachineName</h3>
+        <input type="button" value="פרטי מכונה" class="buttondefault absLast EditMachineBtn"  data-id="@Model.MachineID">
+    </div>*@
+
+<div class="clearfix">
+    <div class="fr">
+        <div id="draggable" class="MachineImg s1 Schema" style="position: relative;">
+            <img alt="" src="@Url.Content(Model.MacPic)" />
+            @foreach (var p in Model.PointDMs)
+            {
+                var show = p.ShowPoint ? "block" : "none";
+                var x = p.HtmlX + "px"; var y = p.HtmlY + "px";
+                <div class="marker Sts-4" style="left: @x ; top: @y ; display:@show" data-id="@p.MachinePointID">@p.PointNumber</div>
+            }
+
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    <div class="fr" style="width: 100px; margin-top:10px">
+
+
+        @foreach (var x in Model.PointDMs)
+        {
+            var chk = x.ShowPoint ? "checked='checked' " : "";
+            <p>
+                <label>
+                    <input id="Checkbox1" type="checkbox" value="@x.MachinePointID" @chk />
+                    <span>נקודה @x.PointNumber</span>
+                </label>
+            </p>
+
+        }
+
+    </div>
+
+</div>
+
+<script>
+    $(".marker").draggable({
+        containment: "#draggable",
+        scroll: false,
+        stop: function (event, ui) {
+            var x = ui.position.left;
+            var y = ui.position.top;
+            var id = this.getAttribute('data-id');
+            $.UpdatePointXY(id, x, y);
+        }
+    });
+</script>

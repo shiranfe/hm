@@ -1,0 +1,115 @@
+﻿@model JobDM
+@using Common
+@{ 
+    string id = ViewBag.InputName ?? "ClientID";
+
+    var clientID = Model.ClientID == 0 ? (Model.ClientParentID ?? null) : Model.ClientID;
+    bool showAdd = ViewBag.HideAdd != true;
+
+    /** keep add/no result*/
+    var clients = Model.Clients.Where(x => x.ClientID != (showAdd ? - 1 : -2)).ToList();
+
+    string label = ViewBag.Label ?? "לקוח";
+
+    string msg = string.Format("יש{0}לבחור{0}לקוח", "&#32;");
+    bool hideRequired = ViewBag.HideRequired == true;
+    string requiredTag = !hideRequired && id == "ClientID" ? " data-val-required=" + msg + " data-val=true required" : "";
+    }
+
+<script>
+
+    var idd = "ClientDrop";
+    if (!jss[idd]) {
+        jss[idd] = true;
+        var clientDropContainer = "@ViewBag.Container";
+        @*if()
+
+        tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/ClientSettings/ClientDrop.js")');*@
+
+        $.addNewClientToTree = function (model) {
+
+            var clienId = model.ClientID;
+
+            /** if already in tree - return */
+            if ($("#t [data-id=" + clienId + "]").is("*"))
+                return;
+
+            /** first node is  "כל המפעלים" ? */
+            var hasRoot = $("#t [data-id=0]").is("*");
+            var firstItemClass = hasRoot ? "#t .jstree-last > .subItem " : "#t > ul";
+
+            /** maybe there more then one clientdrop in screen*/
+            var treeUl = $(clientDropContainer + " .JobClientDrop").find(firstItemClass).first();
+            var clone = treeUl.find("li").first().clone();
+            var a = clone.find("a");
+            a.attr("id", "node-" + clienId);
+            a.attr("data-id", clienId);
+            a.attr("data-name", model.ClientFullName);
+            a.text(model.ClientName);
+            treeUl.prepend(clone);
+
+            /** bind click event*/
+            if (isFunction($.bindClientClick)) {
+                $.bindClientClick("#node-" + clienId);
+            }
+
+
+            /** set the new created client as selected*/
+            setTimeout(function () {
+                a.click();
+            }, 300);
+
+        };
+
+
+
+
+
+    }
+
+
+
+
+</script>
+
+@if (showAdd)
+{
+    <script>
+       
+        crud({
+            entity: "Client",
+            cntrl: "/Admin/Client",
+            onlyUpdate: true,
+            container: clientDropContainer,
+            success: function (model) {
+                $.addNewClientToTree(model);
+ 
+                if ($("#popUpdateClient").is("*"))
+                    closePopup("popUpdateClient");
+
+            }
+        });
+    </script>
+}
+
+<div class="fieldlabel">
+    <span>@label</span>:
+    @* (@clientID)*@
+</div>
+<div class="JobClientDrop fieldvalue">
+    
+    <input value="@clientID" type="hidden" name="@id" id="@id" @requiredTag  style="position:absolute; top :0;" >
+    @Html.Partial("ClientTree", clients, new ViewDataDictionary { { "ClientID", clientID }, { "Container" ,ViewBag.Container } , { "AllowNotInList", ViewBag.AllowNotInList } })
+    @if (!hideRequired)
+    {
+        @Html.ValidationMessage(id)
+    }
+</div>
+@*@if (showAdd)
+{
+    <div class="tcTopMin">
+        <div class="plusBtn AddClientBtn"></div>
+    </div>
+}*@
+
+

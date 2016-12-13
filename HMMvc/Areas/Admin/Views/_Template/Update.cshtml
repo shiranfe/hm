@@ -1,0 +1,61 @@
+﻿@model _TemplateDM
+@using Common
+@{
+ 
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    setPopTitle("_Template", '@ViewBag.PopTitle');
+</script>
+
+<form id="Update_TemplateForm" method="post" data-ajax="true">
+
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+        @Html.HiddenFor(x => x._TemplateID)
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv clearfix">
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            שדה:
+                        </div>
+                        <div class="fieldvalue">
+                           @*@Html.EditorFor(model => model.)
+                        @Html.ValidationMessageFor(model => model.)*@
+                        </div>
+                    </div>
+                    <div class="datarow floatlast ">
+                        <div class="fieldlabel">
+                            שדה:
+                        </div>
+
+                        <div class="fieldvalue">
+                             @*@Html.TextBoxFor(model => model.)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            סוג שדה:
+                        </div>
+                        <div class="fieldvalue">
+                            @*@Html.Editor("FieldID", "AutoComplete", new { options = catalog, placeHolder = "" })*@                 
+                        </div>
+                    </div>
+
+                </div>
+               
+            </div>
+        </div>
+
+    </div>
+    <div class="ForBtnDiv">
+        @Html.ValidationSummary(true)
+
+        <input type="button" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+    </div>
+</form>

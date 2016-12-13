@@ -1,0 +1,69 @@
+﻿@model ClientFilterDm
+@using Common
+
+<div class="VbTabBlockHeader">
+
+    <div class="BlockHeaderTitle">לקוחות</div>
+    @if (Model.PageTotal > 0)
+    {
+        <div class="fl">עמוד @Model.Page מתוך @Model.PageTotal</div>
+    }
+
+    <div class="clear"></div>
+</div>
+<div class="WhiteSep"></div>
+<div id="pageContent" style="padding:15px;">
+    @if (Model.TableList.Any())
+    {<table>
+        <thead>
+
+            <tr>
+                <th style="width:1px;">
+                    מזהה
+                </th>
+                <th>
+                    לקוח
+                </th>
+                <th>
+                    שייך ל
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{var i = 1;}
+            @foreach (var item in Model.TableList)
+            {
+                var odd = i % 2 == 0 ? "odd" : "even";
+                i++;
+            <tr class="@odd " data-id="@item.ClientID">
+                <td>
+                    @item.ClientID
+                </td>
+                <td>
+                    <span class="linktext openItem">@item.ClientName</span>
+                    <span class="floatlast">@item.ClientNameEnglish</span>
+                </td>
+                <td>
+                    @item.ClientParentName <span class="floatlast">@item.ClientParentNameEnglish</span>
+                </td>
+
+                <td>
+                    <span class="linktext deleteItem">מחק</span>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.Partial("~/Areas/Admin/Views/Shared/Pager.cshtml", (Pager)Model)
+                }
+                else
+                {
+                    <div>לא נמצאו לקוחות </div>
+                }
+
+</div>
+<div class="clear"></div>

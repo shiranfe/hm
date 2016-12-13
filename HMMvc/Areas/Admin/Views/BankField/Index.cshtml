@@ -1,0 +1,127 @@
+﻿@model  BankFieldFilterDm
+@using Common
+
+<script src="~/Areas/Admin/Scripts/BankField/index.js"></script>
+
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>בנק שדות</h1>
+        </div>
+        <div class="HeaderActions">
+            <input id="AddItemBtn" type="button" class="buttondefault " value="שדה חדש" />
+       
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    <div class="VbTabBlock corn_3 searchFields">
+
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">חיפוש שדה</div>
+            <div class="HeaderActions">
+                <a class="linktext clear">נקה שדות</a>
+            </div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow  single">
+                    <div class="fieldlabel">
+                        חיפוש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input type="text" id="srch" placeholder="חפש" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div id="innerContent" class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">פריטים</div>
+            @if (Model.PageTotal > 0)
+            {
+                <div class="fl">עמוד @Model.Page מתוך @Model.PageTotal</div>
+            }
+
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div id="pageContent" class="VbTabBlockInfo">
+            @if (Model.TableList.Any())
+            {
+
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th>
+                                שם בעברית
+                            </th>
+                            <th>
+                                שם באנגלית
+                            </th>
+                            <th>
+                                סוג שדה
+                            </th>
+
+                        
+                            @*<th>
+                קישור לקטלוג
+            </th>*@
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                   
+                    @{var i = 1;}
+                    @foreach (var item in Model.TableList.OrderBy(x => x.FieldNameHeb))
+                    {
+                        var odd = i % 2 == 0 ? "odd" : "even";
+                        i++;
+                        <tr class="@odd " data-id="@item.BankFieldID">
+                            <td>
+                                <span class="linktext openItem">@item.FieldNameHeb</span>
+                            </td>
+                            <td class="align-end">
+                                @item.FieldNameEng
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FieldTypeLabel)
+                            </td>
+                          
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.CatalogItemID)
+                                </td>*@
+                            <td>
+                                <span class="linktext deleteItem">מחק</span>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                @Html.Partial("~/Areas/Admin/Views/Shared/Pager.cshtml", (Pager)Model)
+            }
+            else
+            {
+                <div>לא נמצאו פריטים </div>
+            }
+
+        </div>
+
+
+
+        
+
+
+    </div>
+
+</div>
+<div class="clear"></div>
+
+

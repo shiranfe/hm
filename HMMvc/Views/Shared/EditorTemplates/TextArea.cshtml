@@ -1,0 +1,17 @@
+﻿@model Common.StepGroupFieldDM
+@{
+    var field = Model;
+
+    var val = field.HtmlValue ?? string.Empty;
+
+}
+
+<div class="datarow floatfirst single field">
+    <div class="fieldlabel">
+        <span>@field.FieldLabel</span>
+        <span class=" field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@field.HtmlID"></span>
+    </div>
+    <div class="fieldvalue">
+        <textarea id="@field.FieldNameStr" name="@field.HtmlID" @ViewBag.Required rows="2">@val</textarea>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model Common.VbReportEditDM
+@using Common;
+@{
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+   
+}
+
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+@*<script src="~/Scripts/UI/jquery.tablesorter.js"></script>*@
+<script src="~/Scripts/UI/jquery.editinplace.js"></script>
+<script src="~/Scripts/Admin/VbAnalysis.js"></script>
+<style>
+    #VbHtmInfo { background-color:white;padding: 15px 20px;}
+   .PageContHeaderTitle { float: none;}
+     /*.SideHeaderInfoLabel { color:graytext;}
+    .SideHeaderInfoValue { color:graytext; font-weight:bold;}*/
+    .SideHeaderIcon ,.SideHeaderBack{ display:none;}
+</style>
+
+
+@*<script src="~/Scripts/VB/VBReport.js"></script>*@
+<script>
+    var JobID = '@Model.JobDM.JobID';
+    var JobTemplateNotesEN = @Html.Raw(Json.Encode(Model.JobTemplateNotesEN));
+    var JobTemplateNotesIL = @Html.Raw(Json.Encode(Model.JobTemplateNotesIL));
+</script>
+
+@*<div id="VbHtmInfo" class=" corn_3 shadow">
+
+    <h1>ניתוח דוח רעידות</h1>
+     @Html.Partial("VBJobDetails", new ViewDataDictionary(Model))   
+    <div class="clear"></div>
+</div>*@
+
+<div class="fr" style="width:215px;margin-left:20px;">
+    @Html.Partial("VBJobDetails", new ViewDataDictionary(Model))
+
+    <div class="SiteSideMenu corn_3 shadow" style="margin-top:15px"> 
+        <div class="SideMacList">
+            @foreach (var mac in Model.VbEditMachineDMs)
+            {
+                <div class="linktext" data-id="@mac.MachineID">@mac.MachineName</div>
+        }
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+<div class="sitesubcontent corn_3 shadow" id="VBMachineDiv">
+     @Html.Partial("VBMachine", new ViewDataDictionary(Model.SelectedVbEditMachine))
+</div>
+
+<div class="clear"></div>
+
+<script src="~/Scripts/qtipSts.js"></script>
+
+

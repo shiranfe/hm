@@ -1,0 +1,60 @@
+﻿@model List<QuoteJobDM>
+@using Common
+
+<div id="pageContent">
+    @if (Model.Any())
+    {
+        <table>
+            <tr>
+                <th>
+                    מספר עבודה
+                </th>
+                <th>
+                    שם העבודה
+                </th>
+
+                <th>
+                    תאריך יצירה
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+
+            @{var i = 1;}
+            @foreach (var item in Model)
+            {
+                var odd = i % 2 == 0 ? "odd" : "even";
+                i++;
+
+                <tr class="@odd">
+                    <td>
+                        05/@Html.DisplayFor(modelItem => item.JobID)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+
+
+                    <td>
+                        <span class="linktext removeJob" data-id="@item.JobID">הסר קישור</span>
+                    </td>
+
+                </tr>
+
+            }
+
+        </table>
+    }
+    else
+    {
+        <div>לא נמצאו עבודות ללקוח זה</div>
+    }
+</div>
+

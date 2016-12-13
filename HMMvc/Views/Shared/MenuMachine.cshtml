@@ -1,0 +1,59 @@
+﻿@model List<Common.ClientTreeDM>
+@using Common;
+
+
+@*<script src="~/Scripts/UI/jquery.dcjqaccordion.2.7.js"></script>*@
+<script src="~/Scripts/Menu/MachineMenu.js"></script>
+
+<div class="SideMenu">
+    <div id="ClientTreeMenu" class="ClientTreeDiv ">
+        @*@Html.Partial("ClientTree", Model, new ViewDataDictionary { { "ClientID", Session["ClientID"] } })*@
+        @{ViewBag.Container = ".ClientTreeDiv"; ViewBag.HideAdd = true;}
+        @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml", new JobDM { ClientID = (int)Session["ClientID"], Clients = Model })
+
+
+    </div>
+    <div id="SideMenuAccordion" class="SideAccordion">
+
+        <h4>@GlobalDM.GetTransStr("Machine_Machines")</h4>
+        <div>
+            <ul class="MMachines">
+                <li class="SideMenuLink"><a href="/#/Machine">@GlobalDM.GetTransStr("Machine_Machines")</a></li>
+            </ul>
+        </div>
+        <h4>@GlobalDM.GetTransStr("JobType_Vibration")</h4>
+        <div>
+            <ul class="VB">
+                <li class="SideMenuLink"><a href="/#/VB/CurrentSts">@GlobalDM.GetTransStr("JobVB_CurrentSts_Title")</a></li>
+                <li class="SideMenuLink"><a href="/#/VB/History">@GlobalDM.GetTransStr("JobVB_HistoryIndex_Title")</a></li>
+                @*     <li class="SideMenuLink"><a href="/#/Request/RequestList">@GlobalDM.GetTransStr("CallRequestIndex_Title")</a></li>*@
+            </ul>
+        </div>
+        <h4>@GlobalDM.GetTransStr("JobType_Shipotzim")</h4>
+        <div>
+            <ul class="Refubrish">
+                <li class="SideMenuLink"><a href="/#/Refubrish">@GlobalDM.GetTransStr("JobHistory")</a></li>
+                <li class="SideMenuLink"><a href="/#/Refubrish/About">@GlobalDM.GetTransStr("A_About")</a></li>
+            </ul>
+        </div>
+        <h4>@GlobalDM.GetTransStr("JobType_Shivur")</h4>
+        <div>
+            <ul class="Alignment">
+                <li class="SideMenuLink"><a href="/#/Alignment">@GlobalDM.GetTransStr("JobHistory")</a></li>
+                <li class="SideMenuLink"><a href="/#/Alignment/About">@GlobalDM.GetTransStr("A_About")</a></li>
+                <li class="SideMenuLink"><a href="/#/Alignment/Sample">@GlobalDM.GetTransStr("A_SampleReport")</a></li>
+            </ul>
+        </div>
+       
+       
+        <h4>@GlobalDM.GetTransStr("JobType_Izunim")</h4>
+        <div>
+            <ul class="DnBal">
+                <li class="SideMenuLink"><a href="/#/DnBal/About">@GlobalDM.GetTransStr("A_About")</a></li>
+            </ul>
+        </div>
+    </div>
+   
+</div>
+
+

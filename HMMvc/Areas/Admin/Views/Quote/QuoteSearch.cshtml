@@ -1,0 +1,63 @@
+﻿
+<div class="VbTabBlock corn_3 searchFields">
+
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">חיפוש</div>
+        <div class="HeaderActions">
+            <a class="linktext clear">נקה שדות</a>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        <div class="formRow">
+            <div class="datarow  single">
+                <div class="fieldlabel">
+                    חיפוש:
+                </div>
+                <div class="fieldvalue">
+                    <input type="text" id="srch" placeholder="חפש" />
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="formRow ">
+            <div class="datarow  floatfirst">
+                <div class="fieldlabel">
+                    סוג הצעה:
+                </div>
+                <div class="fieldvalue">
+                    @Html.Editor("isCover", "AutoComplete", new { options = ViewBag.IsCoverOps })
+
+                </div>
+            </div>
+            <div class="datarow  floatlast">
+                <div class="fieldlabel">
+                    יוצר:
+                </div>
+                <div class="fieldvalue">
+                    @Html.Editor("CreatorID", "AutoComplete", new { options = ViewBag.Creator })
+                </div>
+            </div>
+        </div>
+
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    סטטוס:
+                </div>
+                <div class="">
+                    @Html.Editor("QuoteStatusID", "AutoComplete", new { options = ViewBag.QuoteStatus })
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+</div>
+
+

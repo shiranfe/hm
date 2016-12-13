@@ -1,0 +1,46 @@
+﻿@model List<ClientDM> 
+@using Common
+
+
+
+<script src="~/Areas/Admin/Scripts/ClientSettings/MergeClients.js"></script>
+<script>
+    setPopTitle('MergeClients', '@ViewBag.PopTitle',true);
+</script>
+<div class="ui-dialog-inner-content">
+    <div class="MergeMacCol" id="OldMacs">        
+        <input type="text" class="filter-merge" placeholder="חפש" />    
+        <div class="MacList">
+            @foreach (var mac in Model)
+            {
+                <div class="ClientMerge linktext " data-id="@mac.ClientID">
+                    @mac.ClientID | @mac.ClientName
+                </div>
+            }
+        </div>
+               
+    </div>
+    <div style="margin:20px;float:right"> </div>
+    <div class="MergeMacCol" id="NewMacs">
+        <input type="text" class="filter-merge" placeholder="חפש" />  
+        <div class="MacList">
+            @foreach (var mac in Model)
+            {
+                <div class="ClientMerge linktext " data-id="@mac.ClientID">
+                    @mac.ClientID | @mac.ClientName
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="MergeSum">
+        <span>מחק את</span>
+        <span id="OldText" class="b">(בחר לקוח)</span>
+        <span>-------> </span>
+        <span>השאר את</span>
+        <span id="NewText" class="b">(בחר לקוח)</span>
+    </div>
+</div>
+<div class="ui-dialog-inner-content-btns">
+    <input id="mergeClientsBtnConfirm" type="button" class="buttondefault" value="אחד לקוחות" />
+</div>

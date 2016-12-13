@@ -1,0 +1,27 @@
+﻿@model Common.Pager
+
+@{ 
+    var maxPages = 10;
+    int start = ((Model.Page / maxPages)) * maxPages; // (25/10)*10 = 20
+    int end = Math.Min(start+maxPages-1,Model.PageTotal); // min(30, 38) = 30
+}
+<div class="page-control">
+    @Html.HiddenFor(model => Model.Page)
+    @Html.HiddenFor(model => Model.PageTotal)
+
+    @if (Model.Page > 1)
+    {
+        <span class="previous">< הקודם</span>
+    }
+    @for (int i = start==0 ? 1 : start ; i <= end; i++)
+    {
+        var current = i == Model.Page ? "current" : "";
+        <span class="page @current">@i</span>
+    }
+    @if (Model.Page < Model.PageTotal)
+    {
+        <span class="next">הבא></span>
+    }
+
+</div>
+

@@ -1,0 +1,216 @@
+﻿@model JobAlignmentPartDM
+@using Common
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+<div class="PageContHeader">
+    <div class="PageContHeaderTitle">
+        <h1>@Model.MachineTypeLangStr</h1>
+
+    </div>
+    <div class="HeaderActions">
+      
+        <a target="_blank" href="/Export/AlignmentExport?id=@Model.JobID" class="rec-icon ReportIcon PrintIcon" title="@GlobalDM.GetTransStr("A_PrintPreview")"></a>
+        <a class="rec-icon ReportIcon PdfIcon" download href="~/Export/AlignmentPdf?id=@Model.JobID&date=@Model.StartDate" title="@GlobalDM.GetTransStr("A_ExportToPdf")"></a>
+
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<style>
+    .fieldlabel{vertical-align:middle;}
+</style>
+<form id="UpdateAlignmentPartForm" method="post" data-ajax="true" style="direction:ltr">
+    @Html.HiddenFor(model => model.JobAlignmentPartID)
+    @Html.HiddenFor(model => model.JobID)
+    @Html.HiddenFor(model => model.MachinePartID)
+
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">מידות</div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo clearfix">
+
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        Coupling Diameter:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.CouplingDiameter)
+                        @Html.ValidationMessageFor(model => model.CouplingDiameter)
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        SC:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.SC)
+                        @Html.ValidationMessageFor(model => model.SC)
+                    </div>
+                </div>
+                <div class="datarow floatlast ">
+                    <div class="fieldlabel">
+                        M-MF1:
+                    </div>
+
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.MMF1)
+                        @Html.ValidationMessageFor(model => model.MMF1)
+                    </div>
+                </div>
+                
+            </div>
+
+
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        SM:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.SM)
+                        @Html.ValidationMessageFor(model => model.SM)
+                    </div>
+                </div>
+                <div class="datarow floatlast ">
+                    <div class="fieldlabel">
+                        MF1-MF2:
+                    </div>
+
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.MF1MF2)
+                        @Html.ValidationMessageFor(model => model.MF1MF2)
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">תוצאות - אנכי</div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo clearfix">
+
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        Offset:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.V_Offset)
+                        @Html.ValidationMessageFor(model => model.V_Offset)
+                    </div>
+                </div>
+                <div class="datarow floatlast ">
+                    <div class="fieldlabel">
+                        MF1:
+                    </div>
+
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.V_MF1)
+                        @Html.ValidationMessageFor(model => model.V_MF1)
+                    </div>
+                </div>
+            </div>
+
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        Angle:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.V_Angle)
+                        @Html.ValidationMessageFor(model => model.V_Angle)
+                    </div>
+                </div>
+                <div class="datarow floatlast ">
+                    <div class="fieldlabel">
+                        MF2:
+                    </div>
+
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.V_MF2)
+                        @Html.ValidationMessageFor(model => model.V_MF2)
+                    </div>
+                </div>
+            </div>
+      
+        </div>
+    </div>
+
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">תוצאות - אופקי</div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo clearfix">
+
+
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        Offset:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.H_Offset)
+                        @Html.ValidationMessageFor(model => model.H_Offset)
+                    </div>
+                </div>
+                <div class="datarow floatlast ">
+                    <div class="fieldlabel">
+                        MF1:
+                    </div>
+
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.H_MF1)
+                        @Html.ValidationMessageFor(model => model.H_MF1)
+                    </div>
+                </div>
+            </div>
+
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        Angle:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.H_Angle)
+                        @Html.ValidationMessageFor(model => model.H_Angle)
+                    </div>
+                </div>
+                <div class="datarow floatlast ">
+                    <div class="fieldlabel">
+                        MF2:
+                    </div>
+
+                    <div class="fieldvalue">
+                        @Html.EditorFor(model => model.H_MF2)
+                        @Html.ValidationMessageFor(model => model.H_MF2)
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    @*<div class="ForBtnDiv clearfix">
+        <input type="button" value="שמור" class="buttondefault floatlast">
+    </div>*@
+
+</form>
+

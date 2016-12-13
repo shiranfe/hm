@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Common.QuoteTalkDM>
+
+@{
+    ViewBag.Title = "Index";
+   // var now = DateTime.Now.ToString("dd/MM/yy H:mm");
+}
+
+<div class="talks-container">
+
+    <div class="talk-div new corn_3">
+        <form id="UpdateQuoteTalkForm" method="post" data-ajax="true">
+            <input type="hidden" name="QuoteID" value="@ViewBag.QuoteID" />
+            <textarea id="Message" name="Message" placeholder="עדכון חדש" class="shadow_none"></textarea>
+            <div class="ForBtnDiv " style="margin-top: 5px">
+                <div class="tbl">
+                    <div class="tc" style="width:135px;">
+                        <input id="QuoteTalkDate" type="text" class="DatePicker" name="QuoteTalkDate"  />
+                    </div>
+                    <div class="tc" style="text-align:left;">
+                        <input type="button" value="הוסף" class="buttondefault ">
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+
+
+    </div>
+
+    <div class="past">
+
+        @foreach (var item in Model)
+        {
+            <div class="talk-row" data-id="@item.QuoteTalkID">
+                <div class="talk-div corn_3 ">
+                    <div class="talk-name">
+                        <span class="creator">@Html.DisplayFor(modelItem => item.Creator)</span>
+                        <span class="talkDate">@Html.DisplayFor(modelItem => item.TalkDate)</span>
+                        <span class="deleteItem linktext"> X </span>
+                    </div>
+                    <div class="b">
+                        <pre class="message">@Html.DisplayFor(modelItem => item.Message)</pre>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+
+
+</div>
+

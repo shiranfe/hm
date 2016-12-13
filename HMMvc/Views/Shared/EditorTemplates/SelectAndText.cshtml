@@ -1,0 +1,39 @@
+﻿@model Common.StepGroupFieldDM
+@{
+    var field = Model;
+    
+    var val = string.IsNullOrEmpty(field.HtmlValue) ? string.Empty : field.HtmlValue;
+
+    var valEmpty = string.IsNullOrEmpty(field.HtmlValue);
+    var showSelect = valEmpty || field.PickListItems.Any(x => x.TransStr == field.HtmlValue);
+
+    var selectDN = showSelect ? "" : "dn";
+    var textDN = showSelect ? "dn" : "";
+}
+
+  
+<div class="datarow floatfirst field">
+    <div class="fieldlabel">
+        <span>@field.FieldLabel</span>
+        <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@field.HtmlID"></span>
+
+    </div>
+    <div class="HtmlValue">
+        <div class="EditableSelectDiv @selectDN">
+            <select class="EditableSelect">
+                <option value=""></option>
+                @foreach (var item in field.PickListItems)
+                {
+                    var sel = item.TransStr == val ? "selected=selected" : "";
+                    <option value="@item.TransStr" @sel>@item.TransStr</option>
+                }
+                <option value="AddOption">אחר</option>
+            </select>
+        </div>
+        <div class="EditabelText @textDN">
+            <input id="@field.FieldNameStr" name="@field.HtmlID" type="text" value="@val" placeholder="הוסף ערך" @ViewBag.Required>
+            <div class="linktext  close">X</div>
+        </div>
+
+    </div>
+</div>

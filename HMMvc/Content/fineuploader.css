@@ -1,0 +1,339 @@
+
+/*----------------------------------------------\
+|			        GENERAL		    	    |		
+\----------------------------------------------*/
+.cp { cursor: pointer; }
+.corn_3 { -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; behavior: url(../css/corns.htc); }
+.shadow { box-shadow: 0 0 15px 0 #bbb; -moz-box-shadow: 0 0 15px 0 #bbb; -webkit-box-shadow: 0 0 15px 0 #bbb; }
+.space3 { float: right; height: 3px; width: 100%; }
+.space5 { float: right; height: 5px; width: 100%; }
+input.Width198 { padding: 0px 7px; border: 1px solid rgb(215, 223, 230); width: 184px; height: 21px; color: rgb(89, 101, 115); font-size: 11px; /*float: right;*/ }
+span.Pos1 { left: 0; bottom: 0; }
+.op_0 { opacity: 0; filter: alpha(opacity=0); }
+
+.jcrop-holder div{
+    position:initial;
+}
+
+#backSite { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0.5; filter: alpha(opacity=50); background: darkslategrey; z-index: 99; }
+
+
+
+/*.popup {width:auto;  background-color:#fff}
+
+.title1{width:100%;color:#596573;font-size:11px;}
+
+input.CencalPopButton{width:55px;	height:24px;display:block;background:url(../images/pops/button.png) -55px 0;line-height:24px;color:#ffffff;font-size:11px;font-weight:bold;text-align:center;text-decoration:none;cursor:pointer;float:right;left:60px;bottom:0;}
+input.CencalPopButton:hover{	background:url(../images/pops/button.png) -55px -24px;}
+div.PopBottom{font-size:11px;line-height:14px;color:#596573;margin-top:10px;}
+div.PopBottom01{font-size:11px;line-height:14px;color:#596573;margin-top:5px;}
+input.PopCropButton1,
+span.PopCropButton1{width:55px;height:24px;display:block;background:url(../images/pops/button.png) 0 0;float:right;margin:0 5px 0 0;bottom:23px;left:23px;line-height:24px;color:#ffffff;font-size:11px;	font-weight:bold;text-align:center;text-decoration:none;cursor:pointer;}
+input.PopCropButton1:hover,span.PopCropButton1:hover{background:url(../images/pops/button.png) 0 -24px;}
+.confirmBtn{float:left;margin:20px 0 0 0;width:55px;height:24px;display:block;background:url(../images/pops/button.png) 0 0;line-height:24px;color:#ffffff;font-size:11px;font-weight:bold;text-align:center;text-decoration:none;cursor:pointer;}
+.PopImage{float:right;width:100%;}
+div.PopTop{height:35px;line-height:34px;color:#1a73ad;width:100%;font-size:12px;font-weight:bold;border-bottom:2px #e6ebf0 solid;float:right;}
+input.PopPhoneButton{
+	width:59px;
+	height:19px;
+	display:block;
+	background:url(../images/pops/button.png) 0 -94px;
+	line-height:19px;
+	color:#2f94d5;
+	font-size:10px;
+	text-align:center;
+	text-decoration:none;
+	cursor:pointer;
+	float:right;
+	margin-top:10px;
+}
+
+input.PopPhoneButton2{
+	width:85px;
+	height:24px;
+	display:block;
+	background:url(../images/pops/button.png) 0 -113px;
+	line-height:24px;
+	color:#ffffff;
+	font-size:11px;
+	text-align:center;
+	font-weight:bold;
+	text-decoration:none;
+	cursor:pointer;
+	float:right;
+	position:absolute;
+	left:0;
+	bottom:0;
+}
+
+input.PopPhoneButton2:hover{
+	background:url(../images/pops/button.png) -59px -89px;
+}
+
+
+span.PopPhoneButton2{
+	width:85px;
+	height:24px;
+	display:block;
+	background:url(../images/pops/button.png) 0 -113px;
+	line-height:24px;
+	color:#ffffff;
+	font-size:11px;
+	text-align:center;
+	font-weight:bold;
+	text-decoration:none;
+	cursor:pointer;
+	float:right;
+	position:absolute;
+	left:0;
+	bottom:0;
+}
+
+span.PopPhoneButton2:hover{
+	background:url(../images/pops/button.png) -59px -89px;
+}
+
+
+
+
+div.PopPhone{width:269px;float:right}
+
+
+*/
+
+/*----------------------------------------------\
+|			       DATEPICKER		    	    |		
+\----------------------------------------------*/
+.inputDates { width: 151px; height: 20px; border: 1px solid #abadb3; margin: 5px; }
+.ui-datepicker { width: 216px; height: auto; margin: 5px auto 0; font: 9pt Arial, sans-serif; -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5); -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5); box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5); }
+    .ui-datepicker a { text-decoration: none; }
+    /* DatePicker Table */
+    .ui-datepicker table { width: 100%; }
+.ui-datepicker-header { background: url('../img/dark_leather.png') repeat 0 0 #000; color: #e0e0e0; font-weight: bold; /*-webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+	-moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+	box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);*/ /*text-shadow: 1px -1px 0px #000;*/ filter: dropshadow(color=#000, offx=1, offy=-1); line-height: 30px; border-width: 1px 0 0 0; border-style: solid; border-color: #111; }
+.ui-datepicker-title { text-align: center; }
+.ui-datepicker-prev, .ui-datepicker-next { display: inline-block; width: 30px; height: 30px; text-align: center; cursor: pointer; background-image: url('../img/arrow.png'); background-repeat: no-repeat; line-height: 600%; overflow: hidden; }
+.ui-datepicker-prev { float: left; background-position: center -30px; }
+.ui-datepicker-next { float: right; background-position: center 0px; }
+.ui-datepicker thead { background-color: #f7f7f7; border-bottom: 1px solid #bbb; background-image: linear-gradient(to top, #f7f7f7 0%,#f1f1f1 100%); }
+.ui-datepicker th { text-transform: uppercase; font-size: 6pt; padding: 5px 0; color: #666666; text-shadow: 1px 0px 0px #fff; filter: dropshadow(color=#fff, offx=1, offy=0); }
+.ui-datepicker tbody td { padding: 0; border-right: 1px solid #bbb; }
+    .ui-datepicker tbody td:last-child { border-right: 0px; }
+.ui-datepicker tbody tr { border-bottom: 1px solid #bbb; }
+    .ui-datepicker tbody tr:last-child { border-bottom: 0px; }
+.ui-datepicker td span, .ui-datepicker td a { display: inline-block; font-weight: bold; text-align: center; width: 30px; height: 30px; line-height: 30px; color: #666666; text-shadow: 1px 1px 0px #fff; filter: dropshadow(color=#fff, offx=1, offy=1); }
+.ui-datepicker-calendar .ui-state-default { background: #ededed; background: -moz-linear-gradient(top, #ededed 0%, #dedede 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede)); background: -webkit-linear-gradient(top, #ededed 0%,#dedede 100%); background: -o-linear-gradient(top, #ededed 0%,#dedede 100%); background: -ms-linear-gradient(top, #ededed 0%,#dedede 100%); background: linear-gradient(to top, #ededed 0%,#dedede 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 ); -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5); -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5); box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5); }
+.ui-datepicker-calendar .ui-state-hover { background: #f7f7f7; }
+.ui-datepicker-calendar .ui-state-active { background: #6eafbf; -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1); -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1); box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1); color: #e0e0e0; text-shadow: 0px 1px 0px #4d7a85; filter: dropshadow(color=#4d7a85, offx=0, offy=1); border: 1px solid #55838f; position: relative; margin: -1px; }
+.ui-datepicker-unselectable .ui-state-default { background: #f4f4f4; color: #b4b3b3; }
+.ui-datepicker-calendar td:first-child .ui-state-active { width: 29px; margin-left: 0; }
+.ui-datepicker-calendar td:last-child .ui-state-active { width: 29px; margin-right: 0; }
+.ui-datepicker-calendar tr:last-child .ui-state-active { height: 29px; margin-bottom: 0; }
+
+/*
+ * jQuery UI Menu @VERSION
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Menu#theming
+ */
+.ui-autocomplete { position: absolute; cursor: default; }
+
+/* workarounds */
+* html .ui-autocomplete { width: 1px; }
+/* without this, the menu expands to 100% in IE6 */
+
+.ui-autocomplete-input { width: 198px; height: 19px; border: 1px solid #d7dfe6; }
+.ui-menu { list-style: none; padding: 2px; margin: 0; display: block; float: left; width: 285px; border: 1px solid #d7dfe6; margin-left: 85px; }
+    .ui-menu .ui-menu { margin-top: -3px; margin-left: -85px; }
+    .ui-menu .ui-menu-item { margin: 0; padding: 0; zoom: 1; float: left; clear: left; width: 100%; }
+        .ui-menu .ui-menu-item a { text-decoration: none; display: block; padding: .2em .4em; line-height: 1.5; zoom: 1; font-size: 11px; background: white; }
+            .ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active { font-weight: normal; color: #2f94d5; margin: -1px; }
+
+/* autocomplete  */
+.pac-container { margin: -1px 0px 0px -86px; padding: 5px 0px; width: 285px !important; }
+    .pac-container .pac-item { color: rgb(89, 101, 115); font-size: 11px; }
+        .pac-container .pac-item b { color: rgb(47, 148, 213); }
+    .pac-container::after { content: none !important; }
+span.selectBox { /*direction:rtl*/ }
+
+
+
+
+
+/*----------------------------------------------\
+|			       SCROLLER		    	    |		
+\----------------------------------------------*/
+
+.scroll-content { position: absolute; top: 0; left: 8px; }
+.slider-wrap { position: absolute; left: 6px; top: 0; background-color: #778d9c; width: 7px; border-left: 1px solid gray; }
+.slider-vertical1 { position: relative; height: 100%; }
+.ui-slider-handle { height: 10px; margin: 0 auto; border: 0 !important; margin-left: 11px !important; width: 7px !important;  background: url(../images/pops/scroller.jpg) repeat-y !important; display: block; position: absolute; }
+    .ui-slider-handle img { border: none; }
+.scrollbar-top { position: absolute; top: 0; }
+.scrollbar-bottom { position: absolute; bottom: 0; }
+.scrollbar-grip { position: absolute; top: 50%; margin-top: -6px; }
+.ui-slider-range1 { position: absolute; width: 100%; background-color: lightgrey; }
+.ui-slider { background: none !important; border: 0 !important; }
+
+#scroll-pane, .scroll-pane { background-color: white; float: left; overflow: auto; width: 182px; height: 114px; position: relative; border: 1px solid #d7dfe6; margin-left: 50px; margin-bottom: 25px; display: inline; }
+
+.scroll-content-item { background-color: #fcfcfc; color: #003366; width: 100px; height: 100px; float: left; margin: 10px; font-size: 3em; line-height: 96px; text-align: center; border: 1px solid gray; display: inline; }
+
+.scroll-content.slider-vertical1 { background: none !important; border: 0 !important; }
+
+
+
+
+/*----------------------------------------------\
+|			       DATEPICKER		    	    |		
+\----------------------------------------------*/
+.inputDates { width: 151px; height: 20px; border: 1px solid #abadb3; margin: 5px; }
+.ui-datepicker { width: 216px; height: auto; margin: 5px auto 0; font: 9pt Arial, sans-serif; -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5); -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5); box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5); }
+    .ui-datepicker a { text-decoration: none; }
+    /* DatePicker Table */
+    .ui-datepicker table { width: 100%; }
+.ui-datepicker-header { background: url('../img/dark_leather.png') repeat 0 0 #000; color: #e0e0e0; font-weight: bold; /*-webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+	-moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+	box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);*/ /*text-shadow: 1px -1px 0px #000;*/ filter: dropshadow(color=#000, offx=1, offy=-1); line-height: 30px; border-width: 1px 0 0 0; border-style: solid; border-color: #111; }
+.ui-datepicker-title { text-align: center; }
+.ui-datepicker-prev, .ui-datepicker-next { display: inline-block; width: 30px; height: 30px; text-align: center; cursor: pointer; background-image: url('../img/arrow.png'); background-repeat: no-repeat; line-height: 600%; overflow: hidden; }
+.ui-datepicker-prev { float: left; background-position: center -30px; }
+.ui-datepicker-next { float: right; background-position: center 0px; }
+.ui-datepicker thead { background-color: #f7f7f7; border-bottom: 1px solid #bbb; background-image: linear-gradient(to top, #f7f7f7 0%,#f1f1f1 100%); }
+.ui-datepicker th { text-transform: uppercase; font-size: 6pt; padding: 5px 0; color: #666666; text-shadow: 1px 0px 0px #fff; filter: dropshadow(color=#fff, offx=1, offy=0); }
+.ui-datepicker tbody td { padding: 0; border-right: 1px solid #bbb; }
+    .ui-datepicker tbody td:last-child { border-right: 0px; }
+.ui-datepicker tbody tr { border-bottom: 1px solid #bbb; }
+    .ui-datepicker tbody tr:last-child { border-bottom: 0px; }
+.ui-datepicker td span, .ui-datepicker td a { display: inline-block; font-weight: bold; text-align: center; width: 30px; height: 30px; line-height: 30px; color: #666666; text-shadow: 1px 1px 0px #fff; filter: dropshadow(color=#fff, offx=1, offy=1); }
+.ui-datepicker-calendar .ui-state-default { background: #ededed; background: -moz-linear-gradient(top, #ededed 0%, #dedede 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede)); background: -webkit-linear-gradient(top, #ededed 0%,#dedede 100%); background: -o-linear-gradient(top, #ededed 0%,#dedede 100%); background: -ms-linear-gradient(top, #ededed 0%,#dedede 100%); background: linear-gradient(to top, #ededed 0%,#dedede 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 ); -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5); -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5); box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5); }
+.ui-datepicker-calendar .ui-state-hover { background: #f7f7f7; }
+.ui-datepicker-calendar .ui-state-active { background: #6eafbf; -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1); -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1); box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1); color: #e0e0e0; text-shadow: 0px 1px 0px #4d7a85; filter: dropshadow(color=#4d7a85, offx=0, offy=1); border: 1px solid #55838f; position: relative; margin: -1px; }
+.ui-datepicker-unselectable .ui-state-default { background: #f4f4f4; color: #b4b3b3; }
+.ui-datepicker-calendar td:first-child .ui-state-active { width: 29px; margin-left: 0; }
+.ui-datepicker-calendar td:last-child .ui-state-active { width: 29px; margin-right: 0; }
+.ui-datepicker-calendar tr:last-child .ui-state-active { height: 29px; margin-bottom: 0; }
+
+/*
+ * jQuery UI Menu @VERSION
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Menu#theming
+ */
+.ui-autocomplete { position: absolute; cursor: default; }
+
+/* workarounds */
+* html .ui-autocomplete { width: 1px; }
+/* without this, the menu expands to 100% in IE6 */
+
+.ui-autocomplete-input { width: 198px; height: 19px; border: 1px solid #d7dfe6; }
+.ui-menu { list-style: none; padding: 2px; margin: 0; display: block; float: left; width: 285px; border: 1px solid #d7dfe6; margin-left: 85px; }
+    .ui-menu .ui-menu { margin-top: -3px; margin-left: -85px; }
+    .ui-menu .ui-menu-item { margin: 0; padding: 0; zoom: 1; float: left; clear: left; width: 100%; }
+        .ui-menu .ui-menu-item a { text-decoration: none; display: block; padding: .2em .4em; line-height: 1.5; zoom: 1; font-size: 11px; background: white; }
+            .ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active { font-weight: normal; color: #2f94d5; margin: -1px; }
+
+/* autocomplete  */
+.pac-container { margin: -1px 0px 0px -86px; padding: 5px 0px; width: 285px !important; }
+    .pac-container .pac-item { color: rgb(89, 101, 115); font-size: 11px; }
+        .pac-container .pac-item b { color: rgb(47, 148, 213); }
+    .pac-container::after { content: none !important; }
+span.selectBox { /*direction:rtl*/ }
+
+
+/*----------------------------------------------\
+|			      UPLOAD FILE BUTTON	    	    |		
+\----------------------------------------------*/
+
+.file_button { width: 73px; padding-bottom: 1px; }
+    .file_button p { width: 60px; line-height: 10px; float: left; padding-right: 13px; font-size: 10px; color: #2f94d5; }
+    .file_button p { margin: -4px 0 0 0; }
+.file_input { width: 73px; height: 20px; position: absolute; overflow: hidden; top: 0; }
+.file_hidden { direction: ltr; font-size: 30px; cursor: pointer; opacity: 0; }
+
+
+/*
+ * Original version: 1.0 © 2010 Andrew Valums ( andrew(at)valums.com )
+ * Current Maintainer (2.0+): 2012, Ray Nicholus ( fineuploader(at)garstasio.com )
+ *
+ * Licensed under MIT license, GNU GPL 2 or later, GNU LGPL 2 or later, see license.txt.
+ */
+/*.qq-uploader { position: relative; width: 100%; }*/
+.qq-upload-button { display: block; /*or inline-block
+    width: 105px;
+    padding: 7px 0;
+    
+    background: #880000;
+    border-bottom: 1px solid #DDD;
+    color: #FFF;*/ text-align: right; }
+.qq-upload-button-hover { text-decoration: underline; }
+
+/*
+.qq-upload-button-focus {
+    outline: 1px dotted #000000;
+}*/
+.qq-upload-drop-area, .qq-upload-extra-drop-area { position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-height: 30px; z-index: 2; background: #FF9797; text-align: center; }
+    .qq-upload-drop-area span { display: block; position: absolute; top: 50%; width: 100%; margin-top: -8px; font-size: 16px; }
+.qq-upload-extra-drop-area { position: relative; margin-top: 50px; font-size: 16px; padding-top: 30px; height: 20px; min-height: 40px; }
+.qq-upload-drop-area-active { background: #FF7171; }
+.qq-upload-list { font-size: 10px; right: 0; list-style: none outside none; margin: 0; padding: 0; position: absolute; top: 35px; width:250px;}
+    .qq-upload-list li { margin: 0; padding: 9px; line-height: 15px; font-size: 16px; background-color: #FFF0BD; }
+.qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-retry, .qq-upload-failed-text, .qq-upload-finished { margin-right: 12px; font-size:12px;}
+.qq-upload-file { }
+.qq-upload-spinner { display: inline-block; background: url("../images/loading.gif"); width: 15px; height: 15px; vertical-align: text-bottom; }
+.qq-upload-finished { display: none; width: 15px; height: 15px; vertical-align: text-bottom; }
+.qq-upload-retry { display: none; color: #000000; }
+.qq-upload-cancel { color: #000000; }
+.qq-upload-retryable .qq-upload-retry { display: inline; }
+.qq-upload-size, .qq-upload-cancel, .qq-upload-retry { font-size: 12px; font-weight: normal; }
+.qq-upload-failed-text { display: none; font-style: italic; font-weight: bold; }
+.qq-upload-failed-icon { display: none; width: 15px; height: 15px; vertical-align: text-bottom; }
+.qq-upload-fail .qq-upload-failed-text { display: inline; }
+.qq-upload-retrying .qq-upload-failed-text { display: inline; color: #D60000; }
+.qq-upload-list li.qq-upload-success { background-color: #5DA30C; color: #FFFFFF; }
+.qq-upload-list li.qq-upload-fail { background-color: #D60000; color: #FFFFFF; }
+.qq-progress-bar { background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(50%,rgba(41,137,216,1)), color-stop(51%,rgba(32,124,202,1)), color-stop(100%,rgba(125,185,232,1))); /* Chrome,Safari4+ */ background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Opera 11.10+ */ background: -ms-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* IE10+ */ background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* W3C */ width: 0%; height: 15px; border-radius: 6px; margin-bottom: 3px; display: none; color: white;
+    text-align: center;}
+.qq-progress-bar-container-selector{
+    padding:5px;
+}
+
+
+/* jquery.Jcrop.min.css v0.9.12 (build:20130126) */
+.jcrop-holder{direction:ltr;text-align:left;margin: 0px auto;}
+.jcrop-vline,.jcrop-hline{background:#FFF url("../images/Jcrop.gif");font-size:0;position:absolute;}
+.jcrop-vline{height:100%;width:1px!important;}
+.jcrop-vline.right{right:0;}
+.jcrop-hline{height:1px!important;width:100%;}
+.jcrop-hline.bottom{bottom:0;}
+.jcrop-tracker{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;height:100%;width:100%;}
+.jcrop-handle{background-color:#333;border:1px #EEE solid;font-size:1px;height:14px;width:14px;}
+.jcrop-handle.ord-n{left:50%;margin-left:-7px;margin-top:-7px;top:0;}
+.jcrop-handle.ord-s{bottom:0;left:50%;margin-bottom:-7px;margin-left:-7px;}
+.jcrop-handle.ord-e{margin-right:-7px;margin-top:-7px;right:0;top:50%;}
+.jcrop-handle.ord-w{left:0;margin-left:-7px;margin-top:-7px;top:50%;}
+.jcrop-handle.ord-nw{left:0;margin-left:-7px;margin-top:-7px;top:0;}
+.jcrop-handle.ord-ne{margin-right:-7px;margin-top:-7px;right:0;top:0;}
+.jcrop-handle.ord-se{bottom:0;margin-bottom:-7px;margin-right:-7px;right:0;}
+.jcrop-handle.ord-sw{bottom:0;left:0;margin-bottom:-7px;margin-left:-7px;}
+.jcrop-dragbar.ord-n,.jcrop-dragbar.ord-s{height:7px;width:100%;}
+.jcrop-dragbar.ord-e,.jcrop-dragbar.ord-w{height:100%;width:7px;}
+.jcrop-dragbar.ord-n{margin-top:-7px;}
+.jcrop-dragbar.ord-s{bottom:0;margin-bottom:-7px;}
+.jcrop-dragbar.ord-e{margin-right:-7px;right:0;}
+.jcrop-dragbar.ord-w{margin-left:-7px;}
+.jcrop-light .jcrop-vline,.jcrop-light .jcrop-hline{background:#FFF;filter:alpha(opacity=70)!important;opacity:.70!important;}
+.jcrop-light .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#000;border-color:#FFF;border-radius:3px;}
+.jcrop-dark .jcrop-vline,.jcrop-dark .jcrop-hline{background:#000;filter:alpha(opacity=70)!important;opacity:.7!important;}
+.jcrop-dark .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#FFF;border-color:#000;border-radius:3px;}
+.solid-line .jcrop-vline,.solid-line .jcrop-hline{background:#FFF;}
+.jcrop-holder img,img.jcrop-preview{max-width:none; }
+.crop { padding:10px; background-color:black; margin-bottom: 10px;}
+.CropBtns {text-align:left; }

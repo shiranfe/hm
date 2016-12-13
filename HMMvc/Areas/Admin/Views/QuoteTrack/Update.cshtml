@@ -1,0 +1,162 @@
+﻿@model QuoteDM
+@using Common
+
+@{
+    ViewBag.Title = "Update Quote Track";
+    //var followDate = Model.FollowDate;//?? DateTime.Now.AddDays(3);
+}
+
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+@*<script src="~/Areas/Admin/Scripts/Quote/Quote.js"></script>*@
+
+<script src="~/Areas/Admin/Scripts/Quote/QuoteTrackDetails.js"></script>
+
+<div id="StepsMenu" class="clearfix">
+    @{
+        ViewBag.QuoteID = Model.QuoteID;
+    }
+    @Html.Partial("~/Areas/Admin/Views/QuoteVersion/SideMenu.cshtml", Model)
+
+</div>
+<div class="sitesubcontent " style="padding:0">
+    <div class="tbl">
+        <div class="tcTop" style="width:190px;">
+            <form id="UpdateQuoteTrackForm" method="post" data-ajax="true">
+                @Html.HiddenFor(model => model.QuoteID)
+                <div class="VbTabBlock corn_3">
+                    <div class="VbTabBlockHeader clearfix">
+                        <div class="BlockHeaderTitle">פרטי מעקב</div>
+                    </div>
+                    <div class="WhiteSep"></div>
+                    <div class="VbTabBlockInfo clearfix">
+
+                        <div class="formRow">
+                            <div class="datarow single">
+                                <div class="">
+                                    סטטוס:
+                                </div>
+                                <div class="">
+                                    @Html.EditorFor(model => Model.QuoteStatusID, new { options = ViewBag.QuoteStatus })
+                                    @*@Html.DropDownList("QuoteStatusID", (SelectList)ViewBag.QuoteStatus)*@
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="formRow">
+
+                            <div class="datarow single">
+                                <div class="">
+                                    תאריך למעקב:
+                                </div>
+                                <div class="">
+                                    <div class="OuterSelect PointValDatesRow">
+                                        <input id="FollowDate" class="DatePicker" name="FollowDate" value="@Html.DisplayFor(model=> Model.FollowDate)" />
+                                    </div>
+                                    @Html.ValidationMessageFor(model => Model.FollowDate)
+                                </div>
+                                <div id="dateError" class="field-validation-error dn">
+                                   תאריך למעקב חייב להיות עדכני
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="formRow">
+                            <div class="datarow single">
+                                <div class="">
+                                    מספר הזמנה:
+                                </div>
+                                <div class="">
+                                    @Html.EditorFor(model => Model.OrderNumber)
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="formRow">
+
+                            <div class="datarow single">
+                                <div class="">
+                                    צרף מסמך הזמנה:
+                                </div>
+                                <div class="">
+                                    @Html.HiddenFor(model => Model.OrderAttachment)
+                                    @{ var linkExist = string.IsNullOrEmpty(Model.OrderAttachmentPath) ? "dn" : "";
+
+                                        var fileName = linkExist == "" ? Model.OrderAttachmentPath.Replace(@"\QuoteOrders\", "") : "";
+                                    }
+                                    <a id="orderAttachmentLink" class="@linkExist linktext" href="@Model.OrderAttachmentPath" target="_blank">@fileName</a>
+                                    @*@Html.EditorFor(model => Model.OrderAttachment)*@
+                                    <div>
+                                        <span class="linktext FileUpload fr"></span>
+
+                                        <span class="linktext @linkExist" id="deleteAttach" data-id="@Model.QuoteID"> | מחק</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="orderAcceptedError" class="field-validation-error dn">
+                            במידה וההזמנה נתקבלה יש להזמין מספר הזמנה או להעלות את מסמך ההזמנה
+                        </div>
+
+                        <div class="formRow">
+                            <div class="datarow single">
+                                <div class="">
+                                    מספר חשבונית:
+                                </div>
+                                <div class="">
+                                    @Html.EditorFor(model => Model.InvoiceNumber)
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="DoneError" class="field-validation-error dn">
+                            יש להזין מספר חשבונית
+                        </div>
+
+                        <div class="ForBtnDiv clearfix">
+                            <input type="button" value="שמור" class="buttondefault floatlast">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tcTop">
+            <div class="VbTabBlock corn_3">
+
+                <div class="VbTabBlockHeader">
+                    <div class="BlockHeaderTitle">שיחות</div>
+                    @*<div class="HeaderActions">
+                            <input id="AddJobBtn" type="button" class=" buttondefault Black" value="צור שיחה">
+
+                        </div>*@
+                    <div class="clear"></div>
+                </div>
+                <div class="WhiteSep"></div>
+                <div class="VbTabBlockInfo" id="quoteJobsDiv">
+
+                    @Html.Partial("~/Areas/Admin/Views/QuoteTalk/Index.cshtml", Model.Talks)
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+<script>
+    try {
+        setPopTitle('QuoteTrack', '@ViewBag.PopTitle');
+    } catch (e) {
+
+    }
+</script>

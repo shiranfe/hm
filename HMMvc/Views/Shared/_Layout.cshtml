@@ -1,0 +1,58 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="shortcut icon" href="~/images/Favicon.png">
+
+    <title>@ViewBag.Title</title>
+    
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @Html.Partial("ChangeLang")
+    @*<script src="~/Scripts/jquery-1.8.2.min.js"></script>*@
+    @Scripts.Render("~/bundles/modernizr")
+   @Scripts.Render("~/bundles/SiteJS")
+    <!--[if lt IE 9]>
+	<link href="~/Content/IE.css" rel="stylesheet" />
+<![endif]-->
+      <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/UI/jquery.scrollTo-min.js"></script>
+    <link href="~/Content/MyFontsWebfontsKit.css" rel="stylesheet" />
+    <script src="~/Scripts/UI/jquery.tablesorter.js"></script>
+
+    @*<script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/jquery.mobile.custom.min.js"></script>
+    <script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>*@
+
+    <script src="~/Scripts/rest.js"></script>
+    <script src="~/Scripts/crud.js"></script>
+</head>
+<body class="client-zone">
+     <div id="ScrptHead"></div>
+    <div id="menu-mask" class="mask"></div>
+    @{Html.RenderAction("Header" , "User");}
+    <div id="SiteBody" class="SiteWidth" >
+   
+            @RenderBody()
+        
+    </div>
+    @Html.Partial("Footer")
+    <script src="~/Scripts/Routing.js"></script>
+    <script src="~/Scripts/sammy.js"></script>
+    <script>
+        $(function () {
+            var routing = new Routing('@Url.Content("~/")', '#SiteBody', 'home');
+            routing.init();
+        });
+    </script>
+    <script src="~/Scripts/UI/jquery.qtip.min.js"></script>
+    <script src="~/Scripts/UI/jquery.cookie.js"></script>
+    <script src="~/Scripts/UI/Accordion/accordion.js"></script>
+    <script src="~/Scripts/UI/jquery.bpopup.min.js"></script>
+    @RenderSection("scripts", required: false)
+    @*@StackExchange.Profiling.MiniProfiler.RenderIncludes()*@
+    <div id="qtip-growl-container"></div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+﻿@model UserLayoutDM
+@using Common
+
+
+@{
+    var permisions = Model.Perrmisions;
+}
+
+@*<div class="emp-div">
+
+
+            <div class="header-icon flag @ViewBag.Lang" id="ChangeLangBtn"></div>
+            <a class="header-icon logout" href="/Admin/Account/Logoff"></a>
+
+
+    </div>*@
+
+<div class="anim menu-header tbl">
+
+    <div class="tcMin">
+        <img src="~/images/MenuUser.png" style="margin: 0 20px;" />
+
+    </div>
+
+    <div class="tc" style="font-size:18px;line-height:1.5;width:100%">
+        <div style="font-size:larger;">@Model.FullName</div>
+        <div>
+            @*  <a class="header-icon logout" href="/Admin/Account/Logoff"></a>*@
+            <a class="linktextHover" href="/Admin/Account/Logoff">התנתק</a>
+            @*<div class="header-icon flag" id="ChangeLangBtn"></div>*@
+            | <span class="linktextHover" id="ChangeLangBtn">שנה שפה</span>
+        </div>
+    </div>
+
+
+    <div class="tcMin">
+        <a class="siteHeaderLogo" href="/#/" style="margin: 37px; "></a>
+    </div>
+
+
+</div>
+
+
+<nav class="anim outer-nav right vertical">
+
+    <div style="float:none;">
+        <h4>מועדפים</h4>
+        <ul class="Settings settings-div">
+            <li class="SideMenuLink"><a href="/Admin/#/home/Dashboard">עמוד הבית</a></li>
+            <li class="SideMenuLink"><a href="/Admin/#/home/Dashboard">המשימות שלי</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>@GlobalDM.GetTransStr("Jobs")</h4>
+        <ul class="Jobs">
+            @if (permisions.ShowRefubrish)
+            {
+                <li class="SideMenuLink">
+                    <a class="plusBtn" href="/Admin/#/Job/JobRequest"></a>
+                    <a href="/Admin/#/Refubrish">תיקונים</a>
+                </li>
+                <li class="SideMenuLink">
+                    <a class="plusBtn" href="/Admin/#/Job/Details/?jobType=Outside"></a>
+                    <a href="/Admin/#/Outside">עבודות חוץ</a>
+                </li>
+            }
+
+            @if (permisions.ShowVB)
+            {
+                <li class="SideMenuLink">
+                    <a class="plusBtn" href="/Admin/#/Import/ImportVbHtmlReport"></a>
+                    <a href="/Admin/#/VB">בדיקת רעידות</a>
+                </li>}
+
+            @if (permisions.ShowAlignment)
+            {
+                <li class="SideMenuLink">
+                    <a class="plusBtn" href="/Admin/#/Job/Details/?jobType=Alignment"></a>
+                    <a href="/Admin/#/Alignment">שיוור בלייזר</a>
+                </li>}
+
+
+        </ul>
+    </div>
+
+    @if (permisions.ShowQuote)
+    {
+
+        <div>
+            <h4>הצעות מחיר</h4>
+            <ul class="Quote">
+              
+                    <li class="SideMenuLink">
+                      @*  <a class="plusBtn" href="/Admin/#/Quote/Update"></a>*@
+                        <a href="/Admin/#/Quote">הצעות מחיר</a>
+                    </li>
+               
+
+                @if (permisions.ShowCatalog)
+                {
+                    <li class="SideMenuLink"><a href="/Admin/#/CatalogItem">קטלוג</a></li>
+                    <li class="SideMenuLink"><a href="/Admin/#/Supplier">ספקים</a></li>
+                    <li class="SideMenuLink"><a href="/Admin/#/SupplierProduct">מחירון ספקים</a></li>
+                    <li class="SideMenuLink"><a href="/Admin/#/Role">מחירון שעות עבודה</a></li>
+                    <li class="SideMenuLink"><a href="/Admin/#/Manufacturer">יצרנים</a></li>
+
+                }
+            </ul>
+        </div>
+    }
+
+    @if (permisions.ShowClientSettings)
+    {
+
+        <div>
+            <h4>הגדרות לקוח</h4>
+            <ul class="ClientSettings settings-div">
+                <li class="SideMenuLink"><a href="/Admin/#/Client">לקוחות</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/Contact">אנשי קשר</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/Machine">מכונות</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/User">משתמשי לקוח</a></li>
+            </ul>
+        </div>
+    }
+
+
+    @if (permisions.ShowSettings)
+    {
+
+        <div>
+            <h4>הגדרות מערכת</h4>
+            <ul class="Settings settings-div">
+                <li class="SideMenuLink"><a href="/Admin/#/BankField">בנק שדות</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/BankTask">בנק משימות</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/DynamicGroups/Page">עריכת כרטיס עבודה</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/Employee">עובדים</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/Lang/EditDictionary">מילון</a></li>
+            </ul>
+        </div>
+    }
+
+    @if (permisions.ShowManagReports)
+    {
+
+        <div>
+            <h4>דו"חות</h4>
+            <ul class="Settings settings-div">
+                <li class="SideMenuLink"><a href="/Admin/#/ManagReport/Quote">הצעות מחיר</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/ManagReport/Refubrish">תיקונים</a></li>
+            </ul>
+        </div>
+    }
+
+
+
+</nav>

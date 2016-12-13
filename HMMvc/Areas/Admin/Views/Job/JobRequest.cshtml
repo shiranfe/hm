@@ -1,0 +1,270 @@
+﻿@model JobRequestDM
+@using Common
+
+@{
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "פרטי עבודה";
+    string StartDate = ((DateTime)Model.StartDate).ToShortDateString();
+    string DueDate = Model.DueDate != null ?
+        ((DateTime)Model.DueDate).ToShortDateString() :
+        string.Empty;
+
+    ViewBag.HasPic = false;
+    //var clientID = Model.ClientID == 0 ? string.Empty : Model.ClientID.ToString();
+
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Scripts/Job/UpdateJobRequest.js"></script>
+
+<script>
+
+
+        //tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Services/clientUserService.js")');
+        tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Services/clientMachineService.js")');
+
+     jobType = "@JobType.Refubrish";
+     idName = "#RefubrishDetailsDM_MachineID";
+</script>
+
+
+<div class="sitesubcontent corn_3 shadow">
+    <h1>קליטת עבודה</h1>
+
+    <form id="UpdateJobRequestForm" method="post" data-ajax="true">
+
+@Html.HiddenFor(model => Model.TempId)
+        @*@Html.HiddenFor(model => Model.JobID)*@
+        <input class="input-validation-error" data-val="true" data-val-number="The field JobID must be a number." data-val-required="The JobID field is required." id="JobID" name="JobID" type="hidden" value="@Model.JobID">
+        @Html.HiddenFor(model => Model.IsVB)
+        @Html.HiddenFor(model => Model.IsRefubrish)
+
+
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">פרטי עבודה </div>
+                
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="formRow">
+                    <div class="datarow single">
+                        @{  ViewBag.Container = "#UpdateJobRequestForm";
+                            ViewBag.HideAdd = false;
+                            ViewBag.AllowNotInList = true; }
+
+                        @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml", Model)
+                       
+                     
+
+                    @*    @Html.Editor("ClientID", "AutoComplete", new { options = ViewBag.Clients, placeHolder = "חפש או הוסף לקוח" })*@
+                        
+
+                    </div>
+
+
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            תאריך התחלה:
+                        </div>
+                        <div class="fieldvalue">
+                            <div class="OuterSelect PointValDatesRow">
+                                <input id="StartDate" class="DatePicker" name="StartDate" value="@StartDate" />
+                            </div>
+                            @Html.ValidationMessageFor(model => Model.StartDate)
+                        </div>
+
+                    </div>
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            תאריך יעד:
+                        </div>
+                        <div class="fieldvalue">
+                            <div class="OuterSelect PointValDatesRow">
+                                <input id="DueDate" class="DatePicker" name="DueDate" value="@DueDate" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formRow dn">
+                  
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            סניף:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.RefubrishDetailsDM.BranchID, new { options = ViewBag.Branch, disabled = true })
+                        </div>
+                    </div>
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            יוצר:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.CreatorID, new { options = ViewBag.Creator, disabled = true })
+
+                            @*@Html.DropDownList("CreatorID", (SelectList)ViewBag.Creator)*@
+                            @* ,new {  } *@
+                        </div>
+
+                    </div>
+                </div>
+                <div class="formRow">
+
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            הערות כלליות:
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                            <textarea id="Comments" class="TextBox" name="Comments" rows="2">@Model.Comments</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+
+        </div>
+
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">פרטי מכונה </div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo clearfix">
+
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            מכונה:
+                        </div>
+                        <div class="fieldvalue machineSelect">
+                            @Html.EditorFor(model => Model.RefubrishDetailsDM.MachineID, new { options = ViewBag.Machine, Required = true, AddBtnClass = "addMachine" , allowNotInList = true, requiredText = "יש לבחור מכונה" })
+                            @*@Html.DropDownList("RefubrishDetailsDM.MachineID", (SelectList)ViewBag.Machine)*@
+                            @Html.ValidationMessageFor(model => Model.RefubrishDetailsDM.MachineID)
+                        </div>
+
+                    </div>
+                    @Html.HiddenFor(model => Model.RefubrishDetailsDM.RefubrishStatusID)
+
+                </div>
+
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            חלקים במכונה:
+                        </div>
+
+                        <div class="fieldvalue">
+
+                            <div id="PartsDIv">
+
+                                <ul>
+                                    @foreach (var part in (SelectList)ViewBag.Parts)
+                                    {
+
+                                        <li class="CheckZone  noTextSelect">
+                                            <input type="checkbox" name="RefubrishDetailsDM.MachineTypeID" value="@part.Value" />
+                                            <span>@part.Text</span>
+                                        </li>
+                                    }
+                                </ul>
+
+                            </div>
+                            <div class="clear"></div>
+                            <div id="partsValidation" class="field-validation-error dn">
+                                <span>יש לבחור חלק אחד לפחות</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            Rpm:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => Model.Rpm)
+                        </div>
+                    </div>
+                    <div class="datarow floatlast">
+
+                        @Html.Partial("~/Areas/Admin/Views/Machine/KwHp.cshtml", Model.Kw ?? "")
+                    </div>
+                </div>
+
+                <div class="formRow">
+
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            כתובת:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.Address)
+                        </div>
+                    </div>   
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            @Html.CheckBoxFor(model => Model.YetArrvied)
+                            <span>עבודה טרם נתקבלה</span>
+                        </div>
+                        
+                    </div>
+
+                      
+                </div>
+
+                <div class="formRow">
+
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            תיאור תקלה עפ"י לקוח:
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                            <textarea id="ClinetNotes" class="TextBox" name="RefubrishDetailsDM.ClinetNotes" rows="2">@Model.RefubrishDetailsDM.ClinetNotes</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        
+        @Html.Partial("~/Areas/Admin/Views/Job/JobPics.cshtml", (JobDM)Model)
+
+
+        <div class="ForBtnDiv clearfix">
+
+            <input id="UpdateJobBtn" type="button" value="שמור" class="buttondefault floatlast">
+        </div>
+
+    </form>
+
+</div>
+<div class="clear"></div>
+
+<script>
+    try {
+        setPopTitle('Job', '@ViewBag.PopTitle',true);
+    } catch (e) {
+        CreateDropDown();
+    }
+
+
+
+</script>
+

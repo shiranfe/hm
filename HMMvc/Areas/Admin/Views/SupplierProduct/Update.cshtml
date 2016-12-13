@@ -1,0 +1,146 @@
+﻿@model Common.SupplierProductDM
+@using Common
+@{
+    ViewBag.Title = "עדכון פריט";
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    setPopTitle('SupplierProduct', '@ViewBag.PopTitle');
+</script>
+
+
+
+<form id="UpdateSupplierProductForm" method="post" data-ajax="true">
+  
+    @Html.HiddenFor(x => x.SupplierProductID)
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv clearfix">
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            שם פריט:
+                        </div>
+                        <div class="fieldvalue">
+                            @*<input class="TextBox valid" data-val="true" autofocus data-val-required="The ProductName field is required." id="ProductName" name="ProductName" placeholder="" type="text" value="@Model.ProductName" />*@
+                            @Html.EditorFor(model => model.ProductName)
+                            @Html.ValidationMessageFor(model => model.ProductName)
+                        </div>
+                    </div>
+                </div>
+             
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            סוג:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @*@Html.EditorFor(x=>x.IsMaterial, new { options = ViewBag.ItemKind })*@
+                            @Html.DropDownList("IsMaterial", (SelectList)ViewBag.ItemKind)
+                        </div>
+                    </div>
+                    <div class="datarow floatlast ">
+                        <div class="fieldlabel">
+                            קטגוריה:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.EditorFor(x => x.ProductTypeID, new { options = ViewBag.ProductType })
+                            @*@Html.DropDownList("ProductTypeID", (SelectList)ViewBag.ProductType)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            ספק:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.EditorFor(x => x.ClientID, new { options = ViewBag.Supplier })
+                            @*@Html.DropDownList("ClientID", (SelectList)ViewBag.Supplier)*@
+                        </div>
+                    </div>
+                    <div class="datarow floatlast ">
+                        <div class="fieldlabel">
+                            עלות:
+                        </div>
+
+                        <div class="fieldvalue ">
+                            @Html.EditorFor(model => model.ProductCost)
+                            @Html.ValidationMessageFor(model => model.ProductCost)
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            יצרן:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.EditorFor(x => x.ManufactureID, new { options = ViewBag.Manufacture })                       
+                            @* @Html.DropDownList("ManufactureID", (SelectList)ViewBag.Manufacture, string.Empty)*@
+                        </div>
+                    </div>
+                    <div class="datarow floatlast ">
+                        <div class="fieldlabel">
+                            % רווח:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.ProfitPrec)
+                            @Html.ValidationMessageFor(model => model.ProfitPrec)
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            עבור לקוחות:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.CheckBoxFor(model => model.IsForClients)
+                        </div>
+                    </div>
+                    <div class="datarow floatlast ">
+                        <div class="fieldlabel">
+                            מחיר:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.ProductPrice)
+                            @Html.ValidationMessageFor(model => model.ProductPrice)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ForBtnDiv">
+        <input  type="button" value="שמור" class="buttondefault floatlast">
+        @Html.ValidationSummary(true)
+    </div>
+</form>
+
+<script>
+
+    $('#ProfitPrec').on('input', function () {
+        var den = parseFloat($(this).val()) + 1;
+        var price = den * $("#ProductCost").val();
+        $("#ProductPrice").val(price.toFixed(2));
+    });
+
+    $("#ProductPrice").on('input', function () {
+        var prec = (($(this).val() / $("#ProductCost").val()) - 1);
+        $("#ProfitPrec").val(prec.toFixed(2));
+    });
+
+</script>

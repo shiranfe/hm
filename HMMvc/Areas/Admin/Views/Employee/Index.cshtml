@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Common.EmployeeDM>
+
+@{
+//Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/Admin/Employees.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+
+</div>*@
+
+<div class="sitesubcontent corn_3 shadow">
+
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>עובדים</h1>
+
+        </div>
+        <div class="HeaderActions">
+            <input id="AddItemBtn" type="button" class="buttondefault" value="הוסף עובד" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="pageContent">
+        <table>
+            <tr>
+
+                <th>
+                    שם מלא
+                </th>
+                <th>
+                    פעיל
+                </th>
+                <th>
+                    הרשאות
+                </th>
+            </tr>
+            @{var i = 1;}
+            @foreach (var item in Model)
+        {
+            var odd = i % 2 == 0 ? "odd" : "even";
+            i++;
+                <tr class="@odd" data-id="@item.EmployeeID">
+                    <td>
+                        <span class="linktext openItem">@item.FullName</span>
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(modelItem => item.Active, new { @disabled = "disabled" })
+                    </td>
+                    <td>
+                        <span class="linktext openItemPermision" data-id="@item.EmployeeID">ערוך הרשאות</span>
+                        |
+                        <span class="linktext deleteItem" data-id="@item.EmployeeID">מחק</span>
+                    </td>
+                </tr>
+        }
+
+        </table>
+    </div>
+</div>
+<div class="clear"></div>
+

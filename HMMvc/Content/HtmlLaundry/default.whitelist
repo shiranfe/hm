@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tags>
+  <p style="" align=""></p>
+  <h1 style="" align=""></h1>
+  <h2 style="" align=""></h2>
+  <h3 style="" align=""></h3>
+  <h4 style="" align=""></h4>
+  <i></i>
+  <b></b>
+  <u></u>
+  <strong></strong>
+  <span style=""></span>
+  <div style=""></div>
+  <table style="" width="" cellpadding="\d+" cellspacing="\d+" border="\d+%"></table>
+  <td style="" align="" valign=""></td>
+  <tr style=""></tr>
+  <th style="" align="" valign=""></th>
+  <img src="" alt=""/>
+  <ol type="1|a|A|i|I" start="\d+"></ol>
+  <li style=""></li>
+  <ul type="(disc)|(circle)|(square)"></ul>
+  <br />
+  <code></code>
+  <pre class=""></pre>
+  <a href="" title="" name="" />
+  <!-- the following element is just a placeholder for default attribute patterns -->
+  <!-- these patterns will be used if any element above defines an attribute with empty value -->
+  <attributes
+    style="font-size:\d+((em)|(pt)|(px))?;font-style:(italic)|(normal);text-align:(right)|(left)|(center)|(justify);color:#[0-9A-Fa-f]{6};margin:((\d+(px)?)|(\s))+;font-weight:(bold)|(bolder)|(lighter)|(normal)|(\d{3})"
+    align="(right)|(left)|(center)|(justify)"
+    width="\d+%?"
+    valign="(top)|(middle)|(bottom)"
+    class="\s*(\w+\s*)+"
+    name="\w+"
+    title="\w{1,512}"
+    rel="(Alternate)|(Appendix)|(Bookmark)|(Chapter)|(Contents)|(Copyright)|(Entry-Content)|(FeedUrl)|(Glossary)|(Help)|(Index)|(Next)|(Offline)|(Prev)|(Search)|(Section)|(Shortcut Icon)|(Start)|(Stylesheet)|(Subsection)"
+    rev="(Alternate)|(Appendix)|(Bookmark)|(Chapter)|(Contents)|(Copyright)|(Entry-Content)|(FeedUrl)|(Glossary)|(Help)|(Index)|(Next)|(Offline)|(Prev)|(Search)|(Section)|(Shortcut Icon)|(Start)|(Stylesheet)|(Subsection)"
+    shape="(circ)|(circle)|(poly)|(polygon)|(rect)|(rectangle)"
+    tabindex="\d+"
+    href="(/|mailto\:|(news|(ht|f)tp(s?))\://){0,1}[@\w\.]+"
+    src="(/|mailto\:|(news|(ht|f)tp(s?))\://){0,1}[@\w\.]+"
+    alt="\w+"
+    />
+</tags>
+
+<!--kellene egy attribute lista név alapján, hogy lehessen azzaláltalánosítani atytribútum szűréseket pl style-->

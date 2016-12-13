@@ -1,0 +1,158 @@
+﻿
+@model Common.JobDM
+
+
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">
+
+                <div class="equip-menu">
+                    <span class="selected">ציוד חדש</span>
+                    |
+                    <span>ציוד קיים</span>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo clearfix">
+
+            @*@Html.Hidden("EquipmentID")*@
+
+
+
+            <div id="equip-search" class="equip-div">
+                <div class="datarow single">
+                    @Html.TextBox("EquipmentSrch", null, new { placeholder = "מספר מזהה ציוד או שם על פי לקוח" })
+                    <input id="SearchEquipmentBtn" style="min-width:50px;" type="button" value="חפש" class="buttondefault ">
+                </div>
+            </div>
+
+
+            <div id="equip-create" class="equip-div">
+                <form id="UpdateJobEquipmentForm" method="post" data-ajax="true">
+                    @Html.HiddenFor(model => Model.ClientID)
+                    <div class="formRow">
+                        <div class="datarow floatfirst ">
+                            <div class="fieldlabel">
+                                סוג ציוד*:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.Editor("MachineTypeID", "AutoComplete", new { options = ViewBag.MachineType, required = true })
+                                @Html.ValidationMessage("MachineTypeID", "יש לבחור סוג ציוד")
+                            </div>
+                        </div>
+
+                        <div class="datarow floatfirst ">
+                            <div class="fieldlabel">
+                                שם ציוד:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.TextBox("EquipmentTitle", null, new { placeholder = "על פי לקוח" })
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="formRow">
+                        <div class="datarow floatfirst ">
+                            <div class="fieldlabel">
+                                Rpm:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.TextBox("Rpm")
+                            </div>
+                        </div>
+                        <div class="datarow floatlast">
+
+                            @Html.Partial("~/Areas/Admin/Views/Machine/KwHp.cshtml", "")
+                        </div>
+                    </div>
+
+                    <div class="formRow">
+
+                        <div class="datarow floatfirst ">
+                            <div class="fieldlabel">
+                                כתובת:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.TextBox("Address")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="ForBtnDiv clearfix" style="text-align:left;padding">
+                        <input id="AddJobEquipment" type="button" value="הוסף" class="buttondefault Black">
+                    </div>
+
+                  
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">ציוד בעבודה</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo clearfix">
+
+            <table id="itemsTable">
+                <thead>
+
+
+                    <tr>
+
+                        <th>
+                            מזהה ציוד
+                        </th>
+                        <th>
+                            סוג ציוד
+                        </th>
+
+                        <th width="5px"></th>
+                    </tr>
+                </thead>
+                <tbody id="equip-items">
+
+                    @foreach (var item in Model.Equipments)
+            {
+                        <tr class="even" data-id="@item.JobEquipmentID">
+                            <td>
+                                @item.EquipmentDM.EquipmentName
+                            </td>
+                            <td>
+                                @item.EquipmentDM.MachineTypeLangStr
+                            </td>
+
+                            <td style="text-align:center">
+                                <span class="linktext deleteItem">מחק</span>
+                            </td>
+                        </tr>
+
+                    }
+
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+    </div>
+
+
+    <script src="~/Areas/Admin/Scripts/Job/JobEquipment.js"></script>

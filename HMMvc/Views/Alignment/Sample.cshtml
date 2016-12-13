@@ -1,0 +1,15 @@
+﻿@using Common
+@{
+    var title = GlobalDM.GetTransStr("JobType_Shivur") + "-" + GlobalDM.GetTransStr("A_SampleReport");
+    ViewBag.Title = title;
+}
+
+<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuMachine", "Menu");}
+</div>
+
+<div class="sitesubcontent corn_3 shadow">
+     <h1>@title</h1>
+   <img src="~/images/SampleLaser%20.png" />
+</div>
+<div class="clear"></div>

@@ -1,0 +1,125 @@
+﻿@model Common.RefubrishDetailsDM
+@{
+    ViewBag.Title = "JobDetails";
+}
+
+@*<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">לכבוד</div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo clearfix">
+
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    MachineName:
+                </div>
+                <div class="fieldvalue" dir="ltr">
+                    @Html.DisplayFor(model => model.MachineName)
+                </div>
+
+
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    עבודה:
+                </div>
+                <div class="fieldvalue" dir="ltr">
+                    06/@Html.DisplayFor(model => model.JobName)
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>*@
+<div class="VbTabBlock corn_3">
+
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">משימות שבוצעו בעבודה</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo" >
+        <div  style="overflow:auto; max-height:500px;">
+            @foreach (var part in Model.Parts)
+            {
+                <div id="pageContent" style="margin-bottom:15px;">
+                    <h3>@part.MachineTypeLangStr</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    קבוצה
+                                </th>
+                                <th>
+                                    תיאור
+                                </th>
+                                @*<th>
+                                    סוג
+                                </th>*@
+
+                                <th>
+                                    ערך/כמות
+                                </th>
+                                <th  width="1px">
+                                   
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{var i = 1;}
+                            @foreach (var item in part.Fields)
+                                {
+                                    var odd = i % 2 == 0 ? "odd" : "even";
+                                    i++;
+                                    var quant = string.IsNullOrEmpty(item.FieldTypeValue) ? "1" : item.FieldTypeValue;
+                            <tr class="@odd">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GroupName)
+                            </td>
+                            <td nowrap>
+                                @Html.DisplayFor(modelItem => item.FieldLabel)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.FieldTypeID)
+                            </td>*@
+                            <td>
+                                <span class="Quntity">@quant</span>
+                           
+                            </td>
+                            <td>
+                                @if (item.CatalogItemID.HasValue)
+                                {
+                                    <input type="button" value="הוסף" class="buttondefault" data-catalog="@item.CatalogItemID">
+                                }
+                            </td>
+
+                        </tr>
+                        }
+
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            }
+        </div> 
+    </div>
+
+</div>
+
+<script>
+    try {
+        setPopTitle('JobDetails', '@ViewBag.PopTitle',true);
+    } catch (e) {
+
+    }
+
+
+</script>

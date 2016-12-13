@@ -1,0 +1,117 @@
+﻿@model JobRefubrishPreTestDM
+@using Common
+@{
+    ViewBag.Title = "RefubrishPreTest_Title";
+}
+
+<h2>בדיקה לפני פירוק</h2>
+
+<script src="~/Scripts/xtra/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+@using (Ajax.BeginForm("PreTest", "AdminRefubrish", new AjaxOptions
+{
+    OnSuccess = "$.PreTest_OnSuccess(data);",
+    
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "target"
+}))
+{
+    <fieldset>
+        @Html.HiddenFor(model => model.JobRefubrish_StepID)
+        @Html.HiddenFor(model => model.JobID)
+        @Html.HiddenFor(model => model.EngtType)
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="display-label">
+            TempertureFrontIsOk
+        </div>
+        <div class="display-field">
+            <div class="fr" style=" width:25px; padding-left:30px;">
+                @Html.TextBoxFor(model => model.TempertureFrontValue)
+               
+            </div>
+            <div class="SwitchDiv fr" id="TempertureFrontIsOk">
+                @Html.HiddenFor(model => Model.TempertureFrontIsOk)
+               @Html.Partial("Switch", Model.TempertureFrontIsOk)
+                
+            </div>
+            <div class="clear"></div>
+            @Html.ValidationMessageFor(model => model.TempertureFrontValue)
+            @Html.ValidationMessageFor(model => Model.TempertureFrontIsOk)
+        </div>
+
+        <div class="display-label">
+            @GlobalDM.GetTransStr("RefubrishPreTest_TempertureBackIsOk") TempertureBackIsOk
+        </div>
+        <div class="display-field">
+            <div class="fr" style=" width:25px; padding-left:30px;">
+                @Html.TextBoxFor(model => model.TempertureBackValue)
+               
+            </div>
+            <div class="SwitchDiv fr" id="TempertureBackIsOk">
+                @Html.HiddenFor(model => Model.TempertureBackIsOk)
+                @Html.Partial("Switch", Model.TempertureBackIsOk)
+              
+            </div>
+            <div class="clear"></div>
+            @Html.ValidationMessageFor(model => model.TempertureBackValue)
+            @Html.ValidationMessageFor(model => Model.TempertureBackIsOk)
+        </div>
+       
+
+
+        @if (Model.EngtType == Common.EngtType.AC)
+        {
+            <div class="display-label">
+                @GlobalDM.GetTransStr("RefubrishPreTest_AC_BodyHeatFrontIsOk") AC_BodyHeatFrontIsOk
+            </div>
+            <div class="display-field">
+                @Html.EditorFor(model => model.AC_BodyHeatFrontIsOk)
+                @Html.ValidationMessageFor(model => model.AC_BodyHeatFrontIsOk)
+            </div>
+            <div class="display-label">
+                @GlobalDM.GetTransStr("RefubrishPreTest_AC_BodyHeatBackIsOk") AC_BodyHeatBackIsOk
+            </div>
+            <div class="display-field">
+                @Html.EditorFor(model => model.AC_BodyHeatBackIsOk)
+                @Html.ValidationMessageFor(model => model.AC_BodyHeatBackIsOk)
+            </div>
+        }
+        else
+        {
+            <div class="display-label">
+                @GlobalDM.GetTransStr("RefubrishPreTest_DC_TempertureFrontValue") DC_TempertureFrontValue
+            </div>
+            <div class="display-field">
+                @Html.TextBoxFor(model => model.DC_TempertureFrontValue)
+                @Html.ValidationMessageFor(model => model.DC_TempertureFrontValue)
+            </div>
+
+            <div class="display-label">
+                @GlobalDM.GetTransStr("RefubrishPreTest_DC_TempertureBackValue") DC_TempertureBackValue
+            </div>
+            <div class="display-field">
+                @Html.TextBoxFor(model => model.DC_TempertureBackValue)
+                @Html.ValidationMessageFor(model => model.DC_TempertureBackValue)
+            </div>
+        }
+
+
+        <div class="ForBtnDiv">
+            <input type="submit" class="buttondefault floatlast" value="שמור">
+            <input type="button" value="בדיקה נכשלה" class="buttondefault red floatlast" id="DeleteClientBtn">
+        </div>
+
+    </fieldset>
+}
+
+<script>
+    $(".SwitchDivInner").each(function (index, value) {
+
+        var checked = $(this).attr('data-val');
+      
+        $(this).find('.' + checked).click();
+    });
+</script>

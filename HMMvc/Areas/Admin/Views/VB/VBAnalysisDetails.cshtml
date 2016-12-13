@@ -1,0 +1,57 @@
+﻿@model Common.VbMachineDM
+@using Common;
+
+
+<script src="~/Scripts/Admin/VBAnalysisDetails.js"></script>
+<script>
+    
+   
+</script>
+<a class="BlockHeaderTitle " href="/Admin/#/Machine/@Model.MachineID /vb">
+    <h1>@Model.MachineName</h1>
+</a>
+<div id="VbTabMacDetails" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">הערות והיסטוריה</div>
+      
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockCont">
+         <div class="openTemplateBtn" >
+            <a href="/Admin/#/VB/VBEditJobTemplateNotes" class="linktext">ערוך תבניות</a>
+        </div>
+        <div class="row ">
+            <div class="b">
+                הערות בעברית:
+            </div>
+            <p id="GeneralNoteIL" class="italic">@Html.DisplayFor(model => model.GeneralNoteIL)</p>
+
+            <div class="b" style="margin-top: 5px;">
+                הערות באנגלית:
+            </div>
+            <p id="GeneralNoteEN" class="italic">@Html.DisplayFor(model => model.GeneralNoteEN)</p>
+
+        </div>
+        <div style="padding: 10px 0;">
+            <div class="row history">
+                <div class="b">היסטוריית הערות:</div>
+                @foreach (var hist in Model.NotesHisory)
+                {
+                    <div class="clear" style="margin-bottom: 3px;">
+                        <a class="fr linktext" href="/Admin/#/VB/VBAnalysis?JobID=2886" > @Html.DisplayFor(model => hist.JobStartDate) -</a>
+                        <div style="overflow: hidden;">@hist.GeneralNote</div>
+
+                    </div>
+              
+                }
+            </div>
+            <div class="row fr" style="width: 34%;">
+                <div class="b">טיפולים אחרונים:</div>
+                @Html.DisplayFor(model => model.LastTipul)
+            </div>
+
+            <div class="clear"></div>
+        </div>
+         <div class="clear"></div>
+    </div>
+</div>

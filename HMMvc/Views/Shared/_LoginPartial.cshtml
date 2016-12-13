@@ -1,0 +1,26 @@
+﻿@model Common.UserLayoutDM
+@using Common
+
+@if (Request.IsAuthenticated) {
+
+    <div class="siteHeaderUser">
+        <div class="floatfirst">
+            <span class="b">@Model.FullName,</span>
+            <span class="seperator">@Model.ClientName </span>
+        </div>
+        <div class="floatlast">
+            <img id="ChangeLangBtn" class="flag @Model.Lang"  />
+            <span class="linktext"><a href="/User/UserDetails">@GlobalDM.GetTransStr("Global_Pereferences")</a></span>
+            <span class="seperator">|</span>         
+            <span class="linktext">@Html.ActionLink(@GlobalDM.GetTransStr("Global_Exit"), "Logoff", "User")</span>  
+        </div>
+        <div class="clear"></div>
+    </div>
+}
+else
+{
+    <ul>
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

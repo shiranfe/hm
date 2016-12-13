@@ -1,0 +1,121 @@
+﻿@model JobTaskDM
+@using Common
+
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Scripts/Job/JobTask.js"></script>
+
+
+
+@Html.Partial("~/Areas/Admin/Views/Outside/JobOutsideInfo.cshtml", Model.JobDM)
+
+<div class="sitesubcontent corn_3 shadow">
+    <h2>פרטי משימה</h2>
+
+    <form id="UpdateJobTaskForm" method="post" data-ajax="true">
+
+        <input class="input-validation-error" data-val="true" data-val-number="The field JobID must be a number." data-val-required="The JobID field is required." id="JobID" name="JobID" type="hidden" value="@Model.JobID">
+        @Html.HiddenFor(model => Model.JobTaskID)
+        @Html.HiddenFor(model => Model.EmpNotes)
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">פרטים כלליים </div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            משימה:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => Model.TaskName)
+                            @Html.ValidationMessageFor(model => Model.TaskName)
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @*<div class="formRow">
+                        <div class="datarow floatfirst">
+                            <div class="fieldlabel">
+                                שלב:
+                            </div>
+                            <div class="fieldvalue">
+                                @Html.Editor("JobRefubrishStepID", "AutoComplete", new { options = ViewBag.Steps })
+
+                           </div>
+
+                        </div>
+
+                    </div>*@
+
+
+                <div class="formRow">
+
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            הערות לביצוע:
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                            <textarea id="ManagerNotes" class="TextBox" name="ManagerNotes" rows="2">@Model.ManagerNotes</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="formRow">
+                    <p>שיבוץ עובדים:</p>
+                    @{Html.RenderAction("TaskEmployess", "JobTaskEmployee", new { Model.JobTaskID });}
+                </div>
+
+                <div class="clear"></div>
+            </div>
+
+        </div>
+
+        @{ 
+            var groups = new List<StepGroupDM> {
+                new StepGroupDM { DynamicGroupID=1, GroupNameStr="כללי", Pid=-1,
+                    StepGroupFieldDMs =  new List<StepGroupFieldDM>
+                    {
+                        new StepGroupFieldDM { DynamicGroupFieldID=11, FieldNameStr = "עומס",  FieldTypeID= ControlType.CheckArea, currenValues = new List<StepGroupFieldValue> {  } },
+                        new StepGroupFieldDM { DynamicGroupFieldID=12, FieldNameStr = "ספר לי",FieldTypeID= ControlType.Text, currenValues = new List<StepGroupFieldValue> { new StepGroupFieldValue { FieldValue= "test" } } }
+                    }
+                },
+                new StepGroupDM { DynamicGroupID=2, GroupNameStr="בדיקות מגר",
+                    StepGroupFieldDMs =  new List<StepGroupFieldDM>
+                    {
+                        new StepGroupFieldDM { DynamicGroupFieldID=13,FieldNameStr = "תקין", FieldTypeID= ControlType.IsOk, currenValues = new List<StepGroupFieldValue> { } },
+                        new StepGroupFieldDM { DynamicGroupFieldID=14, FieldNameStr = "כמה יצא", FieldTypeID= ControlType.Integer, currenValues = new List<StepGroupFieldValue> { new StepGroupFieldValue { FieldValue= "55" } } }
+                    }
+                }
+            };
+        }
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">שדות</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+
+                @Html.Partial("TaskGroups", Model.TaskGroups)
+
+            </div>
+
+        </div>
+
+
+
+        <div class="ForBtnDiv clearfix">
+            <input id="UpdateJobTaskBtn" type="button" value="שמור" class="buttondefault floatlast">
+        </div>
+
+    </form>
+
+</div>
+<div class="clear"></div>

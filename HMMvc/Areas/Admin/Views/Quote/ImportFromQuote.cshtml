@@ -1,0 +1,139 @@
+﻿
+@model QuoteFilterDm
+@using Common
+@*<script>
+            tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Quote/importFromQuote.js")');  
+    </script>*@
+<script src="~/Areas/Admin/Scripts/Quote/importFromQuote.js"></script>
+
+@Html.Partial("~/Areas/Admin/Views/Quote/QuoteSearch.cshtml")
+  
+@*<div class="VbTabBlock corn_3 searchFields">
+
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">חיפוש הצעה</div>
+        
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        <div class="formRow">
+            <div class="datarow  single">
+                <div class="fieldlabel">
+                    חיפוש:
+                </div>
+                <div class="fieldvalue">
+                
+                    <input type="text" id="srch" placeholder="חפש" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+</div>*@
+
+<div class="VbTabBlock corn_3">
+
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">פריטים</div>
+        @if (Model.PageTotal > 0)
+            {
+            <div class="fl">עמוד @Model.Page מתוך @Model.PageTotal</div>
+        }
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div id="pageContent" class="VbTabBlockInfo" >
+       <div style="max-height:400px; overflow:auto">
+           <table>
+               <thead>
+                   <tr>
+                       <th>
+                           כותרת | לקוח
+                       </th>
+
+
+                       <th>
+                           מזהה | יוצר
+                       </th>
+                       <th width="1px"></th>
+                   </tr>
+               </thead>
+               @foreach (var group in Model.TableList.GroupBy(x => x.RelativeTime))
+            {
+
+                   <tbody>
+                       <tr class="odd group">
+                           <td colspan="6">
+                               @{var date = group.Key;//.ToString("dd/MM/yyyy dddd");
+                               }
+                               <b>@date </b>
+                           </td>
+                       </tr>
+                       @*@{var i = 1;}*@
+                       @foreach (var item in Model.TableList.Where(x => x.RelativeTime == group.Key))
+                       {
+
+
+                           <tr class="even" data-id="@item.CurrentVersionID">
+                               <td class="td1">
+                                   <a class="linktext openQuote" target="_blank" href="/Admin/#/QuoteVersion/Update?id=@item.CurrentVersionID">@Html.DisplayFor(modelItem => item.QuoteTitle)</a>
+                                   @if (item.IsCover)
+                                   {
+                                       <i>(הצעת כיסוי)</i>
+                                   }
+                                   @if (item.JobCardNumber.HasValue)
+                                   {
+                                       <i>- כ.ע @item.JobCardNumber</i>
+                                   }
+                                   @if (item.Comments != null)
+                                   {
+                                       <i>- @item.Comments</i>
+                                   }
+
+                                   <div>
+                                       @Html.DisplayFor(modelItem => item.ClientName)
+                                   </div>
+                               </td>
+
+                               <td nowrap>
+                                   <span class="linktext openItem">06/@item.QuoteID</span>
+                                   <div><i>@Html.DisplayFor(modelItem => item.Creator)</i></div>
+                               </td>
+
+                               <td>
+                                   <input type="button" class="buttondefault importQuote" value="ייבא">
+                               </td>
+                           </tr>
+                       }
+                   </tbody>
+                                   }
+
+
+           </table>
+      
+       </div>
+        @Html.Partial("~/Areas/Admin/Views/Shared/Pager.cshtml", (Pager)Model)
+    </div>
+
+</div>
+
+
+<style>
+    input[type=button].importQuote{
+        min-width:70px;
+    }
+</style>
+
+
+<script>
+    var destVersionID = @ViewBag.DestVersionID;
+    try {
+        setPopTitle('ImportFromQuote', '@ViewBag.PopTitle',true);
+    } catch (e) {
+
+    }
+</script>

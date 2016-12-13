@@ -1,0 +1,14 @@
+﻿@model Common.ClientDM
+
+
+    @if (Model.Machines.Any())
+    {
+        foreach (var mac in @Model.Machines)
+        {
+            <div class="MacMerge linktext MacName" data-id="@mac.MachineID">@mac.MachineName</div>
+        }
+    }
+    else
+    {
+        <div style="padding:10px;">לא נמצאו מכונות ללקוח זה</div>
+    }

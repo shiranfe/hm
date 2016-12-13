@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{04E879FE-1614-4CD7-9461-A4EF7EACCDF4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BL</RootNamespace>
+    <AssemblyName>BL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DAL\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alignment\JobAlignmentBL.cs" />
+    <Compile Include="Alignment\JobAlignmentPartBL.cs" />
+    <Compile Include="Bank\BankFieldBL.cs" />
+    <Compile Include="Bank\BankFieldModule.cs" />
+    <Compile Include="Bank\BankTaskBL.cs" />
+    <Compile Include="Bank\BankTaskModule.cs" />
+    <Compile Include="Bank\BankTask_FieldBL.cs" />
+    <Compile Include="Bank\BankTask_FieldModule.cs" />
+    <Compile Include="EmployeeLogBL.cs" />
+    <Compile Include="BugLogBL.cs" />
+    <Compile Include="Cahce\ICache.cs" />
+    <Compile Include="Cahce\EmployeeCache .cs" />
+    <Compile Include="Catalog\CatalogItemComponentBL.cs" />
+    <Compile Include="Catalog\CatalogBL.cs" />
+    <Compile Include="Catalog\ManufacturerBL.cs" />
+    <Compile Include="Catalog\ManufacturerModule.cs" />
+    <Compile Include="Client\ClientMove.cs" />
+    <Compile Include="Client\ContactModule.cs" />
+    <Compile Include="Dynamic\DynamicFieldBL.cs" />
+    <Compile Include="Employee\RoleBL.cs" />
+    <Compile Include="Equipment\EquipmentBL.cs" />
+    <Compile Include="Equipment\EquipmentModule.cs" />
+    <Compile Include="Equipment\EquipmentTechModule.cs" />
+    <Compile Include="FieldPool\FieldPoolModule.cs" />
+    <Compile Include="JobTask\JobTaskGroupBL.cs" />
+    <Compile Include="JobTask\JobTaskGroupFieldBL.cs" />
+    <Compile Include="JobTask\JobTaskGroupFieldModule.cs" />
+    <Compile Include="JobTask\JobTaskGroupModule.cs" />
+    <Compile Include="Job\JobEquipmentBL.cs" />
+    <Compile Include="Job\JobEquipmentModule.cs" />
+    <Compile Include="Job\JobRequestBL.cs" />
+    <Compile Include="JobTask\JobTaskBL.cs" />
+    <Compile Include="JobTask\JobTaskEmployeeBL.cs" />
+    <Compile Include="JobTask\JobTaskEmployeeModule.cs" />
+    <Compile Include="JobTask\JobTaskModule.cs" />
+    <Compile Include="Machine\MachineVB.cs" />
+    <Compile Include="Machine\MachinePartBL.cs" />
+    <Compile Include="Alignment\JobAlignmentModule.cs" />
+    <Compile Include="Alignment\JobAlignmentPartModule.cs" />
+    <Compile Include="Catalog\CatalogItemComponentModule.cs" />
+    <Compile Include="Client\ContactInfoModule.cs" />
+    <Compile Include="Dynamic\DynamicFieldModule.cs" />
+    <Compile Include="Catalog\CatalogItemModule.cs" />
+    <Compile Include="Employee\RoleModule.cs" />
+    <Compile Include="Machine\MachinePartModule.cs" />
+    <Compile Include="Outside\JobOutsideBL.cs" />
+    <Compile Include="Outside\JobOutsideModule.cs" />
+    <Compile Include="Quote\QuoteJobModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quote\QuoteTalkModule.cs" />
+    <Compile Include="Quote\QuoteVersionItemModule.cs" />
+    <Compile Include="Quote\QuoteVersionModule.cs" />
+    <Compile Include="_TemplateModule.cs" />
+    <Compile Include="Quote\QuoteModule.cs" />
+    <Compile Include="Catalog\SupplierProductModule.cs" />
+    <Compile Include="Quote\QuoteJobBL.cs" />
+    <Compile Include="Quote\QuoteTalkBL.cs" />
+    <Compile Include="Quote\QuoteTrackBL.cs" />
+    <Compile Include="Quote\QuoteVersionBL.cs" />
+    <Compile Include="Quote\QuoteVersionItemBL.cs" />
+    <Compile Include="Client\ContactBL.cs" />
+    <Compile Include="_TemplateBL.cs" />
+    <Compile Include="Quote\QuoteBL.cs" />
+    <Compile Include="Catalog\SupplierBL.cs" />
+    <Compile Include="Catalog\SupplierModule.cs" />
+    <Compile Include="Job\JobModule.cs" />
+    <Compile Include="Refubrish\RefebrishModule.cs" />
+    <Compile Include="Refubrish\RefubrishBL.cs" />
+    <Compile Include="Cahce\a1Cache.cs" />
+    <Compile Include="Cahce\CacheModule.cs" />
+    <Compile Include="Cahce\ClientCache.cs" />
+    <Compile Include="Cahce\LangCache.cs" />
+    <Compile Include="Cahce\VBCache.cs" />
+    <Compile Include="Client\ClientBL.cs" />
+    <Compile Include="AdminBL.cs" />
+    <Compile Include="Machine\EmployeeBL.cs" />
+    <Compile Include="Vb\ImportVBHtmlBL.cs" />
+    <Compile Include="Job\JobBL.cs" />
+    <Compile Include="Machine\MergeMachinesModule.cs" />
+    <Compile Include="Client\UserModule.cs" />
+    <Compile Include="Employee\EmployeeModule.cs" />
+    <Compile Include="LangModule.cs" />
+    <Compile Include="Vb\VbModule.cs" />
+    <Compile Include="Machine\MachineModule.cs" />
+    <Compile Include="Vb\VbmachineModule.cs" />
+    <Compile Include="Vb\ImportVBModule.cs" />
+    <Compile Include="_copy.cs" />
+    <Compile Include="Client\ClientModule.cs" />
+    <Compile Include="ServicesUnityExtension.cs" />
+    <Compile Include="Vb\VbBL.cs" />
+    <Compile Include="RequestBL.cs" />
+    <Compile Include="Machine\MachineBL.cs" />
+    <Compile Include="LangBL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Client\UserBL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{93ec8860-c695-4534-bcc8-a9b44fe00b71}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{7631ffd7-e8b4-4dcd-8b06-e33ed5c6bb7a}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{292af35a-a0e4-4cd5-abd4-9e7fe4882a48}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

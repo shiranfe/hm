@@ -1,0 +1,123 @@
+﻿@model CatalogItemComponentDM
+@using Common
+@{
+    List<ComponentTypeDM> allSrcs = ViewBag.AllSrcs;
+    var frstSrc = allSrcs.First();
+}
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Scripts/Catalog/CatalogItemComonent.js"></script>
+
+<script>
+    setPopTitle('CatalogItemComponent', '@ViewBag.PopTitle');
+</script>
+
+
+
+<form id="UpdateCatalogItemComponentForm" method="post" data-ajax="true">
+    @Html.HiddenFor(x => x.CatalogItemComponentID)
+    @Html.HiddenFor(x => x.CatalogItemID)
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv clearfix">
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            סוג :
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.DropDownList("ComponentTypeID", (SelectList)ViewBag.ComponTypes)
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            פריט:
+                        </div>
+
+                        <div class="fieldvalue">
+
+
+
+                            <select id="ComponentSrcID" name="ComponentSrcID">
+                                @foreach (var ops in allSrcs)
+                                {
+                                    var stl = ops.ComponentTypeID == Model.ComponentTypeID ?
+                                        "" : "style=display:none;";
+
+                                    var isSelected = Model.CatalogItemComponentID == 0 ?
+                                        frstSrc == ops : (ops.ComponentTypeID == Model.ComponentTypeID && Model.ComponentSrcID == ops.Id);
+
+                                    var Selected = isSelected ? "selected=selected" : "";
+
+
+                                    <option value="@ops.Id" data-type="@ops.ComponentTypeID"
+                                            data-cost="@ops.Cost.ToString("0.00")" data-price="@ops.Price.ToString("0.00")"
+                                            @stl @Selected>
+                                        @ops.Text
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            עלות ליח' :
+                        </div>
+
+                        <div class="fieldvalue money">
+                            <span id="ComponentCost">@Html.DisplayFor(model => Model.ComponentCost)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            מחיר ליח' :
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.ComponentPrice)
+                            @Html.ValidationMessageFor(model => model.ComponentPrice)
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            כמות:
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.Quantity)
+                            @Html.ValidationMessageFor(model => model.Quantity)
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            סה"כ :
+                        </div>
+
+                        <div class="fieldvalue money">
+                            <span id="sumPrice" class="b">@Html.DisplayFor(model => model.SumPrice)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ForBtnDiv">
+        <input type="button" value="שמור" class="buttondefault floatlast">
+        @Html.ValidationSummary(true)
+    </div>
+</form>

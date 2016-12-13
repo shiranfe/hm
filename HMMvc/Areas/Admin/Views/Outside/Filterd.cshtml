@@ -1,0 +1,183 @@
+﻿@model OutsideFilterDm
+@using Common
+
+<div class="VbTabBlockHeader">
+
+    <div class="BlockHeaderTitle">תוצאות</div>
+    @if (Model.PageTotal > 0)
+    {
+        <div class="fl">עמוד @Model.Page מתוך @Model.PageTotal</div>
+    }
+
+    <div class="clear"></div>
+</div>
+<div class="WhiteSep"></div>
+<div id="pageContent" style="padding:15px;">
+    @if (Model.TableList.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        קריאה (הצעה)
+                    </th>
+                    <th>
+                        שם עבודה
+                    </th>
+                    <th>
+                        לקוח
+                    </th>
+                    <th>
+                        עובדים
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.DueDate)
+                        </th>*@
+
+                </tr>
+            </thead>
+            @foreach (var group in Model.TableList.GroupBy(x => ((DateTime)x.JobDM.StartDate).Date))
+                {
+                <tbody>
+                    <tr class="odd group">
+                        <td colspan="6">
+                            @{var date = group.Key.ToString("dd/MM/yyyy dddd");}
+                            <b>@date</b>
+                        </td>
+                    </tr>
+
+                    @foreach (var item in Model.TableList.Where(x => ((DateTime)x.JobDM.StartDate).Date == group.Key))
+                    {
+                        //var odd = i % 2 == 0 ? "odd" : "even";
+                        //i++;
+                        var urlToGo = item.FirstPartID.HasValue ?
+                            "/Admin/#/Refubrish/" + item.FirstPartID : "/Admin/#/Outside/Update?id="+item.JobID;
+                        var jobName = item.JobDM.JobName ?? "-ללא כותרת-";
+                        <tr class="even" data-emp="@item.JobDM.CreatorID" data-id="@item.JobID">
+                            <td>
+                                <span class="linktextHover openItem">05/@Html.DisplayFor(modelItem => item.JobID)</span>
+                                @if (item.QuoteID.HasValue)
+                                {
+                                    <div>
+                                        <a class="linktextHover" href="/Admin/#/Quote/Get?id=@item.QuoteID">(06/@item.QuoteID)</a>
+                                    </div>
+
+                                }
+                            </td>
+                            <td nowrap>
+                                <div>
+                                    <a class="linktext" href="@urlToGo">@jobName</a>
+                                </div>
+                                @if (item.JobDM.Comments != null)
+                                {
+                                    <i> @item.JobDM.Comments </i>
+                                }
+                            </td>
+                            <td>
+                                <b class="linktextHover  EditClientBtn" data-id="@item.JobDM.ClientID">@item.JobDM.ClientName</b>
+
+                                <div>
+                                    <a class="linktextHover" >
+                                        @item.MachineName
+                                        @*@if (item.SKU != null)
+                                            {<span>
+                                                | <i>מק"ט:</i> @item.SKU
+                                            </span>
+
+                                            }
+                                            @if (item.MachineAddress != null)
+                                            {<span>
+                                                | <i>כתובת:</i> @item.MachineAddress
+                                            </span>
+
+                                            }*@
+
+                                        @*@if (!onePartJob)
+                                            {
+                                                <b>חלקים: </b>
+                                                foreach (var part in item.Parts)
+                                                {
+                                                    <span class="linktextHover Refubrishname" data-id="@part.id">@part.MachineTypeLangStr</span>
+                                                    if (part.MachinePartID != item.Parts.Last().MachinePartID)
+                                                    {
+                                                        <span>,  </span>
+                                                    }
+
+                                                }
+
+                                            }*@
+
+                                        <div>
+
+
+                                            @*@if (item.ClinetNotes != null)
+                                                {
+                                                    <b>תקלה:</b><i> @item.ClinetNotes </i>
+                                                }*@
+
+
+
+                                        </div>
+                                        <div>
+                                            <i> @item.Address (@item.Zone) </i>
+                                        </div>
+                                    </a>
+                                    @*@if (item.ReturningJobParentID.HasValue)
+                                        {
+                                            <div>
+                                                <b>@GlobalDM.GetTransStr("ReturningJob")</b>
+                                                <a class="red" href="/Admin/#/Refubrish/0?JobID=@item.ReturningJobParentID">05/@item.ReturningJobParentID</a>
+                                            </div>
+                                        }*@
+                                </div>
+                            </td>
+                            <td nowrap>
+                                <i>@Html.DisplayFor(modelItem => item.JobDM.Creator)</i>
+                                @*<div class="refubrish-status">
+                                        @Html.DisplayFor(modelItem => item.StatusTrans)
+                                    </div>*@
+
+                            </td>
+                        </tr>
+
+                        foreach (var task in item.JobDM.JobTasks)
+                        {
+                            var emps = string.Empty;
+
+                            foreach (var name in task.EmployeeStr)
+                            {
+                                emps += name + ", ";
+                            }
+
+                            emps = emps.Remove(emps.Length - 2);
+                            <tr class="even talk task " >
+
+                                <td colspan="4"> 
+                                    <a class="linktextHover" href="/Admin/#/JobTask/Update?id=@task.JobTaskID">
+                                        <span class="icon-small done"></span>
+                                        <b>@task.TaskName</b>
+                                        | <span class="">@emps</span>
+                                        <i class="task-time">@task.TaskTime.ToString("dddd, dd/MM HH:mm") </i>
+                                    </a>
+                                  
+                               
+                                </td>
+                                
+                            </tr>
+                        }
+
+
+                    }
+                </tbody>
+                                }
+
+        </table>
+        @Html.Partial("~/Areas/Admin/Views/Shared/Pager.cshtml", (Pager)Model)
+                                }
+                                else
+                                {
+                                    <div>לא נמצאו עבודות </div>
+                                }
+
+</div>
+<div class="clear"></div>

@@ -1,0 +1,63 @@
+﻿@model RefubrishFilterDm
+@using Common
+
+<script src="~/Areas/Admin/Scripts/Refubrish/index.js"></script>
+<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuMachine", "Menu");}
+</div>
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>@ViewBag.ClientName</h1>
+
+        </div>
+        
+        <div class="clear"></div>
+    </div>
+
+    <div>
+
+        <div class="VbTabBlock corn_3 searchFields">
+
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">חיפוש</div>
+                <div class="HeaderActions">
+                    <a class="linktext clear">נקה שדות</a>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            חיפוש:
+                        </div>
+                        <div class="fieldvalue">
+                            <input type="text" id="srch" placeholder="חפש" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="clear"></div>
+
+            </div>
+        </div>
+
+
+        <div id="innerContent" class="VbTabBlock corn_3">
+            @Html.Partial("~/Views/Refubrish/Filterd.cshtml", Model)
+
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+
+<style>
+    td {
+        line-height: 1.7;
+    }
+</style>

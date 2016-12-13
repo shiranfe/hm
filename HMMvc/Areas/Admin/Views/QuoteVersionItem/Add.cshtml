@@ -1,0 +1,70 @@
+﻿
+@{
+    var catalog = new SelectList(ViewBag.poolFields, "FieldPoolID", "FieldLabel");
+    var categoryItems = new SelectList(ViewBag.categoryItems, "TransStr", "TransStr", "CategoryID",-1);
+}
+<tr class="openOptions open add" data-id="0">
+
+    <td>
+        <div class="output">
+            <input type="button" value="חדש" class="buttondefault" />
+
+
+        </div>
+        <div class="input">
+            <input type="text" value="" name="ItemTitle" required placeholder="שם פריט">
+            <input type="hidden" value="" name="CatalogItemID">
+            <input type="hidden" value="" name="ItemSort">
+        </div>
+
+    </td>
+    <td>
+
+        <span class="input"><input type="text" value="1" name="ItemQuntity" required placeholder="כמות"></span>
+
+    </td>
+    <td class="money">
+        <span class="input"><input type="text" value="" name="ItemPricePerUnit" required placeholder="מחיר יחידה"></span>
+
+    </td>
+    <td class="money">
+        <span class="itemTotalPrice"></span>
+    </td>
+    <td></td>
+</tr>
+
+<tr class="options open add notes" data-id="0">
+    <td colspan="5">
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                @Html.Editor( "FieldPoolID","AutoComplete", new { options = catalog, placeHolder = "דגם" })
+                @*@Html.DropDownList("FieldPoolID", catalog, "דגם", new { placeholder = "דגם" })*@
+            </div>
+            <div class="datarow floatlast" style="display:none">
+                @Html.Editor("FieldValue", "AutoComplete", new { options =categoryItems })
+                @*<select id="FieldValue" name="FieldValue" placeholder="דגם" style="direction:ltr">
+        @foreach (var catItem in ViewBag.categoryItems)
+        {
+            <option value="@catItem.TransStr" data-extra="@catItem.CategoryID">@catItem.TransStr</option>
+        }
+    </select>*@
+
+                 
+            </div>
+        </div>
+
+        <textarea name="ItemNotes" placeholder="הערות" rows="1"></textarea>
+    </td>
+</tr>
+<tr class="options open add actions" data-id="0">
+
+    <td colspan="5">
+        @*<span class="linktext">> הכנס</span>*@
+        @*<span class="linktext move-row root">► סעיף ראשי</span>
+        <span class="linktext move-row child">תת סעיף ◄</span>*@
+        <input type="button" value="הוסף" class="fl saveItem Black buttondefault ">
+
+    </td>
+
+</tr>
+

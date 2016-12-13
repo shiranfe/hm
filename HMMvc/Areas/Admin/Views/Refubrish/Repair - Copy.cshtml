@@ -1,0 +1,287 @@
+﻿@model Common.JobRefubrishRepairDM
+
+<h2>תיקונים ועבודות מכאניות </h2>
+
+
+<script src="~/Scripts/xtra/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<style>
+
+</style>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.JobRefubrish_StepID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SandBlasting)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.SandBlasting)
+            @Html.ValidationMessageFor(model => model.SandBlasting)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OilReplacementFront)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.OilReplacementFront)
+            @Html.ValidationMessageFor(model => model.OilReplacementFront)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OilReplacementRearType)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.OilReplacementRearType)
+            @Html.ValidationMessageFor(model => model.OilReplacementRearType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OilReplacementRearUnit)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.OilReplacementRearUnit)
+            @Html.ValidationMessageFor(model => model.OilReplacementRearUnit)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OilReplacementRearRubberType)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.OilReplacementRearRubberType)
+            @Html.ValidationMessageFor(model => model.OilReplacementRearRubberType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BearingReplacementFront)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BearingReplacementFront)
+            @Html.ValidationMessageFor(model => model.BearingReplacementFront)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BearingReplacementRear)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BearingReplacementRear)
+            @Html.ValidationMessageFor(model => model.BearingReplacementRear)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BearingReplacementExtra)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BearingReplacementExtra)
+            @Html.ValidationMessageFor(model => model.BearingReplacementExtra)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BearingBaseRepairFront)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BearingBaseRepairFront)
+            @Html.ValidationMessageFor(model => model.BearingBaseRepairFront)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BearingBaseRepairRear)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BearingBaseRepairRear)
+            @Html.ValidationMessageFor(model => model.BearingBaseRepairRear)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpringsReplacementRear)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.SpringsReplacementRear)
+            @Html.ValidationMessageFor(model => model.SpringsReplacementRear)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpringsReplacementFront)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.SpringsReplacementFront)
+            @Html.ValidationMessageFor(model => model.SpringsReplacementFront)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroundingRingsInstallFront)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.GroundingRingsInstallFront)
+            @Html.ValidationMessageFor(model => model.GroundingRingsInstallFront)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroundingRingsInstallRear)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.GroundingRingsInstallRear)
+            @Html.ValidationMessageFor(model => model.GroundingRingsInstallRear)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WingReplacement)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.WingReplacement)
+            @Html.ValidationMessageFor(model => model.WingReplacement)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AxisAlignmentTest)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AxisAlignmentTest)
+            @Html.ValidationMessageFor(model => model.AxisAlignmentTest)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PivotRepairRear)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PivotRepairRear)
+            @Html.ValidationMessageFor(model => model.PivotRepairRear)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PivotRepairFront)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PivotRepairFront)
+            @Html.ValidationMessageFor(model => model.PivotRepairFront)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PT100InstallFront)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PT100InstallFront)
+            @Html.ValidationMessageFor(model => model.PT100InstallFront)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PT100InstallRear)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PT100InstallRear)
+            @Html.ValidationMessageFor(model => model.PT100InstallRear)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DisassembleAssembleCommissioning)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DisassembleAssembleCommissioning)
+            @Html.ValidationMessageFor(model => model.DisassembleAssembleCommissioning)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GrizrimReplacement)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.GrizrimReplacement)
+            @Html.ValidationMessageFor(model => model.GrizrimReplacement)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Welding)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Welding)
+            @Html.ValidationMessageFor(model => model.Welding)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BushingDressing)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BushingDressing)
+            @Html.ValidationMessageFor(model => model.BushingDressing)
+        </div>
+@if (Model.EngtType == Common.EngtType.AC)
+        {
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AC_FanShieldReplacement)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AC_FanShieldReplacement)
+            @Html.ValidationMessageFor(model => model.AC_FanShieldReplacement)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AC_ConnectionsReplacementNumber)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AC_ConnectionsReplacementNumber)
+            @Html.ValidationMessageFor(model => model.AC_ConnectionsReplacementNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AC_AltimeterOilReplacementLower)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AC_AltimeterOilReplacementLower)
+            @Html.ValidationMessageFor(model => model.AC_AltimeterOilReplacementLower)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AC_AltimeterOilReplacementUpper)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AC_AltimeterOilReplacementUpper)
+            @Html.ValidationMessageFor(model => model.AC_AltimeterOilReplacementUpper)
+        </div>
+}
+else
+{
+    <div class="editor-label">
+            @Html.LabelFor(model => model.DC_CollectorEngravingAndMikaCleaning)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DC_CollectorEngravingAndMikaCleaning)
+            @Html.ValidationMessageFor(model => model.DC_CollectorEngravingAndMikaCleaning)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DC_CoalReplacementHeight)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DC_CoalReplacementHeight)
+            @Html.ValidationMessageFor(model => model.DC_CoalReplacementHeight)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DC_CoalReplacementThickness)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DC_CoalReplacementThickness)
+            @Html.ValidationMessageFor(model => model.DC_CoalReplacementThickness)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DC_CoalReplacementWidth)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DC_CoalReplacementWidth)
+            @Html.ValidationMessageFor(model => model.DC_CoalReplacementWidth)
+        </div>
+}
+        
+
+
+        <div class="ForBtnDiv">
+            <input type="submit" class="buttondefault floatlast" value="שמור">
+            @*<input type="button" value="בדיקה נכשלה" class="buttondefault red floatlast" id="DeleteClientBtn">*@
+        </div>
+    </fieldset>
+}
+

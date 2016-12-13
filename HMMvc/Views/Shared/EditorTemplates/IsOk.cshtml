@@ -1,0 +1,25 @@
+﻿@model Common.StepGroupFieldDM
+@{
+    var field = Model;
+    var val = string.IsNullOrEmpty(field.HtmlValue) ? "" : field.HtmlValue.ToLower();
+    //var req = field.IsRequired ?
+    //         "data-val-required=" + field.FieldNameStr + " data-val=true" : "";
+}
+
+<div class="datarow IsOk floatfirst field">
+    <div class="fieldlabel">
+        <span>@field.FieldLabel</span>
+        <span class=" field-validation-valid" data-valmsg-replace="true" data-valmsg-for="@field.HtmlID"></span>
+
+    </div>
+    <div class="HtmlValue">
+        <div class="SwitchDiv fl">
+            <input type="hidden" value="@field.HtmlValue" id="@field.FieldNameStr"  name="@field.HtmlID" @ViewBag.Required>
+            <div class="SwitchDivInner clearfix" data-val="@val">
+                <div class="SwitchBtn true"><div class="Hand Ok"></div></div>
+                <div class="SwitchBtn false"><div class="Hand NotOk"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+

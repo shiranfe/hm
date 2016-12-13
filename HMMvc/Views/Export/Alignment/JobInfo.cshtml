@@ -1,0 +1,68 @@
+﻿@model JobAlignmentDM
+@using Common
+
+@{
+    var date = ((DateTime)(Model.JobDM.EndDate ?? Model.JobDM.StartDate)).ToShortDateString();
+}
+
+
+
+<div class="report-header-top">
+    <div class="SiteWidth ">
+        <div class="report-header-inner">
+            <label>@GlobalDM.GetTransStr("JobType_Shivur")</label>
+            <div>@date</div>
+        </div>
+
+    </div>
+
+</div>
+@*id="VbHtmInfo"*@
+<div>
+
+    <div class="report-header-bottom">
+        <div class="report-header-inner">
+            <div>@GlobalDM.GetTransStr("User_Customer"): <span class="b">@Model.JobDM.ClientName</span></div>
+            @if(Model.JobDM.ContactName!=""){
+                <div class="">@GlobalDM.GetTransStr("A_for"): <span class="b">@Model.JobDM.ContactName</span></div>
+            }
+
+            <div class="">@GlobalDM.GetTransStr("Job_JobID"): <span class="b">05/@Model.JobID</span></div>
+        </div>
+    </div>
+
+   <div class="tbl" style="border-spacing:2px 7px; height:120px;max-width:75%;">
+       @if (Model.MacPic != null)
+       {
+        <div class="SideHeaderInfoLabel tcTopMin" style="padding-top: 5px;">
+            <div class="MachineImg s1 " style="width:135px;">
+                <img alt="" src="@Url.Content(Model.MacPic)" />
+            </div>
+        </div>
+       }
+                   
+                    <div class="tcTop">
+                        <h1>@Model.JobDM.JobName</h1>
+                        
+                        <div class="SideHeaderInfoLabel">מכונה: <span class="SideHeaderInfoValue">@Model.MachineName</span></div>
+
+                        @*<pre class="black cke_editable" style="margin-bottom:20px;">@Html.Raw(Model.OpenNotes)</pre>*@
+
+                        @*<div>
+                            <div class="SideHeaderInfoLabel">
+                                חלקים בבדיקה:
+                                <span class="SideHeaderInfoValue">@GlobalDM.GetTransStr("EntityToUpdate_MachineType")</span>
+                                @{var i = 0;}
+                                @foreach (var part in Model.JobParts)
+                                {
+                                    <span class="SideHeaderInfoValue">, @part.MachineTypeLangStr</span>
+                                }
+                            </div>
+                        </div>*@
+
+                    </div>
+                </div>
+
+
+
+</div>

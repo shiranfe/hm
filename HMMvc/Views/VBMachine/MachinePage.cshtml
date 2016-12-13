@@ -1,0 +1,139 @@
+﻿@model Common.MachinePageDM
+@using Common;
+
+@{
+    ViewBag.Title = "MachinePage";
+}
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+
+
+@*<link href="~/Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />*@
+@*<link href="~/Content/bootstrap-select.css" rel="stylesheet" />*@
+<script src="~/Scripts/UI/bootstrap-select.js"></script>
+<script src="~/Scripts/UI/jquery.autosize.js"></script>
+<script src="~/Scripts/MachineVB/MachineVBPage.js"></script>
+<script src="~/Scripts/MachineVB/MachineVBTab.js"></script>
+
+<!--[if lte IE 8]>
+   <script src="~/Scripts/UI/excanvas.min.js"></script>
+    <![endif]-->
+
+<script src="~/Scripts/UI/jquery.flot.js"></script>
+<script src="~/Scripts/UI/jquery.flot.time.js"></script>
+<script src="~/Scripts/UI/jquery.jsort.0.4.js"></script>
+
+
+<script>
+    MachineID = '@Model.MachineID';
+    ActiveTab = '@ViewBag.ActiveTab';
+    JobID = '@Model.VBDetails.JobID';
+</script>
+
+<div class="VBMacPage">
+    <div id="StepsMenu">
+        <div class="SiteSideMenu menuInfoDiv  corn_3 shadow">
+            <div class="MachineImg s1 Schema">
+                <img alt="" src="@Url.Content(Model.VBDetails.MacPointPic)" />
+                @foreach (var p in Model.VBDetails.PointPicDMs.Where(x => x.HtmlX != null && x.ShowPoint))
+            {
+                var x = p.HtmlX + "px"; var y = p.HtmlY + "px";
+                    <div class="marker Sts-@p.StatusID" style="left: @x ; top: @y ;" data-id="@p.MachinePointID">@p.PointNumber</div>
+                }
+            </div>
+
+            <div class="MachinePageSideTitle MacName">@Model.MachineName</div>
+            <div class="MachinePageSideInfo">
+                <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("User_Customer"): <span class="SideHeaderInfoValue"><b>@Model.vwParentsName2</b></span></div>
+                <div class="SideHeaderInfoLabel">
+                    <p>
+                        @GlobalDM.GetTransStr("A_Date"): 
+                    </p>
+                 
+                   
+                    @*@Html.Editor("JobID", "AutoComplete", new { options = ViewBag.JobDates })*@
+                    <select id="DateCombo" class="DateCombo">
+                        @foreach (var dt in Model.VBDetails.JobDates)
+                        {
+                            var selected = (dt.IsSelected) ? "selected='selected'" : "";
+                            <option value="@dt.JobID" @selected>@Html.DisplayFor(model => dt.StartDate)</option>
+                        }
+
+                    </select>
+
+
+
+
+                </div>
+
+                @if (Model.VBDetails.Notes != null)
+            {
+                    <div class="SideHeaderInfoLabel">
+                        @GlobalDM.GetTransStr("MacVBTabDetails_GeneralNotesLabel"):
+                        <p class="SideHeaderInfoValue">@Html.DisplayFor(model => model.VBDetails.Notes)</p>
+                    </div>
+                }
+
+                <div class="SideHeaderInfoLabel">
+                    <p>
+                        @GlobalDM.GetTransStr("MacVBTabDetails_ClientNotes"):
+                    </p>
+                    <textarea id="ClientNoteTextBox" class="TextBox" rows="1" placeholder="הוסף משוב">@Model.VBDetails.ClientNotes</textarea>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="StepsDiv" class="">
+            <div class="blckRectangle"></div>
+            @{
+                var PointSelected = Model.VBDetails.PointSelected;
+            }
+
+            @foreach (var point in Model.VBDetails.PointPicDMs)
+            {
+                var sel = PointSelected.MachinePointID==point.MachinePointID ? "selected" : "";
+           
+
+                <div class="SiteSideMenu MacPointsPointListDiv corn_3 shadow  @sel clearfix" data-id="@point.MachinePointID">
+                    <a href="/#/VBMachine/@Model.VBDetails.JobID/@Model.MachineID/@point.MachinePointID">
+                        <div class="PointListFirst">
+                            <div class="PointListDivTitle MacPoints b">@GlobalDM.GetTransStr("Point") @point.PointNumber</div>
+                            <div class="MacPoints">@Html.DisplayFor(pointelemnt => point.LastDate)</div>
+                        </div>
+
+                        <div class="MacStsIcon StsIconBig Sts-@point.StatusID" data-txt="@point.Status"></div>
+                        @* <div class="PointListMid">@point.Status</div>*@
+                        <div class="clear"></div>
+                    </a>
+                   
+                </div>
+
+
+            }
+
+            @*<div class="SiteSideMenu corn_3 shadow Step clearfix" data-id="details">
+                <div class="icon"></div>
+                <div class="stepname SideHeaderInfoValue">פרטים כללים</div>
+            </div>*@
+
+        </div>
+
+    </div>
+   
+
+    <div id="pointPageContent" class="sitesubcontent corn_3 shadow">
+  
+        @Html.Partial("PointPage", Model.VBDetails)
+
+        
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+
+<script>
+    $("#ClientNoteTextBox").autosize();
+
+</script>

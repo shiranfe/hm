@@ -1,0 +1,12 @@
+﻿
+@{
+    var placeholder = string.Empty;
+    if (ViewData.ModelMetadata.Watermark !=null)
+    {
+        placeholder = ViewData.ModelMetadata.Watermark;
+    }
+}
+
+
+
+@*@Html.DropDownList("", ?????,new { placeholder = placeholder, @class = "TextBox" })*@

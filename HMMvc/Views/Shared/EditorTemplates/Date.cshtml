@@ -1,0 +1,21 @@
+﻿@model DateTime
+
+
+@{
+    var placeholder = string.Empty;
+    if (ViewData.ModelMetadata.Watermark !=null)
+    {
+        placeholder = ViewData.ModelMetadata.Watermark;
+    }
+}
+
+
+
+@Html.TextBox("", String.Format("{0:d}", Model.Date.ToShortDateString()), new { placeholder = placeholder, @class = "TextBox datefield" })
+
+<script>
+
+    $(function () {
+        $(".datefield").datepicker();
+    });
+</script>

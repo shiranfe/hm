@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Common.UserDM>
+
+    <table>
+        <thead>
+            <tr>
+
+
+                <th>
+                    שם מלא
+                </th>
+                <th>
+                    שם משתמש
+                </th>
+
+                <th>
+                    לקוח
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{var i = 1;}
+            @foreach (var item in Model)
+            {
+                var odd = i % 2 == 0 ? "odd" : "even";
+                i++;
+                <tr class="@odd" data-id="@item.UserID">
+
+                    <td>
+                        <span class="linktext openItem">@item.FullName</span>
+                    </td>
+                    <td>
+                        @item.Username
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td>
+                        <span class="linktext deleteItem">מחק</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    
+
+
+

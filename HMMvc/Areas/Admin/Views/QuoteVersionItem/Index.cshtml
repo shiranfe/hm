@@ -1,0 +1,45 @@
+﻿@model IEnumerable<QuoteVersionItemDM>
+@using Common
+
+<script>
+    tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Quote/QuoteVersionItem.js")');
+</script>
+@*<script src="~/Areas/Admin/Scripts/Quote/QuoteVersionItem.js"></script>*@
+
+<table id="itemsTable">
+    <thead>
+
+
+        <tr>
+
+            <th style="width:55%;">
+                @GlobalDM.GetTransStr("A_Item")
+            </th>
+            <th>
+                @GlobalDM.GetTransStr("A_Quanitity")
+            </th>
+            <th>
+                @GlobalDM.GetTransStr("A_PricePerUnit")
+            </th>
+            <th style="width:100px">
+                @GlobalDM.GetTransStr("A_TotalPrice")
+            </th>
+            <th width="5px"></th>
+        </tr>
+    </thead>
+    <tbody id="quote-items">
+        @*@{
+                    //var i = 1;
+                    var odd = "";
+            }*@
+        @foreach (var item in Model)
+        {
+            @Html.Partial("~/Areas/Admin/Views/QuoteVersionItem/Update.cshtml", item)
+
+        }
+
+    </tbody>
+   
+      @Html.Partial("~/Areas/Admin/Views/QuoteVersionItem/Add.cshtml")
+  
+</table>

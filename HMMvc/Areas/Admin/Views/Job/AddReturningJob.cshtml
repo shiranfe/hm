@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "AddReturningJob";
+}
+<script>
+    setPopTitle('AddReturningJob', '@ViewBag.PopTitle',true);
+</script>
+
+<p> הזן את מספר העבודה המקורית בכדי לשייך אליה את העבודה החוזרת </p>
+<div class="formRow">
+    <div class="datarow  single">
+        <div class="fieldlabel">
+            מספר עבודה מקורית:
+        </div>
+        <div class="fieldvalue keep-eng">
+            05/<input style="width:100px;" type="text" value="" id="ParentID" />
+        </div>
+    </div>
+</div>
+
+<div class="ForBtnDiv">
+    <input type="button" value="צור עבודה חוזרת" id="AddReturningJobBtn" class="buttondefault floatlast">
+    <div class="clear"></div>
+</div>
+
+<script>
+    $("#AddReturningJobBtn").click(function () {
+       
+        //console.log($("#ParentID").val());
+        location.href = "/Admin/#/Job/Details?jobType=Refubrish&IsReturning=true&JobID=" + $("#ParentID").val();
+        refreshPage();
+        //closePopup("popAddReturningJob");
+    });
+</script>

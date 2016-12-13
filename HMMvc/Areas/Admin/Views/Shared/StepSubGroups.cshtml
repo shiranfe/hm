@@ -1,0 +1,44 @@
+﻿@model StepGroupDM
+@using Common
+@{
+    StepGroupDM rootGroup = ViewBag.RootGroup;
+    List<StepGroupDM> allGroups = ViewBag.allGroups;
+
+    var subGroups = allGroups.Where(x => x.Pid == Model.DynamicGroupID);
+}
+
+@if (subGroups.Any())
+{
+    foreach (var sub in subGroups)
+    {
+        sub.StepGroupFieldDMs = rootGroup.StepGroupFieldDMs;
+        <div class="sub-group" data-id="@sub.DynamicGroupID">
+            <div class="sub-group-title corn_3">@sub.GroupNameStr</div>
+            @*@Html.Partial("StepGroupFields", sub)*@
+            @Html.Partial("~/Areas/Admin/Views/Shared/StepSubGroups.cshtml", sub)
+        </div>
+    }
+}
+else
+{
+    @Html.Partial("~/Areas/Admin/Views/Shared/StepGroupFields.cshtml", Model)
+    @*<div class="clearfix">
+
+        @foreach (var field in group.StepGroupFieldDMs)
+        {
+        var fieldType = field.FieldTypeID.ToString();
+        ViewBag.Required = field.IsRequired || group.IsRequired ?
+        "data-val-required=(*) data-val=true" : "";
+        @Html.EditorFor(model => field, fieldType)
+
+        if (addLineDivider && fieldType != "CheckArea")
+        {
+        <div class="lineDivider clear"></div>
+        }
+
+        addLineDivider = !addLineDivider;
+
+
+        }
+                            </div>*@
+}

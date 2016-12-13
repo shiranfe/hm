@@ -1,0 +1,64 @@
+﻿@model System.Collections.Generic.List<JobAlignmentDM>
+@using System.Linq
+@using Common
+
+<script src="~/Areas/Admin/Scripts/Alignment/alignmentIndex.js"></script>
+<h1>שיוורים</h1>
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">הסטוריית עבודות</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div style="padding:15px;">
+        @if (Model.Any())
+        {
+            <table id="VbHistoryTable" class="tablesorter">
+                <thead>
+                    <tr>
+                        <th style="width: 90px;">
+                            תאריך בדיקה
+
+                        </th>
+                        <th>
+                            עבודה
+                        </th>
+                        <th>
+                            לקוח
+                        </th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @{var i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        var odd = i % 2 == 0 ? "odd" : "even";
+                        i++;
+            
+                        <tr class="@odd">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobDM.StartDate)
+                            </td>
+                            <td>
+                                <a class="linktext" href="/#/Alignment/Update?PartID=@item.FirstPartID">@Html.DisplayFor(modelItem => item.JobDM.JobName)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobDM.ClientName)
+                            </td>
+                          
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+                        }
+                        else
+                        {
+                            <div>לא נמצאו בדיקות במערכת</div>
+                        }
+    </div>
+
+</div>
+

@@ -1,0 +1,20 @@
+﻿
+@{
+    var placeholder = string.Empty;
+    if (ViewData.ModelMetadata.Watermark !=null)
+    {
+        placeholder = ViewData.ModelMetadata.Watermark;
+    }
+
+    var htmlAttributes = ViewData;
+    htmlAttributes["class"] = "TextBox textarea";
+    htmlAttributes["placeholder"] = placeholder;
+}
+
+    @*@Html.TextArea("", ViewData.TemplateInfo.FormattedModelValue.ToString(), new { placeholder, @class = "TextBox textarea" })*@
+
+    @Html.TextArea(
+    "", 
+    ViewData.TemplateInfo.FormattedModelValue.ToString(),
+    htmlAttributes
+) 

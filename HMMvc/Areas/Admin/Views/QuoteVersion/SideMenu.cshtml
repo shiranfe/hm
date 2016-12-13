@@ -1,0 +1,86 @@
+﻿@model QuoteDM
+@using Common
+<div class="SiteSideMenu menuInfoDiv corn_3 shadow clearfix">
+
+
+
+    <div class="SideHeaderInfos">
+        <h1>@GlobalDM.GetTransStr("Quot")</h1>
+        
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Quote_Title"): <span class="SideHeaderInfoValue linktext EditIcon"><b>@Html.DisplayFor(model => model.QuoteTitle)</b></span></div>
+       @if (Model.JobCardNumber.HasValue)
+       {
+
+        <div class="SideHeaderInfoLabel">כרטיס עבודה:<span class="SideHeaderInfoValue">@Model.JobCardNumber</span></div>
+       }
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("QuoteNumber"):<span class="SideHeaderInfoValue">06/@Model.QuoteID</span></div>
+         
+   
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("User_Customer"): <span class="SideHeaderInfoValue">@Model.ClientName</span></div>
+        <div class="SideHeaderInfoLabel">יוצר: <span class="SideHeaderInfoValue">@Model.Creator</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("A_for"): <span class="SideHeaderInfoValue">@Model.ContactName</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Machine_Status"): <span class="SideHeaderInfoValue linktext openTrack" data-id="@Model.QuoteID">@Model.Status</span></div>
+
+
+        <div class="SideHeaderInfoLabel tbl" style="border-spacing:0;">
+
+            <div class="tc">@Html.DropDownList("Versions")</div>
+            <div id="addVersion" class="tcTopMin">
+                <div class="plusBtn"></div>
+            </div>
+
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.JobName))
+    {
+        <div class="" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #d9d9d9;">
+            @*<div class="absIcons">
+                    <a class="rec-icon ReportIcon EditIcon" href="/Admin/#/Refubrish/Refubrish?JobRefubrishPartID=@Model.JobRefubrishPartID" title="עריכה"></a>
+                </div>*@
+
+            <div class="SideHeaderInfos">
+                <h1>פרטי עבודה</h1>
+                <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("A_Job"): <a class="SideHeaderInfoValue linktext" href="/Admin/#/Refubrish/@Model.JobRefubrishPartID">@Model.JobName</a></div>
+                <div class="SideHeaderInfoLabel">מספר עבודה: <span class="SideHeaderInfoValue" id="JobID">05/@Model.JobID</span></div>
+                <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("A_Date"): <span class="SideHeaderInfoValue">@Html.DisplayFor(model => Model.JobDate)</span></div>
+                <div class="SideHeaderInfoLabel">סטטוס עבודה: <span class="SideHeaderInfoValue">@Html.DisplayFor(model => Model.JobStatus)</span></div>
+
+                @if (Model.MachineDM != null)
+                {
+                    <div class="SideHeaderInfoLabel">מכונה: 
+                        <a class="SideHeaderInfoValue linktext" href="/Admin/#/Machine/@Model.MachineDM.MachineID">@Model.MachineDM.MachineName</a>
+                
+                </div>
+
+                    <div class="SideHeaderInfoLabel">
+                        <div class="MachineImg s1 Side">
+                            <img alt="" src="@Url.Content(Model.MachineDM.MacPic)" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="SideHeaderInfoLabel">
+                            חלקים בטיפול:
+                            @{var i = 0;}
+                            @foreach (var part in Model.MachineDM.Parts)
+                            {
+                                var comma = i > 0 ? "," : ""; i++;
+                                <span class="SideHeaderInfoValue">@comma@part.MachineTypeLangStr</span>
+                            }
+                        </div>
+                    </div>
+                 }
+
+
+            </div>
+
+        </div>
+    }
+
+    <div class="SideHeaderBack">
+        <span class="linktext">
+            <a href="/Admin/#/Quote">חזור</a>
+        </span>
+    </div>
+</div>

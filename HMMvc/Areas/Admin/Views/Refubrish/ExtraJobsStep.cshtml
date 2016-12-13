@@ -1,0 +1,27 @@
+﻿@model Common.BasicStepDM
+<h2>סיום עבודה</h2>
+<form id="UpdateStepForm" method="post" data-ajax="true">
+    @Html.ValidationSummary(true)
+    <input type="hidden" id="JobRefubrish_StepID" name="JobRefubrish_StepID" value="@Model.JobRefubrish_StepID" />
+    <input type="hidden" id="JobID" name="JobID" value="@Model.JobID" />
+    <input type="hidden" id="JobRefubrishStepID" name="JobRefubrishStepID" value="@Model.JobRefubrishStepID" />
+    <input type="hidden" id="NextStep" name="NextStep" value="@Model.NextStep" />
+    <div class="VbTabBlock corn_3 clearfix">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">עבודות נוספות</div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="StepDetailsDiv VbTabBlockInfo clearfix">
+            <div class="datarow floatfirst single">
+                <input id="UpdateStepBtn1" type="button" class="buttondefault" value="איזון דינמי">
+            </div>
+            <div class="datarow floatfirst single">
+                <input id="UpdateStepBtn2" type="button" class="buttondefault" value="שיוור בלייזר">
+            </div>
+
+        </div>
+    </div>
+    <div class="ForBtnDiv">
+        <input id="UpdateStepBtn" type="button" class="buttondefault floatlast" value="סגור עבודה">
+    </div>
+</form>

@@ -1,0 +1,72 @@
+﻿
+@model IEnumerable<JobTaskEmployeeDM>
+@using Common
+
+<script>
+    tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Job/JobTaskEmployee.js")');
+</script>
+
+    <table id="itemsTable">
+        <thead>
+
+
+            <tr>
+
+                <th>
+                    עובד
+                </th>
+                <th>
+                    התחלה
+                </th>
+                <th>
+                    סיום
+                </th>
+                <th width="5px"></th>
+            </tr>
+        </thead>
+        <tbody id="emp-items">
+            
+            @foreach (var item in Model)
+            {
+                <tr class="even" data-id="@item.JobTaskEmployeeID">
+                    <td>
+                        @item.EmployeeName
+                    </td>
+                    <td>
+                        @item.VisitStart.ToString("dd/MM/yyyy HH:mm")
+                    </td>
+                    <td>
+                        @item.VisitEnd.ToString("dd/MM/yyyy HH:mm")
+                    </td>
+                    <td style="text-align:center">
+                        <span class="linktext delete">מחק</span>
+                    </td>
+                </tr>
+
+            }
+           
+
+        </tbody>
+        <tfoot>
+            <tr  data-id="-1">
+                <td>
+                    @Html.Editor("EmployeeID", "AutoComplete", new { options = ViewBag.Employee, placeHolder = "בחר עובד" })
+                </td>
+                <td>
+                    <div class="OuterSelect date">
+                        <input id="VisitStart" class="DatePicker" name="VisitStart" value="" placeholder="בחר זמן התחלה" />
+                    </div>
+
+                </td>
+                <td>
+                    <div class="OuterSelect date">
+                        <input id="VisitEnd" class="DatePicker" name="VisitEnd" value="" placeholder="בחר זמן סיום" />
+                    </div>
+                </td>
+                <td>
+                    <input id="AddTaskEmployee" style="min-width:50px;" type="button" value="הוסף" class="buttondefault ">
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>

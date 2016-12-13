@@ -1,0 +1,186 @@
+﻿@model Common.ClientDM
+@using Common
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    setPopTitle('Client', '@ViewBag.PopTitle');
+
+    clientID = @Model.ClientID;
+    
+
+</script>
+
+<script src="~/Areas/Admin/Scripts/ClientSettings/ClientUpdate.js"></script>
+
+<form id="UpdateClientForm" method="post" data-ajax="true">
+
+    @Html.HiddenFor(x => x.ClientID)
+
+    @Html.HiddenFor(x => x.IsManufacture)
+    @Html.HiddenFor(x => x.HasVbService)
+    <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv">
+                <div class="formRow">
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel b">
+                            שם הלקוח(עברית):
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.ClientName)
+                            @Html.ValidationMessageFor(model => model.ClientName)
+                        </div>
+                    </div>
+                    <div class="datarow  floatfirst">
+                        <div class="fieldlabel">
+                            שם הלקוח(אנגלית):
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                            @Html.EditorFor(model => model.ClientNameEnglish)
+                            @Html.ValidationMessageFor(model => model.ClientNameEnglish)
+                        </div>
+                    </div>
+                </div>
+             
+                <div class="formRow">
+                   
+                    <div class="datarow  single">
+                        @*<div class="fieldlabel">
+                            שייך ל:
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                         
+
+                            @Html.DropDownList("ClientParentID", (SelectList)ViewBag.Client, string.Empty)
+                        </div>*@
+                        @{ ViewBag.Container = "#popUpdateClient";
+                            ViewBag.HideAdd = true;
+
+                            ViewBag.Label = "שייך ל";
+                            ViewBag.InputName = "ClientParentID";
+                            }
+                        @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml", new JobDM { ClientParentID = Model.ClientParentID, Clients = ViewBag.Client })
+
+
+                    </div>
+                </div>
+
+
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            מזהה ברווחית:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.AccountingID)
+                        </div>
+                    </div>
+                    <div class="datarow  floatlast">
+                        <div class="fieldlabel">
+                            ח"פ:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.ChatPeyID)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    @{ ViewBag.ShowPersonal = false;}
+                    @Html.Partial("ConactInfoDetails", Model)
+
+
+                </div>
+           
+
+                <div class="formRow" >
+                    <div class="datarow floatfirst ">
+                        @if (Model.ClientID > 0)
+                        {
+                            @Html.Partial("ClientSelectedLogo", new ViewDataDictionary(Model))
+                        }
+                    </div>
+                    <div class="datarow floatfirst ">
+                        <div class="floatfirst">
+                            <div class="fieldvalue" style="padding-left:0px">
+                                @Html.EditorFor(model => model.IsClient)
+                            </div>
+                            <div class="fieldlabel">
+                                הצג בלקוחות
+                            </div>
+
+                        </div>
+                        <div class="floatfirst">
+                            <div class="fieldvalue" style="padding-left:0px">
+                                @Html.EditorFor(model => model.IsSupplier)
+                            </div>
+                            <div class="fieldlabel">
+                                הצג בספקים
+                            </div>
+
+                        </div>
+                        <div class="floatfirst">
+                            <div class="fieldvalue" style="padding-left:0px">
+                                @Html.EditorFor(model => model.ShowInVb)
+                            </div>
+                            <div class="fieldlabel">
+                                הצג בבדיקת רעידות
+                            </div>
+
+                        </div>
+                        <div class="floatfirst">
+                            <div class="fieldvalue" style="padding-left:0px">
+                                @Html.EditorFor(model => model.ShowInRefubrish)
+                            </div>
+                            <div class="fieldlabel">
+                                הצג בתיקונים
+                            </div>
+
+                        </div>
+                    </div>
+                 
+
+                </div>
+
+
+
+
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">אנשי קשר</div>
+            <div class="HeaderActions">
+                <input id="AddContactBtn" type="button" class="buttondefault Black" value="הוסף איש קשר">
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo" id="userDiv">
+  @if (Model.ClientID > 0)
+  {
+      Html.RenderAction("ClientContacts", "Contact", new { ClientID = Model.ClientID });
+  }
+      
+      
+        </div>
+
+    </div>
+     
+
+    <div class="ForBtnDiv">
+        @Html.ValidationSummary(true)
+
+        <input type="button" value=@GlobalDM.GetTransStr("A_Save") class="buttondefault floatlast">
+    </div>
+
+</form>

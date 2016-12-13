@@ -1,0 +1,91 @@
+﻿@model List<Common.ClientDM>
+
+@{
+    ViewBag.Title = "ספקים";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Areas/Admin/Scripts/Catalog/Suppliers.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow clearfix">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>ספקים</h1>
+        </div>
+        <div class="HeaderActions">
+            <input id="AddItemBtn" type="button" class="buttondefault" value="ספק חדש" />
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">חיפוש</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow  single">
+                    <div class="fieldlabel">
+                        חיפוש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input type="text" id="srch" placeholder="חפש" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="VbTabBlock corn_3">
+
+        <div class="VbTabBlockHeader">
+            <div class="BlockHeaderTitle">פריטים</div>
+            <div class="clear"></div>
+        </div>
+        <div class="WhiteSep"></div>
+        <div id="pageContent" class="VbTabBlockInfo">
+        
+                <table>
+                    <tr>
+                        <th>
+                            ספק
+                        </th>
+
+
+                        <th></th>
+                    </tr>
+                    @{var i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        var odd = i % 2 == 0 ? "odd" : "even";
+                        i++;
+                        <tr class="@odd" data-id="@item.ClientID">
+
+                            <td>
+                                <span class="linktext openItem">@item.ClientName</span>
+                            </td>
+
+
+                            <td>
+                                <span class="linktext deleteItem">מחק</span>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+           
+        </div>
+
+    </div>
+    
+
+</div>
+

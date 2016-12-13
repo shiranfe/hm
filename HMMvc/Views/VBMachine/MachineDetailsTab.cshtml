@@ -1,0 +1,183 @@
+﻿@model Common.MachineDetailsDM
+@using Common;
+@{
+    Layout = "";
+}
+
+<div class="PageContHeader">
+    <div class="PageContHeaderTitle">
+       @* <h3>@GlobalDM.GetTransStr("GeneralDetailsFor"): @Html.DisplayFor(model => model.MachineName)</h3>*@
+    </div>
+    <div class="HeaderActions"></div>
+    <div class="clear"></div>
+</div>
+<div class="VbTab">
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.MachineID)
+        <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("Description")</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Machine_MachineName"):
+                    </div>
+                    <div class="fieldvalue ">
+                        @Html.DisplayFor(model => model.MachineName)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+
+                    <div class="VBSKUDiv fieldlabel">
+                        @GlobalDM.GetTransStr("Machine_SKU"):
+                    </div>
+                    <div class="fieldvalue">
+                        <span id="SKUText" >@Html.DisplayFor(model => model.SKU)</span><span id="EditSKUBtn" class="ToggleSKUBtn linktext EditLink">@GlobalDM.GetTransStr("A_Edit")</span>
+                        <div id="EditSKUDiv" class="dn">
+                           
+                                <textarea id="SKUTextBox" class="TextBox" rows="1"></textarea>
+                          
+                            <div class="BtnDiv">
+                                <span id="CancelSKUBtn" class="ToggleSKUBtn linktext">@GlobalDM.GetTransStr("A_Cancel")</span>
+                                <input id="SaveSKUBtn" class="buttondefault LitBtn" type="button" value="@GlobalDM.GetTransStr("A_Save")">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("User_Branch"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.ClientName)
+                    </div>
+                </div>
+                <div class="datarow double floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Description"): 
+                    </div>
+                    <div class="VBDetailsDiv fieldvalue">
+                       <span id="DetailsText">@Html.DisplayFor(model => model.Details)</span><span id="EditDetailsBtn" class="ToggleDetailsBtn linktext EditLink">@GlobalDM.GetTransStr("A_Edit")</span>
+                        <div id="EditDetailsDiv" class="dn">
+                           
+                            <textarea id="DetailsTextBox" class="TextBox" rows="1"></textarea>
+                          
+                            <div class="BtnDiv">
+                                <span id="CancelDetailsBtn" class="ToggleDetailsBtn linktext">@GlobalDM.GetTransStr("A_Cancel")</span>
+                                <input id="SaveDetailsBtn" class="buttondefault LitBtn" type="button" value="@GlobalDM.GetTransStr("A_Save")">
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <div id="VbTabMacPoints" class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("Specifications")</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Type"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.MachineTypeLangStr)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Manufacturer"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.Manufacturer)
+                    </div>
+                </div>
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Machine_Model"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.MachineModel)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Machine_EngPower"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.EngPowerW)
+                    </div>
+                </div>
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("PointInfo_Bearing"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.Bearing)
+                    </div>
+                </div>
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Machine_BearingSpeed"):
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.BearingSpeedCPM)
+                    </div>
+                </div>
+                @if (Model.ShowBearingMachineType)
+                {
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            @GlobalDM.GetTransStr("Machine_Bearing") - @GlobalDM.GetTransStr(Model.MachineType)
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.DisplayFor(model => model.BearingMachineType)
+                        </div>
+                    </div>
+            }
+
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("EntityToUpdate_EngType") :
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.DisplayFor(model => model.EngTypeLangStr)
+                    </div>
+                </div>
+
+                <div class="datarow floatfirst double">
+                    <div class="fieldlabel">
+                        @GlobalDM.GetTransStr("Machine_LastFixes"):
+                    </div>
+                    <div class="fieldvalue">
+                        <span id="CommentsText">@Html.DisplayFor(model => model.Comments)</span><span id="EditCommentsBtn" class="ToggleCommentsBtn linktext EditLink">@GlobalDM.GetTransStr("A_Edit")</span>
+                        <div id="EditCommentsDiv" class="dn">
+                            
+                                <textarea id="CommentsTextBox" class="TextBox" rows="1"></textarea>
+                            
+                            <div class="BtnDiv">
+                                <span id="CancelCommentsBtn" class="ToggleDetailsBtn linktext">@GlobalDM.GetTransStr("A_Cancel")</span>
+                                <input id="SaveCommentsBtn" class="buttondefault LitBtn" type="button" value="@GlobalDM.GetTransStr("A_Save")">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,48 @@
+﻿@model Common.JobDM
+<script>
+     jobType = "@Common.JobType.Outside";
+    //idName = "#JobOutsideDM_MachineID";
+   
+</script>
+<div class="VbTabBlock corn_3">
+    @*@Html.HiddenFor(model => Model.JobOutsideDM.MachineID)*@
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">פרטי עבודת חוץ </div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo clearfix">
+
+        <div class="formRow">
+            <div class="datarow single">
+                <div class="fieldlabel">
+                    כתובת:
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => Model.JobOutsideDM.Address, "GoogleAddress")
+                </div>
+            </div>
+
+        </div>
+        <div class="formRow">
+            
+            <div class="datarow ">
+                <div class="fieldlabel">
+                    אזור:
+                </div>
+                <div class="fieldvalue">
+                    @Html.HiddenFor(model => Model.JobOutsideDM.Zone)
+                    <input disabled="disabled" id="Zone" type="text" value="@Model.JobOutsideDM.Zone" >
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $.LoadMachineParts = function () {
+
+    }
+</script>

@@ -1,0 +1,68 @@
+﻿@model List<RefubrishDM>
+@using Common
+
+
+<h1>תיקונים</h1>
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">הסטוריית עבודות</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div id="pageContent" class="VbTabBlockInfo">
+        @if (Model.Any())
+        {
+             <table>
+                        <tr>
+                           
+                            <th>
+                                שם העבודה
+                            </th>
+                          
+                            <th>
+                              תאריך
+                            </th>
+           
+                            @*<th>
+                               סטטוס
+                            </th>*@
+                           
+
+                        </tr>
+
+                        @{var i = 1;}
+                        @foreach (var item in Model)
+                        {
+                            var odd = i % 2 == 0 ? "odd" : "even";
+                            i++;
+                            var id = item.Parts.First().id;
+                            <tr class="@odd">
+                                
+                                <td>
+                                    <a href="/#/Refubrish/Details?JobRefubrishPartID=@id" class="linktext">@item.JobName</a>
+                                </td>
+                              
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                </td>
+                             
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.StatusTrans)
+                                </td>*@
+                              
+
+                            </tr>
+ 
+                        }
+
+                    </table>
+
+        }
+        else
+        {
+            <div>לא נתבצעו עבודות עבור מכונה זו</div>
+        }
+
+    </div>
+</div>
+

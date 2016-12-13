@@ -1,0 +1,51 @@
+﻿@model Common.VbReportDM
+@using Common
+
+@{
+    var date = ((DateTime)Model.JobDM.StartDate).ToShortDateString();
+}
+
+
+
+<div class="report-header-top">
+    <div class=" SiteWidth ">
+        <div class="report-header-inner">
+            <label>@GlobalDM.GetTransStr("JobType_Vibration")</label>
+            <div>@date</div>
+        </div>
+
+    </div>
+
+</div>
+
+<div>
+
+    <div class="report-header-bottom">
+        <div class="report-header-inner">
+            <div>@GlobalDM.GetTransStr("User_Customer"): <span class="b">@Model.JobDM.ClientName</span></div>
+            @if (Model.JobDM.ContactName != null)
+            {
+                <div class="">@GlobalDM.GetTransStr("A_for"): <span class="b">@Model.JobDM.ContactName</span></div>
+            }
+
+            <div class="">@GlobalDM.GetTransStr("Job_JobID"): <span class="b">05/@Model.JobDM.JobID</span></div>
+        </div>
+    </div>
+
+    <div class="tbl" style="border-spacing:2px 7px;">
+        <div class="SideHeaderInfoLabel tcTopMin">
+            <div id="VbHtmInfoFirst">
+                <div class="VbHtmIcon"></div>
+            </div>
+        </div>
+        <div class="tcTop">
+            <h1>@Model.JobDM.JobName</h1>
+            <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("EmployeeRole_Tester"): <span class="SideHeaderInfoValue">@Model.TesterName</span></div>
+            <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("EmployeeRole_Analyzer"): <span class="SideHeaderInfoValue">@Model.AnalyzerName</span></div>
+            <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Request_Priority"): <span class="SideHeaderInfoValue">@Model.JobDM.Urgency</span></div>
+        </div>
+    </div>
+
+    
+
+</div>

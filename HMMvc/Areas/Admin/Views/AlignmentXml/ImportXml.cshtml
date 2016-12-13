@@ -1,0 +1,33 @@
+﻿
+<style>
+    input[type="submit"], input[type="button"] { padding: 5px; float: right; width: auto; min-width: 100px; }
+</style>
+@*<script src="~/Scripts/UI/jquery.scrollTo-min.js"></script>
+<script src="~/Scripts/UI/jquery.fineuploader-3.0.js"></scrip*@t>
+<script src="~/Areas/Admin/Scripts/Alignment/ImportAlignmentXml.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "VB", ShowTree = true });}
+</div>*@
+<div class="importsubcontent">
+
+    <div id="Step1" class="ImportStep shadow">
+        <h2>שלב 1 - טעינת קובץ</h2>
+        <p>
+            לחץ להעלאת קובץ דוח שיוור בפורמט xml
+        </p>
+        @using (Html.BeginForm("UploadXml", "AlignmentXml", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="file" />
+            <input type="submit" value="Upload" />
+        } 
+        <div id="FileUpload1" class="linktext FileUpload"><input type="button" id="imprt" value="בחר קובץ" /></div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="Step2" class="ImportStep shadow" style="display:none;"></div>
+    <div id="Step3" class="ImportStep shadow" style="display:none;"></div>
+    <div id="Step4" class="ImportStep shadow" style="display:none;"></div>
+
+</div>
+<div class="clear"></div>

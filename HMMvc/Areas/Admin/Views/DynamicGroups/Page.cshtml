@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "DynamicFields";
+   
+}
+
+
+<script src="~/Areas/Admin/Scripts/DynamicFields/DynamicFields.js"></script>
+<style>
+   
+</style>
+
+<div id="navigator" style="padding:1px; float:right; margin-left:30px; width:206px;">
+    <div class="SiteSideMenu  corn_3 shadow" style="position:fixed;">
+        <ul>
+            @*<li>
+                <select id="DynamicObject">
+                    <option value="MachineType" selected="selected">פרטים טכניים </option>
+                    <option value="RefubrishStep">פרטי כרטיס עבודה</option>
+
+                </select>
+            </li>*@
+            <li>@Html.DropDownList("MachineTypeID", (SelectList)ViewBag.MachineType)</li>
+            <li id="steps" >@Html.DropDownList("StepID", (SelectList)ViewBag.Steps)</li>
+        </ul>
+
+        <div class="HeaderActions tbl">
+            <div class="tcTop">
+                <input id="OpenChangeGroupBtn" type="button" value="הוסף קבוצה" class="buttondefault ">
+                @*<input id="SortModeBtn" type="button" value="מצב מיון" class="buttondefault ">*@
+            </div>
+            <div class="tcTop" style="width:50%">
+                <input id="CopyBtn" type="button" value="העתק" class="buttondefault dn move">
+                <input id="CutBtn" type="button" value="גזור" class="buttondefault dn move">
+                <input id="PasteBtn" type="button" value="הדבק" class="buttondefault dn">
+                <input id="DeleteBtn" type="button" value="מחק" class="buttondefault red dn">
+            </div>
+
+        </div>
+        <style>
+            .SiteSideMenu   .HeaderActions input{
+                display:block;
+                margin:3px 0px;
+            }
+
+            .HeaderActions.tbl{
+                border-spacing:0;
+            }
+        </style>
+        @*<div class="srchDiv">
+            <input placeholder="חפש שדה" type="text" id="filterFields" />
+        </div>
+        <ul class="fields">
+            @foreach (Common.StepGroupFieldDM field in ViewBag.allPossibleFields)
+            {
+                <li data-id="@field.DynamicGroupFieldID">@field.FieldLabel</li>
+            }
+        </ul>*@
+    </div>
+   
+
+</div>
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader clearfix">
+
+        <div class="PageContHeaderTitle">
+            <h1>עריכת שדות</h1>
+        </div>
+       
+
+    </div>
+
+
+    <div id="fieldList"></div>
+    @*<div class="VbTabBlock corn_3 SideAccordion">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">שדות קיימים</div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo clearfix">
+
+            </div>
+
+
+        </div>*@
+</div>

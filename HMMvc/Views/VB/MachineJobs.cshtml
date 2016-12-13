@@ -1,0 +1,31 @@
+﻿@model List<NotesHisory>
+@using Common
+<script src="~/Areas/Admin/Scripts/Machine/PointPosition.js"></script>
+<h1>בדיקת רעידות</h1>
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">הסטוריית בדיקות</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        @if (Model.Any())
+        {
+            foreach (var hist in Model)
+            {
+                <div class="clear" style="margin-bottom: 3px;">
+                    <a class="fr linktext" href="/Admin/#/VB/VBAnalysis?JobID=2886"> @Html.DisplayFor(model => hist.JobStartDate) -</a>
+                    <div style="overflow: hidden;">@hist.GeneralNote</div>
+
+                </div>
+
+            }
+        }
+        else
+        {
+            <div>לא נתבצעו עבודות עבור מכונה זו</div>
+        }
+
+    </div>
+</div>
+

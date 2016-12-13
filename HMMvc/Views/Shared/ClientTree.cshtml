@@ -1,0 +1,125 @@
+﻿@model List<ClientTreeDM>
+@using Common
+@using MVC.Helper
+@{
+
+    Layout = null;
+
+    string path = HttpContext.Current.Request.Path;
+    string contr = path.Split('/')[1];
+    //string ses = contr.Contains("Admin") ? "AdminClientID" : "ClientID";
+    int CurClientID = Convert.ToInt32(ViewData["ClientID"]);// Convert.ToInt32(Session[ses]);
+    string allowNotInList = ViewData["AllowNotInList"]!=null ? "data-allowAdd=true" : "";
+
+
+
+}
+@*<script src="~/Scripts/UI/jquery.jstree.js"></script>*@
+
+<script>
+    var theme, url ;
+   
+    if (!jss["ClientsTree"]) {
+        jss["ClientsTree"] = true;
+      
+         theme = (DirFirst == 'left') ? "default" : "default-rtl";
+         url = window.location.origin + '/Scripts/UI/themes/' + theme + '/style.css';
+   
+        LoadScript("/Scripts/UI/jquery.jstree.js");
+        LoadScript("/Areas/Admin/Scripts/ClientSettings/ClientTree.js");
+      
+    }
+</script>
+
+<div class="filterBox" @allowNotInList>
+
+    <div>
+        <input id="srchClient" type="text" class="placeholderColor" autocomplete="off"/>  
+        <span class="SelectBtn"></span> 
+    </div>
+   
+    @*<div class="mask"></div>*@
+    <div class="list ">
+      
+        <div id="t">
+            @(Html.TreeView(Model)
+                .EmptyContent("No clients to show")
+                .Children(m => m.Childs)
+                .HtmlAttributes(new { id = "tree" })
+                .ChildrenHtmlAttributes(new { @class = "subItem LinkText" })
+                .ItemText(m => m.ClientName)
+                .ItemTemplate(
+                @<text>
+                    @{
+
+                        string id = item.ClientID.ToString();
+
+                    }
+                    <a id="node-@id" href="/#/" data-id="@id" data-name="@item.ClientFullName" class="">@item.ClientName</a>
+
+                </text>)
+            )
+
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    /** need to load every time*/
+
+    var curClientID = @CurClientID;
+    var area = "@contr";
+    var container = "@ViewData["Container"]";
+    var allowNotInList= '@ViewData["AllowNotInList"]';
+   // console.log("curClientID " + curClientID);
+
+    $(document).ready(function () {
+      
+    
+        function init(){
+            setTimeout(function(){
+                try {
+                    $(container +" #t").jstree({
+                        "themes": {
+                            "theme": theme,
+                            "url": url,
+                            "dots": true,
+                            "icons": true
+                        },
+                        "plugins": ["ui", "themes", "html_data", "crrm", "dnd", "core"],
+                        "core": {
+                            "initially_open": ['node-'+curClientID+'']
+                        },
+                        "ui": {
+                            "initially_select": ['node-'+curClientID+'']
+                        },
+                    });
+            
+                    $.initTree(container,curClientID);
+                   // console.log("tree loaded");
+                } catch (e) {
+                    //console.log("tree load fail");
+                    init();
+                }
+               
+
+          
+            },300);
+
+           
+        }
+
+        init();
+       
+      
+      
+    });
+   
+
+  
+   
+  
+   
+</script>

@@ -1,0 +1,84 @@
+﻿@model QuoteDM
+@using Common
+
+
+
+
+<div class="report-header-top">
+    <div class="SiteWidt ">
+        <div class="report-header-inner">
+            <label>@GlobalDM.GetTransStr("Quot")</label>
+            <div>@ViewBag.VersionDate</div>
+        </div>
+
+    </div>
+
+</div>
+@*id="VbHtmInfo"*@
+<div style="min-height:115px;">
+
+    <div class="report-header-bottom">
+        <div class="report-header-inner">
+            <div ><span>@GlobalDM.GetTransStr("User_Customer"): </span><span class="b">@Model.ClientName</span></div>
+            @if (Model.ContactName != "")
+            {
+                <div class="">@GlobalDM.GetTransStr("A_for"): <span class="b">@Model.ContactName</span></div>
+            }
+
+            <div class="">@GlobalDM.GetTransStr("QuoteNumber"): <span class="b">06/@Model.QuoteID</span></div>
+        </div>
+    </div>
+
+    <h1>@Html.DisplayFor(model => model.QuoteTitle)</h1>
+    @if (Model.MachineDM != null)
+            {
+        <div class="tbl" style="border-spacing:2px 7px;width:570px;">
+            <div class="SideHeaderInfoLabel tcMin">
+                <div class="MachineImg s1 " style="width:135px;">
+                    <img alt="" src="@Url.Content(Model.MachineDM.MacPic)" />
+                </div>
+            </div>
+            <div class="tcTop">
+
+
+                <div class="SideHeaderInfoLabel">
+                    מכונה
+                    : <span class="SideHeaderInfoValue">@Model.MachineDM.MachineName</span>
+                </div>
+                @if (Model.MachineDM.Rpm != null)
+                {
+                    <div class="SideHeaderInfoLabel tblMin">
+                        <span class="tc">Rpm:</span>
+                        <span class="SideHeaderInfoValue tc">@Model.MachineDM.Rpm</span>
+                    </div>
+                }
+                @if (Model.MachineDM.Kw != null)
+                {
+                    <div class="SideHeaderInfoLabel tblMin">
+                       <span class="tc">Kw:</span>
+                       <span class="SideHeaderInfoValue tc">@Model.MachineDM.Kw</span>
+                    </div>
+                }
+
+                <div>
+                    <div class="SideHeaderInfoLabel">
+                        <div class="SideHeaderInfoLabel">
+                            חלקים בטיפול:
+                            @{var i = 0;}
+                            @foreach (var part in Model.MachineDM.Parts)
+                            {
+                                var comma = i > 0 ? "," : ""; i++;
+                                <span class="SideHeaderInfoValue">@comma@part.MachineTypeLangStr</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+                                }
+
+
+</div>
+
+

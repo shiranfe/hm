@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Common.MachinePartDM>
+
+@{
+
+    ViewBag.Title = "Index";
+}
+
+<div id="pageContent">
+    <table>
+        <tr>
+            <th>
+                חלק
+            </th>
+            <th>
+                סטטוס
+            </th>
+
+            <th></th>
+        </tr>
+        @{
+
+
+            var i = 1;
+            foreach (var part in Model)
+            {
+                var odd = i % 2 == 0 ? "odd" : "even"; i++;
+                <tr class="@odd" data-id="@part.MachinePartID">
+                    <td width="100%">
+                        <input type="hidden" name="MachineEditDM.Parts.MachinePartID" />
+                        <span class="linktext openItem">@part.PartFullName</span>
+                    </td>
+                    <td>
+                        -
+                    </td>
+                    <td>
+                        <input type="hidden" name="MachineEditDM.Parts.MachineTypeID" />
+                        <span class="linktext deleteItem">מחק</span>
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+
+

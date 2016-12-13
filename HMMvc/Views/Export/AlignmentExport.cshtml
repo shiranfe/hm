@@ -1,0 +1,44 @@
+﻿@model JobAlignmentDM
+@using Common
+
+@{
+
+    Layout = "~/Views/Shared/_LayoutReport.cshtml";
+}
+
+@Html.Partial("Alignment/JobInfo", Model)
+
+<div class="VbTabBlock corn_3 ">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">פתח דבר</div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        <pre class="black cke_editable" >@Html.Raw(Model.OpenNotes)</pre>
+
+    </div>
+</div>
+
+@foreach (var part in Model.JobParts)
+{
+    <div class="dont-break">
+        <h3>@GlobalDM.GetTransStr("EntityToUpdate_MachineType") -  @part.MachineTypeLangStr</h3>
+        @Html.Partial("Alignment/PartSizes", part)
+
+        @Html.Partial("Alignment/PartResult", part)
+    </div>
+}
+
+<div class="VbTabBlock corn_3 ">
+    <div class="VbTabBlockHeader clearfix">
+        <div class="BlockHeaderTitle">טבלת טולרנסים</div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        <div class="alignment-size"><img class="tolerance" src="~/images/tolerance.jpg" /></div>
+     
+    </div>
+</div>
+
+
+@Html.Partial("ExportSignuture")

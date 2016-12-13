@@ -1,0 +1,51 @@
+﻿@model Common.RefubrishDM
+@using Common;
+@{
+    
+    var publish = Model.IsPosted ? "בטל פרסום" : "פרסם";
+    var btncolor =  Model.IsPosted ? "green" : "red";
+    var JobRefubrishPartID = Model.JobRefubrishPartID;
+}
+
+<style>
+    .SideHeaderTitle {text-align:right; }
+</style>
+<div id="RefubrishSideMenu" class="SiteSideMenu menuInfoDiv corn_3 shadow clearfix">
+
+   
+    @*<div style="padding: 2px 7px;">
+        <a id="DeleteJobIcon" title="מחק עבודה"></a>
+      
+        <a class="rec-icon ReportIcon PrintIcon" href="/#/VB/VBReport?JobID=@Model.JobID" title="@GlobalDM.GetTransStr("A_PrintPreview")"></a>
+
+        <div class="clear"></div>
+    </div>*@
+    <input type="hidden" id="JobRefubrishPartID" name="JobRefubrishPartID" class="" value="@JobRefubrishPartID" />
+    <div class="SideHeaderInfos">
+
+        <div class="SideHeaderInfoLabel">שם העבודה: <a class="SideHeaderInfoValue linktext" href="/Admin/#/Job/Details?jobType=Refubrish&&JobID=@Model.JobID">@Model.JobName</a></div>
+        @if (Model.ReturningJobParentID.HasValue)
+        {
+            <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("ReturningJob"): <a class="red" href="/Admin/#/Refubrish/0?JobID=@Model.ReturningJobParentID">05/@Model.ReturningJobParentID</a></div>
+        }
+        <div class="SideHeaderInfoLabel">מספר עבודה: <span class="SideHeaderInfoValue" id="JobID">05/@Model.JobID</span></div>
+        <div class="SideHeaderInfoLabel">לקוח: <span class="SideHeaderInfoValue linktext EditClientBtn" data-id="@Model.ClientID">@Model.ClientName</span></div>
+        <div class="SideHeaderInfoLabel">סניף: <span class="SideHeaderInfoValue">@Model.BranchName</span></div>
+        <div class="SideHeaderInfoLabel">מכונה: 
+            @*<span class="SideHeaderInfoValue linktext EditMachineBtn" data-id="@Model.MachineID">@Model.MachineName</span>*@
+            <a class="SideHeaderInfoValue linktext" href="/Admin/#/Machine/@Model.MachineID">@Model.MachineName</a>
+        </div>
+        <div class="SideHeaderInfoLabel">מספר מכונה: <span class="SideHeaderInfoValue">@Model.MachineID</span></div>
+        <div class="SideHeaderInfoLabel">סטטוס: <span class="SideHeaderInfoValue">@Model.StatusTrans</span></div>
+        <div class="SideHeaderInfoLabel"> @Html.DropDownList("Parts")</div>
+    </div>
+    <div class="SideHeaderBack">
+        <span class="linktext fr" id="jobRejectedBtn">עבודה בוטלה</span>
+        <a class="linktext" href="/Admin/#/Refubrish">חזור</a>
+
+    </div>
+    @*<div style="padding: 5px;">
+
+        <input id="PublishVbReport" type="button" data-val="@Model.IsPosted" value="@publish" class="buttondefault @btncolor" >
+    </div>*@
+</div>

@@ -1,0 +1,83 @@
+﻿@model string
+<div class="tbl" id="kwUnit">
+    <div class="tcMin">
+        Kw
+    </div>
+    <div class="tc">
+        <input id="Kw" name="Kw" type="text" value="@Model" class="valid">
+    </div>
+    <div class="tc" style="width:31px;">
+           /   Hp
+    </div>
+    <div class="tc">
+        <input id="Hp"  type="text" value="" class="valid">
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+       
+        var ratio = 0.745699872;
+        function changeToKw() {
+            if ($("#Kw").val()) { // && $("[name=kwUnit]:checked").val() != "Kw"
+                var kw = $("#Kw").val() * ratio;
+                $("#Kw").val(kw);
+                $("[name=kwUnit]").first().attr('checked', 'checked');
+            }
+        }
+
+        var regx = /[^\d.-]/g;
+
+        function setHp() {
+            var val = "";
+            var kw = $("#Kw").val();
+            if (kw) {
+                var speeds = kw.split(regx); //["2","5"]...
+                for (var i = 0; i < speeds.length; i++) {
+                    if (speeds[i]) {
+                        val += (speeds[i] / ratio).toFixed(2);
+                        if ((i + 1) < speeds.length)
+                            val += "/";
+                    }       
+                }
+            }
+            $("#Hp").val(val);
+        }
+
+        function setKw() {
+            var val = "";
+            var hp = $("#Hp").val();
+            if (hp) {
+                var speeds = hp.split(regx); //["2","5"]...
+                for (var i = 0; i < speeds.length; i++) {
+                    if (speeds[i]) {
+                        val += (speeds[i] * ratio).toFixed(2);
+                        if ((i + 1) < speeds.length)
+                            val += "/";
+                    }
+                }
+            }
+            $("#Kw").val(val);
+
+        }
+
+        /*****************         UI FUNCTIONS          ******************/
+
+
+        setHp();
+
+        $("#Kw").live("keyup", function () {
+            setHp();
+        });
+
+        $("#Hp").live("keyup", function () {
+            setKw();
+
+        });
+
+
+    });
+
+
+</script>

@@ -1,0 +1,11 @@
+﻿@model MachineVBDM
+@using Common;
+
+
+
+@Html.Partial("MachineVBTabMacPoints", Model)
+
+@Html.Partial("MachineVBTabPointVal", Model.PointSelected.PointResultDMs.First())
+
+
+

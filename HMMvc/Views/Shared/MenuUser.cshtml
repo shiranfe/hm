@@ -1,0 +1,27 @@
+﻿@using Common
+
+<script src="~/Scripts/UI/jquery.cookie.js"></script>
+<script src="~/Scripts/UI/Accordion/accordion.js"></script>
+<script src="~/Scripts/Menu/UserSettingsMenu.js"></script>
+
+
+
+<div class="SideMenu">
+    <div id="UserMenuAccordion" class="SideAccordion">
+        <h4>@GlobalDM.GetTransStr("User_UserPereferences")</h4>
+        <div>
+            <ul>
+                <li class="SideMenuLink"><a href="/#/User/UserDetails">@GlobalDM.GetTransStr("User_UserDetails")</a></li>
+                <li class="SideMenuLink"><a href="/#/User/ChangePassword">@GlobalDM.GetTransStr("User_ChangePassword")</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="SideHeaderBack">
+        <span class="linktext">
+            <a href="/#/">@GlobalDM.GetTransStr("Global_BackToHome")</a> 
+        </span>
+    </div>
+</div>
+
+

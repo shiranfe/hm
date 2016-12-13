@@ -1,0 +1,39 @@
+﻿@model  object
+@{
+
+    SelectList list = (SelectList)ViewData["options"];
+
+    var value = Model != null ? Model.ToString():"";
+
+    
+
+    //  Model.Get > 0 || !string.IsNullOrEmpty(Model) ? Model.ToString() : "";
+    var dis = (bool?)ViewData["disabled"] == true ;
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string placeHolder = ViewData["placeHolder"] != null ? ViewData["placeHolder"].ToString() : null;
+    string currentGroup = ViewData["currentGroup"] != null ? ViewData["currentGroup"].ToString() : null;
+
+    bool required = (bool?)ViewData["Required"] == true;
+    var requiredText = ViewData["requiredText"] != null ? ViewData["requiredText"].ToString() : null;
+
+    string addBtnClass = ViewData["AddBtnClass"] != null ? ViewData["AddBtnClass"].ToString() : null;
+    bool allowNotInList = (bool?)ViewData["allowNotInList"] == true;
+
+
+}
+
+
+@Html.Partial("~/Views/Shared/EditorTemplates/AutoCompleteHtml.cshtml", new MVC.Models.SelectDm
+{
+    Options = list,
+    Value = value,
+    Disabled = dis,
+    Name = name,
+    AddBtnClass = addBtnClass,
+    Required = required,
+    PlaceHolder=placeHolder,
+    CurrentGroup = currentGroup,
+    AllowNotInList = allowNotInList,
+    RequiredText = requiredText
+})
+

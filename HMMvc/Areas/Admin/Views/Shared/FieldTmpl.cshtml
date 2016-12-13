@@ -1,0 +1,15 @@
+﻿@model Common.JobTaskGroupFieldDM
+@{
+
+    var field = Model;
+    field.HtmlID = field.DynamicGroupFieldID + "";
+    field.HtmlValue = field.FieldValue;
+
+    var fieldType = field.FieldTypeID.ToString();
+    ViewBag.Required = field.IsRequired ?
+    "data-val-required=(*) data-val=true" : "";
+}
+
+@Html.EditorFor(model => field, fieldType)
+
+

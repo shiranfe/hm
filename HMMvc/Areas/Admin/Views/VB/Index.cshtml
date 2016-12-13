@@ -1,0 +1,144 @@
+﻿@model VbFilterDm
+@using Common
+
+@{
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<script src="~/Areas/Admin/Scripts/VB/index.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "VB", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>בדיקת רעידות</h1>
+
+        </div>
+        <div class="HeaderActions">
+
+            <input type="submit" class="buttondefault" value="דוח חדש" onclick="window.location = '/Admin/#/Import/ImportVbHtmlReport';"  />
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="VbTabBlock corn_3 searchFields">
+
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">חיפוש דוחות</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow  floatfirst">
+                    <div class="fieldlabel">
+                        חיפוש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input type="text" id="srch" placeholder="חפש" />
+                    </div>
+                </div>
+                <div class="datarow  floatlast">
+                    <div class="fieldlabel">
+                        סטטוס פירסום:
+                    </div>
+                    <div class="fieldvalue">
+                        @Html.Editor("IsPosted", "AutoComplete", new { options = ViewBag.IsPostedOps })
+
+                    </div>
+                </div>
+            </div>
+        
+            <div class="formRow">
+                <div class="datarow single vbIndexDiv">
+
+                    @{ViewBag.Container = ".vbIndexDiv"; ViewBag.HideAdd = true; ViewBag.HideRequired = true;}
+                    @Html.Partial("~/Areas/Admin/Views/Shared/ClientDrop.cshtml", new JobDM { ClientID = Model.ClientID, Clients = ViewBag.Clients })
+
+
+                </div>
+            </div>
+          
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+    <div>
+
+        <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderIcon MacPoints"></div>
+                <div class="BlockHeaderTitle">דוחות</div>
+                @if (Model.PageTotal > 0)
+                {
+                    <div class="fl">עמוד @Model.Page מתוך @Model.PageTotal</div>
+                }
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div style="padding:15px;">
+                @if (Model.TableList.Any())
+                {
+                    <table id="VbHistoryTable" class="tablesorter">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;">
+                                    פורסם
+                                </th>
+                                <th>
+                                    תאריך בדיקה
+                                </th>
+                                <th>
+                                    מיקום
+                                </th>
+                                <th>
+                                    מס עבודה
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{var i = 1;}
+                            @foreach (var item in Model.TableList)
+                            {
+                                var odd = i % 2 == 0 ? "odd" : "even";
+                                i++;
+                                var posted = (item.JobDM.IsPosted) ? "posted" : "";
+
+                                <tr class="@odd">
+                                    <td>
+                                        <div class="VbhisSts @posted"></div>
+                                    </td>
+                                    <td>
+                                        <a class="linktext" href="/Admin/#/VB/VBAnalysis?JobID=@item.JobDM.JobID">@Html.DisplayFor(modelItem => item.JobDM.StartDate)</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Areas)
+                                    </td>
+                                    <td>
+                                        05/@Html.DisplayFor(modelItem => item.JobDM.JobID)
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                    @Html.Partial("~/Areas/Admin/Views/Shared/Pager.cshtml", (Pager)Model)
+                       
+                }
+                else
+                {
+                    <div>לא נמצאו בדיקות במערכת</div>
+                }
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+

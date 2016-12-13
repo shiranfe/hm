@@ -1,0 +1,47 @@
+﻿@model Common.SpectrumDM
+
+@{
+    ViewBag.Title = "GetPointResualt";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script>
+    var FilePre = 'PointResSpect_';
+</script>
+<script src="~/Scripts/Admin/Spectum.js"></script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "VB", ShowTree = true });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>העלאת תמונות ספקטרום</h1>
+
+        </div>
+        <div class="HeaderActions">
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div>מספר עבודה: <input id="SrchjobID" value="@Model.JobID" type="text" style="width:100px; margin-bottom:10px;" /></div>
+    
+    <div>
+        <div class="DefMacZone fr" style="width: 300px; max-height: 500px;">
+            @foreach (var item in Model.PointResualts)
+            {
+                <div class="PointResualtDiv"  data-id="@item.PointResualtID">
+                    <div><b class="MacName">@item.MachineName</b> - @item.ClientName ,@Html.DisplayFor(modelItem => item.Date) </div>
+                    <div>נקודה @item.PointName, @item.ValueName -  @Html.DisplayFor(modelItem => item.Value)</div>
+                </div>
+            }
+        </div>
+      
+        <div id="PointResualtSelectedDiv" class="fr">
+            
+            @Html.Partial("PointResualtSelected", new ViewDataDictionary(Model.SelectedPointResualt))
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+</div>
+<div class="clear"></div>

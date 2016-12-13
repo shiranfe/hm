@@ -1,0 +1,101 @@
+﻿@model List<Common.JobAlignmentDM>
+
+@{
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "עבודות שיוור בלייזר";
+}
+
+<script src="~/Areas/Admin/Scripts/Alignment/alignmentIndex.js"></script>
+@*<div class="SiteSideMenu corn_3 shadow">
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "Alignment", ShowTree = true });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>שיוור בלייזר</h1>
+
+        </div>
+        <div class="HeaderActions">
+            <input type="submit" class="buttondefault" value="דוח חדש" onclick="window.location = '/Admin/#/Job/Details/?jobType=Alignment';" />
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div>
+
+        <div id="VbTabMacDetails" class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderIcon MacPoints"></div>
+                <div class="BlockHeaderTitle">דוח לפי לקוח</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div style="padding:15px;">
+                @if (Model.Any())
+                {
+                    <table id="VbHistoryTable" class="tablesorter">
+                        <thead>
+                            <tr>
+                                <th style="width:1px;">
+                                    מס עבודה
+                                </th>
+                                <th>
+                                    עבודה
+                                </th>
+                                
+                              
+                                <th>
+                                    לקוח
+                                </th>
+                                <th style="width: 90px;">
+                                    תאריך בדיקה
+
+                                </th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{var i = 1;}
+                            @foreach (var item in Model)
+                            {
+                                var odd = i % 2 == 0 ? "odd" : "even";
+                                i++;
+                                // var posted = (item.JobDM.IsPosted) ? "posted" : "";
+
+                                <tr class="@odd">
+                                    <td >
+                                        <a class="linktextHover" href="/Admin/#/Job/Details?JobID=@item.JobID&jobType=Alignment">05/@Html.DisplayFor(modelItem => item.JobID)</a>
+                                        
+                                    </td>
+                                    <td>
+                                        <a class="linktext" href="/Admin/#/Alignment/Update?PartID=@item.FirstPartID">@Html.DisplayFor(modelItem => item.JobDM.JobName)</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.JobDM.ClientName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.JobDM.StartDate)
+
+                                        @*<div class="VbhisSts @posted"></div>*@
+                                    </td>
+                                   
+                                  
+                                 
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div>לא נמצאו בדיקות במערכת</div>
+                }
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+

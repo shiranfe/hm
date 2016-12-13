@@ -1,0 +1,38 @@
+﻿@model Common.JobAlignmentDM
+
+@{ 
+    ViewBag.Title = "עבודת שיוור";
+}
+
+<script src="~/Scripts/UI/jquery.autosize.js"></script>
+<script src="~/Scripts/UI/ckeditor/ckeditor.js"></script>
+<script src="~/Areas/Admin/Scripts/Alignment/alignmentUpdate.js"></script>
+<div id="StepsMenu">
+   @Html.Partial("UpdateJobDetails", Model)
+
+    <div class="clear"></div>
+</div>
+
+
+<div class="sitesubcontent corn_3 shadow" >
+
+    
+
+    @{Html.RenderAction("Update", "AlignmentPart", new { id = Model.FirstPartID });}
+    <div class="VbTabBlock corn_3">
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">פתח דבר</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+
+            @Html.TextAreaFor(model => Model.OpenNotes)
+
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+

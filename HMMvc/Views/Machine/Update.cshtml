@@ -1,0 +1,166 @@
+﻿@model MachineEditDM
+@using Common
+
+
+
+<div id="VbTabMacDetails" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("Machine_MachineDetails")</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo">
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("Machine_MachineName"):
+                </div>
+                <div class="fieldvalue ">
+                    @Html.DisplayFor(model => model.MachineName)
+                </div>
+            </div>
+
+
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Branch"):
+                </div>
+                <div class="fieldvalue">
+                    @Html.DisplayFor(model => model.ClientName)
+                </div>
+            </div>
+        </div>
+        <div class="formRow">
+            <div class="datarow floatfirst">
+
+                <div class="VBSKUDiv fieldlabel">
+                    @GlobalDM.GetTransStr("Machine_SKU"):
+                </div>
+                <div class="fieldvalue">
+                    <span id="SKUText">@Html.DisplayFor(model => model.SKU)</span>
+                    @*<span id="EditSKUBtn" class="ToggleSKUBtn linktext EditLink">@GlobalDM.GetTransStr("A_Edit")</span>
+                        <div id="EditSKUDiv" class="dn">
+
+                            <textarea id="SKUTextBox" class="TextBox" rows="1"></textarea>
+
+                            <div class="BtnDiv">
+                                <span id="CancelSKUBtn" class="ToggleSKUBtn linktext">@GlobalDM.GetTransStr("A_Cancel")</span>
+                                <input id="SaveSKUBtn" class="buttondefault LitBtn" type="button" value="@GlobalDM.GetTransStr("A_Save")">
+                            </div>
+                        </div>*@
+                </div>
+
+            </div>
+
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("Address"):
+                </div>
+                <div class="fieldvalue">
+                    @Html.DisplayFor(model => model.Address)
+                </div>
+            </div>
+        </div>
+
+
+        <div class="formRow">
+            <div class="datarow double floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("Description"):
+                </div>
+                <div class="VBDetailsDiv fieldvalue">
+                    <span id="DetailsText">@Html.DisplayFor(model => model.Details)</span>
+                    @*<span id="EditDetailsBtn" class="ToggleDetailsBtn linktext EditLink">@GlobalDM.GetTransStr("A_Edit")</span>
+                        <div id="EditDetailsDiv" class="dn">
+
+                            <textarea id="DetailsTextBox" class="TextBox" rows="1"></textarea>
+
+                            <div class="BtnDiv">
+                                <span id="CancelDetailsBtn" class="ToggleDetailsBtn linktext">@GlobalDM.GetTransStr("A_Cancel")</span>
+                                <input id="SaveDetailsBtn" class="buttondefault LitBtn" type="button" value="@GlobalDM.GetTransStr("A_Save")">
+                            </div>
+                        </div>*@
+                </div>
+
+            </div>
+        </div>
+        <div class="formRow">
+            <div class="datarow floatfirst double">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("Machine_LastFixes"):
+                </div>
+                <div class="fieldvalue">
+                    <span id="CommentsText">@Html.DisplayFor(model => model.Comments)</span>
+                    @*<span id="EditCommentsBtn" class="ToggleCommentsBtn linktext EditLink">@GlobalDM.GetTransStr("A_Edit")</span>
+                        <div id="EditCommentsDiv" class="dn">
+
+                             <textarea id="CommentsTextBox" class="TextBox" rows="1"></textarea>
+
+                             <div class="BtnDiv">
+                                 <span id="CancelCommentsBtn" class="ToggleDetailsBtn linktext">@GlobalDM.GetTransStr("A_Cancel")</span>
+                                 <input id="SaveCommentsBtn" class="buttondefault LitBtn" type="button" value="@GlobalDM.GetTransStr("A_Save")">
+                             </div>
+                         </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+
+<div id="parts" class="VbTabBlock_acc">
+    @foreach (var part in Model.Parts)
+    {
+        <h4 class="corn_3">@part.PartFullName</h4>
+        <div class="corn_3">
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo clearfix">
+
+                @if (part.Groups.Any())
+                {
+                    foreach (var group in part.Groups.Where(x => !x.Pid.HasValue))
+                    {
+                        ViewBag.addLineDivider = false;
+                        <div class="VbTabBlock corn_3 clearfix" data-id="@group.DynamicGroupID">
+                            <div class="VbTabBlockHeader clearfix">
+                                <div class="BlockHeaderTitle">@group.GroupNameStr </div>
+                                <div class="HeaderActions"></div>
+                            </div>
+                            <div class="WhiteSep"></div>
+                            <div class="VbTabBlockInfo ">
+                                @{  
+                                    ViewBag.RootGroup = group; ViewBag.allGroups = part.Groups;
+                                     }
+                                @Html.Partial("~/Views/Machine/StepSubGroups.cshtml", group)
+                              
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<script>
+    $("#parts").accordion({
+        heightStyle: "content",
+        navigation: true,
+        active: 0
+    });
+</script>
+
+<script>
+    try {
+        setPopTitle('Machine', '@ViewBag.PopTitle');
+    } catch (e) {
+
+    }
+
+
+</script>

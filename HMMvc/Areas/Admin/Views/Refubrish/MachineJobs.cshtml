@@ -1,0 +1,89 @@
+﻿@model List<RefubrishDM>
+@using Common
+
+<script src="~/Areas/Admin/Scripts/Refubrish/index.js"></script>
+<h1>תיקונים</h1>
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">הסטוריית עבודות</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div id="pageContent" class="VbTabBlockInfo">
+        @if (Model.Any())
+        {
+             <table>
+                        <tr>
+                           
+                            <th>
+                                שם העבודה
+                            </th>
+                          
+                            <th>
+                              תאריך
+                            </th>
+           
+                            <th>
+                               סטטוס
+                            </th>
+                            <th>
+
+                            </th>
+
+                        </tr>
+
+                        @{var i = 1;}
+                        @foreach (var item in Model)
+                        {
+                            var odd = i % 2 == 0 ? "odd" : "even";
+                            i++;
+                            var id = item.Parts.First().id;
+                          //  var onePartJob = item.Parts.Count() == 1;
+                          //var jobId = onePartJob ? item.Parts.First().id : item.JobID;
+                          // var jobLink = onePartJob ? "Refubrishname" : "edit";
+                            <tr class="@odd">
+                                
+                                <td>
+                                    <span class="linktext Refubrishname" data-id="@id">@item.JobName</span>
+                                </td>
+                              
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                </td>
+                             
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StatusTrans)
+                                </td>
+                                <td>
+                                    <span class="linktext edit" data-id="@item.JobID">ערוך</span>
+                                </td>
+
+                            </tr>
+                            @*if (!onePartJob)
+                            {
+                                foreach (var part in item.Parts)
+                                {
+
+                                    <tr class="@odd part">
+
+                                        <td colspan="7">
+                                            <span class="linktext Refubrishname" data-id="@part.id">@part.MachineTypeLangStr</span>
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            }*@
+                        }
+
+                    </table>
+
+        }
+        else
+        {
+            <div>לא נתבצעו בדיקות רעידות עבור מכונה זו</div>
+        }
+
+    </div>
+</div>
+

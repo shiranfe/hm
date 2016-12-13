@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Request List";
+}
+
+@using Common
+@using Common
+
+@*@model IEnumerable<RequestDM>*@
+
+@model PagedList.IPagedList<RequestDM>
+
+
+<div class="SiteSideMenu">
+    @{Html.RenderAction("MenuMachine", "Menu");}
+</div>
+
+<div class="sitesubcontent">
+
+    <div class="floatfirst">
+        <h1>@GlobalDM.GetTransStr("Request_RequestList")</h1>
+    </div>
+
+    <div class="floatlast">
+        <input type="button" value="@GlobalDM.GetTransStr("Request_New")" onClick="location.href = '../Request/RequestDetails/0'" class="buttondefault floatlast">
+    </div>
+
+
+    @using (Html.BeginForm())
+    {       
+        <div class="dataform floatfirst">
+            <div class="datarow floatfirst">
+                <div class="fieldvalue">
+                    @Html.TextBox("SearchString")
+                </div>
+                <input type="submit" value="@GlobalDM.GetTransStr("A_Search")" class="buttondefault floatfirst">
+            </div>
+        </div>
+    }
+    <div id="pageContent">
+        <table>
+            <tr>
+                <th style="width: 100px">
+                    @Html.ActionLink(GlobalDM.GetTransStr("JobType"), "RequestList", new { SortOrder = ViewBag.JobType })
+                </th>
+                <th style="width: 150px">
+                    @Html.ActionLink(GlobalDM.GetTransStr("User_Client"), "RequestList", new { SortOrder = ViewBag.ClientName })
+                </th>
+                <th style="width: 100px">
+                    @Html.ActionLink(GlobalDM.GetTransStr("Request_Creator"), "RequestList", new { SortOrder = ViewBag.CreatedUserName })
+                </th>
+                <th style="width: 100px">
+                    @Html.ActionLink(GlobalDM.GetTransStr("Job_Priority"), "RequestList", new { SortOrder = ViewBag.Priority })
+                </th>
+                <th style="width: 100px">
+                    @Html.ActionLink(GlobalDM.GetTransStr("Request_Date"), "RequestList", new { SortOrder = ViewBag.Date })
+                </th>
+                <th style="width: 100px">
+                    @Html.ActionLink(GlobalDM.GetTransStr("Status"), "RequestList", new { SortOrder = ViewBag.Status })
+                </th>
+            </tr>
+
+            @{
+
+                string DateFormated;
+
+                foreach (var item in Model)
+                {
+                    DateFormated = item.Date.ToShortDateString();
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedUserFullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Priority)
+                        </td>
+                        <td>
+                            @Html.ActionLink(DateFormated, "RequestDetails/" + item.RequestID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    
+
+    <div>
+        page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+
+        @if (Model.HasPreviousPage)
+        {
+            @Html.ActionLink("<<", "RequestList", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw(" ");
+            @Html.ActionLink("< Prev", "RequestList", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:<<
+            @Html.Raw(" ");
+            @:< Prev
+    }
+
+        @if (Model.HasNextPage)
+        {
+            @Html.ActionLink("Next >", "RequestList", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw(" ");
+            @Html.ActionLink(">>", "RequestList", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:Next >
+            @Html.Raw(" ")
+            @:>>
+    }
+    </div>
+
+
+</div>
+<div class="clear"></div>
+

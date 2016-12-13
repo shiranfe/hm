@@ -1,0 +1,173 @@
+﻿@model MachineEditDM
+@using Common
+
+@{
+
+}
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Areas/Admin/Scripts/Machine/MachinePart.js"></script>
+<script src="~/Areas/Admin/Scripts/Machine/UpdateMachine.js"></script>
+<script>
+
+        tryLoadScript('@Url.Content("~/Areas/Admin/Scripts/Services/clientMachineService.js")');
+        //LoadScript('@Url.Content("~/Areas/Admin/Scripts/Machine/UpdateMachine.js")');
+        @*LoadScript('@Url.Content("~/Areas/Admin/Scripts/Machine/MachinePart.js")');*@
+   
+</script>
+
+@*<script src="~/Areas/Admin/Scripts/Machine/MachinePart.js"></script>*@
+
+
+@*<style>
+    .datarow { padding: 5px; }
+</style>*@
+
+    <form id="UpdateMachineForm" method="post" data-ajax="true">
+
+
+        @Html.HiddenFor(model => model.MachineID)
+
+        <div class="VbTabBlock corn_3">
+            <div class="VbTabBlockHeader">
+                <div class="BlockHeaderTitle">תיאור</div>
+                <div class="clear"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo">
+                <div class="formRow">
+                    <div class="datarow single">
+                        <div class="fieldlabel">
+                            @GlobalDM.GetTransStr("Machine_MachineName"):
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.MachineName)
+                            @Html.ValidationMessageFor(model => model.MachineName)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="formRow">
+                    <div class="datarow single ">
+                        <div class="fieldlabel">
+                            @GlobalDM.GetTransStr("User_Branch"):
+                        </div>
+                        <div class="fieldvalue" style="padding-left:0px">
+                            @if (Model.ClientID == 230)
+                            {
+                                <b>ברירת מחדל</b>  @Html.HiddenFor(model => model.ClientID)
+                            }
+                            else
+                            {
+                                @Html.DropDownList("ClientID", (SelectList)ViewBag.Client)
+                            }
+
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            כתובת:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.Address)
+                        </div>
+                    </div>     
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            @GlobalDM.GetTransStr("Machine_SKU"):
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.SKU)
+                        </div>
+                    </div>     
+                </div>
+
+                <div class="formRow">
+                    <div class="datarow floatfirst ">
+                        <div class="fieldlabel">
+                            Rpm:
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.TextBoxFor(model => model.Rpm)
+                        </div>
+                    </div>
+                    <div class="datarow floatlast">
+
+                        @Html.Partial("~/Areas/Admin/Views/Machine/KwHp.cshtml", Model.Kw ?? "")
+
+                        @*<div class="fieldlabel"  >
+                            <div class="tblMin" id="kwUnit">
+                                <label class="tc"><input type="radio" name="kwUnit" value="Kw" checked="checked"><span>Kw</span> </label>
+                                <label class="tc"><input type="radio" name="kwUnit" value="Hp"><span>Hp</span> </label>
+                            </div>
+                           
+                            
+
+                        </div>
+                        <div class="fieldvalue">
+                          
+                        </div>*@
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="datarow floatfirst single">
+                        <div class="fieldlabel">
+                            @GlobalDM.GetTransStr("Description"):
+                        </div>
+                        <div class="fieldvalue">
+                            <textarea id="Details" class="TextBox" name="Details" rows="2">@Model.Details</textarea>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+
+        </div>
+
+        @{var showParts = Model.MachineID > 0 ? "" : "dn";}
+        <div id="macPartsDiv" class="VbTabBlock corn_3 @showParts">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">חלקים</div>
+              
+                    <div class="HeaderActions">
+                        <input id="AddPartBtn" type="button" class="Black " value="הוסף" />
+                        <div class="fl" style="width:150px;">
+
+                            @Html.EditorFor(model=>Model.MachineTypeID, new { options = ViewBag.MachineType })
+                            @*@Html.DropDownList("MachineTypeID", (SelectList)ViewBag.MachineType)*@
+                        </div>
+                       
+                    </div>
+             
+            </div>
+            <div class="WhiteSep"></div>
+            <div id="partList" class="VbTabBlockInfo clearfix">
+
+                @Html.Partial("~/Areas/Admin/Views/MachinePart/Index.cshtml", Model.Parts)
+                <p id="noPartsInfo" class="field-validation-error dn" style="font-size:inherit;
+margin-top:5px;">
+                    מכונה מורכבת מחלק אחד או יותר. בכדי ליצור מכונה חובה להוסיף חלקים ולהזין את פרטי החובה בהם.
+                </p>
+            </div>
+        </div>
+
+        <div class="ForBtnDiv">
+            @*<span class="field-validation-error dn">שים לב! שינוי מכונה יגרום למחיקת כל נתוני כרטיס העבודה של המכונה הקודמת</span>*@
+            <input id="UpdateMachineBtn" type="button" value="שמור" class="buttondefault floatlast">
+        </div>
+    </form>
+
+<script>
+    try {
+        setPopTitle('Machine', '@ViewBag.PopTitle');
+    } catch (e) {
+
+    }
+    
+    var macHasParts = @Model.Parts.Any().ToString().ToLower() ;
+</script>

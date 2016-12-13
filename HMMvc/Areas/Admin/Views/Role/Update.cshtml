@@ -1,0 +1,75 @@
+﻿@model Common.RoleDM
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    setPopTitle('Role', '@ViewBag.PopTitle');
+</script>
+
+<form id="UpdateRoleForm" method="post" data-ajax="true">
+
+    <div  class="VbTabBlock corn_3">
+        @Html.HiddenFor(x => x.RoleID)
+        <div class="VbTabBlockCont">
+            <div id="ClientLogoSelectedDiv" class="AdminPicDiv clearfix">
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            תפקיד(עברית):
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.RoleHebrew)
+                            @Html.ValidationMessageFor(model => model.RoleHebrew)
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="formRow">
+                    <div class="datarow single ">
+                        <div class="fieldlabel">
+                            תפקיד(אנגלית):
+                        </div>
+
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.RoleEnglish)
+                            @Html.ValidationMessageFor(model => model.RoleEnglish)
+                        </div>
+                    </div>
+</div>
+                <div class="formRow">
+                    <div class="datarow  single">
+                        <div class="fieldlabel">
+                            עלות ש"ע":
+                        </div>
+                        <div class="fieldvalue">
+                            @Html.EditorFor(model => model.RoleCost)
+                            @Html.ValidationMessageFor(model => model.RoleCost)
+                        </div>
+                    </div>
+                </div>
+                    <div class="formRow">
+                        
+                        <div class="datarow single ">
+                            <div class="fieldlabel">
+                                מחיר ש"ע":
+                            </div>
+
+                            <div class="fieldvalue">
+                                @Html.EditorFor(model => model.RolePrice)
+                                @Html.ValidationMessageFor(model => model.RolePrice)
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+
+    </div>
+    
+    <div class="ForBtnDiv clearfix">
+        <input type="button" value="שמור" class="buttondefault floatlast">
+        @Html.ValidationSummary(true)
+    </div>
+</form>
+

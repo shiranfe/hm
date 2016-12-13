@@ -1,0 +1,69 @@
+﻿@using Common
+@model Common.UserLayoutDM
+@{
+    var contr = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+}
+<script>
+    try {
+        $(document).ready(function () {
+            $('.TopMenuLink[data-Contr=@contr] > a').addClass('current');
+        });
+    } catch (e) {
+
+    }
+
+
+</script>
+
+<div id="SiteHeader" >
+    <div id="SiteHeaderCenter">
+        <div class="SiteWidth">
+            <div id="SiteHeaderLogos">
+
+                <a class="siteHeaderLogo" href="/#/"></a>
+                @if (Model.ClientID != 0)
+                {
+                    <div class="SiteHeaderClientLogo corn_3 shadow">
+                        <img alt="" src="@Model.ClientLogo" />
+                    </div>
+                }
+                <div class="clear"></div>
+            </div>
+            <div id="siteHeaderUser">
+
+                @Html.Partial("~/Areas/Admin/Views/Shared/MobileHeader.cshtml")
+                @if (Model.ClientID != 0)
+                {
+                    <div id="siteHeaderUserInfos">
+                        <span class="linktextW TopMenuLink" data-Contr="Machine"><a href="/#/Machine">@GlobalDM.GetTransStr("Machine_Machines")</a></span> |
+                        <span class="linktextW TopMenuLink" data-Contr="VB"><a href="/#/VB/CurrentSts">@GlobalDM.GetTransStr("JobType_Vibration")</a></span> |
+                        <span class="linktextW TopMenuLink" data-Contr="Refubrish"><a href="/#/Refubrish/About">@GlobalDM.GetTransStr("JobType_Shipotzim")</a></span> |
+
+                         <span class="linktextW TopMenuLink" data-Contr="Alignment"><a href="/#/Alignment/About">@GlobalDM.GetTransStr("JobType_Shivur")</a></span> |
+                        @*<span class="linktextW TopMenuLink" data-Contr="DnBal"><a href="/#/DnBal/About">@GlobalDM.GetTransStr("JobType_Izunim")</a></span> |*@
+             
+
+                        @* <span class="fr" ><b>@Model.FullName, </b></span>
+                            <span class="f" style="margin:0px 3px;"> @Model.ClientName</span> *@
+                        <div class="clear"></div>
+                    </div>
+                }
+                <div class="details">
+                    @if (Model.ClientID != 0)
+                    {
+                        <div id="siteHeaderUserLinks">
+                            <span class="linktextW"><a href="/#/">@Model.FullName</a></span> @*@GlobalDM.GetTransStr("Global_Pereferences")*@
+                            <span class="seperator">|</span>
+                            <span class="linktextW">@Html.ActionLink(@GlobalDM.GetTransStr("Global_Exit"), "Logoff", "User")</span>
+                        </div>
+                    }
+                    <div class="header-icon flag @Model.Lang floatlast" id="ChangeLangBtn"></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

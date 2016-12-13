@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+div.wikidoc h1{font-size:2.0em;}div.wikidoc h1,div.wikidoc h2,div.wikidoc h3,div.wikidoc h4,div.wikidoc h5,div.wikidoc h6{margin-bottom:.13em;}h1{font-size:1.6em;margin-bottom:.7em;}div.wikidoc h4{font-size:1.2em;}h4{font-size:.8em;padding-bottom:.2em;}a,a:link,a:visited{text-decoration:underline;color:#3E62A6;}html.IE7 div.wikidoc .externalLinkIcon{background-image:url(http://i2.codeplex.com/Images/v17600/icons_weblink_sm.gif);background-repeat:no-repeat;background-position:right 0;display:inline-block;height:1em;margin-left:.13em;width:.81em;padding-top:.5em;padding-left:.5em;}div.wikidoc h2{font-size:1.6em;}h2{color:Black;}h2{font-size:1.2em;padding-top:.7em;padding-bottom:.7em;}div.wikidoc ul{list-style-image:url(http://i2.codeplex.com/Images/v17600/doublearrow.gif);list-style-type:none;}ul{margin-left:0em;padding-left:2em;list-style-type:square;list-style-image:url('http://i2.codeplex.com/Images/v17600/bullet_square.gif');}div.wikidoc li{margin-bottom:.3em;margin-top:.3em;vertical-align:middle;}li{margin-left:0;margin-bottom:.1em;margin-top:.1em;}div.wikidoc pre,div.wikidoc div.csharpcode{background-color:#ECECEC !important;border:dashed .1em #3E62A6 !important;font-family:Consolas,"Courier New",Courier,Monospace !important;font-size:1em !important;margin-top:0;padding:.5em;padding-bottom:1.5em;height:auto;overflow:auto;width:100% !important;}html,form,form.table{height:100%;min-width:970px;}input,select,textarea{font-size:1em;}body,input,select,textarea{font-family:"Segoe UI","Microsoft Sans Serif",Arial,Geneva,Sans-Serif;color:#30332d;}.StandardPadding,table.StandardPadding td,table.StandardPadding th{padding:.2em .7em;}hr{margin-top:.7em;margin-bottom:.7em;margin-top:1em;margin-bottom:1em;}th{font-weight:normal;vertical-align:bottom;}.ClearBoth{clear:both;}.ClearBoth{clear:both;}.SubText{color:#666;font-size:.9em;}</style>
+</head>
+<body>
+    <h1>
+        When you install the Nuget
+    </h1>
+    It copies the NetAcademia.Web.Mvc.HtmlLaundry.dll into your bin folder and gives 
+    a reference to it.<br />
+    It copies a short html quickstart and a default whitelist to your 
+    Content\HtmlLaundry folder. The quickstar is deletable, but the default 
+    whitelist is used by the laundry.<br />
+    It modifies your web.config to restrict .whitelist extensions for the public to 
+    download.<br />
+    It copies the AppStart_HtmlLaundry.cs to your project&#39;s root folder. This file 
+    (with the assist of the WebActivator) replaces the default model binder with 
+    HtmlLaundryModelBinder.<br />
+    <br />
+    In case you did not use the nuget but downloaded from this site you have to do 
+    manually all the steps above!<br />
+&nbsp;<h1>
+        What this laundry cleans</h1>
+    If your web site has to accept html posts (probably some kind of blog, forum or 
+    it is just inplace editable by administrators) it suffers form rughly formatted, 
+    invalid and insecure html data. Html Laundry can catch and clean posted in html 
+    before it reaches your action method. You can have a complete fine grained 
+    control over what it passes through and what it filters out.
+    <h4>
+        You can use Html Laundry to create a protection against XSS and for protect your 
+        site from ugly formatted posts.</h4>
+    <h1>
+        How it is integrated into MVC 3</h1>
+    If you install it with <a class="externalLink" 
+        href="http://nuget.org/List/Packages/HtmlLaundry">the nuget<span 
+        class="externalLinkIcon"></span></a> then your project gets an 
+    AppStart_HtmlLaundry.cs in it&#39;s root. This file replaces the default model 
+    binder. The new model binder detects the UIHint(&quot;html&quot;) attribute on your 
+    model&#39;s properties and as the part of the binding process cleans those 
+    properties value.<br />
+    So it&#39;s automatic, you do not have to do anything. But if you like to fine tune 
+    it&#39;s working you can with
+    <a href="http://htmllaundry.codeplex.com/wikipage?title=whitelists&amp;referringTitle=Home">
+    whitelists</a> and also with the
+    <a href="http://htmllaundry.codeplex.com/wikipage?title=Howto%20use&amp;referringTitle=Home&amp;ANCHOR#whitelistattribute">
+    WhitelistAttribute</a> on your properties.
+    <h1>
+        How the wash machine works</h1>
+    Html Laundry uses the strict old way. Treats the input html as a string and 
+    builds up an xml tree from that string. The building process ensures that all 
+    the html elements will have their closing tag, so at the end there will be a 
+    vaild xml or xhtml if you like. It ensures that everything that seems to be a 
+    tag certainly will be an elemet in the tree and all the content text will be 
+    just text - no tricks.<br />
+    After the xml building the Html Laundry takes a whitelist (you can use different 
+    whitelists for different tasks because whitelists are customizable) and drops 
+    out every element that not exists in the whitelist. The dropped elements leave 
+    their contents behind in their parent element ensuring no data loss. After all 
+    the xml dom will be converted back to string. Now it&#39;s clean and safe html for 
+    displaying back to the user.<br />
+    <h2>
+        Warning!</h2>
+    Html Laundry can protect against XSS however I do not guarantee it will! It 
+    strongly depends on the whitelist! So if you want to be sure you have to test it 
+    in your own environment.
+
+    <p>
+        &nbsp;</p>
+    <h1>
+        How to use Html Laundry</h1>
+    <a name="modelbinder"></a>First of all there is the <b>HtmlLaundryModelBinder</b>. 
+    If you don&#39;t use any custom model binder, then this model binder will do the 
+    work for you if you installed the nuget or made the steps mentioned in the
+    <a href="http://htmllaundry.codeplex.com/wikipage?title=mvcprojectchanges&amp;referringTitle=Howto%20use">
+    project changes section</a>.<br />
+    When you instantiate the HtmlLaundryModelBinder you must give it a whitelist 
+    name as a constructor parameter. This whitelist will be the default whitelist.<br />
+    HtmlLaundryModelBinder sniffs out four attributes:
+    <ul>
+        <li>[Whitelist]</li>
+        <li>[UIHint("html")]</li>
+        <li>[DataType(DataType.Html)]</li>
+        <li>[AllowHtml]</li> 
+    </ul>
+    <a name="whitelistattribute"></a>First it searches for the <b>WhitelistAttribute</b> 
+    on the property actually binding. If it finds then checks the 
+    WhitelistAttribute&#39;s WhitelistName property. Then searches for that whitelist in 
+    the /Content/HtmlLaundry, /Content, App<i>Data/HtmlLaundry and App</i>Data 
+    folders respectively. The filename must be the given WhitelistName with 
+    .whitelist extension. If it finds the whitelist the that whitelist will be used 
+    for cleaning. If not, then checks for the WhitelistAttribute&#39;s 
+    CanUseDefaultWhitelistIfMissing boolean property. If this property true, then 
+    uses the default whitelist otherwise throws an exception.<br />
+    <br />
+    <a name="uihintattribute"></a>If there is no WhitelistAttribute on the property, 
+    then the HtmlLaundryModelBinder checks for the other three attributes (<b>UIHintAttribute</b> with 
+    &quot;html&quot; in it&#39;s UIHint property or <b>DataTypeAttribute</b> set to DataType.Html or <b>AllowHtmlAttribute</b>). If there is one, then Html Laundry will clean 
+    the value intended for that property with the default whitelist.<br />
+    <br />
+    You can use Html Laundry for any string you like not only for properties marked 
+    with the attributes above. In this case you&#39;ll need a HtmlLaundry instance.<br />
+    <div style="BACKGROUND-COLOR: white; COLOR: black">
+        <pre><span style="COLOR: blue">var</span> myLaundry = <span style="COLOR: blue">new</span> HtmlLaundry(<span 
+            style="COLOR: #a31515">@&quot;c:\\WhitelistFilePath/WhitelistName.whitelist&quot;</span>);
+</pre>
+    </div>
+    As you can see in this case you have to use the full path to a whitelist file 
+    instead of just a name. But the HtmlLaundryModelBinder has a useful static 
+    method to get an HtmlLaundry with just the name of the whitelist:<br />
+    <div style="BACKGROUND-COLOR: white; COLOR: black">
+        <pre><span style="COLOR: blue">var</span> myLaundry = HtmlLaundryModelBinder.GetLaundry(<span 
+            style="COLOR: #a31515">&quot;WhitelistName&quot;</span>);
+</pre>
+    </div>
+    Now you have your own Laundry. You can clean html with one line of code:<br />
+    <div style="BACKGROUND-COLOR: white; COLOR: black">
+        <pre><span style="COLOR: blue">string</span> cleanedHtml = myLaundry.CleanHtml(<span 
+            style="COLOR: #a31515">&quot;&lt;b&gt;Bold text&lt;/b&gt;&lt;script&gt;alert(&#39;carzy script&#39;)&lt;/script&gt;&quot;</span>);</pre>
+        
+
+
+
+
+                            <h1>
+                                Whitelists</h1>
+                            Html Laundry has a strict wash machine. Won&#39;t let anything live it doesn&#39;t know. 
+                            And it knows only the things defined in a whitelist.<br />
+                            You can create a very loose whitelist but you can not tell that any element is 
+                            allowed and you can not tell that any attribute is allowed.
+                            <br />
+                            So in a short how safe the cleaned html will be is depends on the whitelist you 
+                            use. But do not affraid about it it you can cut out dangerous tags very 
+                            effectively.<br />
+                            <br />
+                            A whitelist is an xml file. It&#39;s root element is tags. Tags&#39; child elements are 
+                            the allowed html elements. The next whitelist allows only the b and the img 
+                            element.<br />
+                            <div style="BACKGROUND-COLOR: white; COLOR: black">
+                                <pre><span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">tags</span><span 
+                                    style="COLOR: blue">&gt;</span>
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;&lt;/</span><span 
+                                    style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;</span>
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">img</span> <span style="COLOR: blue">/&gt;</span>
+<span style="COLOR: blue">&lt;/</span><span style="COLOR: #a31515">tags</span><span style="COLOR: blue">&gt;</span>
+</pre>
+                            </div>
+                            Based on the whitelist above here are som examples<br />
+                            <table>
+                                <tr>
+                                    <th>
+                                        before clean
+                                    </th>
+                                    <th>
+                                        after clean
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;!
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;!
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;b&gt;world !
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world !&lt;/b&gt;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;span&gt;&lt;b&gt;world&lt;/b&gt;!&lt;/span&gt;
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;!
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img 
+                                        src=&quot;http://i1.codeplex.com/Images/v17601/logo-home.png&quot; /&gt;
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img /&gt;
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            As you can see in the last example the image element lost it&#39;s src attribute. It 
+                            is because you have to define the allowed attributes too.
+                            <br />
+                            <br />
+                            <div style="BACKGROUND-COLOR: white; COLOR: black">
+                                <pre><span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">tags</span><span 
+                                    style="COLOR: blue">&gt;</span>
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;&lt;/</span><span 
+                                    style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;</span>
+  &lt;img src=&quot;&quot; /&gt;
+<span style="COLOR: blue">&lt;/</span><span style="COLOR: #a31515">tags</span><span style="COLOR: blue">&gt;</span>
+</pre>
+                            </div>
+                            Based on the whitelist above the examples are:<br />
+                            <table>
+                                <tr>
+                                    <th>
+                                        before clean
+                                    </th>
+                                    <th>
+                                        after clean
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img 
+                                        src=&quot;http://i1.codeplex.com/Images/v17601/logo-home.png&quot; /&gt;
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img 
+                                        src=&quot;http://i1.codeplex.com/Images/v17601/logo-home.png&quot; /&gt;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img 
+                                        src=&quot;http://i1.codeplex.com/Images/v17601/logo-home.png&quot; alt=&quot;logo&quot; /&gt;
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img 
+                                        src=&quot;http://i1.codeplex.com/Images/v17601/logo-home.png&quot; /&gt;
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            As you can see in the last example the only attribute remained is the one 
+                            defined in the whitelist.<br />
+                            But it can lead to a serious problem with XSS. You can use Regex to validate 
+                            attributes value.<br />
+                            <br />
+                            <div style="BACKGROUND-COLOR: white; COLOR: black">
+                                <pre><span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">tags</span><span 
+                                    style="COLOR: blue">&gt;</span>
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;&lt;/</span><span 
+                                    style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;</span>
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">img</span> <span style="COLOR: red">src</span><span 
+                                    style="COLOR: blue">=</span><span style="COLOR: black">&quot;</span><span 
+                                    style="COLOR: blue">(/|mailto\:|(news|(ht|f)tp(s?))\://){0,1}[@\w\.]+</span><span 
+                                    style="COLOR: black">&quot;</span> <span style="COLOR: blue">/&gt;</span>
+<span style="COLOR: blue">&lt;/</span><span style="COLOR: #a31515">tags</span><span style="COLOR: blue">&gt;</span>
+</pre>
+                            </div>
+                            <br />
+                            Based on the whitelist above the examples are:<br />
+                            <table>
+                                <tr>
+                                    <th>
+                                        before clean
+                                    </th>
+                                    <th>
+                                        after clean
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img 
+                                        src=&quot;http://i1.codeplex.com/Images/v17601/logo-home.png&quot; /&gt;
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img 
+                                        src=&quot;http://i1.codeplex.com/Images/v17601/logo-home.png&quot; /&gt;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img src=&quot;javascript:alert(&#39;wow&#39;)&quot; /&gt;
+                                    </td>
+                                    <td>
+                                        Hello &lt;b&gt;world&lt;/b&gt;! &lt;img /&gt;
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            As you can see in the last example the img element lost it&#39;s src attribute 
+                            because the attribute&#39;s value did not fit to the given regex.<br />
+                            <br />
+                            There is a special attribute, the style attribute. Html Laundry&#39;s whitelist 
+                            treats it in a special way. In case of a style attribute there is more regex at 
+                            once in the attributes value. The expressions are separated with semicolons. In 
+                            the next whitelist the b element has a style attribute with two regex filters. 
+                            This allows the style attribute with font-size and font-style values each using 
+                            it&#39;s own exact format.<br />
+                            <br />
+                            <div style="BACKGROUND-COLOR: white; COLOR: black">
+                                <pre><span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">tags</span><span 
+                                    style="COLOR: blue">&gt;</span>
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">b</span> <span style="COLOR: red">style</span><span 
+                                    style="COLOR: blue">=</span><span style="COLOR: black">&quot;</span><span 
+                                    style="COLOR: blue">font-size:\d+((em)|(pt)|(px))?;font-style:(italic)|(normal)</span><span 
+                                    style="COLOR: black">&quot;</span><span style="COLOR: blue">&gt;&lt;/</span><span 
+                                    style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;</span>
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">img</span> <span style="COLOR: red">src</span><span 
+                                    style="COLOR: blue">=</span><span style="COLOR: black">&quot;</span><span 
+                                    style="COLOR: blue">(/|mailto\:|(news|(ht|f)tp(s?))\://){0,1}[@\w\.]+</span><span 
+                                    style="COLOR: black">&quot;</span> <span style="COLOR: blue">/&gt;</span>
+<span style="COLOR: blue">&lt;/</span><span style="COLOR: #a31515">tags</span><span style="COLOR: blue">&gt;</span>
+</pre>
+                            </div>
+                            <br />
+                            There is a special element called attributes. Because there can be very complex 
+                            regex flters in attribute values and those attributes can be used in many 
+                            elements, there is a way to define default regex for attributes. This default 
+                            regex will be used if and only if the attribute defined in the allowed element 
+                            has tha attribute with the same name and an emty value. Based on this the next 
+                            whitelist is the same as the previous.<br />
+                            <div style="BACKGROUND-COLOR: white; COLOR: black">
+                                <pre><span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">tags</span><span 
+                                    style="COLOR: blue">&gt;</span>
+  &lt;b style=&quot;&quot;&gt;<span style="COLOR: blue">&lt;/</span><span style="COLOR: #a31515">b</span><span style="COLOR: blue">&gt;</span>
+  &lt;img  src=&quot;&quot;/&gt;
+  <span style="COLOR: blue">&lt;</span><span style="COLOR: #a31515">attributes</span> 
+     <span style="COLOR: red">style</span><span style="COLOR: blue">=</span><span style="COLOR: black">&quot;</span><span 
+                                    style="COLOR: blue">font-size:\d+((em)|(pt)|(px))?;font-style:(italic)|(normal)</span><span 
+                                    style="COLOR: black">&quot;</span>
+     <span style="COLOR: red">src</span><span style="COLOR: blue">=</span><span style="COLOR: black">&quot;</span><span 
+                                    style="COLOR: blue">(/|mailto\:|(news|(ht|f)tp(s?))\://){0,1}[@\w\.]+</span><span 
+                                    style="COLOR: black">&quot;</span>
+   <span style="COLOR: blue">/&gt;</span>
+<span style="COLOR: blue">&lt;/</span><span style="COLOR: #a31515">tags</span><span style="COLOR: blue">&gt;</span>
+</pre>
+                            </div>
+                            <br />
+                        </div>
+                       
+       
+
+</body>
+</html>

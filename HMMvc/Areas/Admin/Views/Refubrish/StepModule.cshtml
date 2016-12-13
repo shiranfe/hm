@@ -1,0 +1,156 @@
+﻿@model Common.BasicStepDM
+
+@*<script src="~/Scripts/xtra/jquery.unobtrusive-ajax.min.js"></script>*@
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+
+@*@using (Ajax.BeginForm("UpdateStep", "Admin/Refubrish", new AjaxOptions
+    {
+        OnSuccess = "$.PreTest_OnComplete(data);",
+        //OnComplete = "$.PreTest_OnComplete(data);",
+        // HttpMethod = "POST",
+        //InsertionMode = InsertionMode.Replace,
+        //UpdateTargetId = "target"
+    }))
+    {*@
+<form id="UpdateStepForm" method="post" data-ajax="true">
+    <fieldset class="RefubrishFieldsSet">
+
+        <input type="hidden" id="JobRefubrish_StepID" name="JobRefubrish_StepID" value="@Model.JobRefubrish_StepID" />
+        <input type="hidden" id="JobID" name="JobID" value="@Model.JobID" />
+        <input type="hidden" id="JobRefubrishPartID" name="JobRefubrishPartID" value="@Model.JobRefubrishPartID" />
+        <input type="hidden" id="MachineTypeID" name="MachineTypeID" value="@Model.MachineTypeID" />
+        <input type="hidden" id="JobRefubrishStepID" name="JobRefubrishStepID" value="@Model.JobRefubrishStepID" />
+        <input type="hidden" id="NextStep" name="NextStep" value="@Model.NextStep" />
+
+        @Html.Partial("StepGroups", Model.StepGroups)
+
+        <div class="VbTabBlock corn_3 clearfix">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">תמונות שלב</div>
+                <div class="HeaderActions"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="VbTabBlockInfo clearfix">
+                @{ViewBag.htmlId = "step-pic-" + Model.StepName;}
+                <div class="datarow all-pics @ViewBag.htmlId single">
+                   
+                 
+                    <div class="step-pics">
+                        @foreach (var pic in Model.StepPics)
+                        {
+                            <div class="MachineImg s1 pic-container">
+                                <img src="@pic" />
+                                <div class="delete">X</div>
+                            </div>
+                        }
+                    </div>
+                 
+                    <div id="picUploader" class="MachineImg s1  fr uplodable pic-container" style="margin-bottom:10px;">
+                     
+                        <img src="/images/UploadImage.png" />
+    
+                            @Html.Partial("UploadPic", new MVC.Models.Avatar { ObjID = Model.JobID, ObjType = "Job", FilePre = Model.StepName, SubMode = true })
+
+                    </div>
+
+                    <div class="clear"></div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="VbTabBlock corn_3 clearfix">
+            <div class="VbTabBlockHeader clearfix">
+                <div class="BlockHeaderTitle">פרטים כללים</div>
+                <div class="HeaderActions"></div>
+            </div>
+            <div class="WhiteSep"></div>
+            <div class="StepDetailsDiv VbTabBlockInfo clearfix">
+                <div class="datarow  single">
+                    <div class="fieldlabel">
+                        <span>הערות</span>
+                    </div>
+                    <div class="fieldvalue">
+                        <textarea id="Notes" name="Notes" rows="2">@Model.Notes</textarea>
+                    </div>
+                </div>
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        <span>בוצע על ידי</span>
+                    </div>
+                    <div class="fieldvalue">
+                        <span>@Model.CreatorName</span>
+                    </div>
+                </div>
+                <div class="datarow floatfirst">
+                    <div class="fieldlabel">
+                        <span>תאריך ביצוע</span>
+                    </div>
+                    <div class="fieldvalue">
+                        <span>@Model.DoneDate.ToShortDateString()</span>
+                    </div>
+                </div>
+               
+
+            </div>
+        </div>
+        
+
+
+
+        <div class="validationSummary">
+            @Html.ValidationSummary("יש להזין כל שדות החובה")
+        </div>
+        <div class="ForBtnDiv">
+            <input id="UpdateStepBtn" type="button" class="buttondefault floatlast" value="המשך לשלב הבא">
+            @if (Model.ErrorNextStep != 0)
+            {
+                <input type="button" id="ErrorBtn" value="@Model.ErrorBtnText" data-errornextstep="@Model.ErrorNextStep" class="buttondefault red floatlast">
+            }
+
+            @*אם אני רוצה לחזור אחורה ולשנות צריך למחוק ת השלב הנוכחי...*@
+        </div>
+    </fieldset>
+
+
+
+</form>
+@*}*@
+
+
+<script>
+
+    $(document).ready(function () {
+        //$(".SwitchDivInner").each(function (index, value) {
+
+        //    var checked = $(this).attr('data-val');
+        //    if (checked != '')
+        //        $(this).find('.' + checked).click();
+        //});
+
+        $(".CheckZone").each(function () {
+            var spinner = ' <div class="label"></div><div class="butn plus"></div><div class="butn minus"></div>';
+
+            $(this).append(spinner);
+            var val = $(this).find('input').val();
+            $(this).find('.label').text(val);
+            if (val > 0)
+                $(this).addClass('selected');
+        });
+
+        $(".spinner").hover(function () {
+            $(this).find('.butn').toggle();
+
+        });
+
+        var validator = $("form").data('validator');
+        validator.settings.ignore = "";
+
+        CreateDropDown();
+
+
+    });
+</script>

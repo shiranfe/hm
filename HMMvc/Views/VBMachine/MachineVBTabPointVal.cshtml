@@ -1,0 +1,113 @@
+﻿@model Common.PointResultDM
+@using Common;
+@{
+    Layout = "";
+
+
+    //var PointValModel = Model;//.PointSelected.PointResultDMs.First();
+    var StartDate = Model.From.ToShortDateString();
+    var EndDate = Model.To.ToShortDateString();
+
+}
+<script>
+    //var series = '@Html.Raw(Json.Encode(Model.series))';
+    var PointResultID = '@Model.JobVibrationMachinePointResultID';
+    var datasets=[];//=new Array();
+</script>
+<script src="~/Scripts/MachineVB/MachineVBTabPointVal.js"></script>
+
+
+
+<div id="VbTabPointVal" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderIcon PointVal"></div>
+        <div class="BlockHeaderTitle">ערכים בנקודה</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div id="VbTabPointValCont">
+        <div class="VbTabBlockInfo">
+
+
+            <div>
+
+                <div class="formRow">
+                    <div class="datarow floatfirst">
+                        <div class="fieldlabel">
+                            <span class="SortByLabel">@GlobalDM.GetTransStr("FromDate"): </span>
+                        </div>
+                        <div class="fieldvalue ">
+                            <div class="OuterSelect PointValDatesRow">
+
+                                <input id="StartDate" class="DatePicker" value="@StartDate" />
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="datarow floatlast">
+                        <div class="fieldlabel">
+                            <span class="SortByLabel">@GlobalDM.GetTransStr("UntilDate"): </span>
+                        </div>
+                        <div class="fieldvalue">
+                            <div class="OuterSelect PointValDatesRow">
+
+                                <input id="EndDate" class="DatePicker" value="@EndDate" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="clear"></div>
+            </div>
+
+
+            <div style="margin-top:10px;">
+
+                @*<h3>@Model.ValueName (@Model.ValueUnit)</h3>*@
+
+                <div id="placeholder" style="height:250px">
+
+                </div>
+                @foreach (var x in Model.Legend)
+                {
+                    <script>
+
+                    datasets['@x.label']={
+                        label: '@x.label',
+                        data: @Html.Raw(Json.Encode(x.data))
+                        }; // no ' '
+
+                    </script>
+                }
+
+            </div>
+
+            <div class="clear"></div>
+
+            @if (Model.SpectrumPic != "/")
+            {
+                <div id="SpectrumDiv">
+
+
+                    <h4 style="margin: 5px 0;">@GlobalDM.GetTransStr("PointValue_Spectrum")</h4>
+                    <div class="BorderImg Spectrum" onclick="">
+                        <a href="@Url.Content(Model.SpectrumPic)" target="_blank">
+                            <img id="" alt="" src="@Url.Content(Model.SpectrumPic)" />
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+    
+
+<script src="~/Scripts/VB/VbGraph.js"></script>

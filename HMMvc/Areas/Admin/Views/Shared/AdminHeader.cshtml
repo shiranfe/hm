@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = "";
+   
+}
+<div id="SiteHeader">
+    <div id="SiteHeaderCenter">
+        <div class="SiteWidth">
+            @*<div id="SiteHeaderLogos">
+                <a class="siteHeaderLogo" href="/#/" ></a>
+              
+                <div class="clear"></div>
+            </div>*@
+            <div id="siteHeaderUser">
+               @Html.Partial("MobileHeader")
+               <div id="siteHeaderUserInfos">
+                  
+                   @*@if (permisions.ShowVB)
+                   {<span>   |  </span><span class="linktextW TopMenuLink" data-Contr="VB"><a href="/Admin/#/VB">בדיקת רעידות</a></span> } 
+                   @if (permisions.ShowRefubrish)
+                   {<span>   |  </span><span class="linktextW TopMenuLink" data-contr="Refubrish"><a href="/Admin/#/Refubrish">תיקונים</a></span>}
+                             @if (permisions.ShowQuote)
+                   {<span>   |  </span><span class="linktextW TopMenuLink" data-contr="Quote"><a href="/Admin/#/Quote">הצעות מחיר</a></span> }
+                 @if (permisions.ShowClientSettings)
+                   {<span>   |  </span><span class="linktextW TopMenuLink" data-contr="ClientSettings"><a href="/Admin/#/Client">הגדרות לקוח</a></span> }
+                   @if (permisions.ShowManagReports)
+                   {<span>   |  </span><span class="linktextW TopMenuLink" data-contr="Settings"><a href="/Admin/#/ManagReport">דו"חות</a></span>  }
+                   @if (permisions.ShowSettings)
+                   {<span>   |  </span><span class="linktextW TopMenuLink" data-contr="Settings"><a href="/Admin/#/Employee">הגדרות מערכת</a></span>  }
+
+                    <span>   |  </span><span class="linktext" id="RefreshCacheBtn">רענן</span>*@
+                    <div class="clear"></div>
+                </div>
+               
+                <div class="clear"></div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

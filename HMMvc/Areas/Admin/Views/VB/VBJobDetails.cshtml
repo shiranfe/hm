@@ -1,0 +1,46 @@
+﻿@model VbReportEditDM
+@using Common;
+@{
+    Layout = "";
+
+    var publish = Model.JobDM.IsPosted ? "בטל פרסום" : "פרסם";
+    var btncolor = Model.JobDM.IsPosted ? "green" : "red";
+}
+
+<style>
+    .SideHeaderTitle {text-align:right; }
+</style>
+<div class="SiteSideMenu corn_3 shadow">
+
+    <div class="SideHeaderIcon"></div>
+
+    <div style="padding: 2px 7px;">
+        <a id="DeleteJobIcon" class="rec-icon" title="מחק עבודה"></a>
+        @*<span  class="SideHeaderInfoLabel b" style="font-size: 1.2em;"> @GlobalDM.GetTransStr("JobVibration_Report")</span>*@
+        <a class="rec-icon ReportIcon PrintIcon" href="/#/VB/VBReport?JobID=@Model.JobDM.JobID" title="@GlobalDM.GetTransStr("A_PrintPreview")"></a>
+        @*<a class="rec-icon ReportIcon PdfIcon" download title="@GlobalDM.GetTransStr("A_ExportToPdf")"></a>
+    <a class="rec-icon ReportIcon ExcelIcon"  title="@GlobalDM.GetTransStr("A_ExportToExcel")"></a>*@
+        <div class="clear"></div>
+    </div>
+
+    <div class="SideHeaderInfos">
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("A_Date"): <span class="SideHeaderInfoValue"><b>@Html.DisplayFor(modelItem => Model.JobDM.StartDate)</b></span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Job_JobID"): <span class="SideHeaderInfoValue">05/@Model.JobDM.JobID</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("User_Branch"): <span class="SideHeaderInfoValue">@Model.JobDM.ClientName</span></div>
+        @*<div class="SideHeaderInfoLabel">אזור: <span class="SideHeaderInfoValue">@Model.Areas</span></div>*@
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Request_Creator"): <span class="SideHeaderInfoValue">@Model.InviterName</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("EmployeeRole_Tester"): <span class="SideHeaderInfoValue">@Model.TesterName</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("EmployeeRole_Analyzer"): <span class="SideHeaderInfoValue">@Model.AnalyzerName</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Request_Priority"): <span class="SideHeaderInfoValue">@Model.JobDM.Urgency</span></div>
+    </div>
+    <div class="SideHeaderBack">
+        <span class="linktext">
+            <a href="/#/VB/History">@GlobalDM.GetTransStr("Global_BackToHome")</a>
+        </span>
+    </div>
+    <div style="padding: 5px;">
+
+        <input id="PublishVbReport" type="button" data-val="@Model.JobDM.IsPosted" value="@publish" class="buttondefault @btncolor" >
+    </div>
+    <div class="clear"></div>
+</div>

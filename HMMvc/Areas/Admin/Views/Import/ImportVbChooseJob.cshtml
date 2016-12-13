@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Common.VbHtmlReportChooseJobDM>
+
+
+<h2>שלב 3 - שיוך עבודה</h2>
+
+<p>
+    אנא שייך את הבדיקה לעבודה ע"פ <b>הגורם המזמין</b>
+</p>
+
+<div class="ImportBtnRow">
+    <p>
+        בחר תאריכים שיכללו בייבוא. ברירת מחדל - הכל כלול.
+    </p>
+    @foreach (var item in Model)
+    {
+        <div class="ImportItemDiv in jobs" data-id="@item.ID">
+            @Html.DisplayFor(modelItem => item.JobDate)
+        </div>
+       
+    }
+    <div class="clear"></div>
+</div>
+<div class="ImportBtnRow ">
+
+    <div class="fr">
+        <p>צור עבודה חדשה:</p>
+        <input type="button" id="JobCreateBtn" value="צור עבודה חדשה" />
+    </div>
+    <div class="OrDiv">
+        או
+    </div>
+    <div class="fr">
+        <p>
+            בחר עבודה קיימת:               
+        </p>
+        @Html.DropDownList("jobs", (SelectList)ViewBag.jobs)
+         
+    </div>
+
+    <div class="clear"></div>
+</div>
+<div class="ImportBtnRow dn" id="ImportDivZone">
+    <div  style="margin-bottom:10px;">
+            <span>עבודה: </span><span id="JobType" class="b"></span>
+    </div>
+
+    <input type="button" id="ImportReportBtn" value="ייבא דוח"  style="font-size:18px;"/>
+    <div class="clear"></div>
+
+
+</div>
+ <script>
+     $("#jobs").prop("selectedIndex", -1);
+    
+ </script>

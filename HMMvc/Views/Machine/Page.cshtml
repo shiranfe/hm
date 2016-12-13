@@ -1,0 +1,75 @@
+﻿@model MachineEditDM
+@using Common
+
+@{
+    ViewBag.HasPic = !Model.MacPic.Contains("MacType_");
+    var menuItems = new Dictionary<string, string> {
+        {"details","פרטים כללים" },
+        { "vb","בדיקת רעידות" },
+        { "refubrish","תיקונים" },
+        { "alignment","שיוורים" },
+        //{ "dynamic","איזונים" }
+    };
+}
+
+
+@*<script src="~/Scripts/Machine/Page.js"></script>*@
+
+
+@*<style>
+        .datarow { padding: 5px; }
+    </style>*@
+
+<script>
+
+
+    selectedTab = '@ViewBag.Tab';
+</script>
+
+<div id="StepsMenu">
+    <div class="SiteSideMenu menuInfoDiv MacPage corn_3 shadow">
+        @Html.HiddenFor(mode => Model.MachineID)
+        <div class="MachinePageSidePic">
+            <div class="MachineImg s1 Side uplodable" style="width:100%">
+                <img alt="" src="@Url.Content(Model.MacPic)" />
+
+            </div>
+        </div>
+        <div class="MachinePageSideTitle MacName">@Model.MachineName</div>
+        <div style="margin-top:10px">
+
+            <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("User_Customer"): <span class="SideHeaderInfoValue"><b>@Model.ClientName</b></span></div>
+            @*<div class="SideHeaderInfoLabel ">@Html.DropDownList("Parts") </div>*@
+        </div>
+
+        <div class="SideHeaderBack">
+            <span class="linktext">
+                <a href="/#/Machine">חזרה </a>
+            </span>
+        </div>
+    </div>
+
+    <div id="StepsDiv" class="">
+        <div class="blckRectangle"></div>
+
+        @foreach (var item in menuItems)
+        {
+            <div class="SiteSideMenu corn_3 shadow Step clearfix" data-id="@item.Key">
+                <a href="/Admin/#/Machine/10541/@item.Key">
+                    <div class="icon"></div>
+                    <div class="stepname SideHeaderInfoValue">@item.Value</div>
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+    <div class="clear"></div>
+</div>
+<div class="sitesubcontent" id="machinePageContent">
+
+    @*@{Html.RenderAction("Update", "Machine", new  { id = Model.MachineID });}*@
+</div>
+
+<div class="clear"></div>

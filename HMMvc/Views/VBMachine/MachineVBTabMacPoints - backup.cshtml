@@ -1,0 +1,47 @@
+﻿@model Common.MachineVBDM
+@using Common;
+@{
+    Layout = "";
+    var pointNotSel = true;
+    var PointSelected = Model.PointSelected;
+}
+
+<div id="VbTabMacPoints" class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderIcon MacPoints"></div>
+        <div class="BlockHeaderTitle">@GlobalDM.GetTransStr("Machine_PointsInMachine")</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockCont">
+        @*<div class="MacPointsFirst">
+
+            <div class="MacPointsScrollOuutter">
+                <div id="PointSortZone" class="MacPointsScroolInner">
+                    @foreach (var point in Model.PointPicDMs)
+                    {
+                        var sel = pointNotSel ? "Selected" : ""; pointNotSel = false;
+                        <div class="MacPointsPointListDiv @sel corn_3 shadow_Focused" data-id="@point.MachinePointID">
+                            <div class="PointListFirst">
+                                <div class="PointListDivTitle MacPoints b">@GlobalDM.GetTransStr("Point") @point.PointNumber</div>
+                                   <div class="MacPoints">@Html.DisplayFor(pointelemnt=> point.LastDate)</div>
+                            </div>
+
+                            <div class="MacStsIcon StsIconBig Sts-@point.StatusID" data-txt="@point.Status"></div>
+                   
+                            <div class="clear"></div>
+                        </div>
+                    }
+                
+                </div>
+            </div>
+        </div>*@
+        <div id="PointSelectedDiv" class="MacPointsLast VbTabDarkDiv">
+            @Html.Partial("PointDetails",new ViewDataDictionary(PointSelected))
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<script src="~/Scripts/qtipSts.js"></script>

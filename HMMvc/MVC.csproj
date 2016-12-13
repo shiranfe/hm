@@ -1,0 +1,916 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E4BB8135-E076-4718-AEF7-88CEA421F3E5}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVC</RootNamespace>
+    <AssemblyName>MVC</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.4.2\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.Unity, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BL\bin\Debug\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.Mvc.3.0.1304.0\lib\Net45\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\BL\bin\Debug\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler, Version=3.2.0.157, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.3.2.0.157\lib\net40\MiniProfiler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nQuant.Core, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\nQuant.1.0.3\lib\net40\nQuant.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.15.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\packages\Rotativa.1.6.1\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.2\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\LangDirection.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Alignment\AlignmentXmlController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Alignment\AlignmentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Alignment\AlignmentPartController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Bank\BankFieldController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Bank\BankTaskController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Bank\BankTask_FieldController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Catalog\CatalogItemComponentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Catalog\ManufacturerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Catalog\SupplierProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Catalog\SupplierController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientSettings\ClientController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientSettings\ContactController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Employee\EmployeePermisionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Equipment\EquipmentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskGroupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskGroupFieldController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Job\JobEquipmentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskController.cs" />
+    <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskEmployeeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Job\RefubrishController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Machine\MachinePartController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Machine\MachineController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Employee\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Job\JobController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Catalog\CatalogItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientSettings\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagReportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Quote\QuoteTrackController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Quote\QuoteJobController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Quote\QuoteTalkController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Quote\QuoteVersionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Quote\QuoteVersionItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Dynamic\DynamicGroupsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\_TemplateController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Quote\QuoteController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Job\OutsideController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Dynamic\DynamicFieldsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Job\VBController.cs" />
+    <Compile Include="Controllers\BugLogController.cs" />
+    <Compile Include="Controllers\VBMachineController.cs" />
+    <Compile Include="Controllers\_BasicController.cs" />
+    <Compile Include="Areas\Admin\Models\DynamicFieldsHelper.cs" />
+    <Compile Include="Controllers\DnBalController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Employee\EmployeeController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ImportController.cs" />
+    <Compile Include="Controllers\AlignmentController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MachineController.cs" />
+    <Compile Include="Controllers\PicController.cs" />
+    <Compile Include="Controllers\RefubrishController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Controllers\UserController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\VBController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\EnableCompressionAttribute.cs" />
+    <Compile Include="Helper\Extensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helper\PicHelper.cs" />
+    <Compile Include="Helper\TreeViewHtmlHelper.cs" />
+    <Compile Include="Helper\UploadFiles.cs" />
+    <Compile Include="Models\ContactVM.cs" />
+    <Compile Include="Models\CreateEntityModules.cs" />
+    <Compile Include="Models\FileManager.cs" />
+    <Compile Include="Models\GlobalManager.cs" />
+    <Compile Include="Models\IGlobalManager.cs" />
+    <Compile Include="Models\Pic.cs" />
+    <Compile Include="Models\PicManager.cs" />
+    <Compile Include="Models\SelectDm.cs" />
+    <Compile Include="Models\UserVM.cs" />
+    <Compile Include="PdfConvert.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\Alignment\alignmentIndex.js" />
+    <Content Include="Areas\Admin\Scripts\Alignment\alignmentUpdate.js" />
+    <Content Include="Areas\Admin\Scripts\Alignment\ImportAlignmentXml.js" />
+    <Content Include="Areas\Admin\Scripts\BankField\index.js" />
+    <Content Include="Areas\Admin\Scripts\BankTask\BankTask.js" />
+    <Content Include="Areas\Admin\Scripts\BankTask\index.js" />
+    <Content Include="Areas\Admin\Scripts\BankTask_Field\index.js" />
+    <Content Include="Areas\Admin\Scripts\_Template\index.js" />
+    <Content Include="Areas\Admin\Scripts\Catalog\CatalogItem.js" />
+    <Content Include="Areas\Admin\Scripts\Catalog\CatalogItemComonent.js" />
+    <Content Include="Areas\Admin\Scripts\Catalog\Catalog.js" />
+    <Content Include="Areas\Admin\Scripts\Catalog\SupllierProduct.js" />
+    <Content Include="Areas\Admin\Scripts\Catalog\Manufacturer.js" />
+    <Content Include="Areas\Admin\Scripts\ClientSettings\ClientTree.js" />
+    <Content Include="Areas\Admin\Scripts\ClientSettings\ClientDrop.js" />
+    <Content Include="Areas\Admin\Scripts\ClientSettings\ClientUpdate.js" />
+    <Content Include="Areas\Admin\Scripts\ClientSettings\MergeClients.js" />
+    <Content Include="Areas\Admin\Scripts\ClientSettings\User.js" />
+    <Content Include="Areas\Admin\Scripts\Job\JobFields.js" />
+    <Content Include="Areas\Admin\Scripts\Job\JobTask.js" />
+    <Content Include="Areas\Admin\Scripts\Job\JobEquipment.js" />
+    <Content Include="Areas\Admin\Scripts\Job\JobTaskEmployee.js" />
+    <Content Include="Areas\Admin\Scripts\Outside\index.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\CommonQuote.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\importFromQuote.js" />
+    <Content Include="Areas\Admin\Scripts\Refubrish\index.js" />
+    <Content Include="Areas\Admin\Scripts\Report\mainReport.js" />
+    <Content Include="Areas\Admin\Scripts\VB\ImportVbHtml.js" />
+    <Content Include="Areas\Admin\Scripts\Job\UpdateJobRequest.js" />
+    <Content Include="Areas\Admin\Scripts\Machine\MachinePart.js" />
+    <Content Include="Areas\Admin\Scripts\Machine\Page.js" />
+    <Content Include="Areas\Admin\Scripts\Machine\UpdateMachine.js" />
+    <Content Include="Areas\Admin\Scripts\VB\index.js" />
+    <Content Include="Content\cropper.css" />
+    <Content Include="Content\Site_rtl.css" />
+    <Content Include="images\MenuUser.png" />
+    <Content Include="images\SendMsgLoad.gif" />
+    <Content Include="images\singture_logo.jpg" />
+    <Content Include="images\singture_whils.jpg" />
+    <Content Include="images\UploadImage.png" />
+    <Content Include="images\UploadTicket.png" />
+    <Content Include="Scripts\appVersion.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\Machine\Page.js" />
+    <Content Include="Scripts\crud.js" />
+    <Content Include="Areas\Admin\Scripts\Employee\Role.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\index.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\QuoteTalk.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\QuoteTrackDetails.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\QuoteTrack.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\Quote.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\QuoteVersionItem.js" />
+    <Content Include="Areas\Admin\Scripts\Quote\QuoteVersion.js" />
+    <Content Include="Areas\Admin\Scripts\Services\clientMachineService.js" />
+    <Content Include="Areas\Admin\Scripts\Services\clientUserService.js" />
+    <Content Include="Areas\Admin\Scripts\DynamicFields\DynamicFields.js" />
+    <Content Include="Content\bootstrap-select.css" />
+    <Content Include="Content\HtmlLaundry\HtmlLaundryDoc.htm" />
+    <Content Include="Content\Html\VbHtmlReport.html" />
+    <Content Include="Content\fineuploader.css" />
+    <Content Include="Content\IE.css" />
+    <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\jquery.mCustomScrollbar.css" />
+    <Content Include="Content\MyFontsWebfontsKit.css" />
+    <Content Include="Content\Html\VBReport.html" />
+    <Content Include="images\AboutAlign.png" />
+    <Content Include="images\AboutFixing.png" />
+    <Content Include="images\AboutLaser.png" />
+    <Content Include="images\BackBtnBlack.png" />
+    <Content Include="images\BackBtnBlueBig.png" />
+    <Content Include="images\BackBtnGreen.png" />
+    <Content Include="images\BackBtnGreenBig.png" />
+    <Content Include="images\BackBtnRed.png" />
+    <Content Include="images\BackBtnRedBig.png" />
+    <Content Include="images\BackPointSelected.png" />
+    <Content Include="images\Backs.png" />
+    <Content Include="images\Card_ltr.png" />
+    <Content Include="images\Card_rtl.png" />
+    <Content Include="images\Favicon.png" />
+    <Content Include="images\footerNew_ltr.png" />
+    <Content Include="images\footerNew_rtl.png" />
+    <Content Include="images\HMLogoOpac.png" />
+    <Content Include="images\hor-off.png" />
+    <Content Include="images\hor-rotate.png" />
+    <Content Include="images\Jcrop.gif" />
+    <Content Include="images\BackBtnBlue.png" />
+    <Content Include="images\BackFooter.png" />
+    <Content Include="images\BackFooterHtml.png" />
+    <Content Include="images\BackHeader.png" />
+    <Content Include="images\BackHeaderNotLoged.png" />
+    <Content Include="images\BackMacCard.png" />
+    <Content Include="images\BackSideMenu.png" />
+    <Content Include="images\BackTableLight.png" />
+    <Content Include="images\BackTableLightRow.png" />
+    <Content Include="images\BackTableDark.png" />
+    <Content Include="images\BackTableDarkRow.png" />
+    <Content Include="images\BackTableHeader.png" />
+    <Content Include="images\ClientLogoBack.png" />
+    <Content Include="images\englandFlag.png" />
+    <Content Include="Content\Site_ltr.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\webfonts\264C04_0_0.eot" />
+    <Content Include="Content\webfonts\264C04_0_0.ttf" />
+    <Content Include="Content\webfonts\264C04_0_0.woff" />
+    <Content Include="App_Start\App_Browsers\qt.browser" />
+    <Content Include="Content\HtmlLaundry\default.whitelist" />
+    <Content Include="Areas\Admin\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\JobRefubrushDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicGroups\Page.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\StepGroups.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicFields\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicGroups\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplierProduct\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplierProduct\PriceListProducts.cshtml" />
+    <Content Include="Areas\Admin\Views\SupplierProduct\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\CatalogItem\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatalogItem\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\CatalogItemComponent\ItemComponents.cshtml" />
+    <Content Include="Areas\Admin\Views\CatalogItemComponent\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Quote\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\CreateEntity.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteVersion\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\JobsUnQuoted.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteVersion\SideMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Quote\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteVersionItem\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteJob\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Update.cshtml" />
+    <Content Include="images\tolerance.jpg" />
+    <Content Include="images\ver-off.png" />
+    <Content Include="images\Ver-rotate.png" />
+    <Content Include="Pics\Employee\Sig_20.png" />
+    <Content Include="Pics\Employee\Sig_6.png" />
+    <Content Include="Pics\MachinePicture\Motor.png" />
+    <Content Include="Pics\MachinePicture\size-arrow.png" />
+    <Content Include="Pics\MachinePicture\Type_Compressor.png" />
+    <Content Include="Pics\MachinePicture\Type_EngineAC.png" />
+    <Content Include="Pics\MachinePicture\Type_EngineDC.png" />
+    <Content Include="Pics\MachinePicture\Type_Ext.png" />
+    <Content Include="Pics\MachinePicture\Type_Gear.png" />
+    <Content Include="Pics\MachinePicture\Type_HPump.png" />
+    <Content Include="Pics\MachinePicture\Type_Magresa.png" />
+    <Content Include="Pics\MachinePicture\Type_Mapuach.png" />
+    <Content Include="Pics\MachinePicture\Type_Pump.png" />
+    <Content Include="Pics\MachinePicture\Type_Steer.png" />
+    <Content Include="Pics\MachinePicture\Type_Turbin.png" />
+    <Content Include="Scripts\jquery.mobile.custom.min.js" />
+    <Content Include="Scripts\jquery.ui.touch-punch.min.js" />
+    <Content Include="Scripts\Routing.js" />
+    <Content Include="Scripts\sammy.js" />
+    <Content Include="Scripts\UI\autocomplete.js" />
+    <Content Include="Scripts\UI\classie.js" />
+    <Content Include="Scripts\UI\cropper.min.js" />
+    <Content Include="Scripts\UI\jquery.datetimepicker.full.min.js" />
+    <Content Include="Scripts\UI\menu.js" />
+    <Content Include="Scripts\UI\moment-with-langs.js" />
+    <Content Include="Scripts\UI\Pivot\c3_renderers.min.js" />
+    <Content Include="Scripts\UI\Pivot\d3_renderers.min.js" />
+    <Content Include="Scripts\UI\Pivot\export_renderers.min.js" />
+    <Content Include="Scripts\UI\Pivot\gchart_renderers.min.js" />
+    <Content Include="Scripts\UI\Pivot\pivot.js" />
+    <Content Include="Scripts\VB\VbGraph.js" />
+    <Content Include="Scripts\xtra\jquery.pjax.js" />
+    <Content Include="Views\Export\QuoteExport.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteJob\JobDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\Page.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\MachineJobs.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\MachineJobs.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\NotPermited.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\NotPermitedPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\JobAlignmentDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Alignment\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Alignment\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Alignment\UpdateJobDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\AlignmentPart\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\AlignmentXml\ImportXml.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Alignment\MachineJobs.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteTrack\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteTrack\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteTalk\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteVersionItem\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\StepGroupFields.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\StepSubGroups.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ClientUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\QuoteVersionItem\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\ClientDrop.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\Step.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\ClientContacts.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Manufacturer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Manufacturer\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\MobileHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\JobRequest.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\KwHp.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\JobPics.cshtml" />
+    <Content Include="Areas\Admin\Views\Quote\QuoteSearch.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Test.cshtml" />
+    <Content Include="Areas\Admin\Views\Quote\ImportFromQuote.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Dashboard.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Pager.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\Filterd.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\Filterd.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Filterd.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagReport\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagReport\Quote.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagReport\Refubrish.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\MergeClients.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\AddReturningJob.cshtml" />
+    <Content Include="Areas\Admin\Views\Outside\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Outside\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\JobOutsideDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Outside\Filterd.cshtml" />
+    <Content Include="Areas\Admin\Views\JobTask\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\JobTaskEmployee\TaskEmployess.cshtml" />
+    <Content Include="Areas\Admin\Views\JobTaskEmployee\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\JobTaskEmployee\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Outside\JobOutsideInfo.cshtml" />
+    <Content Include="Areas\Admin\Views\JobEquipment\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\MenuAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\TaskGroups.cshtml" />
+    <Content Include="Areas\Admin\Views\BankField\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_Template\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_Template\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\BankField\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\BankTask\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BankTask\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\BankTask_Field\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BankTask_Field\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\FieldTmpl.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\TaskFields.cshtml" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalFolder.pubxml" />
+    <Content Include="images\Footer.png" />
+    <Content Include="images\Header.png" />
+    <Content Include="images\HeaderNotLoged.png" />
+    <Content Include="images\HMLogo.png" />
+    <Content Include="images\Icons.png" />
+    <Content Include="images\Loading.gif" />
+    <Content Include="images\LoginBack.png" />
+    <Content Include="images\MacCardStsBump.png" />
+    <Content Include="images\MavVBNavMenuBack.png" />
+    <Content Include="images\mCSB_buttons.png" />
+    <Content Include="images\MenuAccHeader.png" />
+    <Content Include="images\plusBtn.png" />
+    <Content Include="images\SampleLaser .png" />
+    <Content Include="images\StgCredit.png" />
+    <Content Include="images\StsLegend.png" />
+    <Content Include="images\StsLegendBack.png" />
+    <Content Include="images\Wheel.png" />
+    <Content Include="NuGet.exe" />
+    <Content Include="Pics\ClientLogos\DefLogo.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_1.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_2.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_3.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_4.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_5.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_6.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_7.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_8.jpg" />
+    <Content Include="Pics\MachinePicture\MacType_9.jpg" />
+    <Content Include="Pics\MachinePointPicture\PointDefault.jpg" />
+    <Content Include="Pics\PointResualt\DefPointResualt.jpeg" />
+    <Content Include="Rotativa\libeay32.dll" />
+    <Content Include="Rotativa\libgcc_s_dw2-1.dll" />
+    <Content Include="Rotativa\mingwm10.dll" />
+    <Content Include="Rotativa\README.txt" />
+    <Content Include="Rotativa\ssleay32.dll" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Areas\Admin\Scripts\Machine\Machine.js" />
+    <Content Include="Areas\Admin\Scripts\Catalog\Suppliers.js" />
+    <Content Include="Areas\Admin\Scripts\ClientSettings\Clients.js" />
+    <Content Include="Areas\Admin\Scripts\Job\UpdateJob.js" />
+    <Content Include="Areas\Admin\Scripts\Machine\MergeMachines.js" />
+    <Content Include="Scripts\Admin\Employees.js" />
+    <Content Include="Areas\Admin\Scripts\Refubrish\Refubrish.js" />
+    <Content Include="Areas\Admin\Scripts\ClientSettings\Contact.js" />
+    <Content Include="Scripts\Admin\VBAnalysisDetails.js" />
+    <Content Include="Scripts\Admin\VbAnalysis.js" />
+    <Content Include="Scripts\Admin\Spectum.js" />
+    <Content Include="Scripts\Admin\UploadPic.js" />
+    <Content Include="Areas\Admin\Scripts\Machine\PointPosition.js" />
+    <Content Include="Scripts\general.js" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\MachineVB\MachineVBTabPointVal.js" />
+    <Content Include="Scripts\MachineVB\MachineVBTab.js" />
+    <Content Include="Scripts\MachineVB\MachineVBPage.js" />
+    <Content Include="Scripts\qtipSts.js" />
+    <Content Include="Scripts\rest.js" />
+    <Content Include="Scripts\UI\ckeditor\adapters\jquery.js" />
+    <Content Include="Scripts\UI\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\UI\ckeditor\config.js" />
+    <Content Include="Scripts\UI\ckeditor\contents.css" />
+    <Content Include="Scripts\UI\ckeditor\lang\en.js" />
+    <Content Include="Scripts\UI\ckeditor\lang\he.js" />
+    <Content Include="Scripts\UI\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Scripts\UI\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Scripts\UI\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Scripts\UI\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Scripts\UI\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Scripts\UI\ckeditor\plugins\icons.png" />
+    <Content Include="Scripts\UI\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Scripts\UI\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Scripts\UI\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Scripts\UI\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Scripts\UI\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\dialog.css" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\editor.css" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\icons.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\icons_hidpi.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\arrow.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\close.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\hidpi\close.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\hidpi\lock-open.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\hidpi\lock.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\hidpi\refresh.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\lock-open.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\lock.png" />
+    <Content Include="Scripts\UI\ckeditor\skins\office2013\images\refresh.png" />
+    <Content Include="Scripts\UI\ckeditor\styles.js" />
+    <Content Include="Scripts\UI\jquery.autosize.js" />
+    <Content Include="Scripts\UI\jquery.bpopup.min.js" />
+    <Content Include="Scripts\UI\jquery.jstree.js" />
+    <Content Include="Scripts\UI\numeral.js" />
+    <Content Include="Scripts\UI\themes\default-rtl\d.png" />
+    <Content Include="Scripts\UI\themes\default-rtl\dots.png" />
+    <Content Include="Scripts\UI\themes\default-rtl\style.css" />
+    <Content Include="Scripts\UI\themes\default-rtl\throbber.gif" />
+    <Content Include="Scripts\UI\themes\default\d.png" />
+    <Content Include="Scripts\UI\themes\default\style.css" />
+    <Content Include="Scripts\UI\themes\default\throbber.gif" />
+    <Content Include="Scripts\UI\Accordion\accordion.js" />
+    <Content Include="Scripts\UI\Accordion\jquery-scrollTo.js" />
+    <Content Include="Scripts\UI\Accordion\jquery-ui-accordion.js" />
+    <Content Include="Scripts\UI\Accordion\jquery.js" />
+    <Content Include="Scripts\UI\bootstrap-select.js" />
+    <Content Include="Scripts\UI\bootstrap-select.min.js" />
+    <Content Include="Scripts\UI\excanvas.min.js" />
+    <Content Include="Scripts\UI\jquery.cookie.js" />
+    <Content Include="Scripts\UI\jquery.dcjqaccordion.2.7.js" />
+    <Content Include="Scripts\Menu\MachineMenu.js" />
+    <Content Include="Scripts\Menu\UserSettingsMenu.js" />
+    <Content Include="Scripts\UI\ckeditor\LICENSE.md" />
+    <Content Include="Scripts\UI\ckeditor\plugins\Thumbs.db" />
+    <None Include="Scripts\xtra\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\xtra\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\xtra\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\xtra\jquery.validate.js" />
+    <Content Include="Scripts\xtra\jquery.validate.min.js" />
+    <Content Include="Scripts\xtra\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\xtra\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\xtra\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\xtra\knockout-2.2.0.js" />
+    <Content Include="Scripts\xtra\modernizr-2.6.2.js" />
+    <Content Include="Scripts\sampels.js" />
+    <Content Include="Scripts\UI\jquery.easing.1.3.js" />
+    <Content Include="Scripts\UI\jquery.editinplace.js" />
+    <Content Include="Scripts\UI\jquery.fineuploader-3.0.js" />
+    <Content Include="Scripts\UI\jquery.flot.js" />
+    <Content Include="Scripts\UI\jquery.flot.time.js" />
+    <Content Include="Scripts\UI\jquery.Jcrop.js" />
+    <Content Include="Scripts\UI\jquery.jsort.0.4.js" />
+    <Content Include="Scripts\UI\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Scripts\UI\jquery.mCustomScrollbar.js" />
+    <Content Include="Scripts\UI\jquery.mousewheel.js" />
+    <Content Include="Scripts\UI\jquery.qtip.min.js" />
+    <Content Include="Scripts\UI\jquery.scrollTo-min.js" />
+    <Content Include="Scripts\UI\jquery.tablesorter.js" />
+    <Content Include="Scripts\VB\VBReport.js" />
+    <Content Include="Scripts\VB\CurrentSts.js" />
+    <Content Include="Scripts\xtra\_references.js" />
+    <Content Include="Content\HtmlExport.css" />
+    <Content Include="Views\Home\Reports.html" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.ascx" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\VB\HtmlPage1.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\Lay.cshtml" />
+    <Content Include="Views\VBMachine\MachineDetailsTab.cshtml" />
+    <Content Include="Views\VBMachine\MachineList.cshtml" />
+    <Content Include="Views\VBMachine\MachinePage.cshtml" />
+    <Content Include="Views\VBMachine\MachineVBTab.cshtml" />
+    <Content Include="Views\VBMachine\MachineVBTabDetails.cshtml" />
+    <Content Include="Views\VBMachine\MachineVBTabMacPoints.cshtml" />
+    <Content Include="Views\VBMachine\MachineVBTabPointVal.cshtml" />
+    <Content Include="Views\Request\RequestDetails.cshtml" />
+    <Content Include="Views\Request\RequestList.cshtml" />
+    <Content Include="Views\Shared\ChangeLang.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\string.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\HeaderNotLoged.cshtml" />
+    <Content Include="Views\Shared\MenuMachine.cshtml" />
+    <Content Include="Views\Shared\MenuUser.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\VB\CurrentSts.cshtml" />
+    <Content Include="Views\VB\History.cshtml" />
+    <Content Include="Views\VB\VBReport.cshtml" />
+    <Content Include="Views\Export\VBReportHtml.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\VBMachine\PointDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\AdminHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\SideMenuAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\PointPositionSelected.cshtml" />
+    <Content Include="Views\VB\CurrentStsContent.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\ClientSelectedMachines.cshtml" />
+    <Content Include="Views\Shared\UploadPic.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\ClientSelectedLogo.cshtml" />
+    <Content Include="Areas\Admin\Views\Lang\EditDictionary.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\PointResualt.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\PointResualtSelected.cshtml" />
+    <Content Include="Views\Alignment\About.cshtml" />
+    <Content Include="Views\DnBal\About.cshtml" />
+    <Content Include="Views\Refubrish\About.cshtml" />
+    <Content Include="Views\Alignment\Sample.cshtml" />
+    <Content Include="Views\Menu\scroll.cshtml" />
+    <Content Include="Views\Home\Warm.cshtml" />
+    <Content Include="Views\Home\NotValidate.cshtml" />
+    <Content Include="Views\Shared\ClientTree.cshtml" />
+    <Content Include="Views\Shared\_MINIPROFILER UPDATED Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\VBAnalysis.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\VBMachine.cshtml" />
+    <Content Include="Views\Export\HeaderExport.cshtml" />
+    <Content Include="Views\Export\FooterExport.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\VBAnalysisDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\VB\VBJobDetails.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\VB\VBEditJobTemplateNotes.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Import\ImportVbHtmlReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Import\ImportVbLoadHtmlAndChooseMacines.cshtml" />
+    <Content Include="Areas\Admin\Views\Import\ImportVbChooseJob.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\MergeMachines.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\MergeMachinesClientSelected.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Update.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
+    <Content Include="Areas\Admin\Views\Machine\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\EmployeePermision\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\Refubrish.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\RefubrishSteps.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\RefubrishJobDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\Switch.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Update.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Float.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\IsOk.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CheckArea.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Select.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SelectAndText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Text.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\StepModule.cshtml" />
+    <Content Include="Areas\Admin\Views\Refubrish\ExtraJobsStep.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\ConactInfoDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Job\MachineParts.cshtml" />
+    <Content Include="Areas\Admin\Views\MachinePart\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\MachinePart\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutoComplete.cshtml" />
+    <Content Include="Views\Shared\_LayoutReport.cshtml" />
+    <Content Include="Views\Shared\FooterPdf.cshtml" />
+    <Content Include="Views\Shared\HeaderPdf.cshtml" />
+    <Content Include="Views\Export\AlignmentExport.cshtml" />
+    <Content Include="Views\Export\Alignment\JobInfo.cshtml" />
+    <Content Include="Views\Export\Alignment\PartSizes.cshtml" />
+    <Content Include="Views\Export\Alignment\PartResult.cshtml" />
+    <Content Include="Views\Export\ExportSignuture.cshtml" />
+    <Content Include="Views\Export\Vb\JobInfo.cshtml" />
+    <Content Include="Views\Export\Quote\JobInfo.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutoCompleteHtml.cshtml" />
+    <Content Include="Views\Export\QuoteEmail.cshtml" />
+    <Content Include="Views\BugLog\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Machine\Index.cshtml" />
+    <Content Include="Views\Machine\Page.cshtml" />
+    <Content Include="Views\Machine\Update.cshtml" />
+    <Content Include="Views\VB\MachineJobs.cshtml" />
+    <Content Include="Views\Machine\StepSubGroups.cshtml" />
+    <Content Include="Views\Refubrish\MachineJobs.cshtml" />
+    <Content Include="Views\Alignment\MachineJobs.cshtml" />
+    <Content Include="Views\Refubrish\Details.cshtml" />
+    <Content Include="Views\Refubrish\Index.cshtml" />
+    <Content Include="Views\Refubrish\Filterd.cshtml" />
+    <Content Include="Views\Alignment\Index.cshtml" />
+    <Content Include="Views\VBMachine\MachineVBTabMacPoints - backup.cshtml" />
+    <Content Include="Views\VBMachine\PointPage.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GoogleAddress.cshtml" />
+    <Content Include="Views\Export\TestExport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Scripts\Home\" />
+    <Folder Include="Areas\Admin\Scripts\Lang\" />
+    <Folder Include="Areas\Admin\Views\ClientSettings\" />
+    <Folder Include="Areas\Admin\Views\Refubrish\Steps\" />
+    <Folder Include="Pics\Job\" />
+    <Folder Include="QuoteOrders\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{04e879fe-1614-4cd7-9461-a4ef7eaccdf4}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{93ec8860-c695-4534-bcc8-a9b44fe00b71}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{7631FFD7-E8B4-4DCD-8B06-E33ED5C6BB7A}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.1\analyzers\dotnet\cs\CodeCracker.Common.dll" />
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.1\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>49000</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49867/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

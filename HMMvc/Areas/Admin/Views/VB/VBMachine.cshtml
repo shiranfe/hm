@@ -1,0 +1,110 @@
+﻿@model Common.VbMachineDM
+@using Common;
+
+<script>var MachineID = '@Model.MachineID';</script>
+<div class="PageContHeader">
+    @*<div class="PageContHeaderTitle">
+        <h1>@Model.MachineName</h1>
+
+    </div>*@
+    @Html.Partial("VBAnalysisDetails", new ViewDataDictionary(Model))
+    <div class="clear"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#VbEditReportTable").tablesorter();
+        
+        $.MarkDuplicates();
+      
+    });
+</script>
+
+<div class="PageContInner">
+
+    <div class="TableZone">
+        <table id="VbEditReportTable" class="tablesorter">
+            <thead>
+                <tr>
+                    <th class="FirstTd">נקודה
+                    </th>
+                    <th>סוג
+                    </th>
+                    <th>כיוון
+                    </th>
+                    <th>ערך
+                    </th>
+                    <th style="width: 140px;">
+                        <div class="OuterSelect" data-id="0">
+                            <span class="SelectVal">סמן הכל</span>
+                            <span class="SelectBtn"></span>
+                            <select id="ChangeAllSts" class="selectbox">
+                                @* <option value="0">הכל</option>*@
+                                @foreach (var sts in Model.VbStatusDMs)
+                                {
+                                    <option value="@sts.StatusID">@sts.Status</option>
+                                }
+
+                            </select>
+                       </div>
+                        
+                    </th>
+                    <th class="LastTd" style="width: 45px;">התעלם
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @{var i = 1;}
+                @foreach (var item in Model.VbPointResultDMs)
+                {
+                    var odd = i % 2 == 0 ? "odd" : "even";
+                    i++;
+                    var hid = @item.IsHidden ? "RowDis" : "";
+                    var dis = @item.IsHidden ? "disabled='disabled'" : "";   
+                      
+                  
+                    <tr class="@odd trrow @hid" data-id="@item.JobVibrationMachinePointResultID" data-ResualTypeID ="@item.ResualTypeID">
+                        <td class="b">נקודה  @Html.DisplayFor(modelItem => item.PoineNumber)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ScheduleEntryStr)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DirectionStr)
+                        </td>
+                        <td dir="ltr">
+                            @Html.DisplayFor(modelItem => item.Value)   @Html.DisplayFor(modelItem => item.ValueUnit)
+                        </td>
+
+
+                        <td>
+                            <div class="OuterSelect" data-id="@item.StatusID">
+
+                                <span class="SelectVal">@item.Status</span>
+                                <span class="SelectBtn"></span>
+                                <select id="VbStatusCombo" class="selectbox StatusByCombo" @dis>
+                                    @foreach (var sts in Model.VbStatusDMs)
+                                    {
+                                        var sel = item.StatusID == sts.StatusID ? "selected=selected" : "";
+                                        <option value="@sts.StatusID" @sel>@sts.Status</option>
+                                    }
+
+                                </select>
+                            </div>
+                            @*  @item.Status
+                                <div class="VBReportStsIcon IconSmall-@item.StatusID" data-txt="@item.Status"></div>*@
+                        </td>
+                        <td class="Center">
+                            @Html.CheckBoxFor(modelItem => item.IsHidden)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

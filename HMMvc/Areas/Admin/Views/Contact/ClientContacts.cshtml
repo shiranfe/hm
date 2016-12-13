@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Common.ContactDM>
+
+    <table>
+        <thead>
+            <tr>
+
+
+                <th>
+                    שם מלא
+                </th>
+                <th>
+                    לקוח
+                </th>
+                <th>
+                    טלפון
+                </th>
+                <th>
+                    דואל
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{var i = 1;}
+            @foreach (var item in Model)
+            {
+                var odd = i % 2 == 0 ? "odd" : "even";
+                i++;
+                <tr class="@odd" data-id="@item.UserID">
+
+                    <td>
+                        <span class="linktext openItem">@item.FullName</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td nowrap>
+                        @item.Mobile
+                    </td>
+                    <td nowrap>
+                        <a class="linktextHover" href="mailto:@item.Email" target="_top">@item.Email</a>
+
+                    </td>
+
+                    <td>
+                        <span class="linktext deleteItem">מחק</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+

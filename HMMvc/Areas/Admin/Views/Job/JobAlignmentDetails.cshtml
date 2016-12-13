@@ -1,0 +1,91 @@
+﻿@model Common.JobDM
+
+<script type="text/javascript">
+     jobType = "@Common.JobType.Alignment";
+     idName = "#JobAlignmentDM_MachineID";
+
+</script>
+<div class="VbTabBlock corn_3">
+
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">פרטי עבודת שיוור בלייזר </div>
+
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo clearfix">
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    בודק:
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => Model.JobAlignmentDM.TesterID, new { options = ViewBag.Testers, Required = true })
+                    @Html.ValidationMessageFor(model => Model.JobAlignmentDM.TesterID)
+                    @*@Html.DropDownList("JobAlignmentDM.TesterID", (SelectList)ViewBag.Testers)*@
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    Measurement Program:
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => Model.JobAlignmentDM.MeasurementProgram)
+                </div>
+            </div>
+        </div>
+        <div class="formRow">
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    מכונה:
+                </div>
+                <div class="fieldvalue machineSelect">
+                    @Html.EditorFor(model => Model.JobAlignmentDM.MachineID, new { options = ViewBag.Machine, Required = true, AddBtnClass = "AddMachineBtn" })
+                    @*@Html.DropDownList("JobAlignmentDM.MachineID", (SelectList)ViewBag.Machine)*@
+                    @Html.ValidationMessageFor(model => Model.JobAlignmentDM.MachineID)
+                </div>
+                @*<div class="tcTopMin">
+                    <div class="plusBtn AddMachineBtn"></div>
+                </div>*@
+              
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    הצג טבלת טולרנטים:
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => Model.JobAlignmentDM.ShowTollerance)
+                </div>
+            </div>
+        </div>
+
+        <div class="formRow">
+            <div class="datarow single">
+                <div class="fieldlabel">
+                    חלקים בעבודה:
+                </div>
+
+                <div id="PartsDIv" class="fieldvalue">
+
+                    @if (Model.JobAlignmentDM.MachineID == 0)
+                    {
+                        <span>נא לבחור מכונה</span>
+                    }
+                    @*else
+                    {
+                        ViewBag.MachineID = Model.JobAlignmentDM.MachineID;
+
+                        var parts = Model.JobAlignmentDM.Parts;
+                        @Html.Partial("MachineParts", parts)
+
+                    }*@
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

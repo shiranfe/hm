@@ -1,0 +1,96 @@
+﻿@model List<Common.LangStringDM>
+
+@{
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/UI/jquery.editinplace.js"></script>
+<script>
+    $(document).ready(function () {
+      
+        $(".WordInPlace").editInPlace({
+            postclose: function () {
+                if ($(this).text() == '')
+                    $(this).text('לחץ להוספה');
+            },
+            callback: function (unused, enteredText) {
+                var lang = $(this)[0].classList[1];
+                var key = $(this).attr("data-key");
+
+
+                var id = $(this).parent().attr('id');
+                $.post("/Admin/VB/UpdateJobTemplateNote",
+                    {
+                        "key": key,
+                        "lang": lang,
+                        "word": enteredText
+                    },
+                function (data) {
+
+                });
+                return enteredText;
+
+
+            },
+            // url: "./server.php",
+            bg_over: "#cff"
+
+        });
+   
+
+    });
+</script>
+
+@*<div class="SiteSideMenu corn_3 shadow">
+   @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "VB", ShowTree = false });}
+  
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>עדכון תבניות הערות</h1>
+            לעדכון מילה, לחץ עליה, ערוך, ולשמירה פשוט לחץ מחוץ לתיבה הטקסט
+        </div>
+        <div class="HeaderActions">
+              @* <input type="submit" id="AddNotesTemplate"  class="buttondefault" value="הוסף תבנית"  />*@
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="pageContent">
+        <table>
+            <tr>
+                <th>מזהה
+                </th>
+                <th style="min-width: 200px;">אנגלית
+                </th>
+                <th style="min-width: 200px;">עברית
+                </th>
+
+            </tr>
+             @{var i = 1;}
+            @foreach (var item in Model)
+            {
+                var odd = i % 2 == 0 ? "odd" : "even";
+                i++;
+                              
+
+                <tr class="@odd">
+                    <td>
+                        <span>@item.Key</span>
+                    </td>
+                    <td>
+                        <span class="WordInPlace en italic" data-key="@item.Key">@item.EN</span>
+                    </td>
+                    <td>
+                        <span class="WordInPlace il italic" data-key="@item.Key">@item.IL</span>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>
+<div class="clear"></div>

@@ -1,0 +1,13 @@
+﻿@model Common.StepGroupFieldDM
+@{
+    var field = Model;
+    //var req =field.IsRequired ? 
+    //         "data-val-required="+field.FieldNameStr+" data-val=true" : "";
+
+}
+
+<div class="CheckZone spinner noTextSelect field">
+    <input type="hidden" id="@field.FieldNameStr" name="@field.HtmlID" value="@field.HtmlValue" >
+    <span>@field.FieldLabel</span>
+</div>
+

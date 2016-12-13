@@ -1,0 +1,78 @@
+﻿@model List<CatalogItemComponentDM>
+@using Common
+@{
+    ViewBag.Title = "ItemComponents";
+    
+    var CatalogItemPrice=Model.Sum(x => x.ComponentPrice*x.Quantity).ToString("c");
+}
+
+<div id="pageContent">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    סוג
+                </th>
+
+                <th>
+                    פריט
+                </th>
+                <th>
+                    עלות ליח'
+                </th>
+                <th>
+                    מחיר ליח'
+                </th>
+                <th>
+                    כמות
+                </th>
+                <th id="sumCol">
+                    סה"כ
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="componenTable">
+            @{var i = 1;
+        var odd = "";}
+            @foreach (var item in Model)
+        {
+            odd = i % 2 == 0 ? "odd" : "even";
+            i++;
+
+                <tr class="@odd" data-id="@item.CatalogItemComponentID">
+                    <td>
+                        <span>@item.ComponentType</span>
+                    </td>
+                    <td>
+                        <span class="linktext openItem" data-id="@item.CatalogItemComponentID">@item.ComponentName</span>
+                    </td>
+                    <td nowrap class="money">
+                        @Html.DisplayFor(modelItem => item.ComponentCost)
+                    </td>
+
+                    <td nowrap class="money">
+                        @Html.DisplayFor(modelItem => item.ComponentPrice)
+                    </td>
+                    <td>
+                        <span>@item.Quantity</span>
+                    </td>
+                    <td class="b money">
+                        @Html.DisplayFor(modelItem => item.SumPrice)
+                    </td>
+                    <td>
+                        <span class="linktext deleteItem">X</span>
+                    </td>
+                </tr>
+        }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+                <td class="b money" id="totalSum">@CatalogItemPrice</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

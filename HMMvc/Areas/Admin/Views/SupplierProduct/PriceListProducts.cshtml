@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Common.SupplierProductDM>
+
+@{
+    Layout = null;
+}
+
+<table id="PriceProductsTable">
+    <thead>
+        <tr>
+            <th>
+                שם
+            </th>
+            <th>
+                קטגוריה
+            </th>
+
+            <th>
+                ספק
+            </th>
+            <th>
+                יצרן
+            </th>
+
+            <th>
+                עלות
+            </th>
+            <th>
+                מחיר
+            </th>
+
+            <th>
+                עבור לקוחות
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var i = 1;}
+        @foreach (var item in Model)
+{
+    var odd = i % 2 == 0 ? "odd" : "even";
+    i++;
+    <tr class="@odd" data-ismaterial="@item.IsMaterial" data-id="@item.SupplierProductID">
+        <td>
+            <span class="linktext openItem">@item.ProductName</span>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductTypeLangStr)
+        </td>
+        <td>
+            <span class="suppliername">@item.SupplierName</span>
+
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.ManufactureName)
+        </td>
+
+        <td nowrap class="money">
+            @Html.DisplayFor(modelItem => item.ProductCost)
+        </td>
+        <td nowrap class="money">
+
+            @Html.DisplayFor(modelItem => item.ProductPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsForClients)
+        </td>
+
+        <td>
+            <span class="linktext deleteItem">X</span>
+        </td>
+    </tr>
+}
+
+
+    </tbody>
+
+</table>
+

@@ -1,0 +1,49 @@
+﻿@model Common.MachinePartDM
+
+<script src="~/Scripts/xtra/jquery.validate.min.js"></script>
+<script src="~/Scripts/xtra/jquery.validate.unobtrusive.min.js"></script>
+
+
+<form id="UpdateMachinePartForm" method="post" data-ajax="true">
+    @Html.HiddenFor(model => Model.MachineID)
+    @Html.HiddenFor(model => Model.MachinePartID)
+    <div class="VbTabBlock corn_3">
+
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo clearfix">
+
+            <div class="formRow">
+                <div class="datarow single">
+                    <div class="fieldlabel">
+                        סוג:
+                    </div>
+                    <div class="fieldvalue">
+                        @*@Html.DropDownList("MachineTypeID", (SelectList)ViewBag.MachineType)*@
+                        @Model.MachineTypeLangStr
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="max-height:420px; overflow:auto;">
+        @if (Model.Groups.Any())
+        {
+            @Html.Partial("StepGroups", Model.Groups)
+        }
+</div>
+ 
+   
+
+    <div class="ForBtnDiv">
+        <input type="button" value="שמור" class="buttondefault floatlast">
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+        setPopTitle('MachinePart', '@ViewBag.PopTitle');
+
+    });
+
+</script>

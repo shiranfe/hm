@@ -1,0 +1,51 @@
+﻿@model JobDM
+@using Common
+@{ 
+    string macPic = ViewBag.PreTestStepPic ?? "/images/UploadImage.png";
+    string ticketPic = ViewBag.DetailPic ?? "/images/UploadTicket.png";
+    var id = Model.JobID > 0 ? Model.JobID : Model.TempId;
+
+    var detailPic = ViewBag.DetailPic != null;
+    var preTestStepPic = ViewBag.PreTestStepPic != null;
+
+}
+<div class="VbTabBlock corn_3">
+    <div class="VbTabBlockHeader">
+        <div class="BlockHeaderTitle">תמונות</div>
+        <div class="clear"></div>
+    </div>
+    <div class="WhiteSep"></div>
+    <div class="VbTabBlockInfo job-pics clearfix">
+
+        <div class="fr">
+            <div class="MachineImg s1 mac-pic uplodable pic-container" data-hasPic="@preTestStepPic" style="position: relative;">
+                <img alt="" src="@macPic" data-def="/images/UploadImage.png" />
+               
+                <div class="delete">X</div>
+
+                    @{ViewBag.htmlId = "mac-pic";}
+                    @Html.Partial("UploadPic", new MVC.Models.Avatar { ObjID = id, ObjType = "Job", FilePre = "PreTestStep", SubMode = true })
+                
+            </div>
+            <div class="clear"></div>
+
+        </div>
+
+        <div class="fr">
+
+            <div class="MachineImg s1 mac-ticket uplodable pic-container" data-hasPic="@detailPic" style="position: relative;">
+                <img alt="" src="@ticketPic" data-def="/images/UploadTicket.png" />
+               
+                    <div class="delete">X</div>
+   
+                    @{ViewBag.htmlId = "mac-ticket";}
+                    @Html.Partial("UploadPic", new MVC.Models.Avatar { ObjID = id, ObjType = "Job", FilePre = "DetailsStep", SubMode = true })
+
+            </div>
+            <div class="clear"></div>
+
+        </div>
+
+
+    </div>
+</div>

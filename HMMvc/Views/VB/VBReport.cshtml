@@ -1,0 +1,152 @@
+﻿@model Common.VbReportDM
+@using Common
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<script src="~/Scripts/VB/VBReport.js"></script>
+<script>var JobID= '@Model.JobDM.JobID';</script>
+<div class="SiteSideMenu corn_3 shadow">
+
+    <div class="SideHeaderIcon"></div>
+    <div class="SideHeaderTitle">@GlobalDM.GetTransStr("JobVibration_Report")</div>
+    <div class="SideHeaderInfos">
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("A_Date"): <span class="SideHeaderInfoValue"><b>@Html.DisplayFor(modelItem => Model.JobDM.StartDate)</b></span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Job_JobID"): <span class="SideHeaderInfoValue">05/@Model.JobDM.JobID</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("User_Branch"): <span class="SideHeaderInfoValue">@Model.JobDM.ClientName</span></div>
+        @*<div class="SideHeaderInfoLabel">אזור: <span class="SideHeaderInfoValue">@Model.Areas</span></div>*@
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Request_Creator"): <span class="SideHeaderInfoValue">@Model.InviterName</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("EmployeeRole_Tester"): <span class="SideHeaderInfoValue">@Model.TesterName</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("EmployeeRole_Analyzer"): <span class="SideHeaderInfoValue">@Model.AnalyzerName</span></div>
+        <div class="SideHeaderInfoLabel">@GlobalDM.GetTransStr("Request_Priority"): <span class="SideHeaderInfoValue">@Model.JobDM.Urgency</span></div>
+    </div>
+    <div class="SideHeaderBack">
+        <span class="linktext">
+            <a href="/#/VB/History">@GlobalDM.GetTransStr("Global_BackToHome")</a>
+        </span>
+    </div>
+</div>
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+        <div class="PageContHeaderTitle">
+            <h1>@GlobalDM.GetTransStr("JobVibration_Report")</h1>
+
+        </div>
+        <div class="HeaderActions">
+
+            <a class="rec-icon ReportIcon PrintIcon"   href="~/Export/VBReportHtml?id=@Model.JobDM.JobID" title="@GlobalDM.GetTransStr("A_PrintPreview")" target="_blank"></a>
+            <a class="rec-icon ReportIcon PdfIcon" href="~/Export/VBReportPdf?id=@Model.JobDM.JobID" title="@GlobalDM.GetTransStr("A_ExportToPdf") " download></a>
+            <a class="rec-icon ReportIcon ExcelIcon" href="~/Export/VBReportExcel?id=@Model.JobDM.JobID" title="@GlobalDM.GetTransStr("A_ExportToExcel") " download></a>
+           
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="VBReportMikraZone">
+
+        <div style="padding: 15px 20px;">
+            <div class="VBReportMikraTitle">@GlobalDM.GetTransStr("Global_Legend"):</div>
+            <div class="VBReportMikraStsDiv" data-sts="4">
+                <div class="VBReportMikraIcon IconBig-4"></div>
+                <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_Normal")</div>
+            </div>
+            <div class="VBReportMikraStsDiv" data-sts="3">
+                <div class="VBReportMikraIcon IconBig-3"></div>
+                <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_FollowUp")</div>
+            </div>
+            <div class="VBReportMikraStsDiv" data-sts="2">
+                <div class="VBReportMikraIcon IconBig-2"></div>
+                <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_Repair")</div>
+            </div>
+            <div class="VBReportMikraStsDiv" data-sts="1">
+                <div class="VBReportMikraIcon IconBig-1"></div>
+                <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_ArgentRepair")</div>
+            </div>
+            <div class="VBReportMikraStsDiv" data-sts="5">
+                <div class="VBReportMikraIcon IconBig-5"></div>
+                <div class="VBReportMikraStatus">@GlobalDM.GetTransStr("JobStatus_NotTested")</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="TableHeaderZone" style="padding:10px;" >
+        <div id="FilterNone" class="">@GlobalDM.GetTransStr("Filter_None")</div>
+        <div id="FilterExist" class="dn">
+            @GlobalDM.GetTransStr("Filter"): 
+            <span id="FilterValue" class="b"></span>
+           <span id="RemoveFilter" class="linktext" style="margin:0 5px;">(@GlobalDM.GetTransStr("Filter_Remove"))</span> 
+
+        </div>
+    </div>
+    <div class="SliceLine"></div>
+    <div class="PageContInner">
+
+        <div class="TableZone">
+            <table id="VbReportTable" class="tablesorter">
+                <thead>
+                    <tr>
+                        <th class="FirstTd">@GlobalDM.GetTransStr("Machine_MachineName")
+                        </th>
+                         <th>@GlobalDM.GetTransStr("Description")
+                        </th>
+                        <th>@GlobalDM.GetTransStr("User_Location")
+                        </th>
+                        <th>@GlobalDM.GetTransStr("JobVibration_MaxValue")
+                        </th>
+                        <th class="LastTd" style="width:140px;">@GlobalDM.GetTransStr("Machine_Status")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                   
+                    @{var i = 1;}
+                    @foreach (var item in Model.VbReportMachineDMs)
+                    {
+                        var odd = i % 2 == 0 ? "odd" : "even";
+                        i++;
+
+                      
+                  
+                        <tr class="@odd trrow" data-sts="@item.StatusID">
+                            <td class="FirstTd">
+                                <a class="linktext MacName" href="/#/VBMachine/MachinePage?ActiveTab=VB&MachineID=@item.MachineID">@item.MachineName</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Details)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Areas)
+                            </td>
+                            <td dir="ltr">@if (item.MaxValue.HasValue)
+                                          {
+                                            @Html.DisplayFor(modelItem => item.MaxValue) 
+                                            <span class="fnt_s" > (mm/s) </span>
+                                          }
+                            </td>
+                            <td class="TdIcon  LastTd">@item.Status
+                                <div class="VBReportStsIcon IconSmall-@item.StatusID" data-txt="@item.Status"></div>
+                            </td>
+                        </tr>
+                    if (item.Notes != null)
+                    {
+                        <tr class="@odd NotesTR trrow" data-sts="@item.StatusID">
+                            <td colspan="5" class="NotesTD">@item.Notes</td>
+                        </tr>
+                    }
+
+                }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<script src="~/Scripts/qtipSts.js"></script>
+
+<p>העבודה נוצרה בהצלחה</p><h1>מספר מכונה {0}</h1>

@@ -1,0 +1,39 @@
+﻿@model Common.StepGroupDM
+@{ 
+    /** IF WANT TO GROUP BY FIELDTYPE*/
+//var fields = Model.StepGroupFieldDMs.GroupBy(x => x.FieldTypeID)
+//    .ToDictionary(x => x.Key, x => x);
+}
+<div class="clearfix">
+    @*@foreach (var fieldGroup in fields)
+    {*@
+
+        @foreach (var field in Model.StepGroupFieldDMs)
+        {
+          
+                field.HtmlID = field.DynamicGroupFieldID +
+               (Model.Pid.HasValue ? "_" + Model.DynamicGroupID : "");
+
+                var curValue = field.currenValues.SingleOrDefault(x =>
+                    !Model.Pid.HasValue || x.SubGroupID == Model.DynamicGroupID);
+
+                field.HtmlValue = curValue != null ? curValue.FieldValue.ToString() : null;//) ? field.FieldValue : null;
+
+                var fieldType = field.FieldTypeID.ToString();
+                ViewBag.Required = field.IsRequired || Model.IsRequired ?
+                "data-val-required=(*) data-val=true" : "";
+                @Html.EditorFor(model => field, fieldType)
+
+
+                @*if (ViewBag.addLineDivider && fieldType != "CheckArea")
+                    {
+                        <div class="lineDivider clear"></div>
+                    }*@
+
+           
+
+
+        }
+        @*<div class="clear"></div>*@
+        @*}*@
+</div>

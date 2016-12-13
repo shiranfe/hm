@@ -1,0 +1,59 @@
+﻿@model ClientFilterDm
+    @using Common
+
+@{
+    ViewBag.Title = "לקוחות";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<script src="~/Areas/Admin/Scripts/ClientSettings/Clients.js"></script>
+
+
+@*<div class="SiteSideMenu corn_3 shadow">
+
+    @{Html.RenderAction("MenuAdmin", "Home", new { ClientToShow = "All", ShowTree = false });}
+</div>*@
+<div class="sitesubcontent corn_3 shadow">
+    <div class="PageContHeader">
+
+        <div class="PageContHeaderTitle">
+            <h1>לקוחות</h1>
+        </div>
+        <div class="HeaderActions">
+            <input id="AddItemBtn" type="button" class="buttondefault " value="לקוח חדש" />
+            <input id="MergeClientBtn" type="button" class="buttondefault" value="איחוד לקוחות" />        
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    <div class="VbTabBlock corn_3 searchFields">
+
+        <div class="VbTabBlockHeader clearfix">
+            <div class="BlockHeaderTitle">חיפוש לקוח</div>
+
+        </div>
+        <div class="WhiteSep"></div>
+        <div class="VbTabBlockInfo">
+            <div class="formRow">
+                <div class="datarow  single">
+                    <div class="fieldlabel">
+                        חיפוש:
+                    </div>
+                    <div class="fieldvalue">
+                        <input type="text" id="srch" placeholder="חפש" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div id="innerContent" class="VbTabBlock corn_3">
+        @Html.Partial("Filterd", Model)
+
+        
+    </div>
+
+</div>
+<div class="clear"></div>

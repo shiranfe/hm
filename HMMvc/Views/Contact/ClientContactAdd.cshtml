@@ -1,0 +1,156 @@
+﻿@model MVC.Models.UserDetailsVM
+@using Common
+
+@{
+    ViewBag.Title = "Add Contact";
+     
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div class="SiteSideMenu">
+        @{Html.RenderAction("UserSettingsMenu", "User");}
+
+    </div>
+
+    
+    <div class="sitesubcontent">
+   
+            @Html.HiddenFor(model => model.UserID)
+
+        <h2 class="floatfirst">@GlobalDM.GetTransStr("User_Users")</h2>
+        <h1 class="float">@GlobalDM.GetTransStr("User_NewUser")</h1>
+        <br />
+        <div class="dataform floatfirst">
+            <div class="datarow">
+                <h2>@GlobalDM.GetTransStr("User_PersonalDetails")</h2>
+            </div>
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_FirstName")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.FirstName)
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_LastName")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.LastName)
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </div>
+            </div>
+
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Role")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.Role)
+                    @Html.ValidationMessageFor(model => model.Role)
+                </div>
+            </div>
+
+            
+            @* <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Permission
+                </div>
+                <div class="fieldlabel">
+                    
+                    @Html.DropDownList("Permission")
+                </div>
+            </div> *@
+            <div class="clear"></div>
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Client")
+                </div>
+                <div class="fieldvalue">
+                    @Html.HiddenFor(x => x.ClientID)
+                    @Html.DropDownList("Client", "")
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Password")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <br />
+        <br />
+        <div class="dataform floatfirst">
+            <div class="datarow">
+                <h2>@GlobalDM.GetTransStr("User_CommunicationDetails")</h2>
+            </div>
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Email")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Mobile")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.Mobile)
+                    @Html.ValidationMessageFor(model => model.Mobile)
+                </div>
+            </div>
+
+            <div class="datarow floatfirst">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_OfficePhone")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.OfficePhone)
+                    @Html.ValidationMessageFor(model => model.OfficePhone)
+                </div>
+            </div>
+            <div class="datarow floatlast">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Fax")
+                </div>
+                <div class="fieldvalue">
+                    @Html.EditorFor(model => model.Fax)
+                    @Html.ValidationMessageFor(model => model.Fax)
+                </div>
+            </div>
+            <div class="datarow floatfirst double">
+                <div class="fieldlabel">
+                    @GlobalDM.GetTransStr("User_Address")
+                </div>
+                <div class="fieldvalue double">
+                    @Html.EditorFor(model => model.Address)
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <br />
+        <br />
+        <div class="dataform">
+
+            <input type="submit" value="@GlobalDM.GetTransStr("A_Save")" class="buttondefault floatlast">
+        </div>
+    </div>
+    <div class="clear"></div>
+    
+    
+    
+    
+
+}

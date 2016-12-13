@@ -1,0 +1,31 @@
+﻿
+@model Common.JobAlignmentDM
+@using Common
+@{
+    ViewBag.Title = "UpdateJobDetails";
+}
+
+
+<div class="SiteSideMenu menuInfoDiv corn_3 shadow clearfix">
+    @*<div class="absIcons">
+        <a href="/Admin/#/Job/Details/?JobID=@Model.JobID&jobType=Alignment" class="rec-icon ReportIcon EditIcon" title="@GlobalDM.GetTransStr("A_Edit")"></a>
+    </div>*@
+    @*<input type="hidden" id="JobRefubrishPartID" name="JobRefubrishPartID" value="@Model.JobID" />*@
+    <div class="SideHeaderInfos">
+        <div class="SideHeaderInfoLabel">שם העבודה: <a class="SideHeaderInfoValue linktext" href="/Admin/#/Job/Details?jobType=Alignment&&JobID=@Model.JobID">@Model.JobDM.JobName</a></div>
+        <div class="SideHeaderInfoLabel">מספר עבודה: <span  class="SideHeaderInfoValue" >05/</span><span class="SideHeaderInfoValue" id="JobID">@Model.JobID</span></div>
+        <div class="SideHeaderInfoLabel">לקוח: <span class="SideHeaderInfoValue">@Model.JobDM.ClientName</span></div>
+        <div class="SideHeaderInfoLabel">מזמין: <span class="SideHeaderInfoValue">@Model.JobDM.ContactName</span></div>
+        <div class="SideHeaderInfoLabel">מכונה: <span class="SideHeaderInfoValue"><a class="linktext " href="/Admin/#/Machine/@Model.MachineID /alignment">@Model.MachineName</a></span></div>
+        <div class="SideHeaderInfoLabel"> @Html.DropDownList("Parts")</div>
+    </div>
+    <div class="SideHeaderBack">
+        <span class="linktext">
+            <a href="/Admin/#/Alignment/Index">חזור</a>
+        </span>
+    </div>
+    @*<div style="padding: 5px;">
+
+            <input id="PublishVbReport" type="button" data-val="@Model.IsPosted" value="@publish" class="buttondefault @btncolor" >
+        </div>*@
+</div>
