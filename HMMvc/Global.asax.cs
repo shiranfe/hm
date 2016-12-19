@@ -5,9 +5,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using BL;
+using MVC.App_Start;
 using Microsoft.Practices.Unity;
-using MvcBlox.App_Start;
-using System.Diagnostics;
 
 namespace MVC
 {
@@ -42,6 +41,7 @@ namespace MVC
 
             AreaRegistration.RegisterAllAreas();
 
+            AutoMapperConfig.Register();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -103,7 +103,7 @@ namespace MVC
             {
                 var lngcok = Request.Cookies["lang"];
                 Session["lang"] = lngcok.Value;
-                Session["dir"] = dir.Value;
+                Session[nameof(dir)] = dir.Value;
             }
 
             var emp = HttpContext.Current.Request.Cookies["EmpID"];

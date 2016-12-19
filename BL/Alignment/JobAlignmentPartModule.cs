@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Common;
+using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
-using DAL;
 
 namespace BL
 {
@@ -58,12 +58,12 @@ namespace BL
         internal List<JobAlignmentPartDM> GetList(int jobID)
         {
            // var quer = GetQuer().Where(x => x.JobID == JobID);
-            //Mapper.DynamicMap<JobAlignmentPart, JobAlignmentPartDM>(entity, model);
+            //Mapper.Map<JobAlignmentPart, JobAlignmentPartDM>(entity, model);
 
             return (from x in GetQuer()
                     select new JobAlignmentPartDM 
                     {
-                        JobAlignmentPartID = x.JobAlignmentPartID,
+                        JobAlignmentPartID = x.JobAlignmentPartID
                       
                        
                     })
@@ -112,12 +112,12 @@ namespace BL
 
         private void ModelToEntity(JobAlignmentPartDM model, JobAlignmentPart entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(JobAlignmentPartDM model, JobAlignmentPart entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

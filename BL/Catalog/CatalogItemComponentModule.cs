@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using BL.Moduls;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BL
 {
@@ -59,7 +59,7 @@ namespace BL
                         ComponentTypeID = g.ComponentTypeID,
                         Quantity = g.Quantity,
                         ComponentCost = g.ComponentCost,
-                        ComponentName = g.ComponentName,
+                        ComponentName = g.ComponentName
                         //CatalogItemDM = new CatalogItemDM {
                         //    CatalogItemID = g.CatalogItem.CatalogItemID,
                         //    ItemName = g.CatalogItem.ItemName,
@@ -77,7 +77,7 @@ namespace BL
         //private static CatalogItemDM GetCatatlogItemDm(vwCatalogItemComponent g)
         //{
         //    var model = new CatalogItemDM();
-        //    Mapper.DynamicMap(g.CatalogItem, model);
+        //    Mapper.Map(g.CatalogItem, model);
         //    return model;
         //}
 
@@ -170,12 +170,12 @@ namespace BL
 
         private void ModelToEntity(CatalogItemComponentDM model, CatalogItemComponent entity)
         {
-            Mapper.DynamicMap<CatalogItemComponentDM, CatalogItemComponent>(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EmtityToModel(CatalogItemComponentDM model, CatalogItemComponent entity)
         {
-            Mapper.DynamicMap<CatalogItemComponent, CatalogItemComponentDM>(entity, model);
+            Mapper.Map(entity, model);
         }
 
 

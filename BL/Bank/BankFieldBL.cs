@@ -1,8 +1,7 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using Common;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System;
 
 namespace BL
 {

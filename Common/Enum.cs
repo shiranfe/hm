@@ -20,7 +20,6 @@ namespace Common
     {
         AC = 1,
         DC = 2,
-
     }
 
     public enum DynamicObject
@@ -111,7 +110,8 @@ namespace Common
         Magresa = 463, 
         PumpMono = 588,
         VacumPump = 592,
-        Dikanter    =596
+        Dikanter    =596,
+        Axe    =597
     }
 
 

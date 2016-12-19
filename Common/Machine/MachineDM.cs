@@ -61,7 +61,7 @@ namespace Common
         public string MachineTypeAdditional { get; set; }
         public bool ShowBearingMachineType => MachineTypeAdditional == null && MachineTypeID.HasValue;
 
-        public string MachineType { get; set; }
+        public string MachineTypeStr { get; set; }
 
         public string Rpm { get; set; }
         public string Kw { get; set; }

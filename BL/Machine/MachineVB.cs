@@ -1,11 +1,10 @@
-﻿using BL.Moduls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BL.Moduls;
 using Common;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 
 namespace BL
 {
@@ -129,7 +128,7 @@ namespace BL
             }
 
             pr.series = lst.Select(x =>
-                new string[] { GetTimestamp(x.Date), x.Value.ToString() }).ToArray();//
+                new[] { GetTimestamp(x.Date), x.Value.ToString() }).ToArray();//
       
 
         }
@@ -150,7 +149,7 @@ namespace BL
                 {
                     label = valueName,
                     data = v.Select(x =>
-                           new string[] { GetTimestamp(x.Date), x.Value.ToString() }).ToArray(),
+                           new[] { GetTimestamp(x.Date), x.Value.ToString() }).ToArray()
 
                 });
             }

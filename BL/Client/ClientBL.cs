@@ -1,11 +1,10 @@
-﻿using BL.Moduls;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BL.Moduls;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 
 namespace BL
 {
@@ -100,7 +99,7 @@ namespace BL
             {
                 ClientID = 0,
                 ClientName = "כל המפעלים",
-                Childs = GetClientTree(clientToShow) ,
+                Childs = GetClientTree(clientToShow) 
 
             } };
         }

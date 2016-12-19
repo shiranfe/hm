@@ -1,11 +1,9 @@
-﻿using BL.Moduls;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 using DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Repository;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -29,13 +27,13 @@ namespace BL
 
             var picks = branchDal.GetQueryable().Select(x=> new{
                  ValueStr = x.BranchID,
-                 Text = x.BranceName,
+                 Text = x.BranceName
             }).ToList();
 
             return picks.Select(x => new PickListDM
             {
                 Value = x.ValueStr.ToString(),
-                 Text = x.Text,
+                 Text = x.Text
             }).ToList();
         }
 

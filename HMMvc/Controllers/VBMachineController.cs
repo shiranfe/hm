@@ -3,7 +3,6 @@
 using Common;
 using Microsoft.Practices.Unity;
 using MvcBlox.Models;
-using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +42,7 @@ namespace MVC.Controllers
             if (model == null || !_globalManager.AuthorizeUser((int)model.ClientID))
                 return Redirect("/Home/NotValidate");
 
-            MachineVBDM mac = GetPointPage(machineID, jobID, machinePointID);
+            var mac = GetPointPage(machineID, jobID, machinePointID);
             model.VBDetails = mac;
 
 
@@ -59,7 +58,7 @@ namespace MVC.Controllers
         public ActionResult PointPage(int machineID, int jobID, int machinePointID) //, string activeTab
         {
 
-            MachineVBDM mac = GetPointPage(machineID, jobID, machinePointID);
+            var mac = GetPointPage(machineID, jobID, machinePointID);
 
             return PartialView(mac);
 
@@ -98,10 +97,10 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult MachineDetailsTab(MachineDetailsDM machineDetailsDM)
         {
-            Extensions.Strlz(machineDetailsDM);
+           // Extensions.Strlz(machineDetailsDM);
             _machineVB.ChangeMachineDetails(machineDetailsDM);
-            var macID = machineDetailsDM.MachineID;
-            return PartialView("MachinePage",  macID );
+            int macID = machineDetailsDM.MachineID;
+            return PartialView(nameof(MachinePage),  macID );
         }    
 
         public ActionResult MachineVbTab(int machineID, int? jobID)

@@ -1,13 +1,11 @@
-﻿using BL.Moduls;
-using Common;
-using DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Repository;
+using BL.Moduls;
+using Common;
+using DAL;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -70,7 +68,7 @@ namespace BL
                     PointNumber = x.Location.Split('-')[0],
                     Direction = x.Location.Split('-').Last(),
                     ScheduleEntry = x.ScheduleEntry.Split().First(),//leave only Demoed/Vel
-                    Value = Convert.ToDouble(x.Latest),
+                    Value = Convert.ToDouble(x.Latest)
 
                 }).ToList();
 
@@ -136,7 +134,7 @@ namespace BL
                     Date = rsl.Date,
 
                     Direction = picks.Single(x => x.Key == rsl.Direction).PickListID,
-                    Value = rsl.Value,
+                    Value = rsl.Value
                     
                 };
                 var m = picks.Single(x => x.Key == rsl.ScheduleEntry);

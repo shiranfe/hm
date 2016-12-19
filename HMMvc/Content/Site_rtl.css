@@ -3299,8 +3299,9 @@ td {
     }
 
 #LoginFormContent {
-    margin: 50px auto;
-    padding-right: 65px;
+    /* margin: 45px auto; */
+    padding: 45px 25px;
+    display: table;
 }
 
 
@@ -5366,7 +5367,7 @@ td.pvtAxisContainer, td.pvtVals {
 
 .report-header-bottom {
     position: absolute;
-    left: 0;
+    left: -3px;
     right: 0;
     top: 0;
     line-height: 2;

@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using DAL;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using AutoMapper;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -67,7 +67,7 @@ namespace BL
             return (from x in GetQuer()
                     select new JobTaskGroupFieldDM
                     {
-                        Id = x.JobTaskGroupFieldID,
+                        Id = x.JobTaskGroupFieldID
                     })
                     .OrderByDescending(x => x.Id)
                     .ToList();
@@ -129,12 +129,12 @@ namespace BL
 
         private void ModelToEntity(JobTaskGroupFieldDM model, JobTaskGroupField entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(JobTaskGroupFieldDM model, JobTaskGroupField entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

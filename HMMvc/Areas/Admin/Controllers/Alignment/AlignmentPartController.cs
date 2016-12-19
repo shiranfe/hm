@@ -86,7 +86,7 @@ namespace MVC.Areas.Admin.Controllers
         }
 
 
-        private void PopulateDrop(JobAlignmentPartDM model)
+        private static void PopulateDrop(JobAlignmentPartDM model)
         {
             //var clnts = _quoteBL.GetAllSrcs();
            // ViewBag.Srcs = new SelectList(clnts, "ClientID", "ClientName", mac.ClientParentID);

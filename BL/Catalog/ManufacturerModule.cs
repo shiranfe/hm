@@ -1,9 +1,9 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BL.Moduls
 {
@@ -35,7 +35,7 @@ namespace BL.Moduls
                     select new ClientDM
                     {
                         ClientID = x.ClientID,
-                        ClientName = x.ClientName,
+                        ClientName = x.ClientName
                        
                     }).OrderBy(x => x.ClientName).ToList();
 
@@ -48,7 +48,7 @@ namespace BL.Moduls
                 .Select(x => new KeyValueDM
                 {
                     PickListID = x.ClientID,
-                    Key = x.ClientName,
+                    Key = x.ClientName
                 });
         }
 

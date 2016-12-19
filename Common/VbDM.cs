@@ -103,25 +103,14 @@ namespace Common
 
         public int DirectionID { get; set; }
         public string DirectionKey { get; set; }
-        public string DirectionStr
-        {
-            get
-            {
-                return GlobalDM.GetTransStr(DirectionKey);
-            }
-        }
+        public string DirectionStr => GlobalDM.GetTransStr(DirectionKey);
 
         [DisplayFormat(DataFormatString = "{0:#,##0.000#}")]
-        public double? Value { get; set; }        
-        public string ValueUnit
-        {
-            get { return ScheduleEntryKey == "Demod" ? "g" : "mm/s"; }
-        }
+        public double? Value { get; set; }
+        public string ValueUnit => ScheduleEntryKey == "Demod" ? "g" : "mm/s";
+        public string ResualTypeID => PoineNumber + ScheduleEntryID.ToString() + DirectionID.ToString();
 
-        public string ResualTypeID { get { return PoineNumber + ScheduleEntryID.ToString() + DirectionID.ToString(); 
-        } }
-       
-        
+
         public bool IsHidden  { get; set; }
     }
 
@@ -140,8 +129,7 @@ namespace Common
 
         public virtual string NotesIL { get; set; }
         public virtual string NotesEN { get; set; }
-        public string Notes { get { return HttpContext.Current.Session["lang"] == "he-IL" ? NotesIL ?? NotesEN : NotesEN ?? NotesIL; } }
-
+        public string Notes => ReferenceEquals(HttpContext.Current.Session["lang"], "he-IL") ? NotesIL ?? NotesEN : NotesEN ?? NotesIL;
 
     }
 
@@ -152,7 +140,7 @@ namespace Common
         public string MachineName { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
-        [DisplayFormat(DataFormatString = "{0:#,##0.000#}")]
+        [DisplayFormat(DataFormatString = @"{0:#,##0.000#}")]
         public double? MaxValue { get; set; }
         public string Status { get; set; }
         public string Notes { get ; set;}
@@ -171,7 +159,7 @@ namespace Common
     {
         public string StatusID { get; set; }
         public string LangStr { get; set; }
-        public string Status { get { return GlobalDM.GetTransStr(LangStr); } }
+        public string Status => GlobalDM.GetTransStr(LangStr);
     }
 
     public class VbCurentMachineStsDM: VbStatusDM
@@ -193,7 +181,9 @@ namespace Common
 
         public string NotesIL { get; set; }
         public string NotesEN { get; set; }
-        public string Notes { get { return HttpContext.Current.Session["lang"] == "he-IL" ? NotesIL ?? NotesEN : NotesEN ?? NotesIL; } }
+        public string Notes =>
+            string.Equals((string) HttpContext.Current.Session["lang"], "he-IL", StringComparison.Ordinal)
+                ? NotesIL ?? NotesEN : NotesEN ?? NotesIL;
     }
 
 

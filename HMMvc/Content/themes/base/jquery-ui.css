@@ -43,8 +43,6 @@
 	position: absolute;
 	top: 0; /* #8656 */
 	cursor: default;
-    border:none !important;
-    box-shadow: 0 0 15px 0px #bbb; -moz-box-shadow: 0 0 15px 0px #bbb; -webkit-box-shadow: 0 0 15px 0px #bbb; 
 }
 
 /* workarounds */

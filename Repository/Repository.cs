@@ -82,7 +82,7 @@ namespace Repository
         }
 
 
-
+         
         public virtual void Update(TEntity entity)
         {
           

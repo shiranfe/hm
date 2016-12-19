@@ -1,7 +1,7 @@
-﻿using DAL;
+﻿using System;
+using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
 
 namespace BL
 {
@@ -28,7 +28,7 @@ namespace BL
                 Entity = entityName,
                 Action =action,
                 Param = param.Substring(0, MaxParamLen),
-                CreationTime= DateTime.Now,  
+                CreationTime= DateTime.Now  
             };
            
             _employeeLogDal.Add(entity);

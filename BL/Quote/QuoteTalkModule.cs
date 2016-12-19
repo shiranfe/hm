@@ -1,11 +1,11 @@
 ﻿using System;
-using AutoMapper;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using Common;
 using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -82,7 +82,7 @@ namespace BL
         public QuoteTalkDM Update(QuoteTalkDM model)
         {
             var entity = (model.QuoteTalkID > 0) ? 
-                GetSingle(model.QuoteTalkID) : new QuoteTalk {  };
+                GetSingle(model.QuoteTalkID) : new QuoteTalk();
             ModelToEntity(model,entity);
 
             if (model.QuoteTalkID > 0)
@@ -104,12 +104,12 @@ namespace BL
 
         private static void ModelToEntity(QuoteTalkDM model, QuoteTalk entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private static void EntityToModel(QuoteTalkDM model, QuoteTalk entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

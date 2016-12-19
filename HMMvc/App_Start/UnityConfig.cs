@@ -1,11 +1,11 @@
-using System;
-using Common;
-using Microsoft.Practices.Unity;
 using BL;
-using MvcBlox.Models;
+using Microsoft.Practices.Unity;
 using MVC.Models;
+using MvcBlox.Models;
+using System;
 
-namespace MvcBlox.App_Start
+
+namespace MVC.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
@@ -13,7 +13,7 @@ namespace MvcBlox.App_Start
     public class UnityConfig
     {
         #region Unity Container
-        private static readonly Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
+        private static readonly Lazy<IUnityContainer> Container = new Lazy<IUnityContainer>(() =>
         {
             var container = new UnityContainer();
             RegisterTypes(container);
@@ -25,7 +25,7 @@ namespace MvcBlox.App_Start
         /// </summary>
         public static IUnityContainer GetConfiguredContainer()
         {
-            return container.Value;
+            return Container.Value;
         }
         #endregion
 
@@ -39,7 +39,7 @@ namespace MvcBlox.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            // container.RegisterType<IProductRepository, ProductRepository>();  
             container.AddNewExtension<ServicesUnityExtension>();
 
             using (var containerControlledLifetimeManager = new ContainerControlledLifetimeManager())
@@ -62,8 +62,6 @@ namespace MvcBlox.App_Start
             {
                 container.RegisterType<PicManager, PicManager>(containerControlledLifetimeManager);
             }
-
         }
-
     }
 }

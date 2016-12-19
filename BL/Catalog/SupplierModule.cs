@@ -1,13 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Moduls
 {
@@ -41,7 +37,7 @@ namespace BL.Moduls
                 .Select(x => new KeyValueDM
                 {
                     PickListID = x.ClientID,
-                    Key = x.ClientName,
+                    Key = x.ClientName
                 });
         }
 
@@ -53,7 +49,7 @@ namespace BL.Moduls
                     select new ClientDM
                     {
                         ClientID = x.ClientID,
-                        ClientName = x.ClientName,
+                        ClientName = x.ClientName
                        
                     }).OrderBy(x => x.ClientName).ToList();
 

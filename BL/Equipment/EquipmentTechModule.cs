@@ -1,13 +1,10 @@
-﻿using BL.Moduls;
+﻿using System;
+using System.Linq;
+using BL.Moduls;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
@@ -28,8 +25,8 @@ namespace BL
             _dynamicGroupFieldDal = _uow.Repository<DynamicGroupField>();
         }
 
-        static int[] _techMainTypes = new int[] { (int)MachineType.EngineAC, (int)MachineType.EngineDC, (int)MachineType.EngineVAC };
-        static int[] _techSeconderyTypes = new int[] { (int)MachineType.HPump, (int)MachineType.Mapuach, (int)MachineType.Steer, (int)MachineType.Gear };
+        static int[] _techMainTypes = { (int)MachineType.EngineAC, (int)MachineType.EngineDC, (int)MachineType.EngineVAC };
+        static int[] _techSeconderyTypes = { (int)MachineType.HPump, (int)MachineType.Mapuach, (int)MachineType.Steer, (int)MachineType.Gear };
 
 
         /// <summary>
@@ -97,7 +94,7 @@ namespace BL
 
             /** if soenst have subgroups- has 1 speed - take group id*/
             if (!speedGroupIds.Any())
-                speedGroupIds = new int[] { dyncmicField.DynamicGroup.DynamicGroupID };
+                speedGroupIds = new[] { dyncmicField.DynamicGroup.DynamicGroupID };
 
             /** make sure didnt set mote speeds then availbe*/
             var numberOfSpeeds = Math.Min(modelValues.Count(), speedGroupIds.Count());
@@ -133,7 +130,7 @@ namespace BL
         /// <returns></returns>
         private static string[] GetSpeedsValues(string modelValue)
         {
-            return modelValue.Split(new char[] { '/', '\\', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return modelValue.Split(new[] { '/', '\\', ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
 

@@ -100,18 +100,12 @@ namespace Common.Helpers
 
         public static string ExceptionMessage(Exception e)
         {
-            if (e.InnerException == null)
-                return e.Message;
-
-            return ExceptionMessage(e.InnerException);
+            return e.InnerException == null ? e.Message : ExceptionMessage(e.InnerException);
         }
 
         public static string InnerExceptionMessage(Exception e)
         {
-            if (e.InnerException == null)
-                return string.Empty;
-
-            return ExceptionMessage(e.InnerException);
+            return e.InnerException == null ? string.Empty : ExceptionMessage(e.InnerException);
         }
     }
 

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace MVC
 {
-    public class EnableCompressionAttribute : ActionFilterAttribute
+    public sealed class EnableCompressionAttribute : ActionFilterAttribute
     {
         const CompressionMode Compress = CompressionMode.Compress;
 

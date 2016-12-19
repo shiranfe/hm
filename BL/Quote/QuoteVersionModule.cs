@@ -1,13 +1,11 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
@@ -55,7 +53,7 @@ namespace BL
                     select new QuoteVersionDM 
                     {
                         QuoteVersionID = x.QuoteVersionID,
-                       Version = x.Version,
+                       Version = x.Version
                        
                     })
                     .OrderByDescending(x=>x.QuoteVersionID)
@@ -181,12 +179,12 @@ namespace BL
 
         private void ModelToEntity(QuoteVersionDM model, QuoteVersion entity)
         {        
-            Mapper.DynamicMap<QuoteVersionDM, QuoteVersion>(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(QuoteVersionDM model, QuoteVersion entity)
         {         
-           Mapper.DynamicMap<QuoteVersion, QuoteVersionDM>(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

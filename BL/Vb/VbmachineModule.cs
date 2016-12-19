@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
 using Common;
-using Repository;
+using DAL;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {
@@ -50,7 +47,7 @@ namespace BL.Moduls
                            ScheduleEntryKey = p.PickList.Key,
                            DirectionID = (int)p.Direction,
                            DirectionStr = p.PickList1.Key,
-                           Value = p.Value,
+                           Value = p.Value
 
                        }).OrderBy(x => x.MachineName).ThenBy(x => x.PointName).ToList();
 
@@ -77,7 +74,7 @@ namespace BL.Moduls
                            ScheduleEntryKey = p.PickList.Key,
                            DirectionID = (int)p.Direction,
                            DirectionStr = p.PickList1.Key,
-                           Value = p.Value,
+                           Value = p.Value
 
                        }).Single();
 
@@ -117,7 +114,7 @@ namespace BL.Moduls
                     {
                         JobID = m.JobVibration.JobID,
                         JobName = m.JobVibration.Job.JobName,
-                        StartDate = m.JobVibration.Job.StartDate,
+                        StartDate = m.JobVibration.Job.StartDate
                     }).OrderByDescending(x => x.StartDate).ToList();
 
         }
@@ -142,7 +139,7 @@ namespace BL.Moduls
                            HtmlY = p.MachinePoint.HtmlY,
                            LangStr = p.Status.Key,
                            LastDate = p.Date,
-                           ShowPoint = p.MachinePoint.ShowPoint,
+                           ShowPoint = p.MachinePoint.ShowPoint
                        }).OrderBy(x => x.PointNumber).ToList();
 
             return ans;
@@ -162,7 +159,7 @@ namespace BL.Moduls
                         ClientNote = m.ClientNote,
                         LastTipul = m.Machine.Comments,
                         GeneralNoteEN = m.GeneralNoteEN,
-                        GeneralNoteIL = m.GeneralNoteIL,
+                        GeneralNoteIL = m.GeneralNoteIL
 
                     }).Single();
 
@@ -184,8 +181,8 @@ namespace BL.Moduls
                     && (m.GeneralNoteEN ?? m.GeneralNoteIL) != null
                     select new NotesHisory
                     {
-                        JobStartDate = (DateTime)m.JobStartDate,
-                        GeneralNote = m.GeneralNoteEN ?? m.GeneralNoteIL,
+                        JobStartDate = m.JobStartDate,
+                        GeneralNote = m.GeneralNoteEN ?? m.GeneralNoteIL
                     }).ToList();
 
         }
@@ -202,7 +199,7 @@ namespace BL.Moduls
                       select new VbMachineDM
                       {
                           MachineID = v.MachineID,
-                          MachineName = v.Machine.MachineName,
+                          MachineName = v.Machine.MachineName
 
                       }).OrderBy(x => x.MachineName)
                    .ToList();
@@ -229,7 +226,7 @@ namespace BL.Moduls
                            DirectionStr = p.PickList1.Key,
                            Value = p.Value,
                            StatusID = p.Status.Value,
-                           LangStr = p.Status.Key,
+                           LangStr = p.Status.Key
                            // PrcntChange= p.pre,
                        }).OrderBy(x => x.StatusID).ToList();
 
@@ -253,7 +250,7 @@ namespace BL.Moduls
                            ScheduleEntryID = p.ScheduleEntry,
                            DirectionID = (int)p.Direction,
                            DirectionStr = p.PickList1.Key,
-                           ScheduleEntryKey = p.PickList.Key,
+                           ScheduleEntryKey = p.PickList.Key
                        }).Single();
 
 
@@ -280,7 +277,7 @@ namespace BL.Moduls
                            Value = p.Value,
                            StatusID = p.Status.Value,
                            LangStr = p.Status.Key,
-                           IsHidden = p.Hide ?? false,
+                           IsHidden = p.Hide ?? false
                        }).OrderBy(x => x.PoineNumber)
                        .ThenBy(x => x.ScheduleEntryID)
                        .ThenBy(x => x.DirectionID)
@@ -304,7 +301,7 @@ namespace BL.Moduls
                        {
                            Date = p.Date,
                            JobID = p.JobID,
-                           Value = (double)p.Value,
+                           Value = (double)p.Value
                        });
             return ans;
 
@@ -323,7 +320,7 @@ namespace BL.Moduls
                            DirectionStr = p.PickList1.Key,
                            Date = p.Date,
                            JobID = p.JobID,
-                           Value = (double)p.Value,
+                           Value = (double)p.Value
                        });
             return ans;
 

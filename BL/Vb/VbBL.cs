@@ -1,11 +1,11 @@
-﻿using Common;
+﻿using System;
 using System.Collections.Generic;
-using DAL;
 using System.Linq;
-using Repository;
-using System;
 using BL.Moduls;
+using Common;
+using DAL;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -166,7 +166,7 @@ namespace BL
                          select new ClientTreeDM
                          {
                              ClientID = m.ClientID,
-                             ClientName = m.vwParentsName2,
+                             ClientName = m.vwParentsName2
                          }).ToList();
 
             return clnts;
@@ -218,7 +218,7 @@ namespace BL
         {
             var ans = new SpectrumDM
             {
-                PointResualts = _vbMachineModule.GetPointResualt(jobID),
+                PointResualts = _vbMachineModule.GetPointResualt(jobID)
             };
 
             if (ans.PointResualts.Any())
@@ -264,7 +264,7 @@ namespace BL
         /**********     ADD    ***********/
         public void ImportVbHtmlReport(List<VbHtmlReportDM> vbHtmlReportDMList)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
 

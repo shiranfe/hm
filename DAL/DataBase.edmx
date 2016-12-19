@@ -203,6 +203,7 @@
           <Property Name="ShowAlignment" Type="bit" Nullable="false" />
           <Property Name="ShowBalancing" Type="bit" Nullable="false" />
           <Property Name="ShowManagReports" Type="bit" Nullable="false" />
+          <Property Name="ShowFieldsEdit" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeeLog">
           <Key>
@@ -1477,7 +1478,9 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobRefubrish_Step_JobRefubrish_Part">
-          <End Role="JobRefubrish_Part" Type="Self.JobRefubrish_Part" Multiplicity="1" />
+          <End Role="JobRefubrish_Part" Type="Self.JobRefubrish_Part" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="JobRefubrish_Step" Type="Self.JobRefubrish_Step" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="JobRefubrish_Part">
@@ -2830,6 +2833,7 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <Property Name="ShowManagReports" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="EmployeeLog" Relationship="HMErpModel.FK_EmployeeLog_Employee" FromRole="Employee" ToRole="EmployeeLog" />
           <NavigationProperty Name="JobTaskEmployee" Relationship="HMErpModel.FK_JobOutsideEmployee_Employee1" FromRole="Employee" ToRole="JobTaskEmployee" />
+          <Property Name="ShowFieldsEdit" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -5526,6 +5530,7 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="HMErpModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ShowFieldsEdit" ColumnName="ShowFieldsEdit" />
                 <ScalarProperty Name="ShowManagReports" ColumnName="ShowManagReports" />
                 <ScalarProperty Name="ShowBalancing" ColumnName="ShowBalancing" />
                 <ScalarProperty Name="ShowAlignment" ColumnName="ShowAlignment" />

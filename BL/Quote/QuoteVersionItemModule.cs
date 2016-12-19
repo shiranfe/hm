@@ -1,11 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 
 namespace BL
 {
@@ -165,12 +164,12 @@ namespace BL
 
         private void ModelToEntity(QuoteVersionItemDM model, QuoteVersionItem entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(QuoteVersionItemDM model, QuoteVersionItem entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
          
 

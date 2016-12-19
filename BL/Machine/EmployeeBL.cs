@@ -1,12 +1,12 @@
-﻿using Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DAL;
-using Repository;
-using Microsoft.Practices.Unity;
-using BL.Moduls;
 using AutoMapper;
+using BL.Moduls;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -57,7 +57,7 @@ namespace BL
                 .Select(x => new DropListDM
                 {
                     id = x.EmployeeID,
-                    Text = x.Employee.FullName,
+                    Text = x.Employee.FullName
                 }).ToList();
         }
 
@@ -75,7 +75,7 @@ namespace BL
                            e.Password == userAccountDM.Password
                     select new UserLoged
                     {
-                        UserID = e.EmployeeID,
+                        UserID = e.EmployeeID
 
                     }).SingleOrDefault();
 
@@ -94,7 +94,7 @@ namespace BL
                      
                         Password= e.Password,
                         Username= e.Username,
-                        BranchID=e.BranchID,
+                        BranchID=e.BranchID
                     }).Single();
 
             model.ContactInfoDM = _contactInfoModule.GetSingleInfo(empID, ObjType.Employee);
@@ -132,8 +132,9 @@ namespace BL
                             ShowQuote = q.ShowQuote,
                             ShowAlignment = q.ShowAlignment,
                             ShowBalancing = q.ShowBalancing,
-                            ShowManagReports = q.ShowManagReports
-                        },
+                            ShowManagReports = q.ShowManagReports,
+                            ShowFieldsEdit = q.ShowFieldsEdit
+                        }
 
                     };
           
@@ -155,7 +156,7 @@ namespace BL
                             FullName = e.FullName,
                             Active = e.Active,
                             BranchID = e.BranchID,
-                            BranchName = e.Branch?.BranceName ?? "not set",
+                            BranchName = e.Branch?.BranceName ?? "not set"
                         }).ToList();
 
             if (withAll)
@@ -221,7 +222,7 @@ namespace BL
             Employee entity = new Employee
             {                             
                 Active = true,
-                ShowRefubrish = true,
+                ShowRefubrish = true
             };
 
             ModelToEntity(entity, model);
@@ -256,7 +257,7 @@ namespace BL
         {
             Employee entity = GetSingle(model.EmployeeID);
 
-            Mapper.DynamicMap<UserPerrmisionDM, Employee>(model.Perrmisions, entity);
+            Mapper.Map(model.Perrmisions, entity);
 
             _uow.SaveChanges();
 
@@ -267,12 +268,12 @@ namespace BL
 
         private void EntityToModel(Employee entity, EmployeeDM model)
         {
-            Mapper.DynamicMap<Employee, EmployeeDM>(entity, model);
+            Mapper.Map(entity, model);
         }
 
         private void ModelToEntity(Employee entity, EmployeeDM model)
         {
-            Mapper.DynamicMap<EmployeeDM, Employee>(model, entity);
+            Mapper.Map(model, entity);
         }
 
        

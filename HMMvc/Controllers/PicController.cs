@@ -14,7 +14,6 @@ namespace MVC.Controllers
 
         private readonly MachineBL _machineBL;
         private readonly IGlobalManager _globalManager;
-        private readonly PicManager _picManger;
 
         public PicController([Dependency]MachineBL machineBL,
             [Dependency]PicManager picManger,
@@ -22,7 +21,6 @@ namespace MVC.Controllers
         {
             _globalManager = globalManager;
             _machineBL = machineBL;
-            _picManger = picManger;
         }
 
 

@@ -98,10 +98,10 @@
                         </td>
                     </tr>
                     <tr class="even">
-                        <td>% הנחה</td>
+                        <td>% הנחה <span>@Html.ValidationMessageFor(model => Model.Disscount)</span></td>
                         <td style="width:100px;">@Html.TextBoxFor(model => Model.Disscount)</td>
                     </tr>
-                    <tr class="odd ">
+                    <tr class="odd">
                         <td>סה"כ אחר הנחה</td>
                         <td class="b keep-eng">
                             <span id="SumAfterDiscount"></span>

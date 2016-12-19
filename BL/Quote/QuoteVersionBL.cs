@@ -1,12 +1,9 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {

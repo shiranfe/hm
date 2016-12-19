@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Linq.Expressions;
 
 namespace BL
 {
@@ -298,12 +298,12 @@ namespace BL
 
         private static void ModelToEntity(QuoteDM model, Quote entity)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private static void EntityToModel(QuoteDM model, Quote entity)
         {
-            Mapper.DynamicMap(entity, model);
+            Mapper.Map(entity, model);
         }
 
         internal void Delete(int quoteID)

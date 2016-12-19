@@ -44,6 +44,7 @@ namespace DAL
         public bool ShowAlignment { get; set; }
         public bool ShowBalancing { get; set; }
         public bool ShowManagReports { get; set; }
+        public bool ShowFieldsEdit { get; set; }
     
         public virtual ICollection<JobVibration> JobVibration { get; set; }
         public virtual ICollection<JobVibration> JobVibration1 { get; set; }

@@ -107,7 +107,14 @@
                         @Html.EditorFor(model => model.Perrmisions.ShowManagReports)
                     </div>
                 </div>
-               
+                <div class="datarow floatlast">
+                    <div class="fieldlabel">
+                        עריכת כרטיס עבודה:
+                    </div>
+                    <div class="fieldvalue" style="padding-left:0">
+                        @Html.EditorFor(model => model.Perrmisions.ShowFieldsEdit)
+                    </div>
+                </div>
             </div>
             <div class="clear"></div>
         </div>

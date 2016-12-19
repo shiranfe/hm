@@ -3,7 +3,6 @@
 using Common;
 using Microsoft.Practices.Unity;
 using MvcBlox.Models;
-using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
 using System.Linq;

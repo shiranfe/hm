@@ -1,15 +1,10 @@
-﻿using BL.Moduls;
-using Common;
-using DAL;
-using Microsoft.Practices.Unity;
-using Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Collections;
+using BL.Moduls;
+using Common;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -103,7 +98,7 @@ namespace BL
                 GetStep(RefubrishStep.DetailsStep),
                 GetStep(RefubrishStep.PreTestStep),
                 GetStep(RefubrishStep.DisassembleStep),
-                GetStep(RefubrishStep.RepairStep),
+                GetStep(RefubrishStep.RepairStep)
             };
 
 

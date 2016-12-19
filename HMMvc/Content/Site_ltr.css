@@ -5366,7 +5366,7 @@ td.pvtAxisContainer, td.pvtVals {
 
 .report-header-bottom {
     position: absolute;
-    right: 0;
+    right: -3px;
     left: 0;
     top: 0;
     line-height: 2;

@@ -1,12 +1,9 @@
-﻿using Common;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Common;
 using DAL;
-using Repository;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -56,7 +53,7 @@ namespace BL
                            LangStr = m.LangStr,
                            MachineTypeID = m.MachineTypeID,
                            NotesIL = m.GeneralNoteIL,
-                           NotesEN = m.GeneralNoteEN,
+                           NotesEN = m.GeneralNoteEN
                        }).ToList()//.OrderBy(x => x.StatusID)
                     ;
 

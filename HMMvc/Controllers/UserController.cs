@@ -52,7 +52,7 @@ namespace MVC.Controllers
             if (ModelState.IsValid)
             {
                 //int res;
-                Extensions.Strlz(loginVm);
+                //Extensions.Strlz(loginVm);
 
                 var userAccountDM = loginVm.ToUserAccountDM();
                 var userLoged = _userBL.IsLoginValid(userAccountDM);
@@ -85,7 +85,7 @@ namespace MVC.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Login", "User");
+            return RedirectToAction(nameof(Login), "User");
         }
 
 

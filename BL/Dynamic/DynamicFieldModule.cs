@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using Common;
-using Repository;
-using Microsoft.Practices.Unity;
 using AutoMapper;
-using System.Linq.Expressions;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {
@@ -217,7 +214,7 @@ namespace BL.Moduls
 
                 OrderVal = flds.OrderVal,
                 PickListEntity = flds.FieldPool.PickListEntity,
-                PickListFromTable = flds.FieldPool.PickListFromTable,
+                PickListFromTable = flds.FieldPool.PickListFromTable
             };
         }
 
@@ -353,7 +350,7 @@ namespace BL.Moduls
                     FieldNameStr = flds.FieldNameStr,
                     FieldTypeID = flds.FieldPool.FieldTypeID,
                     PickListEntity = flds.FieldPool.PickListEntity,
-                    PickListFromTable = flds.FieldPool.PickListFromTable,
+                    PickListFromTable = flds.FieldPool.PickListFromTable
                 }).ToList();
 
 
@@ -381,7 +378,7 @@ namespace BL.Moduls
                 ForeignType = foreignType,
                 GroupNameStr = "קבוצה חדשה",
                 IsRequired = false,
-                OrderVal = 1,
+                OrderVal = 1
 
             });
         }
@@ -407,23 +404,23 @@ namespace BL.Moduls
 
         private void FieldDmToEntity(DynamicGroupFieldDM model, DynamicGroupField entity)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void FieldToModel(DynamicGroupFieldDM model, DynamicGroupField entity)
         {
-            Mapper.DynamicMap(entity, model);
+            Mapper.Map(entity, model);
         }
 
 
         private void GroupToModel(DynamicGroupDM model, DynamicGroup entity)
         {
-            Mapper.DynamicMap(entity, model);
+            Mapper.Map(entity, model);
         }
 
         private void GroupDmToEntity(DynamicGroupDM model, DynamicGroup entity)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         internal void MoveGroup(DynamicGroupDM model)

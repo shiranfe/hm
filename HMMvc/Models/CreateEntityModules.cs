@@ -6,8 +6,8 @@ namespace MVC.Models
 {
     public class CreateEntityModules
     {
-        public string entity { get; set; }
-        public string folder { get; set; }
+        public string Entity { get; set; }
+        public string Folder { get; set; }
         public bool IsAdmin { get; set; }
 
 
@@ -31,7 +31,7 @@ namespace MVC.Models
            
 
             // mvc folder is entity
-            folder = entity;
+            Folder = Entity;
 
             CreateViews();
 
@@ -80,9 +80,9 @@ namespace MVC.Models
 
         private string SetFolder(string path)
         {
-            if (folder != null)
+            if (Folder != null)
             {
-                path += folder + "\\";
+                path += Folder + "\\";
                 var directoryName = Path.GetDirectoryName(path);
                 if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
                 {
@@ -167,11 +167,11 @@ namespace MVC.Models
 
                                 if (line.Contains("#region Modules"))
                                 {
-                                    w.WriteLine("Container.RegisterType<" + entity + "Module," + entity + "Module>(new ContainerControlledLifetimeManager());");
+                                    w.WriteLine("Container.RegisterType<" + Entity + "Module," + Entity + "Module>(new ContainerControlledLifetimeManager());");
                                 }
                                 else if (line.Contains("#region Services"))
                                 {
-                                    w.WriteLine("Container.RegisterType<" + entity + "BL," + entity + "BL>(new ContainerControlledLifetimeManager());");
+                                    w.WriteLine("Container.RegisterType<" + Entity + "BL," + Entity + "BL>(new ContainerControlledLifetimeManager());");
                                 }
                             }
 
@@ -197,7 +197,7 @@ namespace MVC.Models
 
             path = SetFolder(path);
 
-            var ent = isMvc ? "" : entity;
+            var ent = isMvc ? "" : Entity;
 
             var newfile = path + ent + end;
            
@@ -215,7 +215,7 @@ namespace MVC.Models
                     String line;
                     while ((line = r.ReadLine()) != null)
                     {
-                        var newLine = line.Replace(srcEntity, entity);
+                        var newLine = line.Replace(srcEntity, Entity);
 
                         w.WriteLine(newLine);
                     }

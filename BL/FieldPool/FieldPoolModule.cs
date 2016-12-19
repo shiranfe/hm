@@ -1,12 +1,12 @@
-﻿using BL.Moduls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using BL.Moduls;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace BL
 {
@@ -58,7 +58,7 @@ namespace BL
                .Select(x => new FieldPoolDM
                {
                    FieldPoolID = x.FieldPoolID,
-                   FieldLabel = x.FieldLabel,
+                   FieldLabel = x.FieldLabel
                })
                .ToList();
         }
@@ -103,7 +103,7 @@ namespace BL
 
         private static Expression<Func<FieldPool, bool>> DynamicSelectListCategorisCondition()
         {
-            var categoriesStrings = new string[]
+            var categoriesStrings = new[]
             { "MaterialType_Bearings", "MaterialType_Koflong", "MaterialType_Shims","MaterialType_GroundRing"};
 
             return x => x.FieldTypeID == ControlType.Select && categoriesStrings.Contains(x.PickListEntity);
@@ -197,7 +197,7 @@ namespace BL
                     case ControlType.Text:
                     case ControlType.TextArea:
                     case ControlType.SelectAndText:
-                        field.FieldTypeValue = field.FieldValue.ToString();
+                        field.FieldTypeValue = field.FieldValue;
                         break;
                     case ControlType.Select:
                         var pickListID = Convert.ToInt32(field.FieldValue);

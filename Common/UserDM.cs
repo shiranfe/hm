@@ -146,6 +146,7 @@ namespace Common
 
         public bool ShowBalancing { get; set; }
         public bool ShowManagReports { get; set; }
+        public bool ShowFieldsEdit { get; set; }
     }
     
 }

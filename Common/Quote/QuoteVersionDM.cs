@@ -7,7 +7,8 @@ namespace Common
         public int QuoteVersionID { get; set; }
         public int QuoteID { get; set; }
         public int Version { get; set; }
-        public string VersionTitle { get { return "גרסא " + Version.ToString(); } }
+        public string VersionTitle => "גרסא " + Version;
+
         [Required(ErrorMessage = "יש להזין תאריך גרסא")]
         [DataType(DataType.Date)]
         public System.DateTime VersionDate { get; set; }
@@ -15,6 +16,7 @@ namespace Common
         public string Terms { get; set; }
         public string Appendices { get; set; }
 
+        [Range(typeof(decimal), "0", "1", ErrorMessage = "יש להזין מספר בין 0 ל 1")]
         [Required(ErrorMessage = "יש להזין הנחה")]
         public decimal Disscount { get; set; }
 

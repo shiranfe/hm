@@ -9,7 +9,7 @@ namespace MVC.Controllers
 {
     public class RequestController : Controller
     {
-        int _userID;//(int)session["UserID"];
+        int _userID=1;//(int)session["UserID"];
 
         private readonly RequestBL _requestBL;
         private readonly LangBL _langBL;

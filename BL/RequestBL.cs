@@ -1,10 +1,9 @@
-﻿using BL.Moduls;
+﻿using System.Collections.Generic;
+using BL.Moduls;
 using Common;
 using DAL;
-using System;
-using System.Collections.Generic;
-using Repository;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -141,7 +140,7 @@ namespace BL
             InsertRequest(requestDM);
         }
 
-        public void InsertRequest(Common.RequestDM requestDM)
+        public void InsertRequest(RequestDM requestDM)
         {
 
             Request r = new Request();

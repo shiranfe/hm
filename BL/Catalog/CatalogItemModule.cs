@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BL
 {
@@ -84,7 +84,7 @@ namespace BL
                  (from g in grpby
                   select new
                   {
-                      CatalogItemID = g.Key.CatalogItemID,
+                      g.Key.CatalogItemID,
                       CatalogItemPrice = g.Sum(s => s.ComponentPrice * s.Quantity),
                       CatalogItemCost = g.Sum(s => s.ComponentCost * s.Quantity)
                   }).ToList();
@@ -174,12 +174,12 @@ namespace BL
 
         private void ModelToEntity(CatalogItemDM model, CatalogItem entity)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(CatalogItemDM model, CatalogItem entity)
         {
-            Mapper.DynamicMap(entity, model);
+            Mapper.Map(entity, model);
         }
 
 

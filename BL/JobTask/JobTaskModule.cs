@@ -1,13 +1,12 @@
-﻿using AutoMapper;
-using BL.Moduls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace BL
 {
@@ -95,7 +94,7 @@ namespace BL
 
                // OrderVal = flds.OrderVal,
                 PickListEntity = flds.FieldPool.PickListEntity,
-                PickListFromTable = flds.FieldPool.PickListFromTable,
+                PickListFromTable = flds.FieldPool.PickListFromTable
             };
         }
      
@@ -125,7 +124,7 @@ namespace BL
             return new JobOutsideDM
             {
                 Address = j.Address,
-                Zone=j.Zone,    
+                Zone=j.Zone    
             };
         }
 
@@ -160,7 +159,7 @@ namespace BL
                         JobID=x.JobID,
                         JobRefubrishStepID = x.JobRefubrishStepID,
                         ManagerNotes=x.ManagerNotes,
-                        TaskName=x.TaskName,
+                        TaskName=x.TaskName
                         
                     })
                     .OrderByDescending(x => x.JobTaskID)
@@ -229,12 +228,12 @@ namespace BL
 
         private void ModelToEntity(JobTaskDM model, JobTask entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(JobTaskDM model, JobTask entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

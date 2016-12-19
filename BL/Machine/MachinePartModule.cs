@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DAL;
+using AutoMapper;
 using BL.Moduls;
-using System;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -32,8 +32,8 @@ namespace BL
             _dynamicGroupFieldDal=_uow.Repository<DynamicGroupField>();
         }
 
-        static int[] _techMainTypes = new int[] { (int)MachineType.EngineAC, (int)MachineType.EngineDC, (int)MachineType.EngineVAC };
-        static int[] _techSeconderyTypes = new int[] { (int)MachineType.HPump, (int)MachineType.Mapuach, (int)MachineType.Steer, (int)MachineType.Gear };
+        static int[] _techMainTypes = { (int)MachineType.EngineAC, (int)MachineType.EngineDC, (int)MachineType.EngineVAC };
+        static int[] _techSeconderyTypes = { (int)MachineType.HPump, (int)MachineType.Mapuach, (int)MachineType.Steer, (int)MachineType.Gear };
 
         /***************************************************/
 
@@ -98,7 +98,7 @@ namespace BL
                 MachinePartID = part.MachinePartID,
                 MachineTypeID = part.MachineTypeID,
                 PartName = part.PartName,
-                MachineTypeStr = part.MachineType.Key,
+                MachineTypeStr = part.MachineType.Key
             };
         }
 
@@ -242,12 +242,12 @@ namespace BL
 
         private void ModelToEntity(MachinePartDM model, MachinePart entity)
         {        
-            Mapper.DynamicMap<MachinePartDM, MachinePart>(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(MachinePartDM model, MachinePart entity)
         {         
-           Mapper.DynamicMap<MachinePart, MachinePartDM>(entity, model);
+           Mapper.Map(entity, model);
         }
 
 
@@ -392,7 +392,7 @@ namespace BL
 
             /** if soenst have subgroups- has 1 speed - take group id*/
             if (!speedGroupIds.Any())
-                speedGroupIds = new int[] { dyncmicField.DynamicGroup.DynamicGroupID };
+                speedGroupIds = new[] { dyncmicField.DynamicGroup.DynamicGroupID };
 
             /** make sure didnt set mote speeds then availbe*/
             var numberOfSpeeds = Math.Min(modelValues.Count(), speedGroupIds.Count());
@@ -429,7 +429,7 @@ namespace BL
         /// <returns></returns>
         private static string[] GetSpeedsValues(string modelValue)
         {
-            return modelValue.Split(new char[] { '/', '\\', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return modelValue.Split(new[] { '/', '\\', ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
 

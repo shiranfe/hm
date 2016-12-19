@@ -1,13 +1,10 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Moduls
 {
@@ -46,12 +43,12 @@ namespace BL.Moduls
 
         private void EntityToModel(ContactInfo entity, ContactInfoDM model)
         {
-            Mapper.DynamicMap(entity, model);
+            Mapper.Map(entity, model);
         }
 
         private void ModelToEntity(ContactInfo entity, ContactInfoDM model)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
 

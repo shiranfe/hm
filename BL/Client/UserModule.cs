@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using Common;
-using Repository;
-using Microsoft.Practices.Unity;
 using AutoMapper;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {
@@ -40,7 +38,7 @@ namespace BL.Moduls
         public int GetClientID(int userID)
         {
 
-            return (int)_userDal
+            return _userDal
                 .Where(x => x.UserID == userID)
                 .Select(x => x.ClientID).Single();
 
@@ -97,7 +95,7 @@ namespace BL.Moduls
                     Password = i.Password,
                     ClientID = i.ClientID,
                     Username = i.Username,
-                    Active = i.Active,
+                    Active = i.Active
                 }).Single();
 
             model.ContactInfoDM = _contactInfoModule.GetSingleInfo(userID, ObjType.User);
@@ -128,7 +126,7 @@ namespace BL.Moduls
                         Username = u.Username,
                         ClientID = u.ClientID,
                         ClientName = u.Client.ClientName,
-                        FullName = u.FullName,
+                        FullName = u.FullName
                         
                     })
                     .OrderByDescending(x=>x.Username!=null)
@@ -147,7 +145,7 @@ namespace BL.Moduls
                         Username = u.Username,
                         ClientID = u.ClientID,
                         ClientName = v.ClientChildName,
-                        FullName = u.FullName,
+                        FullName = u.FullName
 
                     }).Distinct().ToList();
         }
@@ -200,7 +198,7 @@ namespace BL.Moduls
             User entity = new User
             {              
                 PermissionID = 8, // Permission_Admin
-                Active = true,
+                Active = true
             };
 
             ModelToEntity(entity, model);
@@ -246,12 +244,12 @@ namespace BL.Moduls
 
         private void EntityToModel(User entity, UserDetailsDM model)
         {
-            Mapper.DynamicMap(entity, model);
+            Mapper.Map(entity, model);
         }
 
         private void ModelToEntity(User entity, UserDetailsDM model)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
     }

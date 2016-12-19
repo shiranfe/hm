@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using BL.Moduls;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 
 namespace BL
 {
@@ -51,7 +51,7 @@ namespace BL
         public List<MachineDetailsDM> GetMachineDetailsList(int userID)
         {
 
-            int clientID = _userModule.GetClientID(userID);
+            var clientID = _userModule.GetClientID(userID);
             return _machineModule.SelectMachineDetailsList(clientID);
 
         }
@@ -78,7 +78,7 @@ namespace BL
 
             _machinePartModule.SetPartDetails(model);
 
-            model.MacPic = PicHelper.GetMacPic(model.MachineID, model.MachineType);
+            model.MacPic = PicHelper.GetMacPic(model.MachineID, model.MachineTypeStr);
 
             return model;
         }
@@ -87,7 +87,7 @@ namespace BL
         {
             var model =_machineModule.GetMachineEditDM(machineID);
             model.Parts = _machinePartModule.GetList(machineID);
-            model.MacPic = PicHelper.GetMacPic(model.MachineID, model.MachineType);
+            model.MacPic = PicHelper.GetMacPic(model.MachineID, model.MachineTypeStr);
        
             return model;
         }
@@ -110,14 +110,14 @@ namespace BL
 
         public ClientDM GetDefualtMachine()
         {
-            ClientDM ans = new ClientDM
+            var ans = new ClientDM
             {
                 ClientName = "מכונות ברירת מחדל",
-                ClientID = 0,
+                ClientID = 0
             };
 
             ans.Machines = _machineModule.GetDefualtMachine();
-            int machineID = ans.Machines.First().MachineID;
+            var machineID = ans.Machines.First().MachineID;
 
             ans.SelectedMachine = GetSelectedMachine(machineID);
 
@@ -129,7 +129,7 @@ namespace BL
         public SelectedMachine GetSelectedMachine(int machineID)
         {
 
-            SelectedMachine sel = _machineModule.GetSelectedMachine(machineID);
+            var sel = _machineModule.GetSelectedMachine(machineID);
             sel.PointDMs = _machineModule.GetMachinePoints(machineID);
 
             return sel;
@@ -140,7 +140,7 @@ namespace BL
         {
             var ans = new MachinePicChangeDM
             {
-                Clients = _clientModule.GetClientList(),
+                Clients = _clientModule.GetClientList()
             };
 
             ans.SelectedClient = GetSelectedClient(adminClientID);
@@ -151,9 +151,9 @@ namespace BL
 
         public ClientDM GetSelectedClient(int clientID)
         {
-            ClientDM model = _clientModule.GetClientDM(clientID, false);
+            var model = _clientModule.GetClientDM(clientID, false);
 
-            int[] clientAndChilds = _clientCache.GetClientAndChilds(clientID);
+            var clientAndChilds = _clientCache.GetClientAndChilds(clientID);
 
             model.Machines = _machineModule.GetClientMachinesBasic(clientAndChilds);
 
@@ -167,7 +167,7 @@ namespace BL
         public void GetClientMachines(MachineFilterDm filter)
         {
 
-            int[] clientAndChilds = _clientCache.GetClientAndChilds(filter.ClientID);
+            var clientAndChilds = _clientCache.GetClientAndChilds(filter.ClientID);
 
             var list = _machineModule.GetClientMachinesBasic(clientAndChilds);
 
@@ -243,7 +243,7 @@ namespace BL
 
         private Machine Edit(MachineEditDM model)
         {
-            Machine entity = _machineModule.GetSingle(model.MachineID);
+            var entity = _machineModule.GetSingle(model.MachineID);
 
             ModelToEntity(model, entity);
 
@@ -257,7 +257,7 @@ namespace BL
      
         private Machine Add(MachineEditDM model)
         {
-            Machine entity = new Machine();
+            var entity = new Machine();
 
             ModelToEntity(model, entity);
 
@@ -277,13 +277,13 @@ namespace BL
       
         private static void ModelToEntity(MachineEditDM model, Machine entity)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
 
         public int CreateQuickMachine(JobRequestDM req)
         {
-            string machineName = req.RefubrishDetailsDM.MachineName;
+            var machineName = req.RefubrishDetailsDM.MachineName;
             if (string.IsNullOrEmpty(machineName))
                 throw new Exception("Machine name and id doesnot exist");
 
@@ -338,7 +338,7 @@ namespace BL
                 Parts = GetNewParts(req, existingPartsIds).Select(x =>
                                 new MachinePartDM
                                 {
-                                    MachineTypeID = x,
+                                    MachineTypeID = x
                                 }).ToList()
             };
              

@@ -1,13 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Moduls
 {
@@ -84,7 +81,7 @@ namespace BL.Moduls
                 .Select(x => new KeyValueDM
                 {
                     PickListID = x.SupplierProductID,
-                    Key = x.ProductName + " (" + x.Manufacture.ClientName + ")",
+                    Key = x.ProductName + " (" + x.Manufacture.ClientName + ")"
                 });
         }
 
@@ -97,7 +94,7 @@ namespace BL.Moduls
                 .Select(x => new KeyValueDM
                 {
                     PickListID = x.SupplierProductID,
-                    Key = x.ProductName + " (" + x.Manufacture.ClientName + ")",
+                    Key = x.ProductName + " (" + x.Manufacture.ClientName + ")"
                 }).ToList();
         }
 
@@ -143,12 +140,12 @@ namespace BL.Moduls
 
         private void ModelToEntity(SupplierProductDM model, SupplierProduct entity)
         {
-            Mapper.DynamicMap<SupplierProductDM, SupplierProduct>(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EmtityToModel(SupplierProductDM model, SupplierProduct entity)
         {
-            Mapper.DynamicMap<SupplierProduct, SupplierProductDM>(entity, model);
+            Mapper.Map(entity, model);
         }
 
 

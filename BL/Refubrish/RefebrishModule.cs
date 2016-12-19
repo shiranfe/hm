@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using Common;
-using Repository;
-using Microsoft.Practices.Unity;
 using AutoMapper;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
+using System.Data.Entity;
 
 namespace BL.Moduls
 {
@@ -172,7 +171,7 @@ namespace BL.Moduls
                             JobRefubrishStepID = allstep.JobRefubrishStepID,
                             StepName = allstep.JobRefubrishStep.StepName,
                             FormName = allstep.JobRefubrishStep.FormName,
-                            OrderVal = allstep.JobRefubrishStep.OrderVal,
+                            OrderVal = allstep.JobRefubrishStep.OrderVal
                         }).OrderBy(x => x.OrderVal).ToList();
             return quer;
             // var list = _jobRefubrish_StepDal.ToList(x => x.JobID == JobID);
@@ -243,7 +242,7 @@ namespace BL.Moduls
                 .Select(x => new PickListDM
                 {
                     Text = x.StepName,
-                    Value = x.FormName,
+                    Value = x.FormName
                 }).ToList();
         }
 
@@ -325,7 +324,7 @@ namespace BL.Moduls
 
         private void TryCreateQuote(BasicStepDM model)
         {
-            var job = _jobRefubrishDal.SingleOrDefault(x => x.JobID==model.JobID).Job;
+            var job = _jobRefubrishDal.Where(x => x.JobID==model.JobID).Select(x=>x.Job).Include("Client").SingleOrDefault();
           
             model.QuoteID = job.QuoteID ?? CreateQuoteFromJob(job, model.CreatorID);
         }
@@ -368,7 +367,7 @@ namespace BL.Moduls
             {
                 JobRefubrishPartID = model.JobRefubrishPartID,
                 CreatorID = model.CreatorID,
-                MachineTypeStep = typeStep,
+                MachineTypeStep = typeStep
             };
 
             if (model.NextStep !=  RefubrishStep.None)
@@ -389,13 +388,13 @@ namespace BL.Moduls
             MachineTypeStep typeStep = GetMachineTypeStepByPartID(partID, stepid);
 
             if (typeStep == null)
-                throw new Exception("step " + stepid.ToString() + " for the part " + partID + " doesnt exist");
+                throw new Exception("step " + stepid + " for the part " + partID + " doesnt exist");
 
             var step = new JobRefubrish_Step
             {
                 CreatorID = creatorID,
                 MachineTypeStep = typeStep,
-                DoneDate = doneDate,
+                DoneDate = doneDate
             };
             jobPart.JobRefubrish_Step.Add(step);
         }
@@ -413,7 +412,7 @@ namespace BL.Moduls
             entity = new MachineTypeStep
                {
                    MachineTypeID = (int)machineType,
-                   JobRefubrishStepID = (int)refubrishStep,
+                   JobRefubrishStepID = (int)refubrishStep
                };
 
             _machineTypeStepDal.Add(entity);
@@ -478,7 +477,7 @@ namespace BL.Moduls
         private void RufubrishFromDm(RefubrishDetailsDM model, JobRefubrish entity)
         {
             model.JobID = entity.JobID;
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
 
             if (model.MachinePartID == null || !model.MachinePartID.Any())
                 throw new Exception("no machine parts");
@@ -503,7 +502,7 @@ namespace BL.Moduls
                 {
                     var jobPart = new JobRefubrish_Part
                     {
-                        MachinePartID = partID,
+                        MachinePartID = partID
                         //JobID = entity.JobID,
                     };
 
@@ -578,9 +577,9 @@ namespace BL.Moduls
                 foreach (var refubStep in refubPart.JobRefubrish_Step.ToList())
                 {
                     /** remove part steps fields*/
-                    //refubStep.JobRefubrish_StepField.ToList().ForEach(x =>
-                    //    refubStep.JobRefubrish_StepField.Remove(x)
-                    //);
+                    refubStep.JobRefubrish_StepField.ToList().ForEach(x =>
+                        refubStep.JobRefubrish_StepField.Remove(x)
+                    );
 
                     /** remove part steps*/
                     refubPart.JobRefubrish_Step.Remove(refubStep);

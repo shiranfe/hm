@@ -37,8 +37,7 @@ namespace MVC.Helper
 
         public TreeView(HtmlHelper html, IEnumerable<T> items)
         {
-            if (html == null) throw new ArgumentNullException("html");
-            _html = html;
+            _html = html ?? throw new ArgumentNullException(nameof(html));
             _items = items;
             // The ItemTemplate will default to rendering the DisplayProperty
             _itemTemplate = item => new HelperResult(writer => writer.Write(_displayProperty?.Invoke(item)));
@@ -50,8 +49,7 @@ namespace MVC.Helper
         /// <param name="selector">todo: describe selector parameter on ItemText</param>
         public TreeView<T> ItemText(Func<T, string> selector)
         {
-            if (selector == null) throw new ArgumentNullException("selector");
-            _displayProperty = selector;
+            _displayProperty = selector ?? throw new ArgumentNullException(nameof(selector));
             return this;
         }
 
@@ -62,8 +60,7 @@ namespace MVC.Helper
         /// <param name="itemTemplate">todo: describe itemTemplate parameter on ItemTemplate</param>
         public TreeView<T> ItemTemplate(Func<T, HelperResult> itemTemplate)
         {
-            if (itemTemplate == null) throw new ArgumentNullException("itemTemplate");
-            _itemTemplate = itemTemplate;
+            _itemTemplate = itemTemplate ?? throw new ArgumentNullException(nameof(itemTemplate));
             return this;
         }
 
@@ -74,8 +71,7 @@ namespace MVC.Helper
         /// <param name="selector">todo: describe selector parameter on Children</param>
         public TreeView<T> Children(Func<T, IEnumerable<T>> selector)
         {
-            if (selector == null) throw new ArgumentNullException("selector");
-            _childrenProperty = selector;
+            _childrenProperty = selector ?? throw new ArgumentNullException(nameof(selector));
             return this;
         }
 
@@ -85,8 +81,7 @@ namespace MVC.Helper
         /// <param name="emptyContent">todo: describe emptyContent parameter on EmptyContent</param>
         public TreeView<T> EmptyContent(string emptyContent)
         {
-            if (emptyContent == null) throw new ArgumentNullException("emptyContent");
-            _emptyContent = emptyContent;
+            _emptyContent = emptyContent ?? throw new ArgumentNullException(nameof(emptyContent));
             return this;
         }
 
@@ -106,8 +101,7 @@ namespace MVC.Helper
         /// <param name="htmlAttributes">todo: describe htmlAttributes parameter on HtmlAttributes</param>
         public TreeView<T> HtmlAttributes(IDictionary<string, object> htmlAttributes)
         {
-            if (htmlAttributes == null) throw new ArgumentNullException("htmlAttributes");
-            _htmlAttributes = htmlAttributes;
+            _htmlAttributes = htmlAttributes ?? throw new ArgumentNullException(nameof(htmlAttributes));
             return this;
         }
 
@@ -125,10 +119,10 @@ namespace MVC.Helper
         /// HTML attributes appended to the children items
         /// </summary>
         /// <param name="htmlAttributes">todo: describe htmlAttributes parameter on ChildrenHtmlAttributes</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public TreeView<T> ChildrenHtmlAttributes(IDictionary<string, object> htmlAttributes)
         {
-            if (htmlAttributes == null) throw new ArgumentNullException(nameof(htmlAttributes));
-            _childHtmlAttributes = htmlAttributes;
+            _childHtmlAttributes = htmlAttributes ?? throw new ArgumentNullException(nameof(htmlAttributes));
             return this;
         }
 

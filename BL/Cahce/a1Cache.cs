@@ -1,12 +1,6 @@
-﻿using Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using Repository;
+﻿using System;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -27,21 +21,21 @@ namespace BL
 
         /*****************         Dispose              ******************/
 
-        private bool _disposed = false;
+        private bool _disposed;
 
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (!this._disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
                     //Rep.Dispose();
                 }
             }
-            this._disposed = true;
+            _disposed = true;
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

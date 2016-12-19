@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using DAL;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Entity;
+using AutoMapper;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -87,7 +87,7 @@ namespace BL
             return (from x in list
                     select new BankTask_FieldDM
                     {
-                        BankTask_FieldID = x.BankTask_FieldID,
+                        BankTask_FieldID = x.BankTask_FieldID
                     })
                     .OrderBy(x => x.OrderVal)
                     .ThenByDescending(x => x.BankTask_FieldID)
@@ -121,7 +121,7 @@ namespace BL
         {
             var res = TaskFieldToDm(enity);
 
-            _fieldPoolModule.SetFieldsPickList(new List<StepGroupFieldDM> { (StepGroupFieldDM)res });
+            _fieldPoolModule.SetFieldsPickList(new List<StepGroupFieldDM> { res });
 
             return res;
         }
@@ -162,7 +162,7 @@ namespace BL
 
                 // OrderVal = flds.OrderVal,
                 PickListEntity = flds.FieldPool.PickListEntity,
-                PickListFromTable = flds.FieldPool.PickListFromTable,
+                PickListFromTable = flds.FieldPool.PickListFromTable
             };
         }
 
@@ -207,12 +207,12 @@ namespace BL
 
         private void ModelToEntity(BankTask_FieldDM model, BankTask_Field entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(BankTask_FieldDM model, BankTask_Field entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

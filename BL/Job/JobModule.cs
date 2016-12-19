@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using Common;
-using Repository;
-using Microsoft.Practices.Unity;
 using AutoMapper;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {
@@ -68,7 +66,7 @@ namespace BL.Moduls
                 RefubrishDetailsDM = new RefubrishDetailsDM
                 {
                     BranchID = GetEmployeeBranch(empID),
-                    RefubrishStatusID = GetIntialStatus(),
+                    RefubrishStatusID = GetIntialStatus()
                 }
             };
         }
@@ -99,7 +97,7 @@ namespace BL.Moduls
             var v = job.JobOutside;
             jobDM.JobOutsideDM = new JobOutsideDM();
 
-            Mapper.DynamicMap(v, jobDM.RefubrishDetailsDM);
+            Mapper.Map(v, jobDM.RefubrishDetailsDM);
 
             jobDM.JobOutsideDM.Address = v.Address;
             jobDM.JobOutsideDM.Zone = v.Zone;
@@ -138,7 +136,7 @@ namespace BL.Moduls
         {
             JobDM jobDM = new JobDM();
 
-            Mapper.DynamicMap(job, jobDM);
+            Mapper.Map(job, jobDM);
 
             jobDM.ClientName = job.Client.ClientName;
             jobDM.CreatorName = job.Employee != null ? job.Employee.FullName : string.Empty;
@@ -152,7 +150,7 @@ namespace BL.Moduls
             var v = job.JobRefubrish;
             jobDM.RefubrishDetailsDM = new RefubrishDetailsDM();
 
-            Mapper.DynamicMap(v, jobDM.RefubrishDetailsDM);
+            Mapper.Map(v, jobDM.RefubrishDetailsDM);
 
             jobDM.RefubrishDetailsDM.BranchName = v.Branch.BranceName;
             jobDM.RefubrishDetailsDM.MachineName = v.Machine.MachineName;
@@ -164,7 +162,7 @@ namespace BL.Moduls
 
 
             jobDM.JobAlignmentDM = new JobAlignmentDM();
-            Mapper.DynamicMap(job.JobAlignment, jobDM.JobAlignmentDM);
+            Mapper.Map(job.JobAlignment, jobDM.JobAlignmentDM);
 
             jobDM.JobAlignmentDM.Parts = _machineModule.GetJobAndMachinePartsByType(jobDM.JobID, jobDM.JobAlignmentDM.MachineID, JobType.Alignment);
         }
@@ -177,7 +175,7 @@ namespace BL.Moduls
                
                 AnalyzerName = v.Analayzer.FullName,
                 TesterName = v.Tester.FullName,
-                InviterName = v.Job.Client.ClientName,
+                InviterName = v.Job.Client.ClientName
             };
         }
 
@@ -205,7 +203,7 @@ namespace BL.Moduls
                         /** to know job types*/
                         RefubrishDetailsDM = x.JobRefubrish != null ? new RefubrishDetailsDM() : null,
                         VbReportDM = x.JobVibration != null ? new VbReportDM() : null,
-                        JobAlignmentDM = x.JobAlignment != null ? new JobAlignmentDM() : null,
+                        JobAlignmentDM = x.JobAlignment != null ? new JobAlignmentDM() : null
                     })
                     .OrderByDescending(x=>x.StartDate)
                     .ToList();
@@ -259,10 +257,7 @@ namespace BL.Moduls
 
         private void IntiateNewDynamicBalanceJob(JobDM jobDM)
         {
-            jobDM.VbReportDM = new VbReportDM
-            {
-                
-            };
+            jobDM.VbReportDM = new VbReportDM();
         }
 
 
@@ -271,7 +266,7 @@ namespace BL.Moduls
             jobDM.RefubrishDetailsDM = new RefubrishDetailsDM
             {
                 BranchID = GetEmployeeBranch((int)jobDM.CreatorID),
-                RefubrishStatusID = GetIntialStatus(),       
+                RefubrishStatusID = GetIntialStatus()       
             };
 
             jobDM.RefubrishDetailsDM.Parts = _machineModule.GetJobAndMachinePartsByType(jobDM.JobID, jobDM.RefubrishDetailsDM.MachineID, JobType.Refubrish);
@@ -298,7 +293,7 @@ namespace BL.Moduls
             jobDM.JobAlignmentDM = new JobAlignmentDM
             {
                 TesterID = (int)jobDM.CreatorID,
-                ShowTollerance=true,      
+                ShowTollerance=true      
             };
 
             jobDM.JobAlignmentDM.Parts = _machineModule.GetJobAndMachinePartsByType(jobDM.JobID, jobDM.JobAlignmentDM.MachineID, JobType.Alignment);
@@ -383,7 +378,7 @@ namespace BL.Moduls
 
         private  void JobFromDM(JobDM jobDM, Job job)
         {
-            Mapper.DynamicMap(jobDM, job);
+            Mapper.Map(jobDM, job);
         }
 
 

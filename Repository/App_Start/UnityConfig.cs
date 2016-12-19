@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 
-namespace DAL.App_Start
+namespace Repository.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

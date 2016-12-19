@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
 using Common;
-using Repository;
+using DAL;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {
@@ -79,7 +77,7 @@ namespace BL.Moduls
                          Comments=m.Comments,
                          ClientName = m.Client.ClientName,
                          Address = m.Address,
-                         MachineType = m.MachineTypeID == null ? "1" : m.MachineType.Value,
+                         MachineTypeStr = m.MachineTypeID == null ? "1" : m.MachineType.Value
 
                      })
                      .SingleOrDefault();
@@ -108,7 +106,7 @@ namespace BL.Moduls
                         ClientID = m.ClientID,
                         MachineID = m.MachineID,
                         MachineName = m.MachineName,
-                        vwParentsName2 = m.Client.vwParentsName2,
+                        vwParentsName2 = m.Client.vwParentsName2
                         
                         //MachineTypeID = m.MachineType.MachinePart.FirstOrDefault().MachineTypeID,
                     }).SingleOrDefault();
@@ -127,7 +125,7 @@ namespace BL.Moduls
                             MachineName = m.MachineName,
                             Rpm = m.Rpm,
                             Kw = m.Kw,
-                            Address=m.Address,
+                            Address=m.Address
                         }).OrderBy(x => x.MachineName).ToList();
             return quer;
 
@@ -142,7 +140,7 @@ namespace BL.Moduls
                     select new MachineDetailsDM
                     {
                         MachineName = x.MachineName,
-                        ClientName = x.Client.ClientName,
+                        ClientName = x.Client.ClientName
                         //Status = "xxx"
                     }).ToList();
 
@@ -198,7 +196,7 @@ namespace BL.Moduls
                          Kw=m.Kw,
                          //Manufacturer = m.Manufacturer,
                          //MachineModel = m.MachineModel,
-                         MachineType = m.MachineTypeID == null ? "1" : m.MachineType.Value,
+                         MachineTypeStr = m.MachineTypeID == null ? "1" : m.MachineType.Value
                          //EngPower = m.EngPower,
                          //Bearing = m.Bearing,
                          //BearingSpeed = m.BearingSpeed,
@@ -231,7 +229,7 @@ namespace BL.Moduls
                         GreaseAmount = p.GreaseAmount ,
                         Tfrlok = p.Tfrlok,
                         Track = p.Track,
-                        TrackWheels = p.TrackWheels,
+                        TrackWheels = p.TrackWheels
                     }).SingleOrDefault();
 
 
@@ -274,7 +272,7 @@ namespace BL.Moduls
                            MachineID = m.MachineID,
                            MachineName = m.MachineName,
                            MachineTypeID = m.MachineTypeID == null ? "1" : m.MachineType.Value,
-                           IsDefualtMac = m.ClientID == 230,
+                           IsDefualtMac = m.ClientID == 230
 
                        }).Single();
             ans.ObjID = ans.IsDefualtMac ? Convert.ToInt32(ans.MachineTypeID) : ans.MachineID;
@@ -291,7 +289,7 @@ namespace BL.Moduls
                         PointNumber = p.PointNumber,
                         HtmlX = p.HtmlX,
                         HtmlY = p.HtmlY,
-                        ShowPoint = p.ShowPoint,
+                        ShowPoint = p.ShowPoint
                     }).OrderBy(x => x.PointNumber).ToList();
         }
 
@@ -355,7 +353,7 @@ namespace BL.Moduls
                 {
                     MachinePointID = x.MachinePointID,
                     PointNumber = x.PointNumber,
-                    MachineName = x.Machine.MachineName,
+                    MachineName = x.Machine.MachineName
                 }).OrderBy(x => x.MachinePointID).ToList();
         }
 
@@ -461,7 +459,7 @@ namespace BL.Moduls
                 MachinePartID = x.MachinePart.MachinePartID,
                 MachineTypeID = x.MachinePart.MachineTypeID,
                 PartName = x.MachinePart.PartName,
-                MachineTypeStr = x.MachinePart.MachineType.Key,
+                MachineTypeStr = x.MachinePart.MachineType.Key
             }).ToList();
 
         }
@@ -475,7 +473,7 @@ namespace BL.Moduls
                 MachinePartID = part.MachinePartID,
                 MachineTypeID = part.MachineTypeID,
                 PartName = part.PartName,
-                MachineTypeStr = part.MachineType.Key,
+                MachineTypeStr = part.MachineType.Key
             };
         }
 

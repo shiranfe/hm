@@ -1,10 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BL
 {
@@ -65,7 +64,7 @@ namespace BL
                     {
                         JobID = x.JobID,
                         JobName = x.JobName,
-                        StartDate = x.StartDate,
+                        StartDate = x.StartDate
                     })
                     .OrderByDescending(x => x.JobID)
                     .ToList();
@@ -115,7 +114,7 @@ namespace BL
                 ClientID = job.ClientID,
                 UserID = job.Client.User.FirstOrDefault()?.UserID ?? null,
                 CreatorID = creatorID,
-                QuoteStatusID = 541, //wating for quote
+                QuoteStatusID = 541 //wating for quote
             };
 
             _quoteModule.Update(quoteDm);
@@ -127,12 +126,12 @@ namespace BL
 
         //private void ModelToEntity(QuoteJobDM model, Job entity)
         //{        
-        //    Mapper.DynamicMap<QuoteJobDM, Job>(model, entity);
+        //    Mapper.Map<QuoteJobDM, Job>(model, entity);
         //}
 
         //private void EntityToModel(QuoteJobDM model, Job entity)
         //{         
-        //   Mapper.DynamicMap<Job, QuoteJobDM>(entity, model);
+        //   Mapper.Map<Job, QuoteJobDM>(entity, model);
         //}
 
 

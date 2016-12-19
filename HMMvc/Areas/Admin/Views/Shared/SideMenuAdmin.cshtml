@@ -124,16 +124,24 @@
         </div>
     }
 
+    @if (permisions.ShowFieldsEdit)
+    {
 
+        <div>
+            <h4>הגדרת שדות</h4>
+            <ul class="Settings settings-div">
+                <li class="SideMenuLink"><a href="/Admin/#/BankField">בנק שדות</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/BankTask">בנק משימות</a></li>
+                <li class="SideMenuLink"><a href="/Admin/#/DynamicGroups/Page">עריכת כרטיס עבודה</a></li>
+                     </ul>
+        </div>
+    }
     @if (permisions.ShowSettings)
     {
 
         <div>
             <h4>הגדרות מערכת</h4>
             <ul class="Settings settings-div">
-                <li class="SideMenuLink"><a href="/Admin/#/BankField">בנק שדות</a></li>
-                <li class="SideMenuLink"><a href="/Admin/#/BankTask">בנק משימות</a></li>
-                <li class="SideMenuLink"><a href="/Admin/#/DynamicGroups/Page">עריכת כרטיס עבודה</a></li>
                 <li class="SideMenuLink"><a href="/Admin/#/Employee">עובדים</a></li>
                 <li class="SideMenuLink"><a href="/Admin/#/Lang/EditDictionary">מילון</a></li>
             </ul>

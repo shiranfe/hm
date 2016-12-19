@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using Common;
-using Repository;
+﻿using DAL;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {

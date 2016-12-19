@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using DAL;
-using Microsoft.Practices.Unity;
 using System.Data.Entity;
+using Microsoft.Practices.Unity;
 
 namespace Repository
 {
@@ -30,7 +30,7 @@ namespace Repository
             //try
             //{
                 _context.SaveChanges();
-
+           
             //}
             //catch (Exception e)
             //{
@@ -42,9 +42,9 @@ namespace Repository
             //  //  _repositories = new Hashtable();
             //    throw e;
             //}
-        
-  
-        }
+
+
+        } 
 
         public virtual void Dispose(bool disposing)
         {

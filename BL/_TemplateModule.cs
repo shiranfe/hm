@@ -1,12 +1,11 @@
-﻿using AutoMapper;
-using DAL;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using AutoMapper;
+using Common;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -67,7 +66,7 @@ namespace BL
             return (from x in list
                     select new _TemplateDM
                     {
-                        _TemplateID = x._TemplateID,
+                        _TemplateID = x._TemplateID
                     })
                     .OrderByDescending(x => x._TemplateID)
                     .ToList();
@@ -133,12 +132,12 @@ namespace BL
 
         private void ModelToEntity(_TemplateDM model, _Template entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(_TemplateDM model, _Template entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

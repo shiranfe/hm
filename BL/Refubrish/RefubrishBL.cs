@@ -1,12 +1,12 @@
-﻿using BL.Moduls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using BL.Moduls;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace BL
 {
@@ -163,7 +163,7 @@ namespace BL
                             MachineTypeID = x.MachinePart.MachineTypeID,
                             PartName = x.MachinePart.PartName,
                             MachineTypeStr = x.MachinePart.MachineType.Key
-                        }).ToList(),
+                        }).ToList()
                     }).ToList();
         }
 
@@ -375,10 +375,10 @@ namespace BL
             switch (model.MachineTypeID)
             {
                 case (int)MachineType.EngineAC:
-                    return new int[] { 43, 45 };
+                    return new[] { 43, 45 };
   
                 case (int)MachineType.EngineDC:
-                    return new int[] { 43, 44, 45, 46 };
+                    return new[] { 43, 44, 45, 46 };
 
                 default:
                     return null;

@@ -1,9 +1,9 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BL.Moduls
 {
@@ -39,7 +39,7 @@ namespace BL.Moduls
                 .Select(x => new DropListDM
                 {
                     id = x.EmployeeID,
-                    Text = x.Employee.FullName,
+                    Text = x.Employee.FullName
                 }).ToList();
         }
 

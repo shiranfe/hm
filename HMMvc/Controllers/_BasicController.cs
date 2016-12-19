@@ -1,16 +1,15 @@
 ﻿using BL;
 using Common;
 using Common.Helpers;
-using Microsoft.Practices.Unity;
-using MvcBlox.App_Start;
 using MvcBlox.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using MVC.App_Start;
+using Microsoft.Practices.Unity;
 
 namespace MVC.Areas.Admin.Controllers
 {
@@ -30,7 +29,7 @@ namespace MVC.Areas.Admin.Controllers
 
         public ActionResult ExceptionObj(Exception e)
         {
-            var msg = e.Message;
+            var msg = ErrorHelper.ExceptionMessage(e);
             ModelState.AddModelError(string.Empty, e.Message);
 
             var dict = new Dictionary<string, object>();
@@ -44,7 +43,6 @@ namespace MVC.Areas.Admin.Controllers
             {
                url= param,
                 Message = msg,
-                InnerException = ErrorHelper.InnerExceptionMessage(e),
                 StackTrace = e.StackTrace,
                 CreationTime = DateTime.Now
             });
@@ -102,7 +100,7 @@ namespace MVC.Areas.Admin.Controllers
             }
 
             if (ctrls == null)
-                ctrls = initiateCtrls();
+                ctrls = InitiateCtrls();
 
             //Example- Machine
             var ctrl = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
@@ -170,37 +168,31 @@ namespace MVC.Areas.Admin.Controllers
 
        
 
-        private static Dictionary<string, string> initiateCtrls()
+        private static Dictionary<string, string> InitiateCtrls()
         {
-            var ctrls = new Dictionary<string, string>();
+            return new Dictionary<string, string>
+            {
+                {"Refubrish", "Refubrish"},
+                {"Quote", "Quote"},
+                {"Alignment", "Alignment"},
+                {"VB", "VB"},
+                {"CatalogItem", "Catalog"},
+                {"Supplier", "Catalog"},
+                {"Manufacturer", "Catalog"},
+                {"SupplierProduct", "Catalog"},
+                {"Role", "Catalog"},
+                {"DynamicGroups", "Settings"},
+                {"DynamicFields", "Settings"},
+                {"Employee", "Settings"},
+                {"Lang", "Settings"},
+                {"Client", "ClientSettings"},
+                {"Machine", "ClientSettings"},
+                {"Contact", "ClientSettings"},
+                {"User", "ClientSettings"},
+                {"ManagReports", "ManagReports"}
+            };
 
-            ctrls.Add("Refubrish", "Refubrish");
-            ctrls.Add("Quote", "Quote");
-            ctrls.Add("Alignment", "Alignment");
-            ctrls.Add("VB", "VB");
 
-            /** Catalog*/
-            ctrls.Add("CatalogItem", "Catalog");
-            ctrls.Add("Supplier", "Catalog");
-            ctrls.Add("Manufacturer", "Catalog");
-            ctrls.Add("SupplierProduct", "Catalog");
-            ctrls.Add("Role", "Catalog");
-
-            /** Settings*/
-            ctrls.Add("DynamicGroups", "Settings");
-            ctrls.Add("DynamicFields", "Settings");
-            ctrls.Add("Employee", "Settings");
-            ctrls.Add("Lang", "Settings");
-
-
-            ctrls.Add("Client", "ClientSettings");
-            ctrls.Add("Machine", "ClientSettings");
-            ctrls.Add("Contact", "ClientSettings");
-            ctrls.Add("User", "ClientSettings");
-
-            ctrls.Add("ManagReports", "ManagReports");
-
-            return ctrls;
         }
 
 

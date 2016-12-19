@@ -8,7 +8,7 @@ namespace MVC.Areas.Admin
         {
             get
             {
-                return "Admin";
+                return nameof(Admin);
             }
         }
 

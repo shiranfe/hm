@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DAL;
-using System;
+using AutoMapper;
 using BL.Moduls;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -144,12 +144,12 @@ namespace BL
 
         private void ModelToEntity(RoleDM model, Role entity)
         {
-            Mapper.DynamicMap<RoleDM, Role>(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(RoleDM model, Role entity)
         {
-            Mapper.DynamicMap<Role, RoleDM>(entity, model);
+            Mapper.Map(entity, model);
         }
 
 

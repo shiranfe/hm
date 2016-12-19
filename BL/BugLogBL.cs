@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Common;
 using Common.Helpers;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BL
 {
@@ -26,33 +26,36 @@ namespace BL
 
         public void Add(BugLogDM model)
         {
-            try
+            using (var db = new HMErpEntities())
             {
-                var entity = new BugLog();
-                ModelToEntity(model, entity);
-
-                _bugLogDal.Add(entity);
-
-            }
-            catch (Exception e)
-            {
-                _bugLogDal.Add(new BugLog
+                var bugLogDal = db.BugLog;
+                try
                 {
-                    CreationTime = DateTime.Now,
-                    Message = e.Message,
-                    InnerException = ErrorHelper.InnerExceptionMessage(e),
-                    StackTrace = e.StackTrace,
-                    Status = "log error"
-                });
-            }
+                    var entity = new BugLog();
+                    ModelToEntity(model, entity);
 
-            _uow.SaveChanges();
+                    bugLogDal.Add(entity);
+
+                }
+                catch (Exception e)
+                {
+                    bugLogDal.Add(new BugLog
+                    {
+                        CreationTime = DateTime.Now,
+                        Message = ErrorHelper.ExceptionMessage(e),
+                        StackTrace = e.StackTrace,
+                        Status = "log error"
+                    });
+                }
+
+                db.SaveChanges();
+            }
+          
         }
 
         public List<BugLogDM> Get()
         {
-            var list = _bugLogDal.ToList().Select(Mapper.DynamicMap<BugLogDM>)
-                .OrderByDescending(x=>x.BugID)
+            var list = _bugLogDal.GetQueryableFresh().Select(Mapper.Map<BugLogDM>).OrderByDescending(x=>x.BugID)
                 .ToList();
          
             return list;
@@ -60,7 +63,7 @@ namespace BL
 
         private static void ModelToEntity(BugLogDM model, BugLog entity)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         public void Delete(int id)

@@ -24,30 +24,30 @@ namespace MVC
         //    return ObjectTo;
         //}
 
-        public static void Strlz(object Object)
-        {
+        //public static void Strlz(object Object)
+        //{
 
-                //PropertyInfo[] properties = Object.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                //foreach (PropertyInfo prop in properties)
-                //{
-                //    switch (prop.PropertyType[0].Replace("System.", ""))
-                //    {
-                //        case "bool": prop.SetValue(Object, Convert.ToBoolean(prop.GetValue(Object)));
-                //            break;
-                //        //case "string": prop.SetValue(Object, HttpUtility.HtmlDecode(prop.GetValue(Object)));
-                //        //    break;
-                //        case "string": prop.SetValue(Object, (string)(prop.GetValue(Object)));
-                //            break;
-                //        case "int": prop.SetValue(Object, Convert.ToInt32((int)prop.GetValue(Object)));
-                //            break;
-                //        case "date": prop.SetValue(Object, (DateTime)prop.GetValue(Object));
-                //            break;
-                //        default: prop.SetValue(Object, Convert.ToBoolean(prop.GetValue(Object)));
-                //            break;
-                //    }
-                //}
+        //        //PropertyInfo[] properties = Object.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        //        //foreach (PropertyInfo prop in properties)
+        //        //{
+        //        //    switch (prop.PropertyType[0].Replace("System.", ""))
+        //        //    {
+        //        //        case "bool": prop.SetValue(Object, Convert.ToBoolean(prop.GetValue(Object)));
+        //        //            break;
+        //        //        //case "string": prop.SetValue(Object, HttpUtility.HtmlDecode(prop.GetValue(Object)));
+        //        //        //    break;
+        //        //        case "string": prop.SetValue(Object, (string)(prop.GetValue(Object)));
+        //        //            break;
+        //        //        case "int": prop.SetValue(Object, Convert.ToInt32((int)prop.GetValue(Object)));
+        //        //            break;
+        //        //        case "date": prop.SetValue(Object, (DateTime)prop.GetValue(Object));
+        //        //            break;
+        //        //        default: prop.SetValue(Object, Convert.ToBoolean(prop.GetValue(Object)));
+        //        //            break;
+        //        //    }
+        //        //}
             
-        }
+        //}
 
         public static void SetSysLangCookie(string lng)
         {

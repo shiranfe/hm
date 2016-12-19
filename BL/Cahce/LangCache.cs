@@ -1,13 +1,10 @@
-﻿using Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Common;
 using DAL;
-using BL.Moduls;
-using Repository;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -44,7 +41,7 @@ namespace BL
                 {
                     EN = x.EN,
                     IL = x.IL,
-                    Key = x.Key,
+                    Key = x.Key
                 }).ToList();
 
             return SiteGlobals.Dict; 
@@ -59,7 +56,7 @@ namespace BL
                         select new PickListDM
                         {
                             Value = d.Key,
-                            Text = d.IL,
+                            Text = d.IL
                         }).ToList();
             }
             catch (Exception)
@@ -78,7 +75,7 @@ namespace BL
                         select new PickListDM
                         {
                             Value = d.Key,
-                            Text = d.EN,
+                            Text = d.EN
                         }).ToList();
             }
             catch (Exception)

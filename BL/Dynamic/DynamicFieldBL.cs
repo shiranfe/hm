@@ -1,14 +1,13 @@
-﻿using BL.Moduls;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading;
+using BL.Moduls;
 using Common;
 using DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Repository;
 using Microsoft.Practices.Unity;
-using System.Globalization;
-using System.Threading;
-using System.Text.RegularExpressions;
+using Repository;
 
 namespace BL
 {

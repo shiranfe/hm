@@ -62,9 +62,9 @@ namespace MvcBlox.Models
 
             if (cur.Session["EmpID"] != null) return true;// employee is loged
 
-            if (cur.Session["ClientID"] != null)
+            if (cur.Session[nameof(ClientID)] != null)
             {
-                var CurClientID = (int)cur.Session["ClientID"];
+                var CurClientID = (int)cur.Session[nameof(ClientID)];
                 return _clientBL.MatchClientId(CurClientID, ClientID);
             }
 

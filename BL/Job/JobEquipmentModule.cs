@@ -1,12 +1,10 @@
-﻿using AutoMapper;
-using DAL;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using Common;
+using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace BL
 {
@@ -67,7 +65,7 @@ namespace BL
             return (from x in GetQuer()
                     select new JobEquipmentDM
                     {
-                        JobEquipmentID = x.JobEquipmentID,
+                        JobEquipmentID = x.JobEquipmentID
                     })
                     .OrderByDescending(x => x.JobEquipmentID)
                     .ToList();
@@ -135,12 +133,12 @@ namespace BL
 
         private void ModelToEntity(JobEquipmentDM model, JobEquipment entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(JobEquipmentDM model, JobEquipment entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

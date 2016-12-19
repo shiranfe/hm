@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using Common;
-using Repository;
-using Microsoft.Practices.Unity;
 using AutoMapper;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {
@@ -59,7 +57,7 @@ namespace BL.Moduls
                     LastName = i.LastName,
                     ClientName = i.Client.ClientName,
                     ClientID = i.ClientID,
-                    Active = i.Active,
+                    Active = i.Active
                 }).Single();
 
             model.ContactInfoDM = _contactInfoModule.GetSingleInfo(userID, ObjType.User);
@@ -104,7 +102,7 @@ namespace BL.Moduls
                         UserID = u.UserID,
                         ClientID = u.ClientID,
                         ClientName = v.ClientChildName,
-                        FullName = u.FullName,
+                        FullName = u.FullName
                     }).Distinct().ToList();
         }
 
@@ -144,7 +142,7 @@ namespace BL.Moduls
             User entity = new User
             {              
                 PermissionID = 8, // Permission_Admin
-                Active = true,
+                Active = true
             };
 
             ModelToEntity(entity, model);
@@ -175,15 +173,10 @@ namespace BL.Moduls
         }
 
 
- 
-        private void EntityToModel(User entity, UserDetailsDM model)
-        {
-            Mapper.DynamicMap(entity, model);
-        }
 
         private void ModelToEntity(User entity, UserDetailsDM model)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
     }

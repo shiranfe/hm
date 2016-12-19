@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common;
+using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using DAL;
 
 namespace BL
 {
@@ -87,7 +85,7 @@ namespace BL
                 _bugLogDal.Add(new BugLog
                 {
                     CreationTime = DateTime.Now,
-                    Message = "try to set OrderNumber as null when its not QuoteID " + model.QuoteID,
+                    Message = "try to set OrderNumber as null when its not QuoteID " + model.QuoteID
                 });
             }
 

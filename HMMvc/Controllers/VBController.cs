@@ -72,7 +72,7 @@ namespace MVC.Controllers
 
         public ActionResult VbReport(int jobID)
         {
-             bool isEnglish = Session["dir"].ToString() == "False"; ;
+             var isEnglish = Session["dir"].ToString() == "False"; ;
 
             var rprt = _vbBL.GetVbReport(jobID, isEnglish);
 

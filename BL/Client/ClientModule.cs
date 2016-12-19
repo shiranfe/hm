@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using AutoMapper;
 using Common;
 using DAL;
 using Microsoft.Practices.Unity;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace BL.Moduls
 {
@@ -65,7 +65,7 @@ namespace BL.Moduls
             if (includeContactInfo)
             {
                 ContactInfoDM contInfo = _contactInfoModule.GetSingleInfo(clientID, ObjType.Client);
-                Mapper.DynamicMap<ContactInfoDM, ClientDM>(contInfo, model);
+                Mapper.Map(contInfo, model);
             
             }
          
@@ -103,7 +103,7 @@ namespace BL.Moduls
         {
 
 
-            return (int)_clientDal
+            return _clientDal
                 .Where(x => x.ClientID == clientID)
                 .Select(x => x.ClientID).Single();
 
@@ -138,7 +138,7 @@ namespace BL.Moduls
                         ClientParentName = x.vwParentsName1,
                         ClientNameEnglish = x.ClientNameEnglish,
                         ClientParentNameEnglish = x.ClientParentNameEnglish,
-                        ClientFullNameEnglish = x.ClientFullNameEnglish,
+                        ClientFullNameEnglish = x.ClientFullNameEnglish
                     }).OrderByDescending(x=>x.ClientID).ToList();
 
 
@@ -229,12 +229,12 @@ namespace BL.Moduls
 
         private void ModelToEntity(ClientDM model, Client entity)
         {
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(ClientDM model, Client entity)
         {
-            Mapper.DynamicMap(entity,model );
+            Mapper.Map(entity,model );
         }
      
 

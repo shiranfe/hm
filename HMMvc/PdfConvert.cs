@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using System.IO;
+using System.Web;
 
 namespace Codaxy.WkHtmlToPdf
 {
@@ -64,64 +65,62 @@ namespace Codaxy.WkHtmlToPdf
 
 		public static void ConvertHtmlToPdf(PdfDocument document, PdfConvertEnvironment environment, PdfOutput woutput)
         {
-            if (environment == null)
-                environment = Environment;
+			if (environment == null)
+				environment = Environment;
 
-            string outputPdfFilePath;
-            bool delete;
-            if (woutput.OutputFilePath != null)
-            {
-                outputPdfFilePath = woutput.OutputFilePath;
-                delete = false;
-            }
-            else
-            {
-                outputPdfFilePath = Path.Combine(environment.TempFolderPath, string.Format("{0}.pdf", Guid.NewGuid()));
-                delete = true;
-            }
+			String outputPdfFilePath;
+			bool delete;
+			if (woutput.OutputFilePath != null)
+			{
+				outputPdfFilePath = woutput.OutputFilePath;
+				delete = false;
+			}
+			else
+			{
+				outputPdfFilePath = Path.Combine(environment.TempFolderPath, String.Format("{0}.pdf", Guid.NewGuid()));
+				delete = true;
+			}
 
-            if (!File.Exists(environment.WkHtmlToPdfPath))
-                throw new PdfConvertException(string.Format("File '{0}' not found. Check if wkhtmltopdf application is installed.", environment.WkHtmlToPdfPath));
+			if (!File.Exists(environment.WkHtmlToPdfPath))
+				throw new PdfConvertException(String.Format("File '{0}' not found. Check if wkhtmltopdf application is installed.", environment.WkHtmlToPdfPath));
 
             ProcessStartInfo si;
 
-            var paramsBuilder = new StringBuilder();
+            StringBuilder paramsBuilder = new StringBuilder();
             paramsBuilder.Append("--page-size A4 ");
             //paramsBuilder.Append("--redirect-delay 0 "); not available in latest version
-            if (!string.IsNullOrEmpty(document.HeaderUrl))
+			if (!string.IsNullOrEmpty(document.HeaderUrl))
             {
-                paramsBuilder.AppendFormat("--header-html {0} ", document.HeaderUrl);
+				paramsBuilder.AppendFormat("--header-html {0} ", document.HeaderUrl);
                 paramsBuilder.Append("--margin-top 25 ");
                 paramsBuilder.Append("--header-spacing 5 ");
             }
-            if (!string.IsNullOrEmpty(document.FooterUrl))
+			if (!string.IsNullOrEmpty(document.FooterUrl))
             {
-                paramsBuilder.AppendFormat("--footer-html {0} ", document.FooterUrl);
+				paramsBuilder.AppendFormat("--footer-html {0} ", document.FooterUrl);
                 paramsBuilder.Append("--margin-bottom 25 ");
                 paramsBuilder.Append("--footer-spacing 5 ");
             }
+            
+			paramsBuilder.AppendFormat("\"{0}\" \"{1}\"", document.Url, outputPdfFilePath);
+           
 
-            paramsBuilder.AppendFormat("\"{0}\" \"{1}\"", document.Url, outputPdfFilePath);
+            si = new ProcessStartInfo();
+            si.CreateNoWindow = !environment.Debug;
+			si.FileName = environment.WkHtmlToPdfPath;
+            si.Arguments = paramsBuilder.ToString();
+            si.UseShellExecute = false;
+            si.RedirectStandardError = !environment.Debug;
 
+			try
+			{
+				using (var process = new Process())
+				{
+					process.StartInfo = si;
+					process.Start();
 
-            si = new ProcessStartInfo
-            {
-                CreateNoWindow = !environment.Debug,
-                FileName = environment.WkHtmlToPdfPath,
-                Arguments = paramsBuilder.ToString(),
-                UseShellExecute = false,
-                RedirectStandardError = !environment.Debug
-            };
-
-            try
-            {
-                using (var process = new Process())
-                {
-                    process.StartInfo = si;
-                    process.Start();
-
-                    if (!process.WaitForExit(environment.Timeout))
-                        throw new PdfConvertTimeoutException();
+					if (!process.WaitForExit(environment.Timeout))
+						throw new PdfConvertTimeoutException();
 
                     if (!File.Exists(outputPdfFilePath))
                     {
@@ -134,29 +133,29 @@ namespace Codaxy.WkHtmlToPdf
                         throw new PdfConvertException(String.Format("Html to PDF conversion of '{0}' failed. Reason: Output file '{1}' not found.", document.Url, outputPdfFilePath));
                     }
 
-                    if (woutput.OutputStream != null)
-                    {
-                        using (Stream fs = new FileStream(outputPdfFilePath, FileMode.Open))
-                        {
-                            var buffer = new byte[32 * 1024];
-                            int read;
+					if (woutput.OutputStream != null)
+					{
+						using (Stream fs = new FileStream(outputPdfFilePath, FileMode.Open))
+						{
+							byte[] buffer = new byte[32 * 1024];
+							int read;
 
-                            while ((read = fs.Read(buffer, 0, buffer.Length)) > 0)
-                                woutput.OutputStream.Write(buffer, 0, read);
-                        }
-                    }
+							while ((read = fs.Read(buffer, 0, buffer.Length)) > 0)
+								woutput.OutputStream.Write(buffer, 0, read);
+						}
+					}
 
-                    if (woutput.OutputCallback != null)
-                    {
-                        woutput.OutputCallback(document, File.ReadAllBytes(outputPdfFilePath));
-                    }
-                }
-            }
-            finally
-            {
-                if (delete && File.Exists(outputPdfFilePath))
-                    File.Delete(outputPdfFilePath);
-            }
+					if (woutput.OutputCallback != null)
+					{
+						woutput.OutputCallback(document, File.ReadAllBytes(outputPdfFilePath));
+					}
+				}
+			}
+			finally
+			{
+				if (delete && File.Exists(outputPdfFilePath))
+					File.Delete(outputPdfFilePath);
+			}
         }
     }
 

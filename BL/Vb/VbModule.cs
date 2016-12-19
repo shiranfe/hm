@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
 using Common;
-using Repository;
+using DAL;
 using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL.Moduls
 {
@@ -49,13 +47,13 @@ namespace BL.Moduls
                             JobID = v.JobID,
                             ClientID = v.ClientID,
                             ClientName = isEnglish ? (v.ClientFullNameEnglish ?? v.vwParentsName2) : v.vwParentsName2,
-                            StartDate = (DateTime)v.StartDate,
+                            StartDate = v.StartDate
                         },                     
                         Areas = v.vwParentsName2,                    
                         AnalyzerName = v.AnalyzerName,
                         TesterName = v.TesterName,
                         //Urgency = undefined,
-                        InviterName = v.ClientName,
+                        InviterName = v.ClientName
 
                     }).SingleOrDefault();
 
@@ -74,16 +72,16 @@ namespace BL.Moduls
                             JobID = v.JobID,
                             ClientID = v.ClientID,
                             ClientName = v.vwParentsName2 ?? undefined,
-                            StartDate = (DateTime)v.StartDate,
+                            StartDate = v.StartDate,
                             JobName = v.JobName,
-                            IsPosted = v.IsPosted,
+                            IsPosted = v.IsPosted
                             //Urgency = undefined,
                         },   
                        
                         Areas = v.vwParentsName2,
                         AnalyzerName = v.AnalyzerName,
                         TesterName = v.TesterName,                      
-                        InviterName = v.ClientName,
+                        InviterName = v.ClientName
                        
                     }).SingleOrDefault();
 
@@ -105,7 +103,7 @@ namespace BL.Moduls
                                ClientName = v.ClientName
                            },   
                         
-                           Areas = v.vwParentsName2,
+                           Areas = v.vwParentsName2
                          
                        });
             return ans;
@@ -124,12 +122,12 @@ namespace BL.Moduls
                            {
                                JobID = v.JobID,
                                JobName = v.JobName,
-                               StartDate = (DateTime)v.StartDate,
+                               StartDate = v.StartDate,
                                IsPosted = v.IsPosted,
                                MainClientID = v.ClientID,
                                ClientName = v.ClientName
                            },                            
-                           Areas = v.vwParentsName2,                        
+                           Areas = v.vwParentsName2                        
                        });
 
 
@@ -155,7 +153,7 @@ namespace BL.Moduls
                               LangStr = v.StatusLangStr,
                               NotesEN = v.GeneralNoteEN,
                               NotesIL = v.GeneralNoteIL,
-                              Details = v.Details,
+                              Details = v.Details
                           }).OrderBy(x => x.StatusID)
                        .ToList();
 

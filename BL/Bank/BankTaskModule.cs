@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using DAL;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using AutoMapper;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -76,7 +76,7 @@ namespace BL
                     {
                         BankTaskID = x.BankTaskID,
                         TaskName = x.TaskName,
-                        ManagerNotes=x.ManagerNotes,
+                        ManagerNotes=x.ManagerNotes
                         //TaskFields = x.BankTask_Field
                         //    .Select(y => TaskFieldToDm(y)).ToList()
                     })
@@ -135,7 +135,7 @@ namespace BL
 
         private BankTask Edit(BankTaskDM model)
         {
-            BankTask entity = GetSingle(model.BankTaskID);
+            var entity = GetSingle(model.BankTaskID);
             
             ModelToEntity(model, entity);
 
@@ -143,14 +143,14 @@ namespace BL
         }
 
 
-        private void ModelToEntity(BankTaskDM model, BankTask entity)
+        private static void ModelToEntity(BankTaskDM model, BankTask entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
-        private void EntityToModel(BankTaskDM model, BankTask entity)
+        private static void EntityToModel(BankTaskDM model, BankTask entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 

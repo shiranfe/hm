@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using DAL;
-using Common;
-using Microsoft.Practices.Unity;
-using Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using BL.Moduls;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Threading;
+using AutoMapper;
+using BL.Moduls;
+using Common;
+using DAL;
+using Microsoft.Practices.Unity;
+using Repository;
 
 namespace BL
 {
@@ -185,12 +185,12 @@ namespace BL
 
         private void ModelToEntity(BankFieldDM model, BankField entity)
         {        
-            Mapper.DynamicMap(model, entity);
+            Mapper.Map(model, entity);
         }
 
         private void EntityToModel(BankFieldDM model, BankField entity)
         {         
-           Mapper.DynamicMap(entity, model);
+           Mapper.Map(entity, model);
         }
 
 
