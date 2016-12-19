@@ -117,7 +117,7 @@ namespace BL
         }
 
 
-        public JobTaskGroupFieldDM GetTaskField(BankTask_Field enity)
+        public JobTaskFieldDM GetTaskField(BankTask_Field enity)
         {
             var res = TaskFieldToDm(enity);
 
@@ -126,7 +126,7 @@ namespace BL
             return res;
         }
 
-        public List<JobTaskGroupFieldDM> GetTaskFields(ICollection<BankTask_Field> list)
+        public List<JobTaskFieldDM> GetTaskFields(ICollection<BankTask_Field> list)
         {
             var res = list.Select(y => TaskFieldToDm(y))
                 .OrderBy(x=> x.OrderVal).ToList();
@@ -136,16 +136,15 @@ namespace BL
             return res; 
         }
 
-        private static JobTaskGroupFieldDM TaskFieldToDm(BankTask_Field x)
+        private static JobTaskFieldDM TaskFieldToDm(BankTask_Field x)
         {
             BankField flds = x.BankField;
 
             if (flds.FieldPool == null)
                 throw new Exception("flds.FieldPool empty");
 
-            return new JobTaskGroupFieldDM
+            return new JobTaskFieldDM
             {
-
                 //FieldValue = x.FieldValue,
                 Id = x.BankTask_FieldID,
                 OrderVal = x.OrderVal,
@@ -158,8 +157,7 @@ namespace BL
                 FieldNameStr = flds.FieldNameStr,
                 FieldTypeID = flds.FieldPool.FieldTypeID,
                 FieldUnit = flds.FieldPool.FieldUnit,
-
-
+                
                 // OrderVal = flds.OrderVal,
                 PickListEntity = flds.FieldPool.PickListEntity,
                 PickListFromTable = flds.FieldPool.PickListFromTable
@@ -172,7 +170,7 @@ namespace BL
 
         public BankTask_Field Update(BankTask_FieldDM model)
         {
-            BankTask_Field entity = model.BankTask_FieldID > 0 ?
+            var entity = model.BankTask_FieldID > 0 ?
                Edit(model) : Add(model);
 
 

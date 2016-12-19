@@ -44,7 +44,7 @@ $(document).ready(function () {
                    cntrl: "/Admin/Client",
                    data: params,
                    success: function (client) {
-                       if (clientID == client.ClientID)
+                       if (clientID === client.ClientID)
                            return;
 
                        clientID = client.ClientID;

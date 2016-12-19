@@ -83,10 +83,8 @@
     <Compile Include="Equipment\EquipmentModule.cs" />
     <Compile Include="Equipment\EquipmentTechModule.cs" />
     <Compile Include="FieldPool\FieldPoolModule.cs" />
-    <Compile Include="JobTask\JobTaskGroupBL.cs" />
     <Compile Include="JobTask\JobTaskGroupFieldBL.cs" />
     <Compile Include="JobTask\JobTaskGroupFieldModule.cs" />
-    <Compile Include="JobTask\JobTaskGroupModule.cs" />
     <Compile Include="Job\JobEquipmentBL.cs" />
     <Compile Include="Job\JobEquipmentModule.cs" />
     <Compile Include="Job\JobRequestBL.cs" />

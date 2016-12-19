@@ -57,7 +57,6 @@
     <Compile Include="Helper\ListHelper.cs" />
     <Compile Include="Helper\TimeHelper.cs" />
     <Compile Include="ImportReport.cs" />
-    <Compile Include="JobTask\JobTaskGroupDM.cs" />
     <Compile Include="JobTask\JobTaskGroupFieldDM.cs" />
     <Compile Include="Job\JobDM.cs" />
     <Compile Include="Job\JobEquipmentDM.cs" />

@@ -6,21 +6,21 @@ using System.Web.Mvc;
 
 namespace MVC.Areas.Admin.Controllers
 {
-    public class JobTaskGroupFieldController : _BasicController
+    public class JobTaskFieldController : _BasicController
     {
       
-        private readonly JobTaskGroupFieldBL _entityBL;
+        private readonly JobTaskFieldBL _entityBL;
 
-        public JobTaskGroupFieldController(
+        public JobTaskFieldController(
 
-            [Dependency]JobTaskGroupFieldBL entityBL)
+            [Dependency]JobTaskFieldBL entityBL)
         {
             _entityBL = entityBL;
         }
 
 
     
-        public ActionResult Index(JobTaskGroupFieldFilterDm filter)
+        public ActionResult Index(JobTaskFieldFilterDm filter)
         {
 
             _entityBL.GetItemsList(filter);
@@ -31,7 +31,7 @@ namespace MVC.Areas.Admin.Controllers
 
         public ActionResult Update(int? id)
         {
-            JobTaskGroupFieldDM model;// 
+            JobTaskFieldDM model;// 
 
             if (id.HasValue)
             {
@@ -40,7 +40,7 @@ namespace MVC.Areas.Admin.Controllers
             }
             else
             {
-                model = new JobTaskGroupFieldDM {  };
+                model = new JobTaskFieldDM {  };
                 ViewBag.PopTitle = "חדשה";
             }
 
@@ -52,29 +52,50 @@ namespace MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public ActionResult Update(JobTaskGroupFieldDM model)
+        public ActionResult Update(JobTaskFieldDM model)
         {
             try
             {
-                _entityBL.Update(model);
-                return Json(new { JobTaskGroupFieldID = model.Id});
+                var view = _entityBL.Update(model);
+
+                if (view == null)
+                    return Json(new { Id = model.Id });
+
+                return PartialView("FieldTmpl", view);
             }
             catch (Exception e)
             {
-                return ExceptionObj( e);
+                return ExceptionObj(e);
             }
 
         }
 
-       
 
-      
+
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Sort(int[] ids)
         {
             try
             {
-                _entityBL.Delete(id);
+                _entityBL.Sort(ids);
+
+                //return RedirectToAction("DynamicFields");
+                return Json(new { sts = "Success", });
+            }
+            catch (Exception e)
+            {
+                return ExceptionObj(e);
+
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int[] ids)
+        {
+            try
+            {
+                _entityBL.Delete(ids);
                 return Json(new { msg = "Success" });
             }
             catch (Exception e)
@@ -84,7 +105,7 @@ namespace MVC.Areas.Admin.Controllers
         }
 
 
-        private void PopulateDrop(JobTaskGroupFieldDM model)
+        private void PopulateDrop(JobTaskFieldDM model)
         {
             //var clnts = _quoteBL.GetAllSrcs();
            // ViewBag.Srcs = new SelectList(clnts, "ClientID", "ClientName", mac.ClientParentID);

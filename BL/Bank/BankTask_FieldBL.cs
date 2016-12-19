@@ -34,7 +34,7 @@ namespace BL
         }
 
 
-        public JobTaskGroupFieldDM Update(BankTask_FieldDM model)
+        public JobTaskFieldDM Update(BankTask_FieldDM model)
         {
             var isAdded = model.BankTask_FieldID == 0;
         

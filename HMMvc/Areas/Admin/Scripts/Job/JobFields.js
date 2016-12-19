@@ -7,11 +7,11 @@ var subPid;
 var IsCut = false;
 
 $(document).ready(function () {
-    var ctrl = "Admin/JobTaskGroupField";
+    var ctrl = "Admin/JobTaskField";
     var path = "/" + ctrl + "/";
     var opsField = {
-        entity: "JobTaskGroupField",
-        cntrl: "/Admin/JobTaskGroupField"
+        entity: "JobTaskField",
+        cntrl: "/Admin/JobTaskField"
        // done: hideLoading
     };
 

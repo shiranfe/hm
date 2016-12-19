@@ -16,11 +16,10 @@ namespace DAL
     {
         public int Equipment_TechFieldID { get; set; }
         public int EquipmentID { get; set; }
-        public int DynamicGroupFieldID { get; set; }
+        public int BankFieldID { get; set; }
         public string FieldValue { get; set; }
-        public Nullable<int> SubGroupID { get; set; }
     
-        public virtual DynamicGroupField DynamicGroupField { get; set; }
+        public virtual BankField BankField { get; set; }
         public virtual Equipment Equipment { get; set; }
     }
 }

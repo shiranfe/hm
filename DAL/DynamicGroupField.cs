@@ -18,8 +18,6 @@ namespace DAL
         {
             this.JobRefubrish_StepField = new HashSet<JobRefubrish_StepField>();
             this.MachinePart_TechField = new HashSet<MachinePart_TechField>();
-            this.Equipment_TechField = new HashSet<Equipment_TechField>();
-            this.JobTaskGroupField = new HashSet<JobTaskGroupField>();
         }
     
         public int DynamicGroupFieldID { get; set; }
@@ -36,7 +34,5 @@ namespace DAL
         public virtual ICollection<JobRefubrish_StepField> JobRefubrish_StepField { get; set; }
         public virtual ICollection<MachinePart_TechField> MachinePart_TechField { get; set; }
         public virtual CatalogItem CatalogItem { get; set; }
-        public virtual ICollection<Equipment_TechField> Equipment_TechField { get; set; }
-        public virtual ICollection<JobTaskGroupField> JobTaskGroupField { get; set; }
     }
 }

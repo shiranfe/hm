@@ -37,7 +37,7 @@ namespace BL
 
 
          public void GetItemsList(OutsideFilterDm filter)
-        {
+        { 
             IQueryable<JobOutside> quer = _module.GetQuer();
 
             List<JobOutside> list = GetListByFilter(quer, filter);

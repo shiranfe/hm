@@ -245,9 +245,8 @@
           </Key>
           <Property Name="Equipment_TechFieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EquipmentID" Type="int" Nullable="false" />
-          <Property Name="DynamicGroupFieldID" Type="int" Nullable="false" />
+          <Property Name="BankFieldID" Type="int" Nullable="false" />
           <Property Name="FieldValue" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SubGroupID" Type="int" />
         </EntityType>
         <EntityType Name="FieldPool">
           <Key>
@@ -387,7 +386,6 @@
           <Property Name="TaskName" Type="nvarchar" MaxLength="500" />
           <Property Name="ManagerNotes" Type="nvarchar(max)" />
           <Property Name="EmpNotes" Type="nvarchar(max)" />
-          <Property Name="JobRefubrishStepID" Type="int" />
         </EntityType>
         <EntityType Name="JobTaskEmployee">
           <Key>
@@ -399,24 +397,17 @@
           <Property Name="VisitStart" Type="datetime" Nullable="false" />
           <Property Name="VisitEnd" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="JobTaskGroup">
+        <EntityType Name="JobTaskField">
           <Key>
-            <PropertyRef Name="JobTaskGroupID" />
+            <PropertyRef Name="JobTaskFieldID" />
           </Key>
-          <Property Name="JobTaskGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobTaskFieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="JobTaskID" Type="int" Nullable="false" />
-          <Property Name="GroupNameStr" Type="varchar" MaxLength="255" />
-          <Property Name="LinkedGroupID" Type="int" />
-        </EntityType>
-        <EntityType Name="JobTaskGroupField">
-          <Key>
-            <PropertyRef Name="JobTaskGroupFieldID" />
-          </Key>
-          <Property Name="JobTaskGroupFieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="JobTaskGroupID" Type="int" Nullable="false" />
-          <Property Name="DynamicGroupFieldID" Type="int" Nullable="false" />
           <Property Name="FieldValue" Type="nvarchar(max)" />
           <Property Name="OrderVal" Type="int" Nullable="false" />
+          <Property Name="IsRequired" Type="bit" Nullable="false" />
+          <Property Name="IsForQuote" Type="bit" Nullable="false" />
+          <Property Name="BankFieldID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="JobTemplateNotes">
           <Key>
@@ -1187,15 +1178,15 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Equipment_TechField_DynamicGroupField">
-          <End Role="DynamicGroupField" Type="Self.DynamicGroupField" Multiplicity="1" />
+        <Association Name="FK_Equipment_TechField_BankField">
+          <End Role="BankField" Type="Self.BankField" Multiplicity="1" />
           <End Role="Equipment_TechField" Type="Self.Equipment_TechField" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DynamicGroupField">
-              <PropertyRef Name="DynamicGroupFieldID" />
+            <Principal Role="BankField">
+              <PropertyRef Name="BankFieldID" />
             </Principal>
             <Dependent Role="Equipment_TechField">
-              <PropertyRef Name="DynamicGroupFieldID" />
+              <PropertyRef Name="BankFieldID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1553,55 +1544,29 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobTaskGroup_DynamicGroup">
-          <End Role="DynamicGroup" Type="Self.DynamicGroup" Multiplicity="0..1" />
-          <End Role="JobTaskGroup" Type="Self.JobTaskGroup" Multiplicity="*" />
+        <Association Name="FK_JobTaskField_BankField">
+          <End Role="BankField" Type="Self.BankField" Multiplicity="1" />
+          <End Role="JobTaskField" Type="Self.JobTaskField" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DynamicGroup">
-              <PropertyRef Name="DynamicGroupID" />
+            <Principal Role="BankField">
+              <PropertyRef Name="BankFieldID" />
             </Principal>
-            <Dependent Role="JobTaskGroup">
-              <PropertyRef Name="LinkedGroupID" />
+            <Dependent Role="JobTaskField">
+              <PropertyRef Name="BankFieldID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobTaskGroup_JobTask">
+        <Association Name="FK_JobTaskField_JobTask">
           <End Role="JobTask" Type="Self.JobTask" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="JobTaskGroup" Type="Self.JobTaskGroup" Multiplicity="*" />
+          <End Role="JobTaskField" Type="Self.JobTaskField" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="JobTask">
               <PropertyRef Name="JobTaskID" />
             </Principal>
-            <Dependent Role="JobTaskGroup">
+            <Dependent Role="JobTaskField">
               <PropertyRef Name="JobTaskID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobTaskGroupField_DynamicGroupField">
-          <End Role="DynamicGroupField" Type="Self.DynamicGroupField" Multiplicity="1" />
-          <End Role="JobTaskGroupField" Type="Self.JobTaskGroupField" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicGroupField">
-              <PropertyRef Name="DynamicGroupFieldID" />
-            </Principal>
-            <Dependent Role="JobTaskGroupField">
-              <PropertyRef Name="DynamicGroupFieldID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobTaskGroupField_JobTaskGroup">
-          <End Role="JobTaskGroup" Type="Self.JobTaskGroup" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="JobTaskGroupField" Type="Self.JobTaskGroupField" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobTaskGroup">
-              <PropertyRef Name="JobTaskGroupID" />
-            </Principal>
-            <Dependent Role="JobTaskGroupField">
-              <PropertyRef Name="JobTaskGroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2141,8 +2106,7 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <EntitySet Name="JobRefubrishStep" EntityType="Self.JobRefubrishStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobTask" EntityType="Self.JobTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobTaskEmployee" EntityType="Self.JobTaskEmployee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="JobTaskGroup" EntityType="Self.JobTaskGroup" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="JobTaskGroupField" EntityType="Self.JobTaskGroupField" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobTaskField" EntityType="Self.JobTaskField" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobTemplateNotes" EntityType="Self.JobTemplateNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobVibration" EntityType="Self.JobVibration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobVibrationMachine" EntityType="Self.JobVibrationMachine" Schema="dbo" store:Type="Tables" />
@@ -2441,8 +2405,8 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             <End Role="PickList" EntitySet="PickList" />
             <End Role="Equipment" EntitySet="Equipment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Equipment_TechField_DynamicGroupField" Association="Self.FK_Equipment_TechField_DynamicGroupField">
-            <End Role="DynamicGroupField" EntitySet="DynamicGroupField" />
+          <AssociationSet Name="FK_Equipment_TechField_BankField" Association="Self.FK_Equipment_TechField_BankField">
+            <End Role="BankField" EntitySet="BankField" />
             <End Role="Equipment_TechField" EntitySet="Equipment_TechField" />
           </AssociationSet>
           <AssociationSet Name="FK_Equipment_TechField_Equipment" Association="Self.FK_Equipment_TechField_Equipment">
@@ -2561,21 +2525,13 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             <End Role="JobTask" EntitySet="JobTask" />
             <End Role="JobTaskEmployee" EntitySet="JobTaskEmployee" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobTaskGroup_DynamicGroup" Association="Self.FK_JobTaskGroup_DynamicGroup">
-            <End Role="DynamicGroup" EntitySet="DynamicGroup" />
-            <End Role="JobTaskGroup" EntitySet="JobTaskGroup" />
+          <AssociationSet Name="FK_JobTaskField_BankField" Association="Self.FK_JobTaskField_BankField">
+            <End Role="BankField" EntitySet="BankField" />
+            <End Role="JobTaskField" EntitySet="JobTaskField" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobTaskGroup_JobTask" Association="Self.FK_JobTaskGroup_JobTask">
+          <AssociationSet Name="FK_JobTaskField_JobTask" Association="Self.FK_JobTaskField_JobTask">
             <End Role="JobTask" EntitySet="JobTask" />
-            <End Role="JobTaskGroup" EntitySet="JobTaskGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobTaskGroupField_DynamicGroupField" Association="Self.FK_JobTaskGroupField_DynamicGroupField">
-            <End Role="DynamicGroupField" EntitySet="DynamicGroupField" />
-            <End Role="JobTaskGroupField" EntitySet="JobTaskGroupField" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobTaskGroupField_JobTaskGroup" Association="Self.FK_JobTaskGroupField_JobTaskGroup">
-            <End Role="JobTaskGroup" EntitySet="JobTaskGroup" />
-            <End Role="JobTaskGroupField" EntitySet="JobTaskGroupField" />
+            <End Role="JobTaskField" EntitySet="JobTaskField" />
           </AssociationSet>
           <AssociationSet Name="FK_JobVibration_Employee2" Association="Self.FK_JobVibration_Employee2">
             <End Role="Employee" EntitySet="Employee" />
@@ -3801,15 +3757,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             <End Role="Job" EntitySet="Job" />
             <End Role="JobEquipment" EntitySet="JobEquipment" />
           </AssociationSet>
-          <EntitySet Name="Equipment_TechField" EntityType="HMErpModel.Equipment_TechField" />
-          <AssociationSet Name="FK_Equipment_TechField_DynamicGroupField" Association="HMErpModel.FK_Equipment_TechField_DynamicGroupField">
-            <End Role="DynamicGroupField" EntitySet="DynamicGroupField" />
-            <End Role="Equipment_TechField" EntitySet="Equipment_TechField" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Equipment_TechField_Equipment" Association="HMErpModel.FK_Equipment_TechField_Equipment">
-            <End Role="Equipment" EntitySet="Equipment" />
-            <End Role="Equipment_TechField" EntitySet="Equipment_TechField" />
-          </AssociationSet>
           <EntitySet Name="JobRefubrish" EntityType="HMErpModel.JobRefubrish" />
           <AssociationSet Name="FK_JobRefubrish_Branch" Association="HMErpModel.FK_JobRefubrish_Branch">
             <End Role="Branch" EntitySet="Branch" />
@@ -3835,24 +3782,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             <End Role="PickList" EntitySet="PickList" />
             <End Role="JobRefubrish" EntitySet="JobRefubrish" />
           </AssociationSet>
-          <EntitySet Name="JobTaskGroup" EntityType="HMErpModel.JobTaskGroup" />
-          <EntitySet Name="JobTaskGroupField" EntityType="HMErpModel.JobTaskGroupField" />
-          <AssociationSet Name="FK_JobTaskGroup_JobTask" Association="HMErpModel.FK_JobTaskGroup_JobTask">
-            <End Role="JobTask" EntitySet="JobTask" />
-            <End Role="JobTaskGroup" EntitySet="JobTaskGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobTaskGroupField_JobTaskGroup" Association="HMErpModel.FK_JobTaskGroupField_JobTaskGroup">
-            <End Role="JobTaskGroup" EntitySet="JobTaskGroup" />
-            <End Role="JobTaskGroupField" EntitySet="JobTaskGroupField" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobTaskGroup_DynamicGroup" Association="HMErpModel.FK_JobTaskGroup_DynamicGroup">
-            <End Role="DynamicGroup" EntitySet="DynamicGroup" />
-            <End Role="JobTaskGroup" EntitySet="JobTaskGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobTaskGroupField_DynamicGroupField" Association="HMErpModel.FK_JobTaskGroupField_DynamicGroupField">
-            <End Role="DynamicGroupField" EntitySet="DynamicGroupField" />
-            <End Role="JobTaskGroupField" EntitySet="JobTaskGroupField" />
-          </AssociationSet>
           <EntitySet Name="BankField" EntityType="HMErpModel.BankField" />
           <AssociationSet Name="FK_BankField_FieldPool" Association="HMErpModel.FK_BankField_FieldPool">
             <End Role="FieldPool" EntitySet="FieldPool" />
@@ -3867,6 +3796,24 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <AssociationSet Name="FK_BankTask_Field_BankTask" Association="HMErpModel.FK_BankTask_Field_BankTask">
             <End Role="BankTask" EntitySet="BankTask" />
             <End Role="BankTask_Field" EntitySet="BankTask_Field" />
+          </AssociationSet>
+          <EntitySet Name="Equipment_TechField" EntityType="HMErpModel.Equipment_TechField" />
+          <AssociationSet Name="FK_Equipment_TechField_BankField" Association="HMErpModel.FK_Equipment_TechField_BankField">
+            <End Role="BankField" EntitySet="BankField" />
+            <End Role="Equipment_TechField" EntitySet="Equipment_TechField" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_TechField_Equipment" Association="HMErpModel.FK_Equipment_TechField_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Equipment_TechField" EntitySet="Equipment_TechField" />
+          </AssociationSet>
+          <EntitySet Name="JobTaskField" EntityType="HMErpModel.JobTaskField" />
+          <AssociationSet Name="FK_JobTaskField_BankField" Association="HMErpModel.FK_JobTaskField_BankField">
+            <End Role="BankField" EntitySet="BankField" />
+            <End Role="JobTaskField" EntitySet="JobTaskField" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobTaskField_JobTask" Association="HMErpModel.FK_JobTaskField_JobTask">
+            <End Role="JobTask" EntitySet="JobTask" />
+            <End Role="JobTaskField" EntitySet="JobTaskField" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="PickList">
@@ -4204,7 +4151,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <Property Name="ConditionMinValue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SubGroups" Relationship="HMErpModel.FK_DynamicGroup_DynamicGroup" FromRole="DynamicGroup" ToRole="DynamicGroup1" />
           <NavigationProperty Name="ParentGroup" Relationship="HMErpModel.FK_DynamicGroup_DynamicGroup" FromRole="DynamicGroup1" ToRole="DynamicGroup" />
-          <NavigationProperty Name="JobTaskGroup" Relationship="HMErpModel.FK_JobTaskGroup_DynamicGroup" FromRole="DynamicGroup" ToRole="JobTaskGroup" />
         </EntityType>
         <EntityType Name="FieldPool">
           <Key>
@@ -4339,8 +4285,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <Property Name="IsForQuote" Type="Boolean" Nullable="false" />
           <Property Name="CatalogItemID" Type="Int32" />
           <NavigationProperty Name="CatalogItem" Relationship="HMErpModel.FK_DynamicGroupField_CatalogItem" FromRole="DynamicGroupField" ToRole="CatalogItem" />
-          <NavigationProperty Name="Equipment_TechField" Relationship="HMErpModel.FK_Equipment_TechField_DynamicGroupField" FromRole="DynamicGroupField" ToRole="Equipment_TechField" />
-          <NavigationProperty Name="JobTaskGroupField" Relationship="HMErpModel.FK_JobTaskGroupField_DynamicGroupField" FromRole="DynamicGroupField" ToRole="JobTaskGroupField" />
         </EntityType>
         <Association Name="FK_DynamicGroupField_DynamicGroup">
           <End Type="HMErpModel.DynamicGroup" Multiplicity="1" Role="DynamicGroup" />
@@ -5059,10 +5003,9 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <Property Name="TaskName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ManagerNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EmpNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="JobRefubrishStepID" Type="Int32" />
           <NavigationProperty Name="Job" Relationship="HMErpModel.FK_JobTask_Job" FromRole="JobTask" ToRole="Job" />
           <NavigationProperty Name="JobTaskEmployee" Relationship="HMErpModel.FK_JobTaskEmployee_JobTask" FromRole="JobTask" ToRole="JobTaskEmployee" />
-          <NavigationProperty Name="JobTaskGroup" Relationship="HMErpModel.FK_JobTaskGroup_JobTask" FromRole="JobTask" ToRole="JobTaskGroup" />
+          <NavigationProperty Name="JobTaskField" Relationship="HMErpModel.FK_JobTaskField_JobTask" FromRole="JobTask" ToRole="JobTaskField" />
         </EntityType>
         <EntityType Name="JobTaskEmployee">
           <Key>
@@ -5188,42 +5131,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Equipment_TechField">
-          <Key>
-            <PropertyRef Name="Equipment_TechFieldID" />
-          </Key>
-          <Property Name="Equipment_TechFieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EquipmentID" Type="Int32" Nullable="false" />
-          <Property Name="DynamicGroupFieldID" Type="Int32" Nullable="false" />
-          <Property Name="FieldValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SubGroupID" Type="Int32" />
-          <NavigationProperty Name="DynamicGroupField" Relationship="HMErpModel.FK_Equipment_TechField_DynamicGroupField" FromRole="Equipment_TechField" ToRole="DynamicGroupField" />
-          <NavigationProperty Name="Equipment" Relationship="HMErpModel.FK_Equipment_TechField_Equipment" FromRole="Equipment_TechField" ToRole="Equipment" />
-        </EntityType>
-        <Association Name="FK_Equipment_TechField_DynamicGroupField">
-          <End Type="HMErpModel.DynamicGroupField" Role="DynamicGroupField" Multiplicity="1" />
-          <End Type="HMErpModel.Equipment_TechField" Role="Equipment_TechField" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicGroupField">
-              <PropertyRef Name="DynamicGroupFieldID" />
-            </Principal>
-            <Dependent Role="Equipment_TechField">
-              <PropertyRef Name="DynamicGroupFieldID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Equipment_TechField_Equipment">
-          <End Type="HMErpModel.Equipment" Role="Equipment" Multiplicity="1" />
-          <End Type="HMErpModel.Equipment_TechField" Role="Equipment_TechField" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Equipment">
-              <PropertyRef Name="EquipmentID" />
-            </Principal>
-            <Dependent Role="Equipment_TechField">
-              <PropertyRef Name="EquipmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="JobRefubrish">
           <Key>
             <PropertyRef Name="JobID" />
@@ -5315,82 +5222,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="JobTaskGroup">
-          <Key>
-            <PropertyRef Name="JobTaskGroupID" />
-          </Key>
-          <Property Name="JobTaskGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="JobTaskID" Type="Int32" Nullable="false" />
-          <Property Name="GroupNameStr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="LinkedGroupID" Type="Int32" />
-          <NavigationProperty Name="JobTask" Relationship="HMErpModel.FK_JobTaskGroup_JobTask" FromRole="JobTaskGroup" ToRole="JobTask" />
-          <NavigationProperty Name="JobTaskGroupField" Relationship="HMErpModel.FK_JobTaskGroupField_JobTaskGroup" FromRole="JobTaskGroup" ToRole="JobTaskGroupField" />
-          <NavigationProperty Name="DynamicGroup" Relationship="HMErpModel.FK_JobTaskGroup_DynamicGroup" FromRole="JobTaskGroup" ToRole="DynamicGroup" />
-        </EntityType>
-        <EntityType Name="JobTaskGroupField">
-          <Key>
-            <PropertyRef Name="JobTaskGroupFieldID" />
-          </Key>
-          <Property Name="JobTaskGroupFieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="JobTaskGroupID" Type="Int32" Nullable="false" />
-          <Property Name="DynamicGroupFieldID" Type="Int32" Nullable="false" />
-          <Property Name="FieldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="OrderVal" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="JobTaskGroup" Relationship="HMErpModel.FK_JobTaskGroupField_JobTaskGroup" FromRole="JobTaskGroupField" ToRole="JobTaskGroup" />
-          <NavigationProperty Name="DynamicGroupField" Relationship="HMErpModel.FK_JobTaskGroupField_DynamicGroupField" FromRole="JobTaskGroupField" ToRole="DynamicGroupField" />
-        </EntityType>
-        <Association Name="FK_JobTaskGroup_JobTask">
-          <End Type="HMErpModel.JobTask" Role="JobTask" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="HMErpModel.JobTaskGroup" Role="JobTaskGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobTask">
-              <PropertyRef Name="JobTaskID" />
-            </Principal>
-            <Dependent Role="JobTaskGroup">
-              <PropertyRef Name="JobTaskID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobTaskGroupField_JobTaskGroup">
-          <End Type="HMErpModel.JobTaskGroup" Role="JobTaskGroup" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="HMErpModel.JobTaskGroupField" Role="JobTaskGroupField" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobTaskGroup">
-              <PropertyRef Name="JobTaskGroupID" />
-            </Principal>
-            <Dependent Role="JobTaskGroupField">
-              <PropertyRef Name="JobTaskGroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobTaskGroup_DynamicGroup">
-          <End Type="HMErpModel.DynamicGroup" Role="DynamicGroup" Multiplicity="0..1" />
-          <End Type="HMErpModel.JobTaskGroup" Role="JobTaskGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicGroup">
-              <PropertyRef Name="DynamicGroupID" />
-            </Principal>
-            <Dependent Role="JobTaskGroup">
-              <PropertyRef Name="LinkedGroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobTaskGroupField_DynamicGroupField">
-          <End Type="HMErpModel.DynamicGroupField" Role="DynamicGroupField" Multiplicity="1" />
-          <End Type="HMErpModel.JobTaskGroupField" Role="JobTaskGroupField" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DynamicGroupField">
-              <PropertyRef Name="DynamicGroupFieldID" />
-            </Principal>
-            <Dependent Role="JobTaskGroupField">
-              <PropertyRef Name="DynamicGroupFieldID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="BankField">
           <Key>
             <PropertyRef Name="BankFieldID" />
@@ -5401,6 +5232,8 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <Property Name="CatalogItemID" Type="Int32" />
           <NavigationProperty Name="FieldPool" Relationship="HMErpModel.FK_BankField_FieldPool" FromRole="BankField" ToRole="FieldPool" />
           <NavigationProperty Name="BankTask_Field" Relationship="HMErpModel.FK_BankTask_Field_BankField" FromRole="BankField" ToRole="BankTask_Field" />
+          <NavigationProperty Name="Equipment_TechField" Relationship="HMErpModel.FK_Equipment_TechField_BankField" FromRole="BankField" ToRole="Equipment_TechField" />
+          <NavigationProperty Name="JobTaskField" Relationship="HMErpModel.FK_JobTaskField_BankField" FromRole="BankField" ToRole="JobTaskField" />
         </EntityType>
         <Association Name="FK_BankField_FieldPool">
           <End Type="HMErpModel.FieldPool" Role="FieldPool" Multiplicity="1" />
@@ -5461,6 +5294,83 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
             </Principal>
             <Dependent Role="BankTask_Field">
               <PropertyRef Name="BankTaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Equipment_TechField">
+          <Key>
+            <PropertyRef Name="Equipment_TechFieldID" />
+          </Key>
+          <Property Name="Equipment_TechFieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentID" Type="Int32" Nullable="false" />
+          <Property Name="BankFieldID" Type="Int32" Nullable="false" />
+          <Property Name="FieldValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BankField" Relationship="HMErpModel.FK_Equipment_TechField_BankField" FromRole="Equipment_TechField" ToRole="BankField" />
+          <NavigationProperty Name="Equipment" Relationship="HMErpModel.FK_Equipment_TechField_Equipment" FromRole="Equipment_TechField" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="FK_Equipment_TechField_BankField">
+          <End Type="HMErpModel.BankField" Role="BankField" Multiplicity="1" />
+          <End Type="HMErpModel.Equipment_TechField" Role="Equipment_TechField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankField">
+              <PropertyRef Name="BankFieldID" />
+            </Principal>
+            <Dependent Role="Equipment_TechField">
+              <PropertyRef Name="BankFieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_TechField_Equipment">
+          <End Type="HMErpModel.Equipment" Role="Equipment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HMErpModel.Equipment_TechField" Role="Equipment_TechField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="EquipmentID" />
+            </Principal>
+            <Dependent Role="Equipment_TechField">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobTaskField">
+          <Key>
+            <PropertyRef Name="JobTaskFieldID" />
+          </Key>
+          <Property Name="JobTaskFieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTaskID" Type="Int32" Nullable="false" />
+          <Property Name="FieldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderVal" Type="Int32" Nullable="false" />
+          <Property Name="IsRequired" Type="Boolean" Nullable="false" />
+          <Property Name="IsForQuote" Type="Boolean" Nullable="false" />
+          <Property Name="BankFieldID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BankField" Relationship="HMErpModel.FK_JobTaskField_BankField" FromRole="JobTaskField" ToRole="BankField" />
+          <NavigationProperty Name="JobTask" Relationship="HMErpModel.FK_JobTaskField_JobTask" FromRole="JobTaskField" ToRole="JobTask" />
+        </EntityType>
+        <Association Name="FK_JobTaskField_BankField">
+          <End Type="HMErpModel.BankField" Role="BankField" Multiplicity="1" />
+          <End Type="HMErpModel.JobTaskField" Role="JobTaskField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankField">
+              <PropertyRef Name="BankFieldID" />
+            </Principal>
+            <Dependent Role="JobTaskField">
+              <PropertyRef Name="BankFieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobTaskField_JobTask">
+          <End Type="HMErpModel.JobTask" Role="JobTask" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HMErpModel.JobTaskField" Role="JobTaskField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTask">
+              <PropertyRef Name="JobTaskID" />
+            </Principal>
+            <Dependent Role="JobTaskField">
+              <PropertyRef Name="JobTaskID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6334,7 +6244,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
           <EntitySetMapping Name="JobTask">
             <EntityTypeMapping TypeName="HMErpModel.JobTask">
               <MappingFragment StoreEntitySet="JobTask">
-                <ScalarProperty Name="JobRefubrishStepID" ColumnName="JobRefubrishStepID" />
                 <ScalarProperty Name="EmpNotes" ColumnName="EmpNotes" />
                 <ScalarProperty Name="ManagerNotes" ColumnName="ManagerNotes" />
                 <ScalarProperty Name="TaskName" ColumnName="TaskName" />
@@ -6378,17 +6287,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Equipment_TechField">
-            <EntityTypeMapping TypeName="HMErpModel.Equipment_TechField">
-              <MappingFragment StoreEntitySet="Equipment_TechField">
-                <ScalarProperty Name="SubGroupID" ColumnName="SubGroupID" />
-                <ScalarProperty Name="FieldValue" ColumnName="FieldValue" />
-                <ScalarProperty Name="DynamicGroupFieldID" ColumnName="DynamicGroupFieldID" />
-                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
-                <ScalarProperty Name="Equipment_TechFieldID" ColumnName="Equipment_TechFieldID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="JobRefubrish">
             <EntityTypeMapping TypeName="HMErpModel.JobRefubrish">
               <MappingFragment StoreEntitySet="JobRefubrish">
@@ -6400,27 +6298,6 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
                 <ScalarProperty Name="BranchID" ColumnName="BranchID" />
                 <ScalarProperty Name="Loaction" ColumnName="Loaction" />
                 <ScalarProperty Name="JobID" ColumnName="JobID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobTaskGroup">
-            <EntityTypeMapping TypeName="HMErpModel.JobTaskGroup">
-              <MappingFragment StoreEntitySet="JobTaskGroup">
-                <ScalarProperty Name="LinkedGroupID" ColumnName="LinkedGroupID" />
-                <ScalarProperty Name="GroupNameStr" ColumnName="GroupNameStr" />
-                <ScalarProperty Name="JobTaskID" ColumnName="JobTaskID" />
-                <ScalarProperty Name="JobTaskGroupID" ColumnName="JobTaskGroupID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JobTaskGroupField">
-            <EntityTypeMapping TypeName="HMErpModel.JobTaskGroupField">
-              <MappingFragment StoreEntitySet="JobTaskGroupField">
-                <ScalarProperty Name="OrderVal" ColumnName="OrderVal" />
-                <ScalarProperty Name="FieldValue" ColumnName="FieldValue" />
-                <ScalarProperty Name="DynamicGroupFieldID" ColumnName="DynamicGroupFieldID" />
-                <ScalarProperty Name="JobTaskGroupID" ColumnName="JobTaskGroupID" />
-                <ScalarProperty Name="JobTaskGroupFieldID" ColumnName="JobTaskGroupFieldID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6452,6 +6329,29 @@ warning 6002: The table/view 'KuchiIP_hm_mci.dbo.vwVelDemod' does not have a pri
                 <ScalarProperty Name="BankFieldID" ColumnName="BankFieldID" />
                 <ScalarProperty Name="BankTaskID" ColumnName="BankTaskID" />
                 <ScalarProperty Name="BankTask_FieldID" ColumnName="BankTask_FieldID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment_TechField">
+            <EntityTypeMapping TypeName="HMErpModel.Equipment_TechField">
+              <MappingFragment StoreEntitySet="Equipment_TechField">
+                <ScalarProperty Name="FieldValue" ColumnName="FieldValue" />
+                <ScalarProperty Name="BankFieldID" ColumnName="BankFieldID" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="Equipment_TechFieldID" ColumnName="Equipment_TechFieldID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTaskField">
+            <EntityTypeMapping TypeName="HMErpModel.JobTaskField">
+              <MappingFragment StoreEntitySet="JobTaskField">
+                <ScalarProperty Name="BankFieldID" ColumnName="BankFieldID" />
+                <ScalarProperty Name="IsForQuote" ColumnName="IsForQuote" />
+                <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+                <ScalarProperty Name="OrderVal" ColumnName="OrderVal" />
+                <ScalarProperty Name="FieldValue" ColumnName="FieldValue" />
+                <ScalarProperty Name="JobTaskID" ColumnName="JobTaskID" />
+                <ScalarProperty Name="JobTaskFieldID" ColumnName="JobTaskFieldID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -171,10 +171,7 @@
     <Compile Include="JobTaskEmployee.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
-    <Compile Include="JobTaskGroup.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JobTaskGroupField.cs">
+    <Compile Include="JobTaskField.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="JobTemplateNotes.cs">

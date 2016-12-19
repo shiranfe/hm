@@ -57,7 +57,7 @@ namespace BL
             return GetQuer().AsEnumerable().Select(x => new DropListDM
             {
                 id = x.BankFieldID,
-                Text = x.FieldNameHeb
+                Text = x.FieldNameHeb + "^" + x.FieldPool.FieldLabel
             }).ToList();
         }
 

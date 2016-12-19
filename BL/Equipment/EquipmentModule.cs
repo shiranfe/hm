@@ -74,7 +74,7 @@ namespace BL
             {
                 EquipmentID = x.EquipmentID,
                 MachineTypeID = x.MachineTypeID,
-                MachineType = x.MachineType.Key,
+                MachineTypeKey = x.MachineType.Key,
                 MachineTypeName = x.MachineType.Additional
             };
         }

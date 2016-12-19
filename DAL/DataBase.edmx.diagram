@@ -146,9 +146,6 @@
         <AssociationConnector Association="HMErpModel.FK_Equipment_PickList" />
         <AssociationConnector Association="HMErpModel.FK_JobEquipment_Equipment" />
         <AssociationConnector Association="HMErpModel.FK_JobEquipment_Job" />
-        <EntityTypeShape EntityType="HMErpModel.Equipment_TechField" Width="1.5" PointX="18.75" PointY="23.875" />
-        <AssociationConnector Association="HMErpModel.FK_Equipment_TechField_DynamicGroupField" />
-        <AssociationConnector Association="HMErpModel.FK_Equipment_TechField_Equipment" />
         <EntityTypeShape EntityType="HMErpModel.JobRefubrish" Width="1.5" PointX="12" PointY="28.375" />
         <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Branch" />
         <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Job" />
@@ -156,18 +153,18 @@
         <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Machine" />
         <AssociationConnector Association="HMErpModel.FK_JobRefubrish_Part_JobRefubrish" />
         <AssociationConnector Association="HMErpModel.FK_JobRefubrish_PickList" />
-        <EntityTypeShape EntityType="HMErpModel.JobTaskGroup" Width="1.5" PointX="14.25" PointY="52.75" />
-        <EntityTypeShape EntityType="HMErpModel.JobTaskGroupField" Width="1.5" PointX="16.5" PointY="52.75" />
-        <AssociationConnector Association="HMErpModel.FK_JobTaskGroup_JobTask" />
-        <AssociationConnector Association="HMErpModel.FK_JobTaskGroupField_JobTaskGroup" />
-        <AssociationConnector Association="HMErpModel.FK_JobTaskGroup_DynamicGroup" />
-        <AssociationConnector Association="HMErpModel.FK_JobTaskGroupField_DynamicGroupField" />
         <EntityTypeShape EntityType="HMErpModel.BankField" Width="1.5" PointX="11.25" PointY="57" />
         <AssociationConnector Association="HMErpModel.FK_BankField_FieldPool" />
         <EntityTypeShape EntityType="HMErpModel.BankTask" Width="1.5" PointX="11.25" PointY="60.25" />
         <EntityTypeShape EntityType="HMErpModel.BankTask_Field" Width="1.5" PointX="13.5" PointY="56.875" />
         <AssociationConnector Association="HMErpModel.FK_BankTask_Field_BankField" />
         <AssociationConnector Association="HMErpModel.FK_BankTask_Field_BankTask" />
+        <EntityTypeShape EntityType="HMErpModel.Equipment_TechField" Width="1.5" PointX="17.75" PointY="48.625" />
+        <AssociationConnector Association="HMErpModel.FK_Equipment_TechField_BankField" />
+        <AssociationConnector Association="HMErpModel.FK_Equipment_TechField_Equipment" />
+        <EntityTypeShape EntityType="HMErpModel.JobTaskField" Width="1.5" PointX="14.625" PointY="53" />
+        <AssociationConnector Association="HMErpModel.FK_JobTaskField_BankField" />
+        <AssociationConnector Association="HMErpModel.FK_JobTaskField_JobTask" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

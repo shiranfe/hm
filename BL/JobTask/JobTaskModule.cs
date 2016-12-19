@@ -51,46 +51,37 @@ namespace BL
 
             //Mapper.CreateMap<JobTask, JobTaskDM>();
             //model.TaskGroups = Mapper.Map<List<JobTaskGroupDM>>(entity.JobTaskGroup);
-            model.TaskGroups = entity.JobTaskGroup.Select(x => new JobTaskGroupDM
-            {
-                GroupNameStr = x.GroupNameStr,
-                LinkedGroupID = x.LinkedGroupID,
-                JobTaskGroupID = x.JobTaskGroupID,
-                JobTaskGroupFieldDMs = x.JobTaskGroupField
-                    .Select(y => GroupFieldToDm(y)).ToList()
-            }).ToList();
+            model.JobTaskFieldDMs = entity.JobTaskField.Select(x => FieldToDm(x)).ToList();
 
-            List<JobTaskGroupFieldDM> allFields = model.TaskGroups.SelectMany(x => x.JobTaskGroupFieldDMs).ToList();
-            _fieldPoolModule.SetFieldsPickList(allFields.Select(x=> (StepGroupFieldDM)x).ToList());
+              _fieldPoolModule.SetFieldsPickList(model.JobTaskFieldDMs.Select(x=> (StepGroupFieldDM)x).ToList());
 
             return model;
 
         }
 
-        private static JobTaskGroupFieldDM GroupFieldToDm(JobTaskGroupField x)
+        private static JobTaskFieldDM FieldToDm(JobTaskField x)
         {
-            DynamicGroupField flds = x.DynamicGroupField;
+            BankField flds = x.BankField;
 
-            if (flds.DynamicGroup == null)
-                throw new Exception("flds.DynamicGroup empty");
-
+  
             if (flds.FieldPool == null)
                 throw new Exception("flds.FieldPool empty");
 
-            return new JobTaskGroupFieldDM
+            return new JobTaskFieldDM
             {
                
                 FieldValue = x.FieldValue,
-                Id = x.JobTaskGroupFieldID,
+                Id = x.JobTaskFieldID,
                 OrderVal = x.OrderVal,
-                JobRefubrishStepGroupID = flds.DynamicGroup.DynamicGroupID,
+
+                IsRequired = x.IsRequired,
+                //JobRefubrishStepGroupID = flds.DynamicGroup.DynamicGroupID,
                 //SubGroupID = not availble becuase fields attaced only to parent group anyway
-                DynamicGroupFieldID = flds.DynamicGroupFieldID,
+                DynamicGroupFieldID = flds.BankFieldID,
                 // FieldName = flds.DynamicGroupFieldID + "_" + flds.,
                 FieldNameStr = flds.FieldNameStr,
                 FieldTypeID = flds.FieldPool.FieldTypeID,
                 FieldUnit = flds.FieldPool.FieldUnit,
-                IsRequired = flds.IsRequired,
 
                // OrderVal = flds.OrderVal,
                 PickListEntity = flds.FieldPool.PickListEntity,
@@ -157,7 +148,6 @@ namespace BL
                         JobTaskID = x.JobTaskID,
                         EmpNotes=x.EmpNotes,
                         JobID=x.JobID,
-                        JobRefubrishStepID = x.JobRefubrishStepID,
                         ManagerNotes=x.ManagerNotes,
                         TaskName=x.TaskName
                         

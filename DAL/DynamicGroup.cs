@@ -18,7 +18,6 @@ namespace DAL
         {
             this.DynamicGroupField = new HashSet<DynamicGroupField>();
             this.SubGroups = new HashSet<DynamicGroup>();
-            this.JobTaskGroup = new HashSet<JobTaskGroup>();
         }
     
         public int DynamicGroupID { get; set; }
@@ -35,6 +34,5 @@ namespace DAL
         public virtual ICollection<DynamicGroupField> DynamicGroupField { get; set; }
         public virtual ICollection<DynamicGroup> SubGroups { get; set; }
         public virtual DynamicGroup ParentGroup { get; set; }
-        public virtual ICollection<JobTaskGroup> JobTaskGroup { get; set; }
     }
 }

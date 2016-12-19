@@ -59,7 +59,7 @@ namespace MVC.Areas.Admin.Controllers
                 var view= _entityBL.Update(model);
 
                 if(view==null)
-                    return Json(new { BankTask_FieldID = model.BankTask_FieldID });
+                    return Json(new { Id = model.BankTask_FieldID });
 
                 return PartialView("FieldTmpl", view);
             }

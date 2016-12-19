@@ -8,13 +8,13 @@ namespace Common
     {
         public BankTaskDM()
         {
-            TaskFields = new List<JobTaskGroupFieldDM>();
+            TaskFields = new List<JobTaskFieldDM>();
         }
         public int BankTaskID { get; set; }
         public string TaskName { get; set; }
         public string ManagerNotes { get; set; }
 
-        public List<JobTaskGroupFieldDM> TaskFields{ get; set; }
+        public List<JobTaskFieldDM> TaskFields{ get; set; }
     }
 
     public class BankTaskFilterDm : Pager

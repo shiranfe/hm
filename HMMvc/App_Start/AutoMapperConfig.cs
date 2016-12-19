@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.Configuration;
 using Common;
 using DAL;
+using System.Collections.Generic;
 
 namespace MVC.App_Start
 {
@@ -30,6 +31,7 @@ namespace MVC.App_Start
 
                 //TwoWayMap<JobRefubrishStep, JobRefubrishStepDM>(cfg);
                 TwoWayMap<ContactInfo, ContactInfoDM>(cfg);
+                TwoWayMap<ClientDM, ContactInfoDM>(cfg);
                 //TwoWayMap<JobRefubrish_Part, JobRefubrish_PartDM>(cfg);
                 //TwoWayMap<JobRefubrish_Step, JobRefubrish_StepDM > (cfg);
                 TwoWayMap<MachinePart, MachinePartDM>(cfg);
@@ -54,25 +56,37 @@ namespace MVC.App_Start
                 TwoWayMap<BugLog, BugLogDM>(cfg);
                 // TwoWayMap<EmployeeLog, EmployeeLogDM>(cfg);
                 TwoWayMap<JobOutside, JobOutsideDM>(cfg);
+                TwoWayMap<JobOutside, RefubrishDetailsDM>(cfg);
                 TwoWayMap<JobTask, JobTaskDM>(cfg);
                 TwoWayMap<JobTaskEmployee, JobTaskEmployeeDM>(cfg);
                 TwoWayMap<Equipment, EquipmentDM>(cfg);
                 TwoWayMap<JobEquipment, JobEquipmentDM>(cfg);
                 //TwoWayMap<Equipment_TechField, Equipment_TechFieldDM>(cfg);
                TwoWayMap<JobRefubrish, RefubrishDetailsDM>(cfg);
-                TwoWayMap<JobTaskGroup, JobTaskGroupDM>(cfg);
-                TwoWayMap<JobTaskGroupField, JobTaskGroupFieldDM>(cfg);
+               // TwoWayMap<JobTaskGroup, JobTaskGroupDM>(cfg);
+                TwoWayMap<JobTaskField, JobTaskFieldDM>(cfg);
                 TwoWayMap<BankField, BankFieldDM>(cfg);
                 TwoWayMap<BankTask, BankTaskDM>(cfg);
                 TwoWayMap<BankTask_Field, BankTask_FieldDM>(cfg);
             });
+
+            
         }
 
-        static void TwoWayMap<TSource, TDest>(IMapperConfigurationExpression cfg)
+        static void TwoWayMap<TSource, TDest>(IMapperConfigurationExpression cfg) 
         {
             cfg.CreateMap<TSource, TDest>();
             cfg.CreateMap<TDest, TSource>();
+
+         // _dict.Add(TSource, TDest);
         }
+
+        //static void TestME<TSource, TDest>()
+        //{
+
+        //    Mapper.Map<TDest>((TSource)System.Activator.CreateInstance(typeof(TSource)));
+        //    Mapper.Map<TSource>((TDest)System.Activator.CreateInstance(typeof(TDest)));
+        //}
     }
 
 

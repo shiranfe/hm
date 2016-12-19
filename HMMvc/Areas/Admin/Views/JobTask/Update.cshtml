@@ -103,8 +103,8 @@
             <div class="WhiteSep"></div>
             <div class="VbTabBlockInfo">
 
-                @Html.Partial("TaskGroups", Model.TaskGroups)
-
+                <script>var TaskFieldEntity = "JobTaskField";</script>
+                @Html.Partial("TaskFields", Model.JobTaskFieldDMs)
             </div>
 
         </div>

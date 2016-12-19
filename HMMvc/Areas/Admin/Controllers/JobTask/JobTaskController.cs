@@ -11,12 +11,15 @@ namespace MVC.Areas.Admin.Controllers
       
         private readonly JobTaskBL _entityBL;
         private readonly LangBL _langBL;
+        private readonly BankFieldBL _bankFieldBL;
         public JobTaskController(
+             [Dependency]BankFieldBL bankFieldBL,
                [Dependency]LangBL langBL,
             [Dependency]JobTaskBL entityBL)
         {
             _langBL = langBL;
             _entityBL = entityBL;
+            _bankFieldBL = bankFieldBL;
         }
 
 
@@ -51,7 +54,7 @@ namespace MVC.Areas.Admin.Controllers
                 ViewBag.PopTitle = "משימה חדשה";
             }
 
-            // PopulateDrop(model);
+             PopulateDrop(model);
 
            // ViewBag.Steps = new SelectList(_langBL.GetRefubrishSteps(), "PickListID", "TransStr", model.JobRefubrishStepID ?? (int)RefubrishStep.RepairStep);
 
@@ -94,8 +97,9 @@ namespace MVC.Areas.Admin.Controllers
 
         private void PopulateDrop(JobTaskDM model)
         {
+            ViewBag.BankFields = new SelectList(_bankFieldBL.GetDrop(), "id", "Text");
             //var clnts = _quoteBL.GetAllSrcs();
-           // ViewBag.Srcs = new SelectList(clnts, "ClientID", "ClientName", mac.ClientParentID);
+            // ViewBag.Srcs = new SelectList(clnts, "ClientID", "ClientName", mac.ClientParentID);
         }
 
 

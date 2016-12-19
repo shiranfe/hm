@@ -14,8 +14,8 @@
     var fieldsDivTitle = fieldsDiv; 
 
     var ops = {
-        entity: "BankTask_Field",
-        cntrl: "/Admin/BankTask_Field",
+        entity: TaskFieldEntity,
+        cntrl: "/Admin/" + TaskFieldEntity,
         container: container
     };
 
@@ -99,7 +99,7 @@
 
     function toggleCopyBtn() {
 
-        if ($(containerSelected).length == 0) {
+        if ($(containerSelected).length === 0) {
           //  $(".move").hide();
             $("#DeleteBtn").hide();
         }
@@ -159,11 +159,12 @@
     $("#AddFieldDrop").change(function () {
         var params = {
             BankTaskID: $("#BankTaskID").val(),
+            JobTaskID: $("#JobTaskID").val() ,
             BankFieldID: $(this).val(),
             OrderVal: getLastInOrder()
         };
 
-        if (params.BankTaskID==0)
+        if (params.BankTaskID===0)
             return $.updateBankTask(function (id) {
                 params.BankTaskID = id;
                 add(params, function myfunction() {

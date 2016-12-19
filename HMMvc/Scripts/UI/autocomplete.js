@@ -152,7 +152,7 @@ $(document).ready(function () {
     $(".autocomplete " + _resultLi).live('click', function () {
         var container = $(this).parents(".autocomplete");
 
-        setOptionSelected(container, $(this).data("id"), $(this).text());
+        setOptionSelected(container, $(this).data("id"), $(this).find("span").text());
 
     });
 
@@ -285,7 +285,7 @@ $(document).ready(function () {
         var container = $(id).parents(".autocomplete");
         var selectedLi = getItemByVal(container, value);
 
-        setOptionSelected(container, value, selectedLi.text());
+        setOptionSelected(container, value, selectedLi.find("span").text());
     };
 
 

@@ -12,7 +12,7 @@ namespace Common
         public int? LinkedGroupID { get; set; }
 
         public virtual JobTaskDM JobTaskDM { get; set; }
-        public virtual ICollection<JobTaskGroupFieldDM> JobTaskGroupFieldDMs { get; set; }
+        public virtual ICollection<JobTaskFieldDM> JobTaskGroupFieldDMs { get; set; }
     }
 
     public class JobTaskGroupFilterDm : Pager

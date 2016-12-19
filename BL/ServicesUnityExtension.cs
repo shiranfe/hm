@@ -23,8 +23,8 @@ namespace BL
 Container.RegisterType<BankTask_FieldModule,BankTask_FieldModule>(new ContainerControlledLifetimeManager());
 Container.RegisterType<BankTaskModule,BankTaskModule>(new ContainerControlledLifetimeManager());
 Container.RegisterType<BankFieldModule,BankFieldModule>(new ContainerControlledLifetimeManager());
-Container.RegisterType<JobTaskGroupFieldModule,JobTaskGroupFieldModule>(new ContainerControlledLifetimeManager());
-Container.RegisterType<JobTaskGroupModule,JobTaskGroupModule>(new ContainerControlledLifetimeManager());
+Container.RegisterType<JobTaskFieldModule,JobTaskFieldModule>(new ContainerControlledLifetimeManager());
+//Container.RegisterType<JobTaskGroupModule,JobTaskGroupModule>(new ContainerControlledLifetimeManager());
 Container.RegisterType<JobEquipmentModule,JobEquipmentModule>(new ContainerControlledLifetimeManager());
 Container.RegisterType<EquipmentModule,EquipmentModule>(new ContainerControlledLifetimeManager());
 Container.RegisterType<JobTaskEmployeeModule,JobTaskEmployeeModule>(new ContainerControlledLifetimeManager());
@@ -72,8 +72,8 @@ Container.RegisterType<ClientMove, ClientMove>(new ContainerControlledLifetimeMa
 Container.RegisterType<BankTask_FieldBL,BankTask_FieldBL>(new ContainerControlledLifetimeManager());
 Container.RegisterType<BankTaskBL,BankTaskBL>(new ContainerControlledLifetimeManager());
 Container.RegisterType<BankFieldBL,BankFieldBL>(new ContainerControlledLifetimeManager());
-Container.RegisterType<JobTaskGroupFieldBL,JobTaskGroupFieldBL>(new ContainerControlledLifetimeManager());
-Container.RegisterType<JobTaskGroupBL,JobTaskGroupBL>(new ContainerControlledLifetimeManager());
+Container.RegisterType<JobTaskFieldBL,JobTaskFieldBL>(new ContainerControlledLifetimeManager());
+//Container.RegisterType<JobTaskGroupBL,JobTaskGroupBL>(new ContainerControlledLifetimeManager());
 Container.RegisterType<JobEquipmentBL,JobEquipmentBL>(new ContainerControlledLifetimeManager());
 Container.RegisterType<EquipmentBL,EquipmentBL>(new ContainerControlledLifetimeManager());
 Container.RegisterType<JobTaskEmployeeBL,JobTaskEmployeeBL>(new ContainerControlledLifetimeManager());

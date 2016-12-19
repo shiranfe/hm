@@ -2,7 +2,12 @@
 @{
 
     SelectList list = Model.Options;
-     
+    if (list == null)
+    {
+        throw new Exception("AutoComplete Error - no options for " + Model.Name);
+    }
+
+
     var selectedItem = list.FirstOrDefault(x => x.Value == Model.Value || x.Selected)  ;
 
     string value = selectedItem!=null ? selectedItem.Value : "";
@@ -41,9 +46,17 @@
             @foreach (var item in list)
             {
 
-                var extra = item.Group != null ? "data-extra=" +item.Group.Name : "";
-                var show= item.Group != null && item.Group.Name!=Model.CurrentGroup ? "style=display:none" : "";
-                <li data-id="@item.Value" selected="@item.Selected" @extra @show>@item.Text</li>
+                var extra = item.Group != null ? "data-extra=" + item.Group.Name : "";
+                var show = item.Group != null && item.Group.Name != Model.CurrentGroup ? "style=display:none" : "";
+                var text = item.Text.Split('^');
+                <li data-id="@item.Value" selected="@item.Selected" @extra @show>
+                    <span>@text[0]</span>
+                    @if (text.Length > 1)
+                    {
+                        <div class="info">@text[1]</div>
+                    }
+                  
+                </li>
             }
             @if (showAdd)
             {

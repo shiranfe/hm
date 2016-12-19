@@ -32,6 +32,11 @@ body {
     unicode-bidi: plaintext;
 }
 
+    .filterBox .list ul li .info {
+        color: #bfbfbf;
+        font-style: italic;
+    }
+
 #t ul li {
     unicode-bidi: unset;
 }
@@ -368,7 +373,9 @@ pre {
     color: red;
 }
 
-
+.helptext {
+    color: #bfbfbf;
+}
 .mask {
     position: fixed;
     top: 0;
@@ -3299,8 +3306,9 @@ td {
     }
 
 #LoginFormContent {
-    margin: 50px auto;
-    padding-left: 65px;
+    /* margin: 45px auto; */
+    padding: 45px 25px;
+    display: table;
 }
 
 
@@ -3991,7 +3999,7 @@ p {
 }
 
     .addFieldDiv .autocomplete {
-        width:300px;
+        width:50%;
     }
 
 .BlockHeaderIcon {

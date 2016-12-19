@@ -17,7 +17,7 @@ namespace DAL
         public JobTask()
         {
             this.JobTaskEmployee = new HashSet<JobTaskEmployee>();
-            this.JobTaskGroup = new HashSet<JobTaskGroup>();
+            this.JobTaskField = new HashSet<JobTaskField>();
         }
     
         public int JobTaskID { get; set; }
@@ -25,10 +25,9 @@ namespace DAL
         public string TaskName { get; set; }
         public string ManagerNotes { get; set; }
         public string EmpNotes { get; set; }
-        public Nullable<int> JobRefubrishStepID { get; set; }
     
         public virtual Job Job { get; set; }
         public virtual ICollection<JobTaskEmployee> JobTaskEmployee { get; set; }
-        public virtual ICollection<JobTaskGroup> JobTaskGroup { get; set; }
+        public virtual ICollection<JobTaskField> JobTaskField { get; set; }
     }
 }

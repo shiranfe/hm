@@ -184,8 +184,7 @@
     <Compile Include="Areas\Admin\Controllers\ClientSettings\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\Employee\EmployeePermisionController.cs" />
     <Compile Include="Areas\Admin\Controllers\Equipment\EquipmentController.cs" />
-    <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskGroupController.cs" />
-    <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskGroupFieldController.cs" />
+    <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskFieldController.cs" />
     <Compile Include="Areas\Admin\Controllers\Job\JobEquipmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskController.cs" />
     <Compile Include="Areas\Admin\Controllers\JobTask\JobTaskEmployeeController.cs" />
@@ -550,7 +549,6 @@
     <Content Include="Areas\Admin\Views\Outside\JobOutsideInfo.cshtml" />
     <Content Include="Areas\Admin\Views\JobEquipment\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\MenuAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\TaskGroups.cshtml" />
     <Content Include="Areas\Admin\Views\BankField\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_Template\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_Template\Update.cshtml" />

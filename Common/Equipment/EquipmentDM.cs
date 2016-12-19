@@ -11,7 +11,7 @@ namespace Common
         public string EquipmentTitle { get; set; }
         public string MachineTypeName { get; set; }
         public int MachineTypeID { get; set; }
-        public string MachineType { get; set; }
+        public string MachineTypeKey { get; set; }
         public string ClientName { get; set; }
 
         public string Details { get; set; }
@@ -22,7 +22,7 @@ namespace Common
 
 
         public string EquipmentName => MachineTypeName + EquipmentID + (EquipmentTitle != null ? "_"+EquipmentTitle : "");
-        public string MachineTypeLangStr { get { return GlobalDM.GetTransStr(MachineType) ?? ""; } }
+        public string MachineTypeLangStr { get { return GlobalDM.GetTransStr(MachineTypeKey) ?? ""; } }
 
         public List<JobEquipmentDM> Jobs { get; set; }
 

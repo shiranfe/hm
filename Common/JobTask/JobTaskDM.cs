@@ -8,7 +8,7 @@ namespace Common
     {
         public JobTaskDM()
         {
-            TaskGroups = new List<JobTaskGroupDM>();
+            JobTaskFieldDMs = new List<JobTaskFieldDM>();
 
         }
 
@@ -18,7 +18,7 @@ namespace Common
         public string TaskName { get; set; }
         public string ManagerNotes { get; set; }
         public string EmpNotes { get; set; }
-        public Nullable<int> JobRefubrishStepID { get; set; }
+       
 
         public List<JobTaskEmployeeDM> TaskEmployees { get; set; }
         public JobDM JobDM { get; set; }
@@ -26,7 +26,8 @@ namespace Common
         public string[] EmployeeNames { get; set; }
         public string[] EmployeeStr { get; set; }
 
-        public List<JobTaskGroupDM> TaskGroups { get; set; }
+        public virtual ICollection<JobTaskFieldDM> JobTaskFieldDMs { get; set; }
+        //public List<JobTaskGroupDM> TaskGroups { get; set; }
     }
 
     public class JobTaskFilterDm : Pager

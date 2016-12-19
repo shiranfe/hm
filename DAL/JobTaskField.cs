@@ -12,20 +12,17 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class JobTaskGroup
+    public partial class JobTaskField
     {
-        public JobTaskGroup()
-        {
-            this.JobTaskGroupField = new HashSet<JobTaskGroupField>();
-        }
-    
-        public int JobTaskGroupID { get; set; }
+        public int JobTaskFieldID { get; set; }
         public int JobTaskID { get; set; }
-        public string GroupNameStr { get; set; }
-        public Nullable<int> LinkedGroupID { get; set; }
+        public string FieldValue { get; set; }
+        public int OrderVal { get; set; }
+        public bool IsRequired { get; set; }
+        public bool IsForQuote { get; set; }
+        public int BankFieldID { get; set; }
     
+        public virtual BankField BankField { get; set; }
         public virtual JobTask JobTask { get; set; }
-        public virtual ICollection<JobTaskGroupField> JobTaskGroupField { get; set; }
-        public virtual DynamicGroup DynamicGroup { get; set; }
     }
 }

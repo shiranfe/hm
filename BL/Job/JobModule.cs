@@ -124,7 +124,7 @@ namespace BL.Moduls
                 {
                     EquipmentTitle=x.Equipment.EquipmentTitle,
                     EquipmentID = x.Equipment.EquipmentID,
-                    MachineType = x.Equipment.MachineType.Key,
+                    MachineTypeKey = x.Equipment.MachineType.Key,
                     MachineTypeName = x.Equipment.MachineType.Additional
                 }
             })

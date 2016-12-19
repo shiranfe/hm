@@ -17,6 +17,8 @@ namespace DAL
         public BankField()
         {
             this.BankTask_Field = new HashSet<BankTask_Field>();
+            this.Equipment_TechField = new HashSet<Equipment_TechField>();
+            this.JobTaskField = new HashSet<JobTaskField>();
         }
     
         public int BankFieldID { get; set; }
@@ -26,5 +28,7 @@ namespace DAL
     
         public virtual FieldPool FieldPool { get; set; }
         public virtual ICollection<BankTask_Field> BankTask_Field { get; set; }
+        public virtual ICollection<Equipment_TechField> Equipment_TechField { get; set; }
+        public virtual ICollection<JobTaskField> JobTaskField { get; set; }
     }
 }

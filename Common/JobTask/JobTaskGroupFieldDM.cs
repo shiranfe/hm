@@ -2,17 +2,20 @@
 
 namespace Common
 {
-    public class JobTaskGroupFieldDM : StepGroupFieldDM
+    public class JobTaskFieldDM : StepGroupFieldDM
     {
         public int Id { get; set; }
-        public int JobTaskGroupID { get; set; }
 
+        public int JobTaskFieldID { get; set; }
+        public int JobTaskID { get; set; }
+        public bool IsForQuote { get; set; }
+        public int BankFieldID { get; set; }
     }
 
-    public class JobTaskGroupFieldFilterDm : Pager
+    public class JobTaskFieldFilterDm : Pager
     {
        
 
-        public List<JobTaskGroupFieldDM> TableList { get; set; }
+        public List<JobTaskFieldDM> TableList { get; set; }
     }
 }

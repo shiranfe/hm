@@ -32,6 +32,11 @@ body {
     unicode-bidi: plaintext;
 }
 
+    .filterBox .list ul li .info {
+        color: #bfbfbf;
+        font-style: italic;
+    }
+
 #t ul li {
     unicode-bidi: unset;
 }
@@ -368,7 +373,9 @@ pre {
     color: red;
 }
 
-
+.helptext {
+    color: #bfbfbf;
+}
 .mask {
     position: fixed;
     top: 0;
@@ -3992,7 +3999,7 @@ p {
 }
 
     .addFieldDiv .autocomplete {
-        width:300px;
+        width:50%;
     }
 
 .BlockHeaderIcon {

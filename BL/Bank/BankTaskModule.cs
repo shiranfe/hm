@@ -13,19 +13,20 @@ namespace BL
     public class BankTaskModule
     {
         private readonly IUnitOfWork _uow;
-       
+   
         private readonly IRepository<BankTask> _entityDal;
 
       
         private readonly BankTask_FieldModule _bankTask_FieldModule;
 
         public BankTaskModule([Dependency]IUnitOfWork uow,
+          
             [Dependency]BankTask_FieldModule bankTask_FieldModule)
         {
             _uow = uow;
       
             _entityDal = _uow.Repository<BankTask>();
-     
+            
             _bankTask_FieldModule = bankTask_FieldModule;
         }
 
@@ -52,6 +53,9 @@ namespace BL
             return model;
 
         }
+
+
+       
 
         internal IQueryable<BankTask> GetQuer()
         {

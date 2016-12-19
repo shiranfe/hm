@@ -91,13 +91,12 @@ namespace DAL
         public virtual DbSet<JobTaskEmployee> JobTaskEmployee { get; set; }
         public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<JobEquipment> JobEquipment { get; set; }
-        public virtual DbSet<Equipment_TechField> Equipment_TechField { get; set; }
         public virtual DbSet<JobRefubrish> JobRefubrish { get; set; }
-        public virtual DbSet<JobTaskGroup> JobTaskGroup { get; set; }
-        public virtual DbSet<JobTaskGroupField> JobTaskGroupField { get; set; }
         public virtual DbSet<BankField> BankField { get; set; }
         public virtual DbSet<BankTask> BankTask { get; set; }
         public virtual DbSet<BankTask_Field> BankTask_Field { get; set; }
+        public virtual DbSet<Equipment_TechField> Equipment_TechField { get; set; }
+        public virtual DbSet<JobTaskField> JobTaskField { get; set; }
     
         public virtual int spClientDelete(Nullable<int> client)
         {
